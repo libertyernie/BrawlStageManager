@@ -1,0 +1,42 @@
+﻿Brawl Stage Manager 1.1 - February 14, 2013
+Copyright © 2013 libertyernie
+http://lakora.us/brawl/stagemanager
+
+Brawl Stage Manager is a program that uses BrawlLib to quickly view which
+stages and module files are installed on your SD card (or in whatever folder,
+on whatever device, you use for Brawl hacks.)
+
+The left side of the window has a list of stage .PAC files in the current
+directory; you can change the directory through the Options menu. Choosing a
+stage file will display:
+* Any MSBin nodes in the .pac file, starting with the last (shown by default)
+  * Some stage authors, such as Mewtwo2000, often put info about the stage in
+    these nodes. This program will display them read-only; you can edit them
+    with BrawlBox.
+* The filename, root node name, and filesize of the .PAC
+* The filename, internal name, and filesize of the matching .rel file (if it exists)
+  * By default, the program searches for .rel files in ../../module, but
+    through the Options menu you can tell the program to search the current
+    directory instead.
+* The stage ID of the .rel file
+  * This ID should match the ID of the stage you're replacing; if it doesn't,
+    the button will turn red. (If the program doesn't know what ID your .rel
+    file should have, the button will turn beige.)
+
+Stage Manager can also perform certain operations on stage and .rel files:
+* Click on the button to automatically fix the .rel file's stage ID. This ID
+  has to match the stage you're replacing, or Brawl will freeze.
+  * You can also choose a stage ID manually (in case the automatic function
+    doesn't work) by right-clicking the button and choosing "Change stage ID."
+    The dialog for changing the ID is the same as in BrawlBox.
+* Right-click on the button to pull up a menu, which lets you delete the .pac
+  file or the .rel file. Windows will ask before deleting the file.
+* Drag and drop a .pac file onto the left-hand stage list to copy it to the
+  working directory. The program will ask what filename to save it as.
+* Drag and drop a .pac or .rel file onto the right-hand information display to
+  replace the current .pac or .rel file. Windows will ask before overwriting.
+
+Hint: In the "change directory" dialog, select your SD card and hit OK. If
+there are no .pac files in the root of your SD card, the program should jump
+to /private/wii/app/RSBE/pf/stage/melee instead (if it exists.) You can also
+run BrawlStageManager.exe from the root of your SD card for the same effect.

@@ -41,6 +41,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.defaultSongsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -169,6 +170,7 @@
 			// helpToolStripMenuItem
 			// 
 			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultSongsListToolStripMenuItem,
             this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
@@ -177,7 +179,7 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
@@ -188,6 +190,13 @@
 			this.statusToolStripMenuItem.Name = "statusToolStripMenuItem";
 			this.statusToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
 			this.statusToolStripMenuItem.Text = "test";
+			// 
+			// defaultSongsListToolStripMenuItem
+			// 
+			this.defaultSongsListToolStripMenuItem.Name = "defaultSongsListToolStripMenuItem";
+			this.defaultSongsListToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+			this.defaultSongsListToolStripMenuItem.Text = "Default Songs List";
+			this.defaultSongsListToolStripMenuItem.Click += new System.EventHandler(this.defaultSongsListToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -229,6 +238,7 @@
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem groupSongsByStageToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem statusToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem defaultSongsListToolStripMenuItem;
 
 
 

@@ -390,5 +390,12 @@ namespace BrawlSongManager {
 			Close();
 		}
 
+		private void defaultSongsListToolStripMenuItem_Click(object sender, EventArgs e) {
+			ShowText st = new ShowText();
+			st.Text = "Brawl Defaults";
+			st.TextBox = SongsByStage.DEFAULTS;
+			st.Show();
+		}
+
 	}
 }

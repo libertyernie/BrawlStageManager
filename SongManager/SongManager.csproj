@@ -53,9 +53,9 @@
     <ApplicationIcon>sicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrawlLib, Version=0.14.4793.20732, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BrawlLib, Version=0.14.4796.36552, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\BrawlHacks\BrawlBox\BrawlLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\website-php\brawl\brawllib-jan2013\BrawlLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -82,11 +82,16 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuleIDs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NameDialog.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowText.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowText.Designer.cs">
+      <DependentUpon>ShowText.cs</DependentUpon>
     </Compile>
     <Compile Include="SongListIndices.cs" />
     <Compile Include="SongNameBar.cs">
@@ -115,6 +120,9 @@
     </Compile>
     <EmbeddedResource Include="NameDialog.resx">
       <DependentUpon>NameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowText.resx">
+      <DependentUpon>ShowText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SongNameBar.resx">
       <DependentUpon>SongNameBar.cs</DependentUpon>

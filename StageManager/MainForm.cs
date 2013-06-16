@@ -51,7 +51,7 @@ namespace BrawlStageManager {
 		/// </summary>
 		public Control RightControl {
 			get {
-				Control.ControlCollection controls = splitContainer2.Panel2.Controls;
+				Control.ControlCollection controls = rightPanel.Controls;
 				if (controls.Count > 0) {
 					return controls[0];
 				} else {
@@ -59,7 +59,7 @@ namespace BrawlStageManager {
 				}
 			}
 			set {
-				Control.ControlCollection controls = splitContainer2.Panel2.Controls;
+				Control.ControlCollection controls = rightPanel.Controls;
 				controls.Clear();
 				value.Dock = System.Windows.Forms.DockStyle.Fill;
 				controls.Add(value);
@@ -180,7 +180,7 @@ namespace BrawlStageManager {
 				}
 				if (RenderModels) {
 					modelPanel1.SetCamWithBox(new Vector3("-100,-100,-100"), new Vector3("100,100,100"));
-					updateContextMenuStrip();
+					updateTexturesMenu();
 				}
 				if (msBinNodes.Count > 0) {
 					ListControl list = new ListControl(msBinNodes); // Have ListControl manage these; make that the right panel
@@ -192,7 +192,7 @@ namespace BrawlStageManager {
 			this.Refresh();
 		}
 
-		private void updateContextMenuStrip() {
+		private void updateTexturesMenu() {
 			var items = texturesToolStripMenuItem.DropDownItems;
 			items.Clear();
 			foreach (MDL0TextureNode tex in texNodes) {
@@ -204,7 +204,9 @@ namespace BrawlStageManager {
 				item.Click += new EventHandler((sender, args) => {
 					var menuitem = (sender as ToolStripMenuItem);
 					int index = items.IndexOf(menuitem);
+					//Console.WriteLine(index + " -> " + texNodes[index]);
 					texNodes[index].Enabled = menuitem.Checked;
+					modelPanel1.Invalidate();
 				});
 				items.Add(item);
 			}

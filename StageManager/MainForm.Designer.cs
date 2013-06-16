@@ -42,8 +42,9 @@
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.rightPanel = new System.Windows.Forms.Panel();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
+			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -72,8 +73,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(592, 290);
-			this.splitContainer1.SplitterDistance = 179;
+			this.splitContainer1.Size = new System.Drawing.Size(414, 290);
+			this.splitContainer1.SplitterDistance = 125;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// listBox1
@@ -82,7 +83,7 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(0, 0);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(179, 290);
+			this.listBox1.Size = new System.Drawing.Size(125, 290);
 			this.listBox1.TabIndex = 0;
 			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
 			// 
@@ -101,7 +102,7 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-			this.splitContainer2.Size = new System.Drawing.Size(409, 290);
+			this.splitContainer2.Size = new System.Drawing.Size(285, 290);
 			this.splitContainer2.SplitterDistance = 43;
 			this.splitContainer2.TabIndex = 0;
 			// 
@@ -219,7 +220,7 @@
 			this.modelPanel1.Location = new System.Drawing.Point(0, 0);
 			this.modelPanel1.Name = "modelPanel1";
 			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(405, 160);
+			this.modelPanel1.Size = new System.Drawing.Size(281, 160);
 			this.modelPanel1.TabIndex = 2;
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
@@ -235,19 +236,8 @@
 			this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.rightPanel.Location = new System.Drawing.Point(0, 0);
 			this.rightPanel.Name = "rightPanel";
-			this.rightPanel.Size = new System.Drawing.Size(405, 75);
+			this.rightPanel.Size = new System.Drawing.Size(281, 75);
 			this.rightPanel.TabIndex = 3;
-			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(405, 39);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// splitContainer3
 			// 
@@ -263,9 +253,28 @@
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.modelPanel1);
-			this.splitContainer3.Size = new System.Drawing.Size(405, 239);
+			this.splitContainer3.Size = new System.Drawing.Size(281, 239);
 			this.splitContainer3.SplitterDistance = 75;
 			this.splitContainer3.TabIndex = 4;
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.ShouldVerifyIDs = false;
+			this.stageInfoControl1.Size = new System.Drawing.Size(281, 39);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
+			// 
+			// portraitViewer1
+			// 
+			this.portraitViewer1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.portraitViewer1.Location = new System.Drawing.Point(414, 24);
+			this.portraitViewer1.Name = "portraitViewer1";
+			this.portraitViewer1.Size = new System.Drawing.Size(178, 290);
+			this.portraitViewer1.TabIndex = 2;
 			// 
 			// MainForm
 			// 
@@ -273,6 +282,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(592, 314);
 			this.Controls.Add(this.splitContainer1);
+			this.Controls.Add(this.portraitViewer1);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
@@ -319,6 +329,7 @@
 		private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
 		private System.Windows.Forms.Panel rightPanel;
 		private System.Windows.Forms.SplitContainer splitContainer3;
+		private PortraitViewer portraitViewer1;
 
 
 

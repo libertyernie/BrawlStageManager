@@ -189,8 +189,10 @@ namespace BrawlStageManager {
 					RightControl = noMSBinLabel;
 				}
 			}
+			portraitViewer1.UpdateImage(q++);
 			this.Refresh();
 		}
+		private int q = 0;
 
 		private void updateTexturesMenu() {
 			var items = texturesToolStripMenuItem.DropDownItems;
@@ -283,6 +285,8 @@ namespace BrawlStageManager {
 
 			stageInfoControl1.setStageLabels("", "", "");
 			stageInfoControl1.RelFile = null;
+
+			portraitViewer1.UpdateDirectory();
 		}
 
 		public void dragEnter(object sender, DragEventArgs e) {

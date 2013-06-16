@@ -86,6 +86,12 @@
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="PortraitViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PortraitViewer.designer.cs">
+      <DependentUpon>PortraitViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListControl.cs">
@@ -113,6 +119,9 @@
     <EmbeddedResource Include="MSBinViewer.resx">
       <DependentUpon>MSBinViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PortraitViewer.resx">
+      <DependentUpon>PortraitViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

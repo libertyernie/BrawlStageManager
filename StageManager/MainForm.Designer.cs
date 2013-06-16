@@ -31,6 +31,7 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moduleFileDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,7 +40,7 @@
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.modelManager1 = new BrawlStageManager.ModelManager();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -53,7 +54,7 @@
 			// splitContainer1
 			// 
 			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+			this.splitContainer1.Location = new System.Drawing.Point(292, 24);
 			this.splitContainer1.Name = "splitContainer1";
 			// 
 			// splitContainer1.Panel1
@@ -63,8 +64,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(592, 290);
-			this.splitContainer1.SplitterDistance = 180;
+			this.splitContainer1.Size = new System.Drawing.Size(300, 290);
+			this.splitContainer1.SplitterDistance = 91;
 			this.splitContainer1.TabIndex = 0;
 			// 
 			// listBox1
@@ -73,7 +74,7 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(0, 0);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(180, 290);
+			this.listBox1.Size = new System.Drawing.Size(91, 290);
 			this.listBox1.TabIndex = 0;
 			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
 			// 
@@ -88,7 +89,7 @@
 			// splitContainer2.Panel1
 			// 
 			this.splitContainer2.Panel1.Controls.Add(this.stageInfoControl1);
-			this.splitContainer2.Size = new System.Drawing.Size(408, 290);
+			this.splitContainer2.Size = new System.Drawing.Size(205, 290);
 			this.splitContainer2.SplitterDistance = 43;
 			this.splitContainer2.TabIndex = 0;
 			// 
@@ -99,7 +100,7 @@
 			this.stageInfoControl1.Name = "stageInfoControl1";
 			this.stageInfoControl1.RelFile = null;
 			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(404, 39);
+			this.stageInfoControl1.Size = new System.Drawing.Size(201, 39);
 			this.stageInfoControl1.TabIndex = 0;
 			this.stageInfoControl1.UseRelDescription = false;
 			// 
@@ -130,6 +131,13 @@
 			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.changeDirectoryToolStripMenuItem.Text = "Change directory...";
 			this.changeDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeDirectoryToolStripMenuItem_Click);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 
@@ -201,12 +209,13 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// exitToolStripMenuItem
+			// modelManager1
 			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			this.modelManager1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.modelManager1.Location = new System.Drawing.Point(0, 24);
+			this.modelManager1.Name = "modelManager1";
+			this.modelManager1.Size = new System.Drawing.Size(292, 290);
+			this.modelManager1.TabIndex = 2;
 			// 
 			// MainForm
 			// 
@@ -214,6 +223,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(592, 314);
 			this.Controls.Add(this.splitContainer1);
+			this.Controls.Add(this.modelManager1);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
@@ -251,6 +261,7 @@
 		private System.Windows.Forms.ToolStripMenuItem useFullrelNamesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private ModelManager modelManager1;
 
 
 

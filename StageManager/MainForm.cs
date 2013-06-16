@@ -146,9 +146,20 @@ namespace BrawlStageManager {
 				
 				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
+				List<MDL0Node> modelNodes = new List<MDL0Node>();
 				foreach (ResourceNode node in allNodes) {
+					Console.WriteLine(node);
 					if (node.ResourceType == ResourceType.MSBin) {
 						msBinNodes.Add((MSBinNode)node); // This is an MSBin node - add it to the list
+					} else {
+						ResourceNode modelfolder = node.FindChild("3DModels(NW4R)", false);
+						if (modelfolder != null) {
+							foreach (ResourceNode child in modelfolder.Children) {
+								if (child is MDL0Node) {
+									modelNodes.Add((MDL0Node)child);
+								}
+							}
+						}
 					}
 				}
 				if (msBinNodes.Count > 0) {
@@ -157,6 +168,7 @@ namespace BrawlStageManager {
 				} else {
 					RightControl = noMSBinLabel;
 				}
+				modelManager1.refillList(modelNodes);
 			}
 			this.Refresh();
 		}

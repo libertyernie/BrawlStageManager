@@ -1,0 +1,7 @@
+old.git/
+SongManager/bin
+SongManager/obj
+StageManager/bin
+StageManager/obj
+StageManager.suo
+*.suo

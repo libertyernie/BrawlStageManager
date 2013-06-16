@@ -82,12 +82,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModelManager.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ModelManager.designer.cs">
-      <DependentUpon>ModelManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="ModuleIDs.cs" />
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
@@ -115,9 +109,6 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ModelManager.resx">
-      <DependentUpon>ModelManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MSBinViewer.resx">
       <DependentUpon>MSBinViewer.cs</DependentUpon>

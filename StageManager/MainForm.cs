@@ -38,6 +38,8 @@ namespace BrawlStageManager {
 		/// </summary>
 		private string moduleFolderLocation;
 
+		private List<MDL0TextureNode> texNodes;
+
 		/// <summary>
 		/// Labels for RightControl.
 		/// </summary>
@@ -143,32 +145,46 @@ namespace BrawlStageManager {
 
 				string relname = matchRel(fi.Name);
 				updateRel(relname);
-				
+
+				bool RenderModels = true;
+				if (RenderModels) modelPanel1.ClearAll();
 				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
-				List<MDL0Node> modelNodes = new List<MDL0Node>();
+				texNodes = new List<MDL0TextureNode>();
 				foreach (ResourceNode node in allNodes) {
 					Console.WriteLine(node);
 					if (node.ResourceType == ResourceType.MSBin) {
 						msBinNodes.Add((MSBinNode)node); // This is an MSBin node - add it to the list
-					} else {
+					} else if (RenderModels) {
 						ResourceNode modelfolder = node.FindChild("3DModels(NW4R)", false);
 						if (modelfolder != null) {
 							foreach (ResourceNode child in modelfolder.Children) {
 								if (child is MDL0Node) {
-									modelNodes.Add((MDL0Node)child);
+									MDL0Node model = child as MDL0Node;
+									model._renderBones = false;
+									model._renderPolygons = CheckState.Checked;
+									model._renderVertices = false;
+									model._renderBox = false;
+									if (model.TextureGroup != null) {
+										foreach (ResourceNode texNode in model.TextureGroup.Children) {
+											if (texNode is MDL0TextureNode) {
+												texNodes.Add((MDL0TextureNode)texNode);
+											}
+										}
+									}
+									modelPanel1.AddTarget(model);
 								}
 							}
 						}
 					}
 				}
+				if (RenderModels) modelPanel1.SetCamWithBox(new Vector3("-100,-100,-100"), new Vector3("100,100,100"));
 				if (msBinNodes.Count > 0) {
 					ListControl list = new ListControl(msBinNodes); // Have ListControl manage these; make that the right panel
 					RightControl = list;
 				} else {
 					RightControl = noMSBinLabel;
 				}
-				modelManager1.refillList(modelNodes);
 			}
 			this.Refresh();
 		}

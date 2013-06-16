@@ -40,7 +40,7 @@
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.modelManager1 = new BrawlStageManager.ModelManager();
+			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -209,13 +209,18 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// modelManager1
+			// modelPanel1
 			// 
-			this.modelManager1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.modelManager1.Location = new System.Drawing.Point(0, 24);
-			this.modelManager1.Name = "modelManager1";
-			this.modelManager1.Size = new System.Drawing.Size(292, 290);
-			this.modelManager1.TabIndex = 2;
+			this.modelPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.modelPanel1.InitialYFactor = 100;
+			this.modelPanel1.InitialZoomFactor = 5;
+			this.modelPanel1.Location = new System.Drawing.Point(0, 24);
+			this.modelPanel1.Name = "modelPanel1";
+			this.modelPanel1.RotationScale = 0.1F;
+			this.modelPanel1.Size = new System.Drawing.Size(292, 290);
+			this.modelPanel1.TabIndex = 2;
+			this.modelPanel1.TranslationScale = 0.05F;
+			this.modelPanel1.ZoomScale = 2.5F;
 			// 
 			// MainForm
 			// 
@@ -223,7 +228,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(592, 314);
 			this.Controls.Add(this.splitContainer1);
-			this.Controls.Add(this.modelManager1);
+			this.Controls.Add(this.modelPanel1);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;
@@ -261,7 +266,7 @@
 		private System.Windows.Forms.ToolStripMenuItem useFullrelNamesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private ModelManager modelManager1;
+		private System.Windows.Forms.ModelPanel modelPanel1;
 
 
 

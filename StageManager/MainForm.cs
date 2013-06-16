@@ -166,9 +166,9 @@ namespace BrawlStageManager {
 									model._renderVertices = false;
 									model._renderBox = false;
 									if (model.TextureGroup != null) {
-										foreach (ResourceNode texNode in model.TextureGroup.Children) {
-											if (texNode is MDL0TextureNode) {
-												texNodes.Add((MDL0TextureNode)texNode);
+										foreach (ResourceNode tex in model.TextureGroup.Children) {
+											if (tex is MDL0TextureNode) {
+												texNodes.Add((MDL0TextureNode)tex);
 											}
 										}
 									}
@@ -178,7 +178,10 @@ namespace BrawlStageManager {
 						}
 					}
 				}
-				if (RenderModels) modelPanel1.SetCamWithBox(new Vector3("-100,-100,-100"), new Vector3("100,100,100"));
+				if (RenderModels) {
+					modelPanel1.SetCamWithBox(new Vector3("-100,-100,-100"), new Vector3("100,100,100"));
+					updateContextMenuStrip();
+				}
 				if (msBinNodes.Count > 0) {
 					ListControl list = new ListControl(msBinNodes); // Have ListControl manage these; make that the right panel
 					RightControl = list;
@@ -187,6 +190,24 @@ namespace BrawlStageManager {
 				}
 			}
 			this.Refresh();
+		}
+
+		private void updateContextMenuStrip() {
+			var items = texturesToolStripMenuItem.DropDownItems;
+			items.Clear();
+			foreach (MDL0TextureNode tex in texNodes) {
+				ToolStripMenuItem item = new ToolStripMenuItem() {
+					Text = tex.Name,
+					Checked = true,
+					CheckOnClick = true
+				};
+				item.Click += new EventHandler((sender, args) => {
+					var menuitem = (sender as ToolStripMenuItem);
+					int index = items.IndexOf(menuitem);
+					texNodes[index].Enabled = menuitem.Checked;
+				});
+				items.Add(item);
+			}
 		}
 
 		/// <summary>

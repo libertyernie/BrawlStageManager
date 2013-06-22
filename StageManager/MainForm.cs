@@ -189,7 +189,7 @@ namespace BrawlStageManager {
 					RightControl = noMSBinLabel;
 				}
 			}
-			portraitViewer1.UpdateImage(q++);
+			portraitViewer1.UpdateImage(PortraitMap.Map[fi.Name]);
 			this.Refresh();
 		}
 		private int q = 0;

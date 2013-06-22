@@ -86,6 +86,7 @@
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="PortraitMap.cs" />
     <Compile Include="PortraitViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>

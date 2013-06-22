@@ -55,8 +55,15 @@ namespace BrawlStageManager {
 			return path + ext;
 		}
 
-		private struct Textures {
+		private struct Textures : IEnumerable<TEX0Node> {
 			public TEX0Node prevbase_tex0, icon_tex0, frontstname_tex0;
+
+			public IEnumerator<TEX0Node> GetEnumerator() {
+				return new List<TEX0Node> { prevbase_tex0, icon_tex0, frontstname_tex0 }.GetEnumerator();
+			}
+			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
+				return GetEnumerator();
+			}
 		}
 
 		private Textures textures;
@@ -86,19 +93,30 @@ namespace BrawlStageManager {
 
 			} else {
 				textures = retval ?? new Textures();
-				prevbase.BackgroundImage = (textures.prevbase_tex0 ?? nothingnode).GetImage(0);
-				icon.BackgroundImage = (textures.icon_tex0 ?? nothingnode).GetImage(0);
-				frontstname.BackgroundImage = (textures.frontstname_tex0 ?? nothingnode).GetImage(0);
+				setBG(prevbase, textures.prevbase_tex0);
+				setBG(icon, textures.icon_tex0);
+				setBG(frontstname, textures.frontstname_tex0);
+
+				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
+					label1.Text = "prevbase: " + textures.prevbase_tex0.Width + "x" + textures.prevbase_tex0.Height
+						+ "\nfrontstname: " + textures.frontstname_tex0.Width + "x" + textures.frontstname_tex0.Height;
+				}
 
 				_iconNum = iconNum;
 			}
 		}
 
+		private void setBG(Panel panel, TEX0Node tex0) {
+			panel.BackgroundImage = new Bitmap(
+				(tex0 ?? nothingnode).GetImage(0),
+				new Size(panel.Width, panel.Height));
+		}
+
 		private Textures? get_icons(int iconNum) {
 			if (common5 != null) {
-				label1.Text = "common5: ";
+				saveButton.Text = "Save common5";
 			} else if (sc_selmap != null) {
-				label1.Text = "sc_selmap.pac: ";
+				saveButton.Text = "Save sc_selmap";
 			} else {
 				return null;
 			}
@@ -143,7 +161,7 @@ namespace BrawlStageManager {
 		}
 
 		void panel1_DragEnter(object sender, DragEventArgs e) {
-			if (/*tex0 != null && */e.Data.GetDataPresent(DataFormats.FileDrop)) {
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
 				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
 				if (s.Length == 1) { // Can only drag and drop one file
 					string filename = s[0].ToLower();
@@ -181,6 +199,7 @@ namespace BrawlStageManager {
 					dlg.ImageSource = filename;
 					if (dlg.ShowDialog(null, GetTEX0For(sender)) == DialogResult.OK) {
 						UpdateImage(_iconNum);
+						GetTEX0For(sender).IsDirty = true;
 					}
 				}
 			}

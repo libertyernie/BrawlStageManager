@@ -22,6 +22,7 @@ namespace BrawlStageManager {
 		}
 
 		private string _openFilePath;
+		public Size? prevbaseResizeTo;
 
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
@@ -196,7 +197,17 @@ namespace BrawlStageManager {
 				}
 			} else {
 				using (TextureConverterDialog dlg = new TextureConverterDialog()) {
-					dlg.ImageSource = filename;
+					if (sender == prevbase && prevbaseResizeTo != null) {
+						string tempFile = Path.GetTempFileName();
+						using (Bitmap orig = new Bitmap(filename)) {
+							using (Bitmap resized = new Bitmap(orig, prevbaseResizeTo ?? Size.Empty)) {
+								resized.Save(tempFile);
+							}
+						}
+						dlg.ImageSource = tempFile;
+					} else {
+						dlg.ImageSource = filename;
+					}
 					if (dlg.ShowDialog(null, GetTEX0For(sender)) == DialogResult.OK) {
 						UpdateImage(_iconNum);
 						GetTEX0For(sender).IsDirty = true;

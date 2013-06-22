@@ -192,7 +192,6 @@ namespace BrawlStageManager {
 			portraitViewer1.UpdateImage(PortraitMap.Map[fi.Name]);
 			this.Refresh();
 		}
-		private int q = 0;
 
 		private void updateTexturesMenu() {
 			var items = texturesToolStripMenuItem.DropDownItems;
@@ -373,6 +372,25 @@ namespace BrawlStageManager {
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
 			Close();
+		}
+
+		private void prevbaseSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (sender == originalSizeToolStripMenuItem) {
+				originalSizeToolStripMenuItem.Checked = true;
+				x128ToolStripMenuItem.Checked = false;
+				x88ToolStripMenuItem.Checked = false;
+				portraitViewer1.prevbaseResizeTo = null;
+			} else if (sender == x128ToolStripMenuItem) {
+				originalSizeToolStripMenuItem.Checked = false;
+				x128ToolStripMenuItem.Checked = true;
+				x88ToolStripMenuItem.Checked = false;
+				portraitViewer1.prevbaseResizeTo = new Size(128, 128);
+			} else if (sender == x88ToolStripMenuItem) {
+				originalSizeToolStripMenuItem.Checked = false;
+				x128ToolStripMenuItem.Checked = false;
+				x88ToolStripMenuItem.Checked = true;
+				portraitViewer1.prevbaseResizeTo = new Size(88, 88);
+			}
 		}
 
 	}

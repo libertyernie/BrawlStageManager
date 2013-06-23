@@ -85,5 +85,9 @@ namespace BrawlStageManager {
 
 			return path + ext;
 		}
+
+		public override string ToString() {
+			return Name + " " + base.ToString();
+		}
 	}
 }

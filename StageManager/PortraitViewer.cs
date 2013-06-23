@@ -28,14 +28,24 @@ namespace BrawlStageManager {
 		private ResourceNode sc_selmap;
 
 		private struct Textures : IEnumerable<TEX0Node> {
-			public TEX0Node prevbase_tex0, icon_tex0, frontstname_tex0;
+			public TEX0Node prevbase_tex0, icon_tex0, frontstname_tex0, seriesicon_tex0, selmap_mark_tex0;
 
 			public IEnumerator<TEX0Node> GetEnumerator() {
-				return new List<TEX0Node> { prevbase_tex0, icon_tex0, frontstname_tex0 }.GetEnumerator();
+				return new List<TEX0Node> { prevbase_tex0, icon_tex0, frontstname_tex0, seriesicon_tex0, selmap_mark_tex0 }.GetEnumerator();
 			}
 			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
 				return GetEnumerator();
 			}
+		}
+
+		public TEX0Node GetTEX0For(object sender) {
+			return
+				(sender == prevbase) ? textures.prevbase_tex0 :
+				(sender == icon) ? textures.icon_tex0 :
+				(sender == frontstname) ? textures.frontstname_tex0 :
+				(sender == seriesicon) ? textures.seriesicon_tex0 :
+				(sender == selmap_mark) ? textures.selmap_mark_tex0 :
+				null;
 		}
 
 		private Textures textures;
@@ -49,15 +59,15 @@ namespace BrawlStageManager {
 			_iconNum = -1;
 			fileSizeBar.Style = ProgressBarStyle.Continuous;
 
-			foreach (Panel p in new Panel[] {prevbase, icon, frontstname}) {
-				p.DragEnter += panel1_DragEnter;
-				p.DragDrop += panel1_DragDrop;
+			foreach (Control child in flowLayoutPanel1.Controls) {
+				if (child is ImagePreviewPanel) {
+					(child as ImagePreviewPanel).DragEnter += panel1_DragEnter;
+					(child as ImagePreviewPanel).DragDrop += panel1_DragDrop;
+				}
 			}
 
 			UpdateDirectory();
 		}
-
-		private static TEX0Node nothingnode = new TEX0Node();
 
 		public void UpdateImage(int iconNum) {
 			prevbase.BackgroundImage = null;
@@ -68,9 +78,11 @@ namespace BrawlStageManager {
 
 			} else {
 				textures = retval ?? new Textures();
-				setBG(prevbase);
-				setBG(icon);
-				setBG(frontstname);
+				foreach (Control child in flowLayoutPanel1.Controls) {
+					if (child is ImagePreviewPanel) {
+						setBG(child as ImagePreviewPanel);
+					}
+				}
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "prevbase: " + textures.prevbase_tex0.Width + "x" + textures.prevbase_tex0.Height
@@ -82,9 +94,16 @@ namespace BrawlStageManager {
 		}
 
 		private void setBG(Panel panel) {
-			panel.BackgroundImage = new Bitmap(
-				(GetTEX0For(panel) ?? nothingnode).GetImage(0),
-				new Size(panel.Width, panel.Height));
+			TEX0Node tex0 = GetTEX0For(panel);
+			if (tex0 == null) {
+				Bitmap b = new Bitmap(1, 1);
+				b.SetPixel(0, 0, Color.Brown);
+				panel.BackgroundImage = b;
+			} else {
+				panel.BackgroundImage = new Bitmap(
+					tex0.GetImage(0),
+					new Size(panel.Width, panel.Height));
+			}
 		}
 
 		private Textures? get_icons(int iconNum) {
@@ -103,6 +122,8 @@ namespace BrawlStageManager {
 				prevbase_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapPrevbase." + iconNum.ToString("D2"), false),
 				icon_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapIcon." + iconNum.ToString("D2"), false),
 				frontstname_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapFrontStname." + iconNum.ToString("D2"), false),
+				seriesicon_tex0 = (TEX0Node)texturesFolder.FindChild("SeriesIcon." + iconNum.ToString("D2"), false),
+				selmap_mark_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapMark." + iconNum.ToString("D2"), false),
 			};
 			return result;
 		}
@@ -220,15 +241,6 @@ namespace BrawlStageManager {
 					}
 				}
 			}
-		}
-
-		public TEX0Node GetTEX0For(object sender) {
-			return
-				(sender == prevbase) ? textures.prevbase_tex0 :
-				(sender == icon) ? textures.icon_tex0 :
-				(sender == frontstname) ? textures.frontstname_tex0 :
-				(sender is Control) ? GetTEX0For((sender as Control).Parent) :
-				null;
 		}
 
 		protected void saveButton_Click(object sender, EventArgs e) {

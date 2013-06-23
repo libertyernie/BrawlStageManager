@@ -161,16 +161,16 @@
 
 		#endregion
 
-		protected BrawlStageManager.ImagePreviewPanel prevbase;
+		public ImagePreviewPanel prevbase { get; private set; }
+		public ImagePreviewPanel icon { get; private set; }
+		public ImagePreviewPanel frontstname { get; private set; }
+		public ImagePreviewPanel seriesicon { get; private set; }
+		public ImagePreviewPanel selmap_mark { get; private set; }
 		protected System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button saveButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private BrawlStageManager.ImagePreviewPanel icon;
-		private BrawlStageManager.ImagePreviewPanel frontstname;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.ProgressBar fileSizeBar;
 		private System.Windows.Forms.Label fileSizeLabel;
-		private ImagePreviewPanel seriesicon;
-		private ImagePreviewPanel selmap_mark;
 	}
 }

@@ -272,6 +272,7 @@ namespace BrawlStageManager {
 				DirectoryInfo search = new DirectoryInfo(path.FullName + "private\\wii\\app\\RSBE\\pf\\stage\\melee");
 				if (search.Exists) {
 					changeDirectory(search); // Change to the typical stage folder used by the FPC, if it exists on the drive
+					return;
 				}
 			}
 
@@ -375,23 +376,27 @@ namespace BrawlStageManager {
 		}
 
 		private void prevbaseSizeToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (sender == originalSizeToolStripMenuItem) {
-				originalSizeToolStripMenuItem.Checked = true;
-				x128ToolStripMenuItem.Checked = false;
-				x88ToolStripMenuItem.Checked = false;
+			foreach (ToolStripMenuItem item in prevbaseSize.DropDownItems) {
+				item.Checked = (item == sender);
+			}
+			if (sender == prevbaseOriginalSizeToolStripMenuItem) {
 				portraitViewer1.prevbaseResizeTo = null;
 			} else if (sender == x128ToolStripMenuItem) {
-				originalSizeToolStripMenuItem.Checked = false;
-				x128ToolStripMenuItem.Checked = true;
-				x88ToolStripMenuItem.Checked = false;
 				portraitViewer1.prevbaseResizeTo = new Size(128, 128);
 			} else if (sender == x88ToolStripMenuItem) {
-				originalSizeToolStripMenuItem.Checked = false;
-				x128ToolStripMenuItem.Checked = false;
-				x88ToolStripMenuItem.Checked = true;
 				portraitViewer1.prevbaseResizeTo = new Size(88, 88);
 			}
 		}
 
+		private void frontstnameSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+			foreach (ToolStripMenuItem item in frontstnameSizeToolStripMenuItem.DropDownItems) {
+				item.Checked = (item == sender);
+			}
+			if (sender == frontstnameOriginalSizeToolStripMenuItem) {
+				portraitViewer1.frontstnameResizeTo = null;
+			} else if (sender == x56ToolStripMenuItem) {
+				portraitViewer1.frontstnameResizeTo = new Size(104, 56);
+			}
+		}
 	}
 }

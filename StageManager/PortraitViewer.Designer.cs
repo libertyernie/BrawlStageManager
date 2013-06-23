@@ -23,12 +23,14 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
 			this.prevbase = new BrawlStageManager.ImagePreviewPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.icon = new BrawlStageManager.ImagePreviewPanel();
 			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
+			this.button1 = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -68,9 +70,8 @@
 			this.flowLayoutPanel1.Controls.Add(this.frontstname);
 			this.flowLayoutPanel1.Controls.Add(this.label1);
 			this.flowLayoutPanel1.Controls.Add(this.saveButton);
-			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(210, 400);
 			this.flowLayoutPanel1.TabIndex = 3;
@@ -93,13 +94,25 @@
 			this.frontstname.Size = new System.Drawing.Size(208, 56);
 			this.frontstname.TabIndex = 4;
 			// 
+			// button1
+			// 
+			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button1.Location = new System.Drawing.Point(0, 0);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(20, 400);
+			this.button1.TabIndex = 4;
+			this.button1.Text = ">";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// PortraitViewer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.flowLayoutPanel1);
+			this.Controls.Add(this.button1);
 			this.Name = "PortraitViewer";
-			this.Size = new System.Drawing.Size(210, 400);
+			this.Size = new System.Drawing.Size(230, 400);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -113,5 +126,6 @@
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private BrawlStageManager.ImagePreviewPanel icon;
 		private BrawlStageManager.ImagePreviewPanel frontstname;
+		private System.Windows.Forms.Button button1;
 	}
 }

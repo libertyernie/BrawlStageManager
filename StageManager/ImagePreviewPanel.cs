@@ -15,7 +15,6 @@ namespace BrawlStageManager {
 		public ImagePreviewPanel() {
 			this.AllowDrop = true;
 			this.ContextMenuStrip = new ContextMenuStrip();
-			this.Margin = new Padding(0);
 
 			ToolStripMenuItem replace = new ToolStripMenuItem("Replace");
 			replace.Click += new System.EventHandler(this.replace_Click);
@@ -27,7 +26,7 @@ namespace BrawlStageManager {
 		}
 
 		private PortraitViewer getPVParent() {
-			var p = Parent;
+			Control p = Parent;
 			while (p != null) {
 				if (p is PortraitViewer) {
 					return (PortraitViewer)p;
@@ -39,7 +38,7 @@ namespace BrawlStageManager {
 		}
 
 		private void replace_Click(object sender, EventArgs e) {
-			var pv = getPVParent();
+			PortraitViewer pv = getPVParent();
 			if (pv != null) {
 				_openDlg.Filter = ExportFilters.TEX0;
 				if (_openDlg.ShowDialog() == DialogResult.OK) {
@@ -50,7 +49,7 @@ namespace BrawlStageManager {
 		}
 
 		private void export_Click(object sender, EventArgs e) {
-			var pv = getPVParent();
+			PortraitViewer pv = getPVParent();
 			if (pv != null) {
 				_saveDlg.Filter = ExportFilters.TEX0;
 				_saveDlg.FilterIndex = 1;

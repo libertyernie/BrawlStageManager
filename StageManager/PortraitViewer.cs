@@ -16,6 +16,7 @@ namespace BrawlStageManager {
 
 		private string _openFilePath;
 		public Size? prevbaseResizeTo;
+		public Size? frontstnameResizeTo;
 
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
@@ -105,23 +106,35 @@ namespace BrawlStageManager {
 			return result;
 		}
 
+		private ResourceNode fcopy(string path) {
+			FileInfo f = new FileInfo(path);
+			if (!f.Exists) throw new IOException(f.FullName + " doesn't exist");
+
+			string tempfile = Path.GetTempFileName();
+			if (File.Exists(tempfile)) File.Delete(tempfile);
+			File.Copy(f.FullName, tempfile);
+			return NodeFactory.FromFile(null, tempfile);
+		}
+
 		public void UpdateDirectory() {
 			Console.WriteLine(System.Environment.CurrentDirectory);
+			if (sc_selmap != null) sc_selmap.Dispose();
+			if (common5 != null) common5.Dispose();
 			try {
 				string path = "../../menu2/sc_selmap.pac";
 				common5 = null;
-				sc_selmap = NodeFactory.FromFile(null, path);
+				sc_selmap = fcopy(path);
 				_openFilePath = path;
 			} catch (IOException) {
 				try {
-					string path = "G:/private/wii/app/rsbe/pf/system/common5.pac";
-					common5 = NodeFactory.FromFile(null, path);
+					string path = "../../system/common5.pac";
+					common5 = fcopy(path);
 					sc_selmap = common5.FindChild("sc_selmap_en", false);
 					_openFilePath = path;
 				} catch (IOException) {
 					try {
 						string path = "../../system/common5_en.pac";
-						common5 = NodeFactory.FromFile(null, path);
+						common5 = fcopy(path);
 						sc_selmap = common5.FindChild("sc_selmap_en", false);
 						_openFilePath = path;
 					} catch (IOException) {
@@ -177,12 +190,21 @@ namespace BrawlStageManager {
 							}
 						}
 						dlg.ImageSource = tempFile;
+					} else if (sender == frontstname && frontstnameResizeTo != null) {
+						string tempFile = Path.GetTempFileName();
+						using (Bitmap orig = new Bitmap(filename)) {
+							using (Bitmap resized = new Bitmap(orig, frontstnameResizeTo ?? Size.Empty)) {
+								resized.Save(tempFile);
+							}
+						}
+						dlg.ImageSource = tempFile;
 					} else {
 						dlg.ImageSource = filename;
 					}
-					if (dlg.ShowDialog(null, GetTEX0For(sender)) == DialogResult.OK) {
+					TEX0Node tex0 = GetTEX0For(sender);
+					if (dlg.ShowDialog(null, tex0) == DialogResult.OK) {
+						tex0.IsDirty = true;
 						UpdateImage(_iconNum);
-						GetTEX0For(sender).IsDirty = true;
 					}
 				}
 			}
@@ -202,12 +224,23 @@ namespace BrawlStageManager {
 				return;
 			}
 
-			if (common5 != null) {
-				common5.Merge();
-				common5.Export(_openFilePath);
+			ResourceNode toSave = common5 ?? sc_selmap;
+			try {
+				toSave.Merge();
+				toSave.Export(_openFilePath);
+			} catch (IOException) {
+				toSave.Export(_openFilePath + ".out.pac");
+				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			if (flowLayoutPanel1.Visible) {
+				flowLayoutPanel1.Visible = false;
+				button1.Text = "<";
 			} else {
-				sc_selmap.Merge();
-				sc_selmap.Export(_openFilePath);
+				flowLayoutPanel1.Visible = true;
+				button1.Text = ">";
 			}
 		}
 	}

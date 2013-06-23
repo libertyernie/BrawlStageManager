@@ -269,5 +269,15 @@ namespace BrawlStageManager {
 				button1.Text = ">";
 			}
 		}
+
+		public void ExportImages(int p, string thisdir) {
+			Textures? texs_maeby = get_icons(p);
+			if (texs_maeby == null) return;
+
+			Textures texs = (Textures)texs_maeby;
+			foreach (TEX0Node tex0 in texs) {
+				if (tex0 != null) tex0.Export(thisdir + "/" + tex0.Name + ".png");
+			}
+		}
 	}
 }

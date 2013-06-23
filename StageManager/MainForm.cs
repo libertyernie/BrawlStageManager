@@ -416,5 +416,54 @@ namespace BrawlStageManager {
 				portraitViewer1.frontstnameResizeTo = new Size(104, 56);
 			}
 		}
+
+		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
+			string outdir = "C:/Users/Owner/Desktop/outdir";
+			if (Directory.Exists(outdir)) {
+				var dr = MessageBox.Show("Delete the old outdir folder?", "", MessageBoxButtons.OKCancel);
+				if (dr != DialogResult.OK) {
+					return;
+				}
+				Directory.Delete(outdir, true);
+			}
+			using (ProgressWindow progress = new ProgressWindow((Control)null, "Exporting...", "", true)) {
+				progress.Begin(0, listBox1.Items.Count, 0);
+				Directory.CreateDirectory(outdir);
+				int i = 0;
+				foreach (FileInfo f in listBox1.Items) {
+					if (progress.Cancelled) {
+						break;
+					}
+					progress.Update(++i);
+					string thisdir = outdir + "/" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
+					Directory.CreateDirectory(thisdir);
+					string p = readNameFromPac(f);
+					File.Copy(f.FullName, thisdir + "/" + p);
+					FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
+					if (rel.Exists) File.Copy(rel.FullName, thisdir + "/" + rel.Name);
+
+					portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
+				}
+			}
+		}
+
+		private static string readNameFromPac(FileInfo f) {
+			var sb = new System.Text.StringBuilder();
+			using (var stream = new FileStream(f.FullName, FileMode.Open)) {
+				stream.Seek(16, SeekOrigin.Begin);
+				int b = stream.ReadByte();
+				while (b == 0) {
+					b = stream.ReadByte();
+				}
+				while (b != 0) {
+					sb.Append((char)b);
+					b = stream.ReadByte();
+				}
+			}
+			if (sb.ToString().IndexOfAny(Path.GetInvalidFileNameChars()) > -1) {
+				return f.Name;
+			}
+			return sb.ToString() + ".pac";
+		}
 	}
 }

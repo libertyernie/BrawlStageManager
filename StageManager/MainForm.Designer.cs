@@ -54,6 +54,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -182,6 +183,7 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeDirectoryToolStripMenuItem,
+            this.exportAllToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -362,6 +364,13 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 357);
 			this.portraitViewer1.TabIndex = 2;
 			// 
+			// exportAllToolStripMenuItem
+			// 
+			this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
+			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exportAllToolStripMenuItem.Text = "Export all";
+			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,6 +434,7 @@
 		private System.Windows.Forms.ToolStripMenuItem frontstnameOriginalSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem x56ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem renderModels;
+		private System.Windows.Forms.ToolStripMenuItem exportAllToolStripMenuItem;
 
 
 

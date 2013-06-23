@@ -30,7 +30,9 @@
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.icon = new BrawlStageManager.ImagePreviewPanel();
 			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
+			this.fileSizeBar = new System.Windows.Forms.ProgressBar();
 			this.button1 = new System.Windows.Forms.Button();
+			this.fileSizeLabel = new System.Windows.Forms.Label();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -57,7 +59,7 @@
 			this.saveButton.Location = new System.Drawing.Point(0, 328);
 			this.saveButton.Margin = new System.Windows.Forms.Padding(0);
 			this.saveButton.Name = "saveButton";
-			this.saveButton.Size = new System.Drawing.Size(176, 23);
+			this.saveButton.Size = new System.Drawing.Size(208, 23);
 			this.saveButton.TabIndex = 2;
 			this.saveButton.Text = "Save";
 			this.saveButton.UseVisualStyleBackColor = true;
@@ -70,6 +72,8 @@
 			this.flowLayoutPanel1.Controls.Add(this.frontstname);
 			this.flowLayoutPanel1.Controls.Add(this.label1);
 			this.flowLayoutPanel1.Controls.Add(this.saveButton);
+			this.flowLayoutPanel1.Controls.Add(this.fileSizeBar);
+			this.flowLayoutPanel1.Controls.Add(this.fileSizeLabel);
 			this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -94,6 +98,14 @@
 			this.frontstname.Size = new System.Drawing.Size(208, 56);
 			this.frontstname.TabIndex = 4;
 			// 
+			// fileSizeBar
+			// 
+			this.fileSizeBar.Location = new System.Drawing.Point(0, 351);
+			this.fileSizeBar.Margin = new System.Windows.Forms.Padding(0);
+			this.fileSizeBar.Name = "fileSizeBar";
+			this.fileSizeBar.Size = new System.Drawing.Size(208, 23);
+			this.fileSizeBar.TabIndex = 5;
+			// 
 			// button1
 			// 
 			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -105,6 +117,15 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
+			// fileSizeLabel
+			// 
+			this.fileSizeLabel.AutoSize = true;
+			this.fileSizeLabel.Location = new System.Drawing.Point(3, 374);
+			this.fileSizeLabel.Name = "fileSizeLabel";
+			this.fileSizeLabel.Size = new System.Drawing.Size(66, 13);
+			this.fileSizeLabel.TabIndex = 6;
+			this.fileSizeLabel.Text = "fileSizeLabel";
+			// 
 			// PortraitViewer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,6 +135,7 @@
 			this.Name = "PortraitViewer";
 			this.Size = new System.Drawing.Size(230, 400);
 			this.flowLayoutPanel1.ResumeLayout(false);
+			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
@@ -127,5 +149,7 @@
 		private BrawlStageManager.ImagePreviewPanel icon;
 		private BrawlStageManager.ImagePreviewPanel frontstname;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.ProgressBar fileSizeBar;
+		private System.Windows.Forms.Label fileSizeLabel;
 	}
 }

@@ -46,13 +46,13 @@
 			this.prevbaseOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x128ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x88ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.frontstnameSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.frontstnameOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.x56ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.frontstnameSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.frontstnameOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.x56ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -111,7 +111,7 @@
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
 			this.splitContainer2.Size = new System.Drawing.Size(312, 357);
-			this.splitContainer2.SplitterDistance = 52;
+			this.splitContainer2.SplitterDistance = 56;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// stageInfoControl1
@@ -121,7 +121,7 @@
 			this.stageInfoControl1.Name = "stageInfoControl1";
 			this.stageInfoControl1.RelFile = null;
 			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 48);
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 52);
 			this.stageInfoControl1.TabIndex = 0;
 			this.stageInfoControl1.UseRelDescription = false;
 			// 
@@ -139,8 +139,8 @@
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.modelPanel1);
-			this.splitContainer3.Size = new System.Drawing.Size(308, 297);
-			this.splitContainer3.SplitterDistance = 93;
+			this.splitContainer3.Size = new System.Drawing.Size(308, 293);
+			this.splitContainer3.SplitterDistance = 99;
 			this.splitContainer3.TabIndex = 4;
 			// 
 			// rightPanel
@@ -148,7 +148,7 @@
 			this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.rightPanel.Location = new System.Drawing.Point(0, 0);
 			this.rightPanel.Name = "rightPanel";
-			this.rightPanel.Size = new System.Drawing.Size(308, 93);
+			this.rightPanel.Size = new System.Drawing.Size(308, 99);
 			this.rightPanel.TabIndex = 3;
 			// 
 			// modelPanel1
@@ -159,7 +159,7 @@
 			this.modelPanel1.Location = new System.Drawing.Point(0, 0);
 			this.modelPanel1.Name = "modelPanel1";
 			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(308, 200);
+			this.modelPanel1.Size = new System.Drawing.Size(308, 190);
 			this.modelPanel1.TabIndex = 2;
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
@@ -298,6 +298,29 @@
 			this.x88ToolStripMenuItem.Text = "88x88";
 			this.x88ToolStripMenuItem.Click += new System.EventHandler(this.prevbaseSizeToolStripMenuItem_Click);
 			// 
+			// frontstnameSizeToolStripMenuItem
+			// 
+			this.frontstnameSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.frontstnameOriginalSizeToolStripMenuItem,
+            this.x56ToolStripMenuItem});
+			this.frontstnameSizeToolStripMenuItem.Name = "frontstnameSizeToolStripMenuItem";
+			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.frontstnameSizeToolStripMenuItem.Text = "Frontstname size:";
+			// 
+			// frontstnameOriginalSizeToolStripMenuItem
+			// 
+			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
+			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Original size";
+			this.frontstnameOriginalSizeToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
+			// 
+			// x56ToolStripMenuItem
+			// 
+			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
+			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.x56ToolStripMenuItem.Text = "104x56";
+			this.x56ToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
+			// 
 			// texturesToolStripMenuItem
 			// 
 			this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
@@ -327,29 +350,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 357);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// frontstnameSizeToolStripMenuItem
-			// 
-			this.frontstnameSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.frontstnameOriginalSizeToolStripMenuItem,
-            this.x56ToolStripMenuItem});
-			this.frontstnameSizeToolStripMenuItem.Name = "frontstnameSizeToolStripMenuItem";
-			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.frontstnameSizeToolStripMenuItem.Text = "Frontstname size:";
-			// 
-			// frontstnameOriginalSizeToolStripMenuItem
-			// 
-			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
-			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Original size";
-			this.frontstnameOriginalSizeToolStripMenuItem.Click += new System.EventHandler(frontstnameSizeToolStripMenuItem_Click);
-			// 
-			// x56ToolStripMenuItem
-			// 
-			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
-			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.x56ToolStripMenuItem.Text = "104x56";
-			this.x56ToolStripMenuItem.Click += new System.EventHandler(frontstnameSizeToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

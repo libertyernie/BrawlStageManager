@@ -129,6 +129,17 @@ namespace BrawlStageManager {
 			}
 			try {
 				fi.Refresh(); // Update file size
+				if (fi.Length == 2261408) { // mewtwo2000's venom causes latest brawllib to crash :(
+					var md5provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
+					byte[] hash = md5provider.ComputeHash(File.ReadAllBytes(fi.FullName));
+					var sb = new System.Text.StringBuilder();
+					foreach (byte b in hash) {
+						sb.Append(b.ToString("x2").ToLower());
+					}
+					if (sb.ToString() == "814f5f640226f1616966317807e1e1a2") {
+						throw new FileNotFoundException();
+					}
+				}
 				_rootNode = NodeFactory.FromFile(null, _rootPath = fi.FullName);
 			} catch (FileNotFoundException) {
 				// This might happen if you delete the file from Explorer after this program puts it in the list

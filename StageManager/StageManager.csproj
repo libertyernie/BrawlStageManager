@@ -72,6 +72,9 @@
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
     <Compile Include="FileOperations.cs" />
+    <Compile Include="ImagePreviewPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

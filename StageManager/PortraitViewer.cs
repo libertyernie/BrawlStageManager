@@ -14,13 +14,6 @@ using BrawlLib;
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
 
-		private static OpenFileDialog _openDlg;
-		private static SaveFileDialog _saveDlg;
-		static PortraitViewer() {
-			_openDlg = new OpenFileDialog();
-			_saveDlg = new SaveFileDialog();
-		}
-
 		private string _openFilePath;
 		public Size? prevbaseResizeTo;
 
@@ -32,29 +25,6 @@ namespace BrawlStageManager {
 		/// Either the sc_selmap_en archive within common5.pac or the sc_selmap.pac file.
 		/// </summary>
 		private ResourceNode sc_selmap;
-
-		/// <summary>
-		/// Method lifted directly from BrawlBox.
-		/// </summary>
-		public static string ApplyExtension(string path, string filter, int filterIndex) {
-			int tmp;
-			if ((Path.HasExtension(path)) && (!int.TryParse(Path.GetExtension(path), out tmp)))
-				return path;
-
-			int index = filter.IndexOfOccurance('|', filterIndex * 2);
-			if (index == -1)
-				return path;
-
-			index = filter.IndexOf('.', index);
-			int len = Math.Max(filter.Length, filter.IndexOfAny(new char[] { ';', '|' })) - index;
-
-			string ext = filter.Substring(index, len);
-
-			if (ext.IndexOf('*') >= 0)
-				return path;
-
-			return path + ext;
-		}
 
 		private struct Textures : IEnumerable<TEX0Node> {
 			public TEX0Node prevbase_tex0, icon_tex0, frontstname_tex0;
@@ -77,8 +47,10 @@ namespace BrawlStageManager {
 
 			_iconNum = -1;
 
-			prevbase.DragEnter += panel1_DragEnter;
-			prevbase.DragDrop += panel1_DragDrop;
+			foreach (Panel p in new Panel[] {prevbase, icon, frontstname}) {
+				p.DragEnter += panel1_DragEnter;
+				p.DragDrop += panel1_DragDrop;
+			}
 
 			UpdateDirectory();
 		}
@@ -94,9 +66,9 @@ namespace BrawlStageManager {
 
 			} else {
 				textures = retval ?? new Textures();
-				setBG(prevbase, textures.prevbase_tex0);
-				setBG(icon, textures.icon_tex0);
-				setBG(frontstname, textures.frontstname_tex0);
+				setBG(prevbase);
+				setBG(icon);
+				setBG(frontstname);
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "prevbase: " + textures.prevbase_tex0.Width + "x" + textures.prevbase_tex0.Height
@@ -107,9 +79,9 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private void setBG(Panel panel, TEX0Node tex0) {
+		private void setBG(Panel panel) {
 			panel.BackgroundImage = new Bitmap(
-				(tex0 ?? nothingnode).GetImage(0),
+				(GetTEX0For(panel) ?? nothingnode).GetImage(0),
 				new Size(panel.Width, panel.Height));
 		}
 
@@ -216,11 +188,12 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private TEX0Node GetTEX0For(object sender) {
+		public TEX0Node GetTEX0For(object sender) {
 			return
 				(sender == prevbase) ? textures.prevbase_tex0 :
 				(sender == icon) ? textures.icon_tex0 :
 				(sender == frontstname) ? textures.frontstname_tex0 :
+				(sender is Control) ? GetTEX0For((sender as Control).Parent) :
 				null;
 		}
 
@@ -235,29 +208,6 @@ namespace BrawlStageManager {
 			} else {
 				sc_selmap.Merge();
 				sc_selmap.Export(_openFilePath);
-			}
-		}
-
-		private void replaceToolStripMenuItem_Click(object sender, EventArgs e) {
-			_openDlg.Filter = ExportFilters.TEX0;
-			if (_openDlg.ShowDialog() == DialogResult.OK) {
-				string fileName = _openDlg.FileName;
-				Replace(sender, fileName);
-			}
-		}
-
-		/// <summary>
-		/// From BrawlBox (mostly - some simplification)
-		/// </summary>
-		private void exportToolStripMenuItem_Click(object sender, EventArgs e) {
-			_saveDlg.Filter = ExportFilters.TEX0;
-			_saveDlg.FilterIndex = 1;
-			if (_saveDlg.ShowDialog() == DialogResult.OK) {
-				int fIndex = _saveDlg.FilterIndex;
-
-				//Fix extension
-				string fileName = ApplyExtension(_saveDlg.FileName, _saveDlg.Filter, fIndex - 1);
-				GetTEX0For(sender).Export(fileName);
 			}
 		}
 	}

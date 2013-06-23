@@ -23,55 +23,27 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			this.components = new System.ComponentModel.Container();
-			this.prevbase = new System.Windows.Forms.Panel();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.replaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.prevbase = new BrawlStageManager.ImagePreviewPanel();
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-			this.icon = new System.Windows.Forms.Panel();
-			this.frontstname = new System.Windows.Forms.Panel();
-			this.contextMenuStrip1.SuspendLayout();
+			this.icon = new BrawlStageManager.ImagePreviewPanel();
+			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// prevbase
 			// 
 			this.prevbase.AllowDrop = true;
-			this.prevbase.ContextMenuStrip = this.contextMenuStrip1;
 			this.prevbase.Location = new System.Drawing.Point(0, 0);
 			this.prevbase.Margin = new System.Windows.Forms.Padding(0);
 			this.prevbase.Name = "prevbase";
 			this.prevbase.Size = new System.Drawing.Size(176, 176);
 			this.prevbase.TabIndex = 0;
 			// 
-			// contextMenuStrip1
-			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.replaceToolStripMenuItem,
-            this.exportToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(116, 48);
-			// 
-			// replaceToolStripMenuItem
-			// 
-			this.replaceToolStripMenuItem.Name = "replaceToolStripMenuItem";
-			this.replaceToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-			this.replaceToolStripMenuItem.Text = "Replace";
-			this.replaceToolStripMenuItem.Click += new System.EventHandler(this.replaceToolStripMenuItem_Click);
-			// 
-			// exportToolStripMenuItem
-			// 
-			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			this.exportToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
-			this.exportToolStripMenuItem.Text = "Export";
-			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
-			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(0, 294);
+			this.label1.Location = new System.Drawing.Point(0, 288);
 			this.label1.Margin = new System.Windows.Forms.Padding(0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(176, 40);
@@ -80,7 +52,7 @@
 			// 
 			// saveButton
 			// 
-			this.saveButton.Location = new System.Drawing.Point(0, 334);
+			this.saveButton.Location = new System.Drawing.Point(0, 328);
 			this.saveButton.Margin = new System.Windows.Forms.Padding(0);
 			this.saveButton.Name = "saveButton";
 			this.saveButton.Size = new System.Drawing.Size(176, 23);
@@ -105,14 +77,17 @@
 			// 
 			// icon
 			// 
-			this.icon.Location = new System.Drawing.Point(3, 179);
+			this.icon.AllowDrop = true;
+			this.icon.Location = new System.Drawing.Point(0, 176);
+			this.icon.Margin = new System.Windows.Forms.Padding(0);
 			this.icon.Name = "icon";
 			this.icon.Size = new System.Drawing.Size(64, 56);
 			this.icon.TabIndex = 3;
 			// 
 			// frontstname
 			// 
-			this.frontstname.Location = new System.Drawing.Point(0, 238);
+			this.frontstname.AllowDrop = true;
+			this.frontstname.Location = new System.Drawing.Point(0, 232);
 			this.frontstname.Margin = new System.Windows.Forms.Padding(0);
 			this.frontstname.Name = "frontstname";
 			this.frontstname.Size = new System.Drawing.Size(208, 56);
@@ -125,7 +100,6 @@
 			this.Controls.Add(this.flowLayoutPanel1);
 			this.Name = "PortraitViewer";
 			this.Size = new System.Drawing.Size(210, 400);
-			this.contextMenuStrip1.ResumeLayout(false);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
@@ -133,14 +107,11 @@
 
 		#endregion
 
-		protected System.Windows.Forms.Panel prevbase;
+		protected BrawlStageManager.ImagePreviewPanel prevbase;
 		protected System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button saveButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem replaceToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-		private System.Windows.Forms.Panel icon;
-		private System.Windows.Forms.Panel frontstname;
+		private BrawlStageManager.ImagePreviewPanel icon;
+		private BrawlStageManager.ImagePreviewPanel frontstname;
 	}
 }

@@ -41,6 +41,7 @@
 			this.moduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.verifyrelStageIDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.renderModels = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
 			this.warningResizingIsQuiteUglyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -206,6 +207,7 @@
             this.moduleFileDirectoryToolStripMenuItem,
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
+            this.renderModels,
             this.prevbaseSize,
             this.frontstnameSizeToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -256,6 +258,15 @@
 			this.useFullrelNamesToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.useFullrelNamesToolStripMenuItem.Text = "Use full .rel names";
 			this.useFullrelNamesToolStripMenuItem.Click += new System.EventHandler(this.useFullrelNamesToolStripMenuItem_Click);
+			// 
+			// renderModels
+			// 
+			this.renderModels.Checked = true;
+			this.renderModels.CheckOnClick = true;
+			this.renderModels.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.renderModels.Name = "renderModels";
+			this.renderModels.Size = new System.Drawing.Size(184, 22);
+			this.renderModels.Text = "Render models";
 			// 
 			// prevbaseSize
 			// 
@@ -413,6 +424,7 @@
 		private System.Windows.Forms.ToolStripMenuItem frontstnameSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem frontstnameOriginalSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem x56ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem renderModels;
 
 
 

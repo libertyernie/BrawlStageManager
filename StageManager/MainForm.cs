@@ -117,6 +117,11 @@ namespace BrawlStageManager {
 			changeDirectory(path);
 		}
 
+		private static long[] sizes_of_broken_files = { 2261408, 3596224 };
+		private static string[] md5sums_of_broken_files = {
+			"814f5f640226f1616966317807e1e1a2",		  
+			"0a0767b84bd67e3cc6582f23a0eab6f9"};
+
 		private void open(FileInfo fi) {
 			RightControl = loadingLabel;
 			this.Refresh();
@@ -129,14 +134,17 @@ namespace BrawlStageManager {
 			}
 			try {
 				fi.Refresh(); // Update file size
-				if (fi.Length == 2261408) { // mewtwo2000's venom causes latest brawllib to crash :(
+
+				int isBrokenIndex = Array.IndexOf(sizes_of_broken_files, fi.Length);
+
+				if (isBrokenIndex >= 0) { // mewtwo2000's venom causes latest brawllib to crash :(
 					var md5provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
 					byte[] hash = md5provider.ComputeHash(File.ReadAllBytes(fi.FullName));
 					var sb = new System.Text.StringBuilder();
 					foreach (byte b in hash) {
 						sb.Append(b.ToString("x2").ToLower());
 					}
-					if (sb.ToString() == "814f5f640226f1616966317807e1e1a2") {
+					if (sb.ToString() == md5sums_of_broken_files[isBrokenIndex]) {
 						throw new FileNotFoundException();
 					}
 				}
@@ -157,8 +165,7 @@ namespace BrawlStageManager {
 				string relname = matchRel(fi.Name);
 				updateRel(relname);
 
-				bool RenderModels = true;
-				if (RenderModels) modelPanel1.ClearAll();
+				if (renderModels.Checked) modelPanel1.ClearAll();
 				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
 				texNodes = new List<MDL0TextureNode>();
@@ -166,7 +173,7 @@ namespace BrawlStageManager {
 					Console.WriteLine(node);
 					if (node.ResourceType == ResourceType.MSBin) {
 						msBinNodes.Add((MSBinNode)node); // This is an MSBin node - add it to the list
-					} else if (RenderModels) {
+					} else if (renderModels.Checked) {
 						ResourceNode modelfolder = node.FindChild("3DModels(NW4R)", false);
 						if (modelfolder != null) {
 							foreach (ResourceNode child in modelfolder.Children) {
@@ -189,7 +196,7 @@ namespace BrawlStageManager {
 						}
 					}
 				}
-				if (RenderModels) {
+				if (renderModels.Checked) {
 					modelPanel1.SetCamWithBox(new Vector3("-100,-100,-100"), new Vector3("100,100,100"));
 					updateTexturesMenu();
 				}

@@ -123,8 +123,8 @@ namespace BrawlStageManager {
 			"0a0767b84bd67e3cc6582f23a0eab6f9"};
 
 		private void open(FileInfo fi) {
-			RightControl = loadingLabel;
-			this.Refresh();
+			//RightControl = loadingLabel;
+			//this.Refresh();
 			if (_rootNode != null) {
 				_rootNode.Dispose(); _rootNode = null;
 			}

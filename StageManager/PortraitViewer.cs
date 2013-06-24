@@ -143,26 +143,25 @@ namespace BrawlStageManager {
 			if (sc_selmap != null) sc_selmap.Dispose();
 			if (common5 != null) common5.Dispose();
 			_openFilePath = null;
+			label1.Text = "";
+			fileSizeBar.Maximum = 1214283;
 			try {
 				string path = "../../menu2/sc_selmap.pac";
 				common5 = null;
 				sc_selmap = fcopy(path);
 				_openFilePath = path;
-				fileSizeBar.Maximum = 1214283;
 			} catch (IOException) {
 				try {
 					string path = "../../system/common5.pac";
 					common5 = fcopy(path);
 					sc_selmap = common5.FindChild("sc_selmap_en", false);
 					_openFilePath = path;
-					fileSizeBar.Maximum = 12204896;
 				} catch (IOException) {
 					try {
 						string path = "../../system/common5_en.pac";
 						common5 = fcopy(path);
 						sc_selmap = common5.FindChild("sc_selmap_en", false);
 						_openFilePath = path;
-						fileSizeBar.Maximum = 12204896;
 					} catch (IOException) {
 						common5 = null;
 						sc_selmap = null;
@@ -171,8 +170,7 @@ namespace BrawlStageManager {
 				}
 			}
 			if (_openFilePath != null) {
-				fileSizeBar.Value = (int)new FileInfo(_openFilePath).Length;
-				fileSizeLabel.Text = fileSizeBar.Value + " / " + fileSizeBar.Maximum;
+				updateFileSize();
 			} else {
 				fileSizeBar.Value = 0;
 				fileSizeLabel.Text = "";
@@ -252,12 +250,24 @@ namespace BrawlStageManager {
 			try {
 				toSave.Merge();
 				toSave.Export(_openFilePath);
-				fileSizeBar.Value = (int)new FileInfo(_openFilePath).Length;
-				fileSizeLabel.Text = fileSizeBar.Value + " / " + fileSizeBar.Maximum;
 			} catch (IOException) {
 				toSave.Export(_openFilePath + ".out.pac");
 				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
 			}
+
+			updateFileSize();
+		}
+
+		private void updateFileSize() {
+			if (common5 != null) {
+				string tempfile = Path.GetTempFileName();
+				sc_selmap.Export(tempfile);
+				fileSizeBar.Value = (int)new FileInfo(tempfile).Length;
+				File.Delete(tempfile);
+			} else {
+				fileSizeBar.Value = (int)new FileInfo(_openFilePath).Length;
+			}
+			fileSizeLabel.Text = fileSizeBar.Value + " / " + fileSizeBar.Maximum;
 		}
 
 		private void button1_Click(object sender, EventArgs e) {

@@ -375,28 +375,28 @@ namespace BrawlStageManager {
 			File.Copy(pac.FullName, _rootPath, true);
 			File.Copy(rel.FullName, stageInfoControl1.RelFile.FullName, true);
 
-			var prevbases = dirinfo.EnumerateFiles("MenSelmapPrevbase.*");
+			var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
 			if (prevbases.Any()) {
 				portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName);
 			}
 
-			var icons = dirinfo.EnumerateFiles("MenSelmapIcon.*");
+			var icons = dirinfo.EnumerateFiles("*Icon.*");
 			if (icons.Any()) {
 				portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName);
 			}
 
-			var frontstnames = dirinfo.EnumerateFiles("MenSelmapFrontStname.*");
+			var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
 			if (frontstnames.Any()) {
 				portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName);
 			}
 
-			var seriesicons = dirinfo.EnumerateFiles("SeriesIcon.*")
-				.Concat(dirinfo.EnumerateFiles("MenSelchrMark.*"));
+			var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
+				.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
 			if (seriesicons.Any()) {
 				portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName);
 			}
 
-			var selmap_marks = dirinfo.EnumerateFiles("MenSelmapMark.*");
+			var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
 			if (selmap_marks.Any()) {
 				portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName);
 			}

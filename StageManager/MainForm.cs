@@ -11,9 +11,11 @@ namespace BrawlStageManager {
 
 		public static OpenFileDialog OpenDialog { get; private set; }
 		public static SaveFileDialog SaveDialog { get; private set; }
+		public static FolderBrowserDialog FolderDialog { get; private set; }
 		static MainForm() {
 			OpenDialog = new OpenFileDialog();
 			SaveDialog = new SaveFileDialog();
+			FolderDialog = new FolderBrowserDialog();
 		}
 
 		/// <summary>
@@ -415,10 +417,9 @@ namespace BrawlStageManager {
 		}
 
 		private void changeDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
-			FolderBrowserDialog fbd = new FolderBrowserDialog();
-//			fbd.SelectedPath = CurrentDirectory; // Uncomment this if you want the "change directory" dialog to start with the current directory selected
-			if (fbd.ShowDialog() == DialogResult.OK) {
-				changeDirectory(fbd.SelectedPath);
+			FolderDialog.SelectedPath = CurrentDirectory; // Uncomment this if you want the "change directory" dialog to start with the current directory selected
+			if (FolderDialog.ShowDialog() == DialogResult.OK) {
+				changeDirectory(FolderDialog.SelectedPath);
 			}
 		}
 
@@ -475,11 +476,33 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private static string readNameFromPac(FileInfo f) {
+			var sb = new System.Text.StringBuilder();
+			using (var stream = new FileStream(f.FullName, FileMode.Open, FileAccess.Read)) {
+				stream.Seek(16, SeekOrigin.Begin);
+				int b = stream.ReadByte();
+				while (b == 0) {
+					b = stream.ReadByte();
+				}
+				while (b != 0) {
+					sb.Append((char)b);
+					b = stream.ReadByte();
+				}
+			}
+			if (sb.ToString().IndexOfAny(Path.GetInvalidFileNameChars()) > -1) {
+				return f.Name;
+			}
+			return sb.ToString() + ".pac";
+		}
+
 		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
-			
-			string outdir = "C:/Users/Owner/Desktop/outdir";
-			if (Directory.Exists(outdir)) {
-				var dr = MessageBox.Show("Delete the old outdir folder?", "", MessageBoxButtons.OKCancel);
+			if (FolderDialog.ShowDialog() != DialogResult.OK) {
+				return;
+			}
+
+			string outdir = FolderDialog.SelectedPath;
+			if (Directory.Exists(outdir) && Directory.EnumerateFileSystemEntries(outdir).Any()) {
+				var dr = MessageBox.Show("Is it OK to delete everything in "+outdir+"?", "", MessageBoxButtons.OKCancel);
 				if (dr != DialogResult.OK) {
 					return;
 				}
@@ -495,34 +518,36 @@ namespace BrawlStageManager {
 					}
 					progress.Update(++i);
 					string thisdir = outdir + "/" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
-					Directory.CreateDirectory(thisdir);
-					string p = readNameFromPac(f);
-					File.Copy(f.FullName, thisdir + "/" + p);
-					FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
-					if (rel.Exists) File.Copy(rel.FullName, thisdir + "/" + rel.Name);
-
-					portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
+					exportStage(f, thisdir);
 				}
 			}
 		}
 
-		private static string readNameFromPac(FileInfo f) {
-			var sb = new System.Text.StringBuilder();
-			using (var stream = new FileStream(f.FullName, FileMode.Open)) {
-				stream.Seek(16, SeekOrigin.Begin);
-				int b = stream.ReadByte();
-				while (b == 0) {
-					b = stream.ReadByte();
-				}
-				while (b != 0) {
-					sb.Append((char)b);
-					b = stream.ReadByte();
-				}
+		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (FolderDialog.ShowDialog() != DialogResult.OK) {
+				return;
 			}
-			if (sb.ToString().IndexOfAny(Path.GetInvalidFileNameChars()) > -1) {
-				return f.Name;
+
+			string outdir = FolderDialog.SelectedPath;
+			if (Directory.Exists(outdir) && Directory.EnumerateFileSystemEntries(outdir).Any()) {
+				var dr = MessageBox.Show("Is it OK to delete everything in " + outdir + "?", "", MessageBoxButtons.OKCancel);
+				if (dr != DialogResult.OK) {
+					return;
+				}
+				Directory.Delete(outdir, true);
 			}
-			return sb.ToString() + ".pac";
+
+			exportStage(listBox1.SelectedItem as FileInfo, outdir);
+		}
+
+		private void exportStage(FileInfo f, string thisdir) {
+			Directory.CreateDirectory(thisdir);
+			string p = readNameFromPac(f);
+			File.Copy(f.FullName, thisdir + "/" + p);
+			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
+			if (rel.Exists) File.Copy(rel.FullName, thisdir + "/" + rel.Name);
+
+			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
 		}
 	}
 }

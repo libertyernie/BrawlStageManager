@@ -34,6 +34,7 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moduleFileDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -183,6 +184,7 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeDirectoryToolStripMenuItem,
+            this.exportStageToolStripMenuItem,
             this.exportAllToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -195,6 +197,13 @@
 			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.changeDirectoryToolStripMenuItem.Text = "Change directory...";
 			this.changeDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeDirectoryToolStripMenuItem_Click);
+			// 
+			// exportAllToolStripMenuItem
+			// 
+			this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
+			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exportAllToolStripMenuItem.Text = "Export all stages";
+			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -364,12 +373,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 357);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// exportAllToolStripMenuItem
+			// exportStageToolStripMenuItem
 			// 
-			this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
-			this.exportAllToolStripMenuItem.Text = "Export all";
-			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
+			this.exportStageToolStripMenuItem.Name = "exportStageToolStripMenuItem";
+			this.exportStageToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exportStageToolStripMenuItem.Text = "Export stage";
+			this.exportStageToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -435,6 +444,7 @@
 		private System.Windows.Forms.ToolStripMenuItem x56ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem renderModels;
 		private System.Windows.Forms.ToolStripMenuItem exportAllToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exportStageToolStripMenuItem;
 
 
 

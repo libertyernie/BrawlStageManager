@@ -8,6 +8,14 @@ using System.IO;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
+
+		public static OpenFileDialog OpenDialog { get; private set; }
+		public static SaveFileDialog SaveDialog { get; private set; }
+		static MainForm() {
+			OpenDialog = new OpenFileDialog();
+			SaveDialog = new SaveFileDialog();
+		}
+
 		/// <summary>
 		/// The currently opened .pac file's root node.
 		/// </summary>
@@ -468,6 +476,7 @@ namespace BrawlStageManager {
 		}
 
 		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
+			
 			string outdir = "C:/Users/Owner/Desktop/outdir";
 			if (Directory.Exists(outdir)) {
 				var dr = MessageBox.Show("Delete the old outdir folder?", "", MessageBoxButtons.OKCancel);

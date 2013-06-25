@@ -9,9 +9,6 @@ using System.Windows.Forms;
 namespace BrawlStageManager {
 	public class ImagePreviewPanel : Panel {
 
-		private static OpenFileDialog _openDlg = new OpenFileDialog();
-		private static SaveFileDialog _saveDlg = new SaveFileDialog();
-
 		public ImagePreviewPanel() {
 			this.AllowDrop = true;
 			this.ContextMenuStrip = new ContextMenuStrip();
@@ -40,9 +37,9 @@ namespace BrawlStageManager {
 		private void replace_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
 			if (pv != null) {
-				_openDlg.Filter = ExportFilters.TEX0;
-				if (_openDlg.ShowDialog() == DialogResult.OK) {
-					string fileName = _openDlg.FileName;
+				MainForm.OpenDialog.Filter = ExportFilters.TEX0;
+				if (MainForm.OpenDialog.ShowDialog() == DialogResult.OK) {
+					string fileName = MainForm.OpenDialog.FileName;
 					pv.Replace(this, fileName);
 				}
 			}
@@ -51,13 +48,13 @@ namespace BrawlStageManager {
 		private void export_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
 			if (pv != null) {
-				_saveDlg.Filter = ExportFilters.TEX0;
-				_saveDlg.FilterIndex = 1;
-				if (_saveDlg.ShowDialog() == DialogResult.OK) {
-					int fIndex = _saveDlg.FilterIndex;
+				MainForm.SaveDialog.Filter = ExportFilters.TEX0;
+				MainForm.SaveDialog.FilterIndex = 1;
+				if (MainForm.SaveDialog.ShowDialog() == DialogResult.OK) {
+					int fIndex = MainForm.SaveDialog.FilterIndex;
 
 					//Fix extension
-					string fileName = ApplyExtension(_saveDlg.FileName, _saveDlg.Filter, fIndex - 1);
+					string fileName = ApplyExtension(MainForm.SaveDialog.FileName, MainForm.SaveDialog.Filter, fIndex - 1);
 					pv.GetTEX0For(this).Export(fileName);
 				}
 			}

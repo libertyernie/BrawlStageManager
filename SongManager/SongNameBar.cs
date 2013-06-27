@@ -15,6 +15,7 @@ namespace BrawlSongManager {
 
 		private ResourceNode info_pac, info_training_pac;
 		private MSBinNode info, info_training;
+		private string _currentFile;
 
 		private bool updateTextColor;
 		private string TextBoxText {
@@ -74,12 +75,19 @@ namespace BrawlSongManager {
 		/// </summary>
 		public String findInfoFile() {
 			info = info_training = null;
+			_currentFile = null;
 
+			string tempfile = Path.GetTempFileName();
+			File.Delete(tempfile);
 			if (new FileInfo("MiscData[140].msbin").Exists) {
-				info = NodeFactory.FromFile(null, "MiscData[140].msbin") as MSBinNode;
+				_currentFile = "MiscData[140].msbin";
+				File.Copy("MiscData[140].msbin", tempfile);
+				info = NodeFactory.FromFile(null, tempfile) as MSBinNode;
 				return "Loaded .\\MiscData[140].msbin";
 			} else if (new FileInfo("\\MiscData[140].msbin").Exists) {
-				info = NodeFactory.FromFile(null, "\\MiscData[140].msbin") as MSBinNode;
+				_currentFile = "\\MiscData[140].msbin";
+				File.Copy("\\MiscData[140].msbin", tempfile);
+				info = NodeFactory.FromFile(null, tempfile) as MSBinNode;
 				return "Loaded \\MiscData[140].msbin";
 			} else {
 				string[] infopaths = { "..\\..\\info2\\info.pac", "..\\..\\info2\\info_en.pac", "..\\info.pac" };
@@ -88,7 +96,9 @@ namespace BrawlSongManager {
 					if (info == null) {
 						string s = Path.GetFullPath(relativepath);
 						if (new FileInfo(s).Exists) {
-							info_pac = NodeFactory.FromFile(null, s);
+							_currentFile = s;
+							File.Copy(s, tempfile);
+							info_pac = NodeFactory.FromFile(null, tempfile);
 							info = (MSBinNode)info_pac.FindChild("MiscData[140]", true);
 						}
 					}
@@ -100,13 +110,13 @@ namespace BrawlSongManager {
 					modifiedStringIndices.Clear();
 					copyIntoFileStrings();
 
-					// info found; try info_training in same directory
+					/*// info found; try info_training in same directory
 					string trainingpath = info_pac.FilePath.Replace("info.pac", "info_training.pac").Replace("info_en.pac", "info_training_en.pac");
 					if (new FileInfo(trainingpath).Exists) {
 						info_training_pac = NodeFactory.FromFile(null, trainingpath);
 						info_training = (MSBinNode)info_training_pac.FindChild("MiscData[140]", true);
 						return "Loaded info.pac and info_training.pac";
-					} else {
+					} else */{
 						return "Loaded info.pac";
 					}
 				}
@@ -152,7 +162,7 @@ namespace BrawlSongManager {
 					updateNodeString();
 					info.Rebuild();
 					info_pac.Merge();
-					info_pac.Export(info_pac.FilePath);
+					info_pac.Export(_currentFile);
 					if (info_training != null) {
 						info_training.Rebuild();
 						info_training_pac.Merge();

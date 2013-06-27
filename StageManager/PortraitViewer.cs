@@ -259,15 +259,17 @@ namespace BrawlStageManager {
 		}
 
 		private void updateFileSize() {
+			long length;
 			if (common5 != null) {
 				string tempfile = Path.GetTempFileName();
 				sc_selmap.Export(tempfile);
-				fileSizeBar.Value = (int)new FileInfo(tempfile).Length;
+				length = new FileInfo(tempfile).Length;
 				File.Delete(tempfile);
 			} else {
-				fileSizeBar.Value = (int)new FileInfo(_openFilePath).Length;
+				length = new FileInfo(_openFilePath).Length;
 			}
-			fileSizeLabel.Text = fileSizeBar.Value + " / " + fileSizeBar.Maximum;
+			fileSizeBar.Value = Math.Min(fileSizeBar.Maximum, (int)length);
+			fileSizeLabel.Text = length + " / " + fileSizeBar.Maximum;
 		}
 
 		private void button1_Click(object sender, EventArgs e) {

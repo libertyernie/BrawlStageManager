@@ -476,6 +476,17 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private void selmapMarkToolStripMenuItem_Click(object sender, EventArgs e) {
+			foreach (ToolStripMenuItem item in selmapMarkSizeToolStripMenuItem.DropDownItems) {
+				item.Checked = (item == sender);
+			}
+			if (sender == selmapMarkOriginalSizeToolStripMenuItem) {
+				portraitViewer1.selmapMarkResizeTo = null;
+			} else if (sender == x56ToolStripMenuItem1) {
+				portraitViewer1.selmapMarkResizeTo = new Size(104, 56);
+			}
+		}
+
 		private static string readNameFromPac(FileInfo f) {
 			var sb = new System.Text.StringBuilder();
 			using (var stream = new FileStream(f.FullName, FileMode.Open, FileAccess.Read)) {

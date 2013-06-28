@@ -17,6 +17,7 @@ namespace BrawlStageManager {
 		private string _openFilePath;
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
+		public Size? selmapMarkResizeTo;
 
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
@@ -225,6 +226,14 @@ namespace BrawlStageManager {
 						string tempFile = Path.GetTempFileName();
 						using (Bitmap orig = new Bitmap(filename)) {
 							using (Bitmap resized = new Bitmap(orig, frontstnameResizeTo ?? Size.Empty)) {
+								resized.Save(tempFile);
+							}
+						}
+						dlg.ImageSource = tempFile;
+					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
+						string tempFile = Path.GetTempFileName();
+						using (Bitmap orig = new Bitmap(filename)) {
+							using (Bitmap resized = new Bitmap(orig, selmapMarkResizeTo ?? Size.Empty)) {
 								resized.Save(tempFile);
 							}
 						}

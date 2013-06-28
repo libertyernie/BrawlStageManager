@@ -119,12 +119,27 @@ namespace BrawlStageManager {
 			ResourceNode texturesFolder = sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false);
 			if (texturesFolder == null) return null;
 
+			ResourceNode pat0folder = sc_selmap.FindChild("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/" +
+				"pasted__stnamelogoM/Texture0", false);
+			var query = (from n in pat0folder.Children
+						where n is PAT0TextureEntryNode
+						&& ((PAT0TextureEntryNode)n).Key == iconNum
+						select ((PAT0TextureEntryNode)n));
+			PAT0TextureEntryNode pat0node;
+			if (query.Any()) {
+				pat0node = query.First();
+			} else {
+				pat0node = new PAT0TextureEntryNode() {
+					Name = "FAKE"
+				};
+			}
+
 			Textures result = new Textures {
 				prevbase_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapPrevbase." + iconNum.ToString("D2"), false),
 				icon_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapIcon." + iconNum.ToString("D2"), false),
 				frontstname_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapFrontStname." + iconNum.ToString("D2"), false),
 				seriesicon_tex0 = (TEX0Node)texturesFolder.FindChild("SeriesIcon." + iconNum.ToString("D2"), false),
-				selmap_mark_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapMark." + iconNum.ToString("D2"), false),
+				selmap_mark_tex0 = (TEX0Node)texturesFolder.FindChild(pat0node.Name, false),
 			};
 			return result;
 		}

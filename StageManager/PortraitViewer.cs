@@ -281,9 +281,11 @@ namespace BrawlStageManager {
 			TextureContainer texs = get_icons(p);
 			if (texs == null) return;
 
-			foreach (TEX0Node tex0 in texs) {
-				if (tex0 != null) tex0.Export(thisdir + "/" + tex0.Name + ".png");
-			}
+			if (texs.prevbase_tex0 != null) texs.prevbase_tex0.Export(thisdir + "/MenSelmapPrevbase.png");
+			if (texs.icon_tex0 != null) texs.icon_tex0.Export(thisdir + "/MenSelmapIcon.png");
+			if (texs.frontstname_tex0 != null) texs.frontstname_tex0.Export(thisdir + "/MenSelmapFrontStname.png");
+			if (texs.seriesicon_tex0 != null) texs.seriesicon_tex0.Export(thisdir + "/MenSelchrMark.png");
+			if (texs.selmap_mark_tex0 != null) texs.selmap_mark_tex0.Export(thisdir + "/MenSelmapMark.png");
 		}
 
 		public void openModifyPAT0Dialog() {

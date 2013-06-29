@@ -130,19 +130,20 @@ namespace BrawlStageManager {
 
 		private static long[] sizes_of_broken_files = { 2261408, 3596224 };
 		private static string[] md5sums_of_broken_files = {
-			"814f5f640226f1616966317807e1e1a2",		  
-			"0a0767b84bd67e3cc6582f23a0eab6f9"};
+			"814f5f640226f1616966317807e1e1a2",  // mewtwo2000 venom
+			"0a0767b84bd67e3cc6582f23a0eab6f9"}; // new pork city small version
 
 		private void open(FileInfo fi) {
-			//RightControl = loadingLabel;
-			//this.Refresh();
 			if (_rootNode != null) {
-				_rootNode.Dispose(); _rootNode = null;
+				_rootNode.Dispose();
+				_rootNode = null;
+				_rootPath = null;
 			}
 			if (fi == null) { // No .pac file selected (i.e. you just opened the program)
 				RightControl = chooseLabel;
 				return;
 			}
+			_rootPath = fi.FullName;
 			try {
 				fi.Refresh(); // Update file size
 
@@ -159,7 +160,7 @@ namespace BrawlStageManager {
 						throw new FileNotFoundException();
 					}
 				}
-				_rootNode = NodeFactory.FromFile(null, _rootPath = fi.FullName);
+				_rootNode = NodeFactory.FromFile(null, _rootPath);
 			} catch (FileNotFoundException) {
 				// This might happen if you delete the file from Explorer after this program puts it in the list
 				RightControl = couldNotOpenLabel;
@@ -327,7 +328,7 @@ namespace BrawlStageManager {
 						if (filename.EndsWith(".pac")) {
 							e.Effect = DragDropEffects.Copy;
 						}
-					} else if (_rootNode != null) { // The sender must be on the right - modify an existing stage/module; ignore if no stage is selected
+					} else if (_rootPath != null) { // The sender must be on the right - modify an existing stage/module; ignore if no stage is selected
 						if (filename.EndsWith(".pac") || filename.EndsWith(".rel") || Directory.Exists(filename)) {
 							e.Effect = DragDropEffects.Copy;
 						}
@@ -351,9 +352,11 @@ namespace BrawlStageManager {
 					FileOperations.Copy(filepath, CurrentDirectory + "\\" + nd.EntryText); // Use FileOperations (calls Windows shell -> asks for confirmation to overwrite)
 					changeDirectory(CurrentDirectory); // Refresh .pac list
 				}
-			} else if (_rootNode != null) {
+			} else if (_rootPath != null) {
 				name = new FileInfo(_rootPath).Name;
-				_rootNode.Dispose(); _rootNode = null; // Close the file before overwriting it!
+				if (_rootNode != null) {
+					_rootNode.Dispose(); _rootNode = null; // Close the file before overwriting it!
+				}
 				if (filepath.EndsWith(".pac")) {
 					FileOperations.Copy(filepath, CurrentDirectory + "\\" + name);
 				} else if (filepath.EndsWith(".rel")) {
@@ -556,7 +559,7 @@ namespace BrawlStageManager {
 			string p = readNameFromPac(f);
 			File.Copy(f.FullName, thisdir + "/" + p);
 			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
-			if (rel.Exists) File.Copy(rel.FullName, thisdir + "/" + rel.Name);
+			if (rel.Exists) File.Copy(rel.FullName, thisdir + "/st.rel");
 
 			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
 		}

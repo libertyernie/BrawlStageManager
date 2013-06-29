@@ -129,10 +129,13 @@ namespace BrawlStageManager {
 			changeDirectory(path);
 		}
 
-		private static long[] sizes_of_broken_files = { 2261408, 3596224 };
+		private static long[] sizes_of_broken_files = { 2261408, 3596224, 3728768, 510496 };
 		private static string[] md5sums_of_broken_files = {
 			"814f5f640226f1616966317807e1e1a2",  // mewtwo2000 venom
-			"0a0767b84bd67e3cc6582f23a0eab6f9"}; // new pork city small version
+			"0a0767b84bd67e3cc6582f23a0eab6f9", // new pork city small version
+			"e47bb210fee934c49c25aba7b7456acb", // brawl minus battlefield
+			"feb6ae768107623f3512007bd803b425", // brawl minus yoshi's island melee
+			};
 
 		private void open(FileInfo fi) {
 			if (_rootNode != null) {

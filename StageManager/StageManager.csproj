@@ -81,6 +81,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModifyPAT0Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModifyPAT0Dialog.Designer.cs">
+      <DependentUpon>ModifyPAT0Dialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModuleIDs.cs" />
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
@@ -109,12 +115,16 @@
     <Compile Include="StageInfoControl.Designer.cs">
       <DependentUpon>StageInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextureContainer.cs" />
     <EmbeddedResource Include="AboutBSM.resx">
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModifyPAT0Dialog.resx">
+      <DependentUpon>ModifyPAT0Dialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MSBinViewer.resx">
       <DependentUpon>MSBinViewer.cs</DependentUpon>

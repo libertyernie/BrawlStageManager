@@ -28,17 +28,6 @@ namespace BrawlStageManager {
 		/// </summary>
 		private ResourceNode sc_selmap;
 
-		private struct Textures : IEnumerable<TEX0Node> {
-			public TEX0Node prevbase_tex0, icon_tex0, frontstname_tex0, seriesicon_tex0, selmap_mark_tex0;
-
-			public IEnumerator<TEX0Node> GetEnumerator() {
-				return new List<TEX0Node> { prevbase_tex0, icon_tex0, frontstname_tex0, seriesicon_tex0, selmap_mark_tex0 }.GetEnumerator();
-			}
-			System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-				return GetEnumerator();
-			}
-		}
-
 		public TEX0Node GetTEX0For(object sender) {
 			return
 				(sender == prevbase) ? textures.prevbase_tex0 :
@@ -49,7 +38,7 @@ namespace BrawlStageManager {
 				null;
 		}
 
-		private Textures textures;
+		private TextureContainer textures;
 
 		// In case the image needs to be reloaded after replacing the texture
 		protected int _iconNum;
@@ -74,11 +63,11 @@ namespace BrawlStageManager {
 			prevbase.BackgroundImage = null;
 			_iconNum = -1;
 
-			Textures? retval = get_icons(iconNum);
+			TextureContainer retval = get_icons(iconNum);
 			if (retval == null) {
 
 			} else {
-				textures = retval ?? new Textures();
+				textures = retval ?? new TextureContainer();
 				foreach (Control child in flowLayoutPanel1.Controls) {
 					if (child is ImagePreviewPanel) {
 						setBG(child as ImagePreviewPanel);
@@ -86,12 +75,18 @@ namespace BrawlStageManager {
 				}
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
-					label1.Text = "prevbase: " + textures.prevbase_tex0.Width + "x" + textures.prevbase_tex0.Height
-						+ "\nfrontstname: " + textures.frontstname_tex0.Width + "x" + textures.frontstname_tex0.Height;
+					label1.Text = "P " + size(textures.prevbase_tex0)
+						+ " - F " + size(textures.frontstname_tex0)
+						+ " - M " + size(textures.selmap_mark_tex0);
 				}
 
 				_iconNum = iconNum;
 			}
+		}
+
+		public static string size(TEX0Node node) {
+			if (node == null) return "null";
+			return node.Width + "x" + node.Height;
 		}
 
 		private void setBG(Panel panel) {
@@ -107,7 +102,7 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private Textures? get_icons(int iconNum) {
+		private TextureContainer get_icons(int iconNum) {
 			if (common5 != null) {
 				saveButton.Text = "Save common5";
 			} else if (sc_selmap != null) {
@@ -116,31 +111,7 @@ namespace BrawlStageManager {
 				return null;
 			}
 
-			ResourceNode texturesFolder = sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false);
-			if (texturesFolder == null) return null;
-
-			ResourceNode pat0folder = sc_selmap.FindChild("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/" +
-				"pasted__stnamelogoM/Texture0", false);
-			var query = (from n in pat0folder.Children
-						where n is PAT0TextureEntryNode
-						&& ((PAT0TextureEntryNode)n).Key == iconNum
-						select ((PAT0TextureEntryNode)n));
-			PAT0TextureEntryNode pat0node;
-			if (query.Any()) {
-				pat0node = query.First();
-			} else {
-				pat0node = new PAT0TextureEntryNode() {
-					Name = "FAKE"
-				};
-			}
-
-			Textures result = new Textures {
-				prevbase_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapPrevbase." + iconNum.ToString("D2"), false),
-				icon_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapIcon." + iconNum.ToString("D2"), false),
-				frontstname_tex0 = (TEX0Node)texturesFolder.FindChild("MenSelmapFrontStname." + iconNum.ToString("D2"), false),
-				seriesicon_tex0 = (TEX0Node)texturesFolder.FindChild("SeriesIcon." + iconNum.ToString("D2"), false),
-				selmap_mark_tex0 = (TEX0Node)texturesFolder.FindChild(pat0node.Name, false),
-			};
+			TextureContainer result = new TextureContainer(sc_selmap, iconNum);
 			return result;
 		}
 
@@ -307,12 +278,23 @@ namespace BrawlStageManager {
 		}
 
 		public void ExportImages(int p, string thisdir) {
-			Textures? texs_maeby = get_icons(p);
-			if (texs_maeby == null) return;
+			TextureContainer texs = get_icons(p);
+			if (texs == null) return;
 
-			Textures texs = (Textures)texs_maeby;
 			foreach (TEX0Node tex0 in texs) {
 				if (tex0 != null) tex0.Export(thisdir + "/" + tex0.Name + ".png");
+			}
+		}
+
+		public void openModifyPAT0Dialog() {
+			modifyPAT0.PerformClick();
+		}
+
+		private void modifyPAT0_Click(object sender, EventArgs e) {
+			var result = new ModifyPAT0Dialog(textures).ShowDialog();
+			if (result == DialogResult.OK) {
+				// The dialog will mark the pat0 as dirty if changed
+				UpdateImage(_iconNum);
 			}
 		}
 	}

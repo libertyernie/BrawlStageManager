@@ -44,6 +44,7 @@
 			this.verifyrelStageIDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.renderModels = new System.Windows.Forms.ToolStripMenuItem();
+			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
 			this.warningResizingIsQuiteUglyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,13 +53,13 @@
 			this.frontstnameSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.frontstnameOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x56ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.selmapMarkSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.selmapMarkOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.x56ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.selmapMarkSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.selmapMarkOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.x56ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -175,6 +176,7 @@
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
+            this.resizeToolStripMenuItem,
             this.texturesToolStripMenuItem,
             this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -228,10 +230,7 @@
             this.moduleFileDirectoryToolStripMenuItem,
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
-            this.renderModels,
-            this.prevbaseSize,
-            this.frontstnameSizeToolStripMenuItem,
-            this.selmapMarkSizeToolStripMenuItem});
+            this.renderModels});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "Options";
@@ -290,6 +289,16 @@
 			this.renderModels.Size = new System.Drawing.Size(184, 22);
 			this.renderModels.Text = "Render models";
 			// 
+			// resizeToolStripMenuItem
+			// 
+			this.resizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.prevbaseSize,
+            this.frontstnameSizeToolStripMenuItem,
+            this.selmapMarkSizeToolStripMenuItem});
+			this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
+			this.resizeToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+			this.resizeToolStripMenuItem.Text = "Resize";
+			// 
 			// prevbaseSize
 			// 
 			this.prevbaseSize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -298,7 +307,7 @@
             this.x128ToolStripMenuItem,
             this.x88ToolStripMenuItem});
 			this.prevbaseSize.Name = "prevbaseSize";
-			this.prevbaseSize.Size = new System.Drawing.Size(184, 22);
+			this.prevbaseSize.Size = new System.Drawing.Size(168, 22);
 			this.prevbaseSize.Text = "Prevbase size:";
 			// 
 			// warningResizingIsQuiteUglyToolStripMenuItem
@@ -337,28 +346,49 @@
             this.frontstnameOriginalSizeToolStripMenuItem,
             this.x56ToolStripMenuItem});
 			this.frontstnameSizeToolStripMenuItem.Name = "frontstnameSizeToolStripMenuItem";
-			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.frontstnameSizeToolStripMenuItem.Text = "Frontstname size:";
 			// 
 			// frontstnameOriginalSizeToolStripMenuItem
 			// 
 			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
-			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Original size";
 			this.frontstnameOriginalSizeToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
 			// 
 			// x56ToolStripMenuItem
 			// 
 			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
-			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
 			this.x56ToolStripMenuItem.Text = "104x56";
 			this.x56ToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
+			// 
+			// selmapMarkSizeToolStripMenuItem
+			// 
+			this.selmapMarkSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selmapMarkOriginalSizeToolStripMenuItem,
+            this.x56ToolStripMenuItem1});
+			this.selmapMarkSizeToolStripMenuItem.Name = "selmapMarkSizeToolStripMenuItem";
+			this.selmapMarkSizeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+			this.selmapMarkSizeToolStripMenuItem.Text = "Selmap mark size:";
+			// 
+			// selmapMarkOriginalSizeToolStripMenuItem
+			// 
+			this.selmapMarkOriginalSizeToolStripMenuItem.Name = "selmapMarkOriginalSizeToolStripMenuItem";
+			this.selmapMarkOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+			this.selmapMarkOriginalSizeToolStripMenuItem.Text = "Original size";
+			// 
+			// x56ToolStripMenuItem1
+			// 
+			this.x56ToolStripMenuItem1.Name = "x56ToolStripMenuItem1";
+			this.x56ToolStripMenuItem1.Size = new System.Drawing.Size(138, 22);
+			this.x56ToolStripMenuItem1.Text = "60x56";
 			// 
 			// texturesToolStripMenuItem
 			// 
 			this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
-			this.texturesToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-			this.texturesToolStripMenuItem.Text = "Textures";
+			this.texturesToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+			this.texturesToolStripMenuItem.Text = "Model Textures";
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -384,29 +414,6 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// selmapMarkSizeToolStripMenuItem
-			// 
-			this.selmapMarkSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.selmapMarkOriginalSizeToolStripMenuItem,
-            this.x56ToolStripMenuItem1});
-			this.selmapMarkSizeToolStripMenuItem.Name = "selmapMarkSizeToolStripMenuItem";
-			this.selmapMarkSizeToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.selmapMarkSizeToolStripMenuItem.Text = "Selmap mark size:";
-			// 
-			// selmapMarkOriginalSizeToolStripMenuItem
-			// 
-			this.selmapMarkOriginalSizeToolStripMenuItem.Name = "selmapMarkOriginalSizeToolStripMenuItem";
-			this.selmapMarkOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.selmapMarkOriginalSizeToolStripMenuItem.Text = "Original size";
-			this.selmapMarkOriginalSizeToolStripMenuItem.Click += selmapMarkToolStripMenuItem_Click;
-			// 
-			// x56ToolStripMenuItem1
-			// 
-			this.x56ToolStripMenuItem1.Name = "x56ToolStripMenuItem1";
-			this.x56ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.x56ToolStripMenuItem1.Text = "60x56";
-			this.x56ToolStripMenuItem1.Click += selmapMarkToolStripMenuItem_Click;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,9 +423,11 @@
 			this.Controls.Add(this.portraitViewer1);
 			this.Controls.Add(this.menuStrip1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainForm";
 			this.Text = "Brawl Stage Manager";
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -475,6 +484,7 @@
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkOriginalSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem x56ToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
 
 
 

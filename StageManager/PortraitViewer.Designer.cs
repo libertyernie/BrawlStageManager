@@ -30,11 +30,12 @@
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.icon = new BrawlStageManager.ImagePreviewPanel();
 			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
-			this.fileSizeBar = new System.Windows.Forms.ProgressBar();
-			this.fileSizeLabel = new System.Windows.Forms.Label();
-			this.button1 = new System.Windows.Forms.Button();
 			this.seriesicon = new BrawlStageManager.ImagePreviewPanel();
 			this.selmap_mark = new BrawlStageManager.ImagePreviewPanel();
+			this.fileSizeBar = new System.Windows.Forms.ProgressBar();
+			this.fileSizeLabel = new System.Windows.Forms.Label();
+			this.modifyPAT0 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -49,7 +50,7 @@
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(0, 358);
+			this.label1.Location = new System.Drawing.Point(0, 440);
 			this.label1.Margin = new System.Windows.Forms.Padding(0);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(176, 40);
@@ -58,7 +59,7 @@
 			// 
 			// saveButton
 			// 
-			this.saveButton.Location = new System.Drawing.Point(0, 398);
+			this.saveButton.Location = new System.Drawing.Point(0, 358);
 			this.saveButton.Margin = new System.Windows.Forms.Padding(0);
 			this.saveButton.Name = "saveButton";
 			this.saveButton.Size = new System.Drawing.Size(208, 23);
@@ -74,10 +75,11 @@
 			this.flowLayoutPanel1.Controls.Add(this.frontstname);
 			this.flowLayoutPanel1.Controls.Add(this.seriesicon);
 			this.flowLayoutPanel1.Controls.Add(this.selmap_mark);
-			this.flowLayoutPanel1.Controls.Add(this.label1);
 			this.flowLayoutPanel1.Controls.Add(this.saveButton);
 			this.flowLayoutPanel1.Controls.Add(this.fileSizeBar);
 			this.flowLayoutPanel1.Controls.Add(this.fileSizeLabel);
+			this.flowLayoutPanel1.Controls.Add(this.modifyPAT0);
+			this.flowLayoutPanel1.Controls.Add(this.label1);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(210, 500);
@@ -101,34 +103,6 @@
 			this.frontstname.Size = new System.Drawing.Size(208, 56);
 			this.frontstname.TabIndex = 4;
 			// 
-			// fileSizeBar
-			// 
-			this.fileSizeBar.Location = new System.Drawing.Point(0, 421);
-			this.fileSizeBar.Margin = new System.Windows.Forms.Padding(0);
-			this.fileSizeBar.Name = "fileSizeBar";
-			this.fileSizeBar.Size = new System.Drawing.Size(208, 23);
-			this.fileSizeBar.TabIndex = 5;
-			// 
-			// fileSizeLabel
-			// 
-			this.fileSizeLabel.AutoSize = true;
-			this.fileSizeLabel.Location = new System.Drawing.Point(3, 444);
-			this.fileSizeLabel.Name = "fileSizeLabel";
-			this.fileSizeLabel.Size = new System.Drawing.Size(66, 13);
-			this.fileSizeLabel.TabIndex = 6;
-			this.fileSizeLabel.Text = "fileSizeLabel";
-			// 
-			// button1
-			// 
-			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.button1.Location = new System.Drawing.Point(0, 0);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(20, 500);
-			this.button1.TabIndex = 4;
-			this.button1.Text = ">";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// seriesicon
 			// 
 			this.seriesicon.AllowDrop = true;
@@ -145,6 +119,45 @@
 			this.selmap_mark.Size = new System.Drawing.Size(120, 56);
 			this.selmap_mark.TabIndex = 8;
 			// 
+			// fileSizeBar
+			// 
+			this.fileSizeBar.Location = new System.Drawing.Point(0, 381);
+			this.fileSizeBar.Margin = new System.Windows.Forms.Padding(0);
+			this.fileSizeBar.Name = "fileSizeBar";
+			this.fileSizeBar.Size = new System.Drawing.Size(208, 23);
+			this.fileSizeBar.TabIndex = 5;
+			// 
+			// fileSizeLabel
+			// 
+			this.fileSizeLabel.Location = new System.Drawing.Point(3, 404);
+			this.fileSizeLabel.Name = "fileSizeLabel";
+			this.fileSizeLabel.Size = new System.Drawing.Size(204, 13);
+			this.fileSizeLabel.TabIndex = 6;
+			this.fileSizeLabel.Text = "fileSizeLabel";
+			this.fileSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// modifyPAT0
+			// 
+			this.modifyPAT0.Location = new System.Drawing.Point(0, 417);
+			this.modifyPAT0.Margin = new System.Windows.Forms.Padding(0);
+			this.modifyPAT0.Name = "modifyPAT0";
+			this.modifyPAT0.Size = new System.Drawing.Size(208, 23);
+			this.modifyPAT0.TabIndex = 9;
+			this.modifyPAT0.Text = "Modify PAT0 (~)";
+			this.modifyPAT0.UseVisualStyleBackColor = true;
+			this.modifyPAT0.Click += new System.EventHandler(this.modifyPAT0_Click);
+			// 
+			// button1
+			// 
+			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.button1.Location = new System.Drawing.Point(0, 0);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(20, 500);
+			this.button1.TabIndex = 4;
+			this.button1.Text = ">";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// PortraitViewer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,23 +167,23 @@
 			this.Name = "PortraitViewer";
 			this.Size = new System.Drawing.Size(230, 500);
 			this.flowLayoutPanel1.ResumeLayout(false);
-			this.flowLayoutPanel1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		public BrawlStageManager.ImagePreviewPanel prevbase { get; private set; }
-		public BrawlStageManager.ImagePreviewPanel icon { get; private set; }
-		public BrawlStageManager.ImagePreviewPanel frontstname { get; private set; }
-		public BrawlStageManager.ImagePreviewPanel seriesicon { get; private set; }
-		public BrawlStageManager.ImagePreviewPanel selmap_mark { get; private set; }
+		public BrawlStageManager.ImagePreviewPanel prevbase;
+		public BrawlStageManager.ImagePreviewPanel icon;
+		public BrawlStageManager.ImagePreviewPanel frontstname;
+		public BrawlStageManager.ImagePreviewPanel seriesicon;
+		public BrawlStageManager.ImagePreviewPanel selmap_mark;
 		protected System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button saveButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.ProgressBar fileSizeBar;
 		private System.Windows.Forms.Label fileSizeLabel;
+		private System.Windows.Forms.Button modifyPAT0;
 	}
 }

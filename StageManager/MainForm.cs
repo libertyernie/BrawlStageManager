@@ -125,6 +125,7 @@ namespace BrawlStageManager {
 			listBox1.DragEnter += new DragEventHandler(dragEnter);
 			listBox1.DragDrop += new DragEventHandler(dragDrop);
 
+			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			changeDirectory(path);
 		}
 
@@ -583,6 +584,10 @@ namespace BrawlStageManager {
 				e.Handled = true;
 				portraitViewer1.openModifyPAT0Dialog();
 			}
+		}
+
+		private void selmapMarkPreviewToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 		}
 	}
 }

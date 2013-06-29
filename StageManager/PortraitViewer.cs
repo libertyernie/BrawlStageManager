@@ -18,6 +18,7 @@ namespace BrawlStageManager {
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
+		public bool selmapMarkPreview;
 
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
@@ -96,9 +97,14 @@ namespace BrawlStageManager {
 				b.SetPixel(0, 0, Color.Brown);
 				panel.BackgroundImage = b;
 			} else {
-				panel.BackgroundImage = new Bitmap(
+				Bitmap image = new Bitmap(
 					tex0.GetImage(0),
 					new Size(panel.Width, panel.Height));
+				if (panel == selmap_mark && selmapMarkPreview) {
+					panel.BackgroundImage = Utilities.AlphaSwap(image);
+				} else {
+					panel.BackgroundImage = image;
+				}
 			}
 		}
 

@@ -207,29 +207,11 @@ namespace BrawlStageManager {
 			} else {
 				using (TextureConverterDialog dlg = new TextureConverterDialog()) {
 					if (sender == prevbase && prevbaseResizeTo != null) {
-						string tempFile = Path.GetTempFileName();
-						using (Bitmap orig = new Bitmap(filename)) {
-							using (Bitmap resized = new Bitmap(orig, prevbaseResizeTo ?? Size.Empty)) {
-								resized.Save(tempFile);
-							}
-						}
-						dlg.ImageSource = tempFile;
+						dlg.ImageSource = resizeToTempFile(filename, prevbaseResizeTo);
 					} else if (sender == frontstname && frontstnameResizeTo != null) {
-						string tempFile = Path.GetTempFileName();
-						using (Bitmap orig = new Bitmap(filename)) {
-							using (Bitmap resized = new Bitmap(orig, frontstnameResizeTo ?? Size.Empty)) {
-								resized.Save(tempFile);
-							}
-						}
-						dlg.ImageSource = tempFile;
+						dlg.ImageSource = resizeToTempFile(filename, frontstnameResizeTo);
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
-						string tempFile = Path.GetTempFileName();
-						using (Bitmap orig = new Bitmap(filename)) {
-							using (Bitmap resized = new Bitmap(orig, selmapMarkResizeTo ?? Size.Empty)) {
-								resized.Save(tempFile);
-							}
-						}
-						dlg.ImageSource = tempFile;
+						dlg.ImageSource = resizeToTempFile(filename, selmapMarkResizeTo);
 					} else {
 						dlg.ImageSource = filename;
 					}
@@ -240,6 +222,21 @@ namespace BrawlStageManager {
 					}
 				}
 			}
+		}
+
+		private string resizeToTempFile(string filename, Size? resizeToArg) {
+			Size resizeTo = resizeToArg ?? Size.Empty;
+			string tempFile = Path.GetTempFileName();
+			using (Bitmap orig = new Bitmap(filename)) {
+				if (orig.Size.Width <= resizeTo.Width && orig.Size.Height <= resizeTo.Height) {
+					File.Copy(filename, tempFile, true);
+				} else {
+					using (Bitmap resized = new Bitmap(orig, resizeTo)) {
+						resized.Save(tempFile);
+					}
+				}
+			}
+			return tempFile;
 		}
 
 		protected void saveButton_Click(object sender, EventArgs e) {

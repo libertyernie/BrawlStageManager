@@ -148,6 +148,7 @@ namespace BrawlStageManager {
 				return;
 			}
 			_rootPath = fi.FullName;
+			if (renderModels.Checked) modelPanel1.ClearAll();
 			try {
 				fi.Refresh(); // Update file size
 
@@ -181,7 +182,6 @@ namespace BrawlStageManager {
 				string relname = matchRel(fi.Name);
 				updateRel(relname);
 
-				if (renderModels.Checked) modelPanel1.ClearAll();
 				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
 				texNodes = new List<MDL0TextureNode>();

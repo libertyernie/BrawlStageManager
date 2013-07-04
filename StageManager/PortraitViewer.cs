@@ -138,29 +138,26 @@ namespace BrawlStageManager {
 			_openFilePath = null;
 			label1.Text = "";
 			fileSizeBar.Maximum = 1214283;
-			try {
-				string path = "../../menu2/sc_selmap.pac";
+			if (File.Exists("../../menu2/sc_selmap.pac")) {
 				common5 = null;
-				sc_selmap = fcopy(path);
-				_openFilePath = path;
-			} catch (IOException) {
-				try {
-					string path = "../../system/common5.pac";
-					common5 = fcopy(path);
-					sc_selmap = common5.FindChild("sc_selmap_en", false);
-					_openFilePath = path;
-				} catch (IOException) {
-					try {
-						string path = "../../system/common5_en.pac";
-						common5 = fcopy(path);
-						sc_selmap = common5.FindChild("sc_selmap_en", false);
-						_openFilePath = path;
-					} catch (IOException) {
-						common5 = null;
-						sc_selmap = null;
-						label1.Text = "Could not load sc_selmap or common5(_en).";
-					}
-				}
+				sc_selmap = fcopy("../../menu2/sc_selmap.pac");
+				_openFilePath = "../../menu2/sc_selmap.pac";
+			} else if (File.Exists("../../menu2/sc_selmap_en.pac")) {
+				common5 = null;
+				sc_selmap = fcopy("../../menu2/sc_selmap_en.pac");
+				_openFilePath = "../../menu2/sc_selmap_en.pac";
+			} else if (File.Exists("../../system/common5.pac")) {
+				common5 = fcopy("../../system/common5.pac");
+				sc_selmap = common5.FindChild("sc_selmap_en", false);
+				_openFilePath = "../../system/common5.pac";
+			} else if (File.Exists("../../system/common5_en.pac")) {
+				common5 = fcopy("../../system/common5_en.pac");
+				sc_selmap = common5.FindChild("sc_selmap_en", false);
+				_openFilePath = "../../system/common5_en.pac";
+			} else {
+				common5 = null;
+				sc_selmap = null;
+				label1.Text = "Could not load sc_selmap(_en) or common5(_en).";
 			}
 			if (_openFilePath != null) {
 				updateFileSize();

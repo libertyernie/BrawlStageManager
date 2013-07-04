@@ -11,9 +11,9 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartWorkingDirectory>D:\Users\Isaac\Desktop\BrawlHacks\Brawl- 2.x.6\2.x.6\private\wii\app\rsbe\pf\stage\melee</StartWorkingDirectory>
+    <StartWorkingDirectory>G:\</StartWorkingDirectory>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <StartWorkingDirectory>D:\Users\Isaac\Desktop\BrawlHacks\Brawl- 2.x.6\2.x.6\private\wii\app\rsbe\pf\stage\melee</StartWorkingDirectory>
+    <StartWorkingDirectory>G:\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

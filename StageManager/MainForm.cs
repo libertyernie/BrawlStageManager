@@ -312,8 +312,19 @@ namespace BrawlStageManager {
 			}
 
 			if (useAFixedStageListToolStripMenuItem.Checked) {
-				pacFiles = PortraitMap.StageOrder.Where(s => s.Length > 0)
-					.Select(s => new FileInfo("STG" + s.ToUpper() + ".PAC")).ToArray();
+				List<string> list = new List<string>();
+				foreach (string s in PortraitMap.StageOrder) {
+					if (s.Length > 0) {
+						list.AddRange(s == "starfox" ? new string[] { "STARFOX_GDIFF" } :
+									  s == "emblem" ? new string[] { "EMBLEM_00", "EMBLEM_01", "EMBLEM_02" } :
+									  s == "mariopast" ? new string[] { "MARIOPAST_00", "MARIOPAST_01" } :
+									  s == "metalgear" ? new string[] { "METALGEAR_00", "METALGEAR_01", "METALGEAR_02" } :
+									  s == "tengan" ? new string[] { "TENGAN_1", "TENGAN_2", "TENGAN_3" } :
+									  s == "village" ? new string[] { "VILLAGE_00", "VILLAGE_01", "VILLAGE_02", "VILLAGE_03", "VILLAGE_04" } :
+									  new string[] { s.ToUpper() });
+					}
+				}
+				pacFiles = list.Select(s => new FileInfo("STG" + s + ".PAC")).ToArray();
 			} else {
 				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
 					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive

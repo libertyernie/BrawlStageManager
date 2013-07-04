@@ -300,8 +300,8 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public void AddPAT0ForEachStage(string path) {
-			var look = sc_selmap.FindChild(path, false).Children[0];
+		public void AddPAT0ForEachStage(string pathToPAT0TextureNode) {
+			var look = sc_selmap.FindChild(pathToPAT0TextureNode, false).Children[0];
 			if (!(look is PAT0TextureNode)) {
 				throw new FormatException(look.Name);
 			}

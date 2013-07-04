@@ -36,6 +36,7 @@
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moduleFileDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,7 +63,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -221,6 +221,13 @@
 			this.exportAllToolStripMenuItem.Text = "Export all stages";
 			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
 			// 
+			// addmissingPAT0EntriesToolStripMenuItem
+			// 
+			this.addmissingPAT0EntriesToolStripMenuItem.Name = "addmissingPAT0EntriesToolStripMenuItem";
+			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
+			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
+			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -310,7 +317,7 @@
 			this.useAFixedStageListToolStripMenuItem.CheckOnClick = true;
 			this.useAFixedStageListToolStripMenuItem.Name = "useAFixedStageListToolStripMenuItem";
 			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.useAFixedStageListToolStripMenuItem.Text = "Use a fixed stage list";
+			this.useAFixedStageListToolStripMenuItem.Text = "Use a static stage list";
 			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
 			// 
 			// resizeToolStripMenuItem
@@ -441,13 +448,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// addmissingPAT0EntriesToolStripMenuItem
-			// 
-			this.addmissingPAT0EntriesToolStripMenuItem.Name = "addmissingPAT0EntriesToolStripMenuItem";
-			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
-			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

@@ -61,6 +61,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.useAFixedStageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -232,7 +233,8 @@
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
             this.renderModels,
-            this.selmapMarkPreviewToolStripMenuItem});
+            this.selmapMarkPreviewToolStripMenuItem,
+            this.useAFixedStageListToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "Options";
@@ -366,14 +368,14 @@
 			this.frontstnameOriginalSizeToolStripMenuItem.Checked = true;
 			this.frontstnameOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
-			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Off";
 			this.frontstnameOriginalSizeToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
 			// 
 			// x56ToolStripMenuItem
 			// 
 			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
-			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.x56ToolStripMenuItem.Text = "104x56";
 			this.x56ToolStripMenuItem.Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
 			// 
@@ -391,13 +393,13 @@
 			this.selmapMarkOriginalSizeToolStripMenuItem.Checked = true;
 			this.selmapMarkOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.selmapMarkOriginalSizeToolStripMenuItem.Name = "selmapMarkOriginalSizeToolStripMenuItem";
-			this.selmapMarkOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.selmapMarkOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x56ToolStripMenuItem1
 			// 
 			this.x56ToolStripMenuItem1.Name = "x56ToolStripMenuItem1";
-			this.x56ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+			this.x56ToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.x56ToolStripMenuItem1.Text = "60x56";
 			// 
 			// texturesToolStripMenuItem
@@ -429,6 +431,14 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
+			// 
+			// useAFixedStageListToolStripMenuItem
+			// 
+			this.useAFixedStageListToolStripMenuItem.CheckOnClick = true;
+			this.useAFixedStageListToolStripMenuItem.Name = "useAFixedStageListToolStripMenuItem";
+			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.useAFixedStageListToolStripMenuItem.Text = "Use a fixed stage list";
+			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -502,6 +512,7 @@
 		private System.Windows.Forms.ToolStripMenuItem x56ToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkPreviewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem useAFixedStageListToolStripMenuItem;
 
 
 

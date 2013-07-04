@@ -310,9 +310,14 @@ namespace BrawlStageManager {
 				}
 			}
 
-			Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
-				return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
-			});
+			if (useAFixedStageListToolStripMenuItem.Checked) {
+				pacFiles = PortraitMap.StageOrder.Where(s => s.Length > 0)
+					.Select(s => new FileInfo("stg" + s + ".pac")).ToArray();
+			} else {
+				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
+					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
+				});
+			}
 			listBox1.Items.Clear();
 			listBox1.Items.AddRange(pacFiles);
 			listBox1.Refresh();
@@ -591,6 +596,10 @@ namespace BrawlStageManager {
 
 		private void selmapMarkPreviewToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
+		}
+
+		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
+			changeDirectory(CurrentDirectory); // Refresh .pac list
 		}
 	}
 }

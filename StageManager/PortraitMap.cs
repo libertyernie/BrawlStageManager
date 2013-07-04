@@ -6,7 +6,7 @@ using System.Text;
 namespace BrawlStageManager {
 	public class PortraitMap {
 		public static string[] StageOrder = {
-			"0",
+			"",
 			"battlefield",
 			"final",
 			"dolpic",
@@ -66,7 +66,7 @@ namespace BrawlStageManager {
 			"dxbigblue",
 			"dxzebes",
 			"dxpstadium",
-			"60",		// 50
+			"",		// 50
 			"custom13",
 			"custom14",
 			"custom15",
@@ -101,7 +101,7 @@ namespace BrawlStageManager {
 			get {
 				string basename = filename.ToLower().Substring(3);
 				for (int i = 0; i < StageOrder.Length; i++) {
-					if (basename.StartsWith(StageOrder[i])) {
+					if (StageOrder[i].Length > 0 && basename.StartsWith(StageOrder[i])) {
 						return i;
 					}
 				}

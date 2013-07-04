@@ -313,7 +313,7 @@ namespace BrawlStageManager {
 
 			if (useAFixedStageListToolStripMenuItem.Checked) {
 				pacFiles = PortraitMap.StageOrder.Where(s => s.Length > 0)
-					.Select(s => new FileInfo("stg" + s + ".pac")).ToArray();
+					.Select(s => new FileInfo("STG" + s.ToUpper() + ".PAC")).ToArray();
 			} else {
 				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
 					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive

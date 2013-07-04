@@ -2,26 +2,28 @@
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
-Brawl Stage Manager is a program that uses BrawlLib to quickly view which
-stages and module files are installed on your SD card (or in whatever folder,
-on whatever device, you use for Brawl hacks.)
+Brawl Stage Manager is a program that uses BrawlLib to help you see and organize the stages, module files, and stage portraits that are installed on your SD card (or in whatever folder, on whatever device, you use for Brawl hacks.)
 
 The left side of the window has a list of stage .PAC files in the current
 directory; you can change the directory through the Options menu. Choosing a
 stage file will display:
-* Any MSBin nodes in the .pac file, starting with the last (shown by default)
-  * Some stage authors, such as Mewtwo2000, often put info about the stage in
-    these nodes. This program will display them read-only; you can edit them
-    with BrawlBox.
 * The filename, root node name, and filesize of the .PAC
 * The filename, internal name, and filesize of the matching .rel file (if it exists)
   * By default, the program searches for .rel files in ../../module, but
     through the Options menu you can tell the program to search the current
     directory instead.
-* The stage ID of the .rel file
+* On the upper-right button: the stage ID of the .rel file
   * This ID should match the ID of the stage you're replacing; if it doesn't,
-    the button will turn red. (If the program doesn't know what ID your .rel
-    file should have, the button will turn beige.)
+    the button will turn red. (If the program doesn't know what ID your .rel file
+	should have due to an unrecognized .pac name, the button will turn beige.)
+* Any MSBin nodes in the .pac file, starting with the last (shown by default)
+  * Some stage authors often put info about the stage in these nodes. This
+    program will display them read-only; you can edit them with BrawlBox.
+* If Options>Render Models is checked: the 3D models that make up the stage itself
+  * You can hide a particular texture by unchecking it in the Model Textures list
+  * Note: using "Preview All Models" in BrawlBox is another way to examine a stage
+You can use Page Up and Page Down to go up and down this list,
+even when it doesn't have focus.
 
 Stage Manager can also perform certain operations on stage and .rel files:
 * Click on the button to automatically fix the .rel file's stage ID. This ID
@@ -33,8 +35,28 @@ Stage Manager can also perform certain operations on stage and .rel files:
   file or the .rel file. Windows will ask before deleting the file.
 * Drag and drop a .pac file onto the left-hand stage list to copy it to the
   working directory. The program will ask what filename to save it as.
-* Drag and drop a .pac or .rel file onto the right-hand information display to
+* Drag and drop a .pac or .rel file onto the center information display to
   replace the current .pac or .rel file. Windows will ask before overwriting.
+
+New for version 2.0! The right sidebar will display (top to bottom):
+* Stage preview (MelSelmapPrevbase)
+* Stage icon (MenSelmapIcon)
+* Stage name (MenSelmapFrontStname)
+* Series icon (MenSelchrMark normally; SeriesIcon if using my
+  Classic Expansion Pack sc_selmap)
+* Game logo (MenSelmapMark)
+* A filesize bar that compares your sc_selmap size to the one in the game -
+  going over this limit could cause freezing at the stage select screen!
+To replace one of these images, drag and drop an image file onto it to bring up
+the BrawlBox texture converter. You can also right-click on the image and choose
+Replace or Export.
+All of these textures are looked up in the PAT0 entries in the common5, so
+they will match the ones you see in-game. You can edit the PAT0 entries for
+MenSelchrMark and MenSelmapMark using the Modify PAT0 button (or by pressing
+the tilde (~) button on your keyboard.) Use BrawlBox to add a texture if you
+need to. MenSelchrMark is I4; MenSelmapMark is IA4.
+ALWAYS REMEMBER TO SAVE YOUR COMMON5 (or sc_selmap) - this program doesn't keep
+track of how long it's been since you last saved it.
 
 Hint: In the "change directory" dialog, select your SD card and hit OK. If
 there are no .pac files in the root of your SD card, the program should jump

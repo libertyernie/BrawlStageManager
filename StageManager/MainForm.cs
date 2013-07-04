@@ -149,6 +149,10 @@ namespace BrawlStageManager {
 			}
 			_rootPath = fi.FullName;
 			if (renderModels.Checked) modelPanel1.ClearAll();
+
+			string relname = matchRel(fi.Name);
+			updateRel(relname);
+
 			try {
 				fi.Refresh(); // Update file size
 
@@ -178,9 +182,6 @@ namespace BrawlStageManager {
 					FileOperations.Delete(fi.FullName);
 					changeDirectory(CurrentDirectory);
 				};
-
-				string relname = matchRel(fi.Name);
-				updateRel(relname);
 
 				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
@@ -600,6 +601,14 @@ namespace BrawlStageManager {
 
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
 			changeDirectory(CurrentDirectory); // Refresh .pac list
+		}
+
+		private void addmissingPAT0EntriesToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (DialogResult.Yes == MessageBox.Show("Would you like to fill in the gaps on SelchrMark and SelmapMark PAT0 entries so there's one for each stage? (The mappings will remain the same until you modify them.)", "Confirm", MessageBoxButtons.YesNo)) {
+				portraitViewer1.AddPAT0ForEachStage("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnamelogoM");
+				portraitViewer1.AddPAT0ForEachStage("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/lambert113");
+				MessageBox.Show("Save the common5/sc_selmap file and restart the program for the changes to take effect.");
+			}
 		}
 	}
 }

@@ -299,5 +299,46 @@ namespace BrawlStageManager {
 				UpdateImage(_iconNum);
 			}
 		}
+
+		public void AddPAT0ForEachStage(string path) {
+			var look = sc_selmap.FindChild(path, false).Children[0];
+			if (!(look is PAT0TextureNode)) {
+				throw new FormatException(look.Name);
+			}
+
+			PAT0TextureNode pasted__stnamelogoM = look as PAT0TextureNode;
+			List<Tuple<string, float>> entries = new List<Tuple<string, float>>();
+			foreach (var child in pasted__stnamelogoM.Children.ToList()) {
+				if (!(child is PAT0TextureEntryNode)) {
+					throw new FormatException(child.Name);
+				}
+				PAT0TextureEntryNode entry = child as PAT0TextureEntryNode;
+				entries.Add(new Tuple<string, float>(entry.Texture, entry.Key));
+				if (entry.Key != 0) pasted__stnamelogoM.RemoveChild(child);
+			}
+
+			for (int i = 1; i < 80; i++) {
+				string texname = (from e in entries
+								  where e.Item2 <= i
+								  orderby e.Item2 descending
+								  select e.Item1).FirstOrDefault()
+								  ?? "ChangeThisTextureNamePlease";
+				var entry = new PAT0TextureEntryNode();
+				pasted__stnamelogoM.AddChild(entry);
+				entry.Key = i;
+				entry.Texture = texname;
+			}
+
+			var moreThan79query = from e in entries
+								  where e.Item2 >= 80
+								  orderby e.Item2 ascending
+								  select e;
+			foreach (var tuple in moreThan79query) {
+				var entry = new PAT0TextureEntryNode();
+				pasted__stnamelogoM.AddChild(entry);
+				entry.Key = tuple.Item2;
+				entry.Texture = tuple.Item1;
+			}
+		}
 	}
 }

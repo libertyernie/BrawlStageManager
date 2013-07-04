@@ -45,6 +45,7 @@
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.renderModels = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.useAFixedStageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
 			this.warningResizingIsQuiteUglyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.useAFixedStageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -193,6 +194,7 @@
             this.changeDirectoryToolStripMenuItem,
             this.exportStageToolStripMenuItem,
             this.exportAllToolStripMenuItem,
+            this.addmissingPAT0EntriesToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -201,28 +203,28 @@
 			// changeDirectoryToolStripMenuItem
 			// 
 			this.changeDirectoryToolStripMenuItem.Name = "changeDirectoryToolStripMenuItem";
-			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.changeDirectoryToolStripMenuItem.Text = "Change directory...";
 			this.changeDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeDirectoryToolStripMenuItem_Click);
 			// 
 			// exportStageToolStripMenuItem
 			// 
 			this.exportStageToolStripMenuItem.Name = "exportStageToolStripMenuItem";
-			this.exportStageToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exportStageToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.exportStageToolStripMenuItem.Text = "Export stage";
 			this.exportStageToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
 			// 
 			// exportAllToolStripMenuItem
 			// 
 			this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.exportAllToolStripMenuItem.Text = "Export all stages";
 			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -302,6 +304,14 @@
 			this.selmapMarkPreviewToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.selmapMarkPreviewToolStripMenuItem.Text = "SelmapMark preview";
 			this.selmapMarkPreviewToolStripMenuItem.Click += new System.EventHandler(this.selmapMarkPreviewToolStripMenuItem_Click);
+			// 
+			// useAFixedStageListToolStripMenuItem
+			// 
+			this.useAFixedStageListToolStripMenuItem.CheckOnClick = true;
+			this.useAFixedStageListToolStripMenuItem.Name = "useAFixedStageListToolStripMenuItem";
+			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.useAFixedStageListToolStripMenuItem.Text = "Use a fixed stage list";
+			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
 			// 
 			// resizeToolStripMenuItem
 			// 
@@ -432,13 +442,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// useAFixedStageListToolStripMenuItem
+			// addmissingPAT0EntriesToolStripMenuItem
 			// 
-			this.useAFixedStageListToolStripMenuItem.CheckOnClick = true;
-			this.useAFixedStageListToolStripMenuItem.Name = "useAFixedStageListToolStripMenuItem";
-			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.useAFixedStageListToolStripMenuItem.Text = "Use a fixed stage list";
-			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
+			this.addmissingPAT0EntriesToolStripMenuItem.Name = "addmissingPAT0EntriesToolStripMenuItem";
+			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
+			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -513,6 +522,7 @@
 		private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkPreviewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem useAFixedStageListToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addmissingPAT0EntriesToolStripMenuItem;
 
 
 

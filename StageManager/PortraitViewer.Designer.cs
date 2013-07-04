@@ -143,7 +143,7 @@
 			this.modifyPAT0.Name = "modifyPAT0";
 			this.modifyPAT0.Size = new System.Drawing.Size(208, 23);
 			this.modifyPAT0.TabIndex = 9;
-			this.modifyPAT0.Text = "Modify PAT0 (~)";
+			this.modifyPAT0.Text = "Modify PAT0 mapping (~)";
 			this.modifyPAT0.UseVisualStyleBackColor = true;
 			this.modifyPAT0.Click += new System.EventHandler(this.modifyPAT0_Click);
 			// 

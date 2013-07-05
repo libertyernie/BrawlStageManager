@@ -206,6 +206,8 @@ namespace BrawlSongManager {
 			this.Text = this.Text.Substring(0, this.Text.IndexOf('-')) + "- " + newpath; // Update titlebar
 
 			refreshDirectory();
+
+			statusToolStripMenuItem.Text = songNameBar.findInfoFile();
 		}
 		private void changeDirectory(DirectoryInfo path) {
 			changeDirectory(path.FullName);
@@ -244,8 +246,6 @@ namespace BrawlSongManager {
 				// This occurs when you delete the last item in the list (and "group songs" is off)
 				listBox1.SelectedIndex = listBox1.Items.Count - 1;
 			}
-
-			statusToolStripMenuItem.Text = songNameBar.findInfoFile();
 		}
 
 		private void closing(object sender, FormClosingEventArgs e) {

@@ -300,31 +300,49 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public void AddPAT0ForEachStage(string pathToPAT0TextureNode) {
+		public void AddPAT0FromExisting(string pathToPAT0TextureNode) {
+			AddPAT0(pathToPAT0TextureNode, true);
+		}
+
+		public void AddPAT0ByStageNumber(string pathToPAT0TextureNode) {
+			AddPAT0(pathToPAT0TextureNode, false);
+		}
+
+		private void AddPAT0(string pathToPAT0TextureNode, bool fromExisting) {
 			var look = sc_selmap.FindChild(pathToPAT0TextureNode, false).Children[0];
 			if (!(look is PAT0TextureNode)) {
 				throw new FormatException(look.Name);
 			}
 
-			PAT0TextureNode pasted__stnamelogoM = look as PAT0TextureNode;
+			PAT0TextureNode tn = look as PAT0TextureNode;
 			List<Tuple<string, float>> entries = new List<Tuple<string, float>>();
-			foreach (var child in pasted__stnamelogoM.Children.ToList()) {
+			foreach (var child in tn.Children.ToList()) {
 				if (!(child is PAT0TextureEntryNode)) {
 					throw new FormatException(child.Name);
 				}
 				PAT0TextureEntryNode entry = child as PAT0TextureEntryNode;
 				entries.Add(new Tuple<string, float>(entry.Texture, entry.Key));
-				if (entry.Key != 0) pasted__stnamelogoM.RemoveChild(child);
+				if (entry.Key != 0) tn.RemoveChild(child);
+			}
+
+			string basename = null;
+			if (!fromExisting) {
+				basename = (from e in entries
+							where e.Item1.Contains('.')
+							select e.Item1).First();
+				basename = basename.Substring(0, basename.LastIndexOf('.'));
 			}
 
 			for (int i = 1; i < 80; i++) {
-				string texname = (from e in entries
-								  where e.Item2 <= i
-								  orderby e.Item2 descending
-								  select e.Item1).FirstOrDefault()
-								  ?? "ChangeThisTextureNamePlease";
+				string texname = !fromExisting
+					? basename + "." + i.ToString("D2")
+					: ((from e in entries
+						where e.Item2 <= i
+						orderby e.Item2 descending
+						select e.Item1).FirstOrDefault()
+						?? "ChangeThisTextureNamePlease");
 				var entry = new PAT0TextureEntryNode();
-				pasted__stnamelogoM.AddChild(entry);
+				tn.AddChild(entry);
 				entry.Key = i;
 				entry.Texture = texname;
 			}
@@ -335,7 +353,7 @@ namespace BrawlStageManager {
 								  select e;
 			foreach (var tuple in moreThan79query) {
 				var entry = new PAT0TextureEntryNode();
-				pasted__stnamelogoM.AddChild(entry);
+				tn.AddChild(entry);
 				entry.Key = tuple.Item2;
 				entry.Texture = tuple.Item1;
 			}

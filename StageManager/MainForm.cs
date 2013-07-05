@@ -616,8 +616,12 @@ namespace BrawlStageManager {
 
 		private void addmissingPAT0EntriesToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (DialogResult.Yes == MessageBox.Show("Would you like to fill in the gaps on SelchrMark and SelmapMark PAT0 entries so there's one for each stage? (The mappings will remain the same until you modify them.)", "Confirm", MessageBoxButtons.YesNo)) {
-				portraitViewer1.AddPAT0ForEachStage("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnamelogoM");
-				portraitViewer1.AddPAT0ForEachStage("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/lambert113");
+				portraitViewer1.AddPAT0FromExisting("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnamelogoM");
+				portraitViewer1.AddPAT0FromExisting("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/lambert113");
+				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/basebgM");
+				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnameM");
+				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnameshadowM");
+				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapIcon/iconM");
 				MessageBox.Show("Save the common5/sc_selmap file and restart the program for the changes to take effect.");
 			}
 		}

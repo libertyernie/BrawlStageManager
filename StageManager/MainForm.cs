@@ -611,7 +611,10 @@ namespace BrawlStageManager {
 		}
 
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
-			changeDirectory(CurrentDirectory); // Refresh .pac list
+			var result = MessageBox.Show("This will reload the common5/sc_selmap from the disk.", "Continue?", MessageBoxButtons.YesNo);
+			if (result == DialogResult.Yes) {
+				changeDirectory(CurrentDirectory); // Refresh .pac list
+			}
 		}
 
 		private void addmissingPAT0EntriesToolStripMenuItem_Click(object sender, EventArgs e) {

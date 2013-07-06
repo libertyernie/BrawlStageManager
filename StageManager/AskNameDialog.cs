@@ -24,5 +24,9 @@ namespace BrawlStageManager {
 				textBox1.Text = value;
 			}
 		}
+
+		private void button2_Click(object sender, EventArgs e) {
+			NameText = Text;
+		}
 	}
 }

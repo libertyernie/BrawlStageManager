@@ -371,17 +371,16 @@ namespace BrawlStageManager {
 
 		public bool AddMenSelmapMark(string path, bool ask) {
 			Bitmap bitmap = new Bitmap(path);
-			string name = null;
+			string name = Path.GetFileNameWithoutExtension(path);
 			if (ask) {
 				using (var nameDialog = new AskNameDialog(bitmap)) {
+					nameDialog.Text = name;
 					if (nameDialog.ShowDialog() != DialogResult.OK) {
 						return false;
 					} else {
 						name = nameDialog.NameText;
 					}
 				}
-			} else {
-				name = Path.GetFileNameWithoutExtension(path);
 			}
 			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
 			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);

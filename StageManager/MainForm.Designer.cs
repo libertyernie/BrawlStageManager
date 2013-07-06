@@ -37,6 +37,7 @@
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moduleFileDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +64,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -197,6 +198,7 @@
             this.exportAllToolStripMenuItem,
             this.addmissingPAT0EntriesToolStripMenuItem,
             this.addMenSelmapMarksToolStripMenuItem,
+            this.updateScselcharacter2ToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -229,6 +231,13 @@
 			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
 			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
 			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
+			// 
+			// addMenSelmapMarksToolStripMenuItem
+			// 
+			this.addMenSelmapMarksToolStripMenuItem.Name = "addMenSelmapMarksToolStripMenuItem";
+			this.addMenSelmapMarksToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addMenSelmapMarksToolStripMenuItem.Text = "Add MenSelmapMark(s)";
+			this.addMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.addMenSelmapMarksToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -451,12 +460,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// addMenSelmapMarksToolStripMenuItem
+			// updateScselcharacter2ToolStripMenuItem
 			// 
-			this.addMenSelmapMarksToolStripMenuItem.Name = "addMenSelmapMarksToolStripMenuItem";
-			this.addMenSelmapMarksToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
-			this.addMenSelmapMarksToolStripMenuItem.Text = "Add MenSelmapMark(s)";
-			this.addMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.addMenSelmapMarksToolStripMenuItem_Click);
+			this.updateScselcharacter2ToolStripMenuItem.Name = "updateScselcharacter2ToolStripMenuItem";
+			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
+			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -533,6 +542,7 @@
 		private System.Windows.Forms.ToolStripMenuItem useAFixedStageListToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addmissingPAT0EntriesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addMenSelmapMarksToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem updateScselcharacter2ToolStripMenuItem;
 
 
 

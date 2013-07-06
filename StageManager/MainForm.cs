@@ -662,5 +662,9 @@ namespace BrawlStageManager {
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e) {
 			TempFiles.DeleteAll();
 		}
+
+		private void updateScselcharacter2ToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.copyIconsToSelcharacter2();
+		}
 	}
 }

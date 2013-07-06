@@ -260,6 +260,64 @@ namespace BrawlStageManager {
 			updateFileSize();
 		}
 		
+		public void copyIconsToSelcharacter2() {
+			string fileToSaveTo = null;
+
+			ResourceNode s2 = null;
+			if (common5 != null) {
+				s2 = common5.FindChild("sc_selcharacter2_en", false);
+			} else if (sc_selmap != null) {
+				if (File.Exists("../../menu2/sc_selcharacter2.pac")) {
+					fileToSaveTo = "../../menu2/sc_selcharacter2.pac";
+					s2 = fcopy(fileToSaveTo);
+				} else if (File.Exists("../../menu2/sc_selcharacter2_en.pac")) {
+					fileToSaveTo = "../../menu2/sc_selcharacter2_en.pac";
+					s2 = fcopy(fileToSaveTo);
+				}
+			}
+
+			if (s2 == null) return;
+
+			ResourceNode md0 = s2.FindChild("MenuRule_en/ModelData[0]", false);
+			ResourceNode md80 = sc_selmap.FindChild("MiscData[80]", false);
+			if (md0 == null || md80 == null) return;
+
+			using (ProgressWindow w = new ProgressWindow()) {
+				w.Begin(0, 60, 0);
+				for (int i = 1; i < 60; i++) {
+					if (i == 32) i = 50;
+					string tempFile1 = TempFiles.Create(".tex0");
+					string tempFile2 = TempFiles.Create(".plt0");
+					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + i.ToString("D2"), false) as TEX0Node;
+					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + i.ToString("D2"), false) as TEX0Node;
+					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + i.ToString("D2"), false);
+					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + i.ToString("D2"), false);
+					if (iconFrom != null && iconTo != null && palFrom != null && palTo != null) {
+						iconFrom.Export(tempFile1);
+						iconTo.Replace(tempFile1);
+						palFrom.Export(tempFile2);
+						palTo.Replace(tempFile2);
+					}
+
+					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + i.ToString("D2"), false) as TEX0Node;
+					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
+					if (prevbase != null && stageswitch != null) {
+						Bitmap b128 = new Bitmap(96, 48);
+						using (var g = Graphics.FromImage(b128)) {
+							g.DrawImage(prevbase.GetImage(0), 0, -24, 96, 96);
+						}
+						stageswitch.Replace(b128);
+					}
+
+					w.Update(i);
+				}
+			}
+
+			if (fileToSaveTo != null) {
+				s2.Export(fileToSaveTo);
+			}
+		}
+
 		protected void saveButton_Click(object sender, EventArgs e) {
 			save();
 		}

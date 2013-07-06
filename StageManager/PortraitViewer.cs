@@ -259,6 +259,18 @@ namespace BrawlStageManager {
 
 			updateFileSize();
 		}
+
+		private static int[] SelmapNumForThisSelcharacter2Num =
+		{ 00,
+		  01,02,03,04,05,
+		  06,08,10,09,11,
+		  12,13,14,15,16,
+		  17,18,21,22,23,
+		  27,26,19,24,07,
+		  25,20,30,31,28,29,
+		  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,
+		  50,51,52,53,54,
+		  55,56,57,58,59};
 		
 		public void copyIconsToSelcharacter2() {
 			string fileToSaveTo = null;
@@ -288,10 +300,12 @@ namespace BrawlStageManager {
 					if (i == 32) i = 50;
 					string tempFile1 = TempFiles.Create(".tex0");
 					string tempFile2 = TempFiles.Create(".plt0");
-					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + i.ToString("D2"), false) as TEX0Node;
-					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + i.ToString("D2"), false) as TEX0Node;
-					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + i.ToString("D2"), false);
-					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + i.ToString("D2"), false);
+					string nameTo = i.ToString("D2");
+					string nameFrom = SelmapNumForThisSelcharacter2Num[i].ToString("D2");
+					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameFrom, false) as TEX0Node;
+					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameTo, false) as TEX0Node;
+					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameFrom, false);
+					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameTo, false);
 					if (iconFrom != null && iconTo != null && palFrom != null && palTo != null) {
 						iconFrom.Export(tempFile1);
 						iconTo.Replace(tempFile1);
@@ -299,7 +313,7 @@ namespace BrawlStageManager {
 						palTo.Replace(tempFile2);
 					}
 
-					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + i.ToString("D2"), false) as TEX0Node;
+					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + SelmapNumForThisSelcharacter2Num[i].ToString("D2"), false) as TEX0Node;
 					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
 					if (prevbase != null && stageswitch != null) {
 						Bitmap b128 = new Bitmap(96, 48);

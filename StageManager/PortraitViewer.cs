@@ -15,11 +15,17 @@ using BrawlLib.Wii.Textures;
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
 
-		private string _openFilePath;
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
 		public bool selmapMarkPreview;
+		public bool IsDirty {
+			get {
+				return common5 != null ? common5.IsDirty
+					: sc_selmap != null ? sc_selmap.IsDirty
+					: false;
+			}
+		}
 
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
@@ -42,8 +48,9 @@ namespace BrawlStageManager {
 
 		private TextureContainer textures;
 
+		private string _openFilePath;
 		// In case the image needs to be reloaded after replacing the texture
-		protected int _iconNum;
+		private int _iconNum;
 
 		public PortraitViewer() {
 			InitializeComponent();
@@ -237,7 +244,7 @@ namespace BrawlStageManager {
 			return tempFile;
 		}
 
-		protected void saveButton_Click(object sender, EventArgs e) {
+		public void save() {
 			if (sc_selmap == null) {
 				return;
 			}
@@ -252,6 +259,9 @@ namespace BrawlStageManager {
 			}
 
 			updateFileSize();
+		}
+		protected void saveButton_Click(object sender, EventArgs e) {
+			save();
 		}
 
 		private void updateFileSize() {

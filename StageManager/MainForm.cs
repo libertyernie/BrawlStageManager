@@ -125,6 +125,8 @@ namespace BrawlStageManager {
 			listBox1.DragEnter += new DragEventHandler(dragEnter);
 			listBox1.DragDrop += new DragEventHandler(dragDrop);
 
+			FormClosing += MainForm_FormClosing;
+
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			changeDirectory(path);
 		}
@@ -633,7 +635,7 @@ namespace BrawlStageManager {
 			OpenDialog.Filter = BrawlLib.ExportFilters.TEX0;
 			OpenDialog.Multiselect = true;
 			if (OpenDialog.ShowDialog() == DialogResult.OK) {
-				var result = MessageBox.Show("Ask for a name for each texture?", "Question", MessageBoxButtons.YesNoCancel);
+				var result = MessageBox.Show("Ask for a name for each texture?", Text, MessageBoxButtons.YesNoCancel);
 				if (result != DialogResult.Cancel) {
 					bool ask = (DialogResult.Yes == result);
 					foreach (string file in OpenDialog.FileNames) {
@@ -643,6 +645,17 @@ namespace BrawlStageManager {
 				}
 			}
 			OpenDialog.Multiselect = false;
+		}
+
+		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+			if (portraitViewer1.IsDirty) {
+				var result = MessageBox.Show("Would you like to save common5/sc_selmap before closing?", Text, MessageBoxButtons.YesNoCancel);
+				if (result == DialogResult.Cancel) {
+					e.Cancel = true;
+				} else if (result == DialogResult.Yes) {
+					portraitViewer1.save();
+				}
+			}
 		}
 	}
 }

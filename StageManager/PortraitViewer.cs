@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib;
+using BrawlLib.Wii.Textures;
 
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
@@ -293,6 +294,8 @@ namespace BrawlStageManager {
 		}
 
 		private void modifyPAT0_Click(object sender, EventArgs e) {
+			if (textures == null) return;
+
 			var result = new ModifyPAT0Dialog(textures).ShowDialog();
 			if (result == DialogResult.OK) {
 				// The dialog will mark the pat0 as dirty if changed
@@ -314,7 +317,10 @@ namespace BrawlStageManager {
 				throw new FormatException(look.Name);
 			}
 
+			bool icon = look.Parent.Name == "iconM";
+
 			PAT0TextureNode tn = look as PAT0TextureNode;
+
 			List<Tuple<string, float>> entries = new List<Tuple<string, float>>();
 			foreach (var child in tn.Children.ToList()) {
 				if (!(child is PAT0TextureEntryNode)) {
@@ -325,17 +331,15 @@ namespace BrawlStageManager {
 				if (entry.Key != 0) tn.RemoveChild(child);
 			}
 
-			string basename = null;
-			if (!fromExisting) {
-				basename = (from e in entries
+			string basename =  (from e in entries
 							where e.Item1.Contains('.')
 							select e.Item1).First();
-				basename = basename.Substring(0, basename.LastIndexOf('.'));
-			}
+			basename = basename.Substring(0, basename.LastIndexOf('.'));
 
 			for (int i = 1; i < 80; i++) {
-				string texname = !fromExisting
-					? basename + "." + i.ToString("D2")
+				string texname =
+					!fromExisting ? basename + "." + i.ToString("D2")
+					: ((i > 31 && i < 50) || (i > 59)) ? basename + "." + "00"
 					: ((from e in entries
 						where e.Item2 <= i
 						orderby e.Item2 descending
@@ -345,6 +349,9 @@ namespace BrawlStageManager {
 				tn.AddChild(entry);
 				entry.Key = i;
 				entry.Texture = texname;
+				if (icon) {
+					entry.Palette = entry.Texture;
+				}
 			}
 
 			var moreThan79query = from e in entries
@@ -356,7 +363,30 @@ namespace BrawlStageManager {
 				tn.AddChild(entry);
 				entry.Key = tuple.Item2;
 				entry.Texture = tuple.Item1;
+				if (icon) {
+					entry.Palette = entry.Texture;
+				}
 			}
+		}
+
+		public bool AddMenSelmapMark(string path, bool ask) {
+			Bitmap bitmap = new Bitmap(path);
+			string name = null;
+			if (ask) {
+				using (var nameDialog = new AskNameDialog(bitmap)) {
+					if (nameDialog.ShowDialog() != DialogResult.OK) {
+						return false;
+					} else {
+						name = nameDialog.NameText;
+					}
+				}
+			} else {
+				name = Path.GetFileNameWithoutExtension(path);
+			}
+			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
+			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
+			tex0.ReplaceRaw(TextureConverter.IA4.EncodeTEX0Texture(bitmap, 1));
+			return true;
 		}
 	}
 }

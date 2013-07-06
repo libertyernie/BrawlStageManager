@@ -615,7 +615,7 @@ namespace BrawlStageManager {
 		}
 
 		private void addmissingPAT0EntriesToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (DialogResult.Yes == MessageBox.Show("Would you like to fill in the gaps on SelchrMark and SelmapMark PAT0 entries so there's one for each stage? (The mappings will remain the same until you modify them.)", "Confirm", MessageBoxButtons.YesNo)) {
+			if (DialogResult.Yes == MessageBox.Show("Would you like to fill in the gaps on SelchrMark and SelmapMark PAT0 entries so there's one for each stage? (The mappings will remain the same until you modify them. Renaming MenSelchrMarks after doing this may cause problems, but for MenSelmapMarks it should be OK.)", "Confirm", MessageBoxButtons.YesNo)) {
 				portraitViewer1.AddPAT0FromExisting("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnamelogoM");
 				portraitViewer1.AddPAT0FromExisting("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/lambert113");
 				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/basebgM");
@@ -624,6 +624,22 @@ namespace BrawlStageManager {
 				portraitViewer1.AddPAT0ByStageNumber("MiscData[80]/AnmTexPat(NW4R)/MenSelmapIcon/iconM");
 				MessageBox.Show("Save the common5/sc_selmap file and restart the program for the changes to take effect.");
 			}
+		}
+
+		private void addMenSelmapMarksToolStripMenuItem_Click(object sender, EventArgs e) {
+			OpenDialog.Filter = BrawlLib.ExportFilters.TEX0;
+			OpenDialog.Multiselect = true;
+			if (OpenDialog.ShowDialog() == DialogResult.OK) {
+				var result = MessageBox.Show("Ask for a name for each texture?", "Question", MessageBoxButtons.YesNoCancel);
+				if (result != DialogResult.Cancel) {
+					bool ask = (DialogResult.Yes == result);
+					foreach (string file in OpenDialog.FileNames) {
+						bool r = portraitViewer1.AddMenSelmapMark(file, ask);
+						if (!r) break;
+					}
+				}
+			}
+			OpenDialog.Multiselect = false;
 		}
 	}
 }

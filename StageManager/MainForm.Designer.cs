@@ -63,6 +63,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -195,6 +196,7 @@
             this.exportStageToolStripMenuItem,
             this.exportAllToolStripMenuItem,
             this.addmissingPAT0EntriesToolStripMenuItem,
+            this.addMenSelmapMarksToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -449,6 +451,13 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
 			// 
+			// addMenSelmapMarksToolStripMenuItem
+			// 
+			this.addMenSelmapMarksToolStripMenuItem.Name = "addMenSelmapMarksToolStripMenuItem";
+			this.addMenSelmapMarksToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addMenSelmapMarksToolStripMenuItem.Text = "Add MenSelmapMark(s)";
+			this.addMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.addMenSelmapMarksToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,6 +532,7 @@
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkPreviewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem useAFixedStageListToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addmissingPAT0EntriesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addMenSelmapMarksToolStripMenuItem;
 
 
 

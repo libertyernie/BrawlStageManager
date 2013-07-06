@@ -71,6 +71,12 @@
     <Compile Include="AboutBSM.Designer.cs">
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
+    <Compile Include="AskNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskNameDialog.Designer.cs">
+      <DependentUpon>AskNameDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileOperations.cs" />
     <Compile Include="ImagePreviewPanel.cs">
       <SubType>Component</SubType>
@@ -119,6 +125,9 @@
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="AboutBSM.resx">
       <DependentUpon>AboutBSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AskNameDialog.resx">
+      <DependentUpon>AskNameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

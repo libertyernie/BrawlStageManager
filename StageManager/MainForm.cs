@@ -126,6 +126,7 @@ namespace BrawlStageManager {
 			listBox1.DragDrop += new DragEventHandler(dragDrop);
 
 			FormClosing += MainForm_FormClosing;
+			FormClosed += MainForm_FormClosed;
 
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			changeDirectory(path);
@@ -656,6 +657,10 @@ namespace BrawlStageManager {
 					portraitViewer1.save();
 				}
 			}
+		}
+
+		private void MainForm_FormClosed(object sender, FormClosedEventArgs e) {
+			TempFiles.DeleteAll();
 		}
 	}
 }

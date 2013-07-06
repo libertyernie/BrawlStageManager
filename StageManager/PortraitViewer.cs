@@ -133,9 +133,8 @@ namespace BrawlStageManager {
 			FileInfo f = new FileInfo(path);
 			if (!f.Exists) throw new IOException(f.FullName + " doesn't exist");
 
-			string tempfile = Path.GetTempFileName();
-			if (File.Exists(tempfile)) File.Delete(tempfile);
-			File.Copy(f.FullName, tempfile);
+			string tempfile = TempFiles.Create();
+			File.Copy(f.FullName, tempfile, true);
 			return NodeFactory.FromFile(null, tempfile);
 		}
 
@@ -231,7 +230,7 @@ namespace BrawlStageManager {
 
 		private string resizeToTempFile(string filename, Size? resizeToArg) {
 			Size resizeTo = resizeToArg ?? Size.Empty;
-			string tempFile = Path.GetTempFileName();
+			string tempFile = TempFiles.Create();
 			using (Bitmap orig = new Bitmap(filename)) {
 				if (orig.Size.Width <= resizeTo.Width && orig.Size.Height <= resizeTo.Height) {
 					File.Copy(filename, tempFile, true);
@@ -260,6 +259,7 @@ namespace BrawlStageManager {
 
 			updateFileSize();
 		}
+		
 		protected void saveButton_Click(object sender, EventArgs e) {
 			save();
 		}

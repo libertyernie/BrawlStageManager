@@ -132,12 +132,14 @@ namespace BrawlStageManager {
 			changeDirectory(path);
 		}
 
-		private static long[] sizes_of_broken_files = { 2261408, 3596224, 3728768, 510496 };
+		private static long[] sizes_of_broken_files = { 2261408, 3596224, 3728768, 510496, 911680, 3978464 };
 		private static string[] md5sums_of_broken_files = {
 			"814f5f640226f1616966317807e1e1a2",  // mewtwo2000 venom
 			"0a0767b84bd67e3cc6582f23a0eab6f9", // new pork city small version
 			"e47bb210fee934c49c25aba7b7456acb", // brawl minus battlefield
 			"feb6ae768107623f3512007bd803b425", // brawl minus yoshi's island melee
+			"438612a2260b8f49d8741a87068c30b9", // brawl plus temple
+			"30382d7f1a19d88beac5a08ca6b7f93d" // brawl plus new pork city
 			};
 
 		private void open(FileInfo fi) {
@@ -660,7 +662,7 @@ namespace BrawlStageManager {
 		}
 
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e) {
-			TempFiles.DeleteAll();
+			TempFiles.TryToDeleteAll();
 		}
 
 		private void updateScselcharacter2ToolStripMenuItem_Click(object sender, EventArgs e) {

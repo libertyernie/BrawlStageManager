@@ -22,9 +22,14 @@ namespace BrawlStageManager {
 			return file;
 		}
 
-		public static void DeleteAll() {
+		public static void TryToDeleteAll() {
 			while (tempFiles.Any()) {
-				File.Delete(tempFiles.Pop());
+				string s = tempFiles.Pop();
+				try {
+					File.Delete(s);
+				} catch (Exception e) {
+					Console.WriteLine(s + ": " + e.Message);
+				}
 			}
 		}
 	}

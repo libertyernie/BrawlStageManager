@@ -403,14 +403,19 @@ namespace BrawlStageManager {
 
 			PAT0TextureNode tn = look as PAT0TextureNode;
 
+			List<PAT0TextureEntryNode> childrenList = (from c in tn.Children
+													   where c is PAT0TextureEntryNode
+													   select (PAT0TextureEntryNode)c).ToList();
+			if ((from c in childrenList where c.Key >= 40 && c.Key < 50 select c).Count() >= 10) {
+				MessageBox.Show("Skipping " + pathToPAT0TextureNode.Substring(pathToPAT0TextureNode.LastIndexOf('/') + 1) +
+					" - mappings for icon numbers 40-49 already exist.");
+				return;
+			}
+
 			List<Tuple<string, float>> entries = new List<Tuple<string, float>>();
-			foreach (var child in tn.Children.ToList()) {
-				if (!(child is PAT0TextureEntryNode)) {
-					throw new FormatException(child.Name);
-				}
-				PAT0TextureEntryNode entry = child as PAT0TextureEntryNode;
+			foreach (var entry in childrenList) {
 				entries.Add(new Tuple<string, float>(entry.Texture, entry.Key));
-				if (entry.Key != 0) tn.RemoveChild(child);
+				if (entry.Key != 0) tn.RemoveChild(entry);
 			}
 
 			string basename =  (from e in entries
@@ -420,13 +425,13 @@ namespace BrawlStageManager {
 
 			for (int i = 1; i < 80; i++) {
 				string texname =
-					!fromExisting ? basename + "." + i.ToString("D2")
+					fromExisting? ((from e in entries
+									where e.Item2 <= i
+									orderby e.Item2 descending
+									select e.Item1).FirstOrDefault()
+									?? "ChangeThisTextureNamePlease")
 					: ((i > 31 && i < 50) || (i > 59)) ? basename + "." + "00"
-					: ((from e in entries
-						where e.Item2 <= i
-						orderby e.Item2 descending
-						select e.Item1).FirstOrDefault()
-						?? "ChangeThisTextureNamePlease");
+					: basename + "." + i.ToString("D2");
 				var entry = new PAT0TextureEntryNode();
 				tn.AddChild(entry);
 				entry.Key = i;

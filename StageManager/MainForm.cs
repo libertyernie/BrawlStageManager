@@ -170,7 +170,7 @@ namespace BrawlStageManager {
 					foreach (byte b in hash) {
 						sb.Append(b.ToString("x2").ToLower());
 					}
-					if (sb.ToString() == md5sums_of_broken_files[isBrokenIndex]) {
+					if (!md5sums_of_broken_files.Contains(sb.ToString())) {
 						throw new FileNotFoundException();
 					}
 				}

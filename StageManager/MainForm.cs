@@ -201,10 +201,14 @@ namespace BrawlStageManager {
 							foreach (ResourceNode child in modelfolder.Children) {
 								if (child is MDL0Node) {
 									MDL0Node model = child as MDL0Node;
+									model.Populate();
 									model._renderBones = false;
-									model._renderPolygons = CheckState.Checked;
+									model._renderPolygons = true;
+									model._renderWireframe = false;
 									model._renderVertices = false;
 									model._renderBox = false;
+									model.ApplyCHR(null, 0);
+									model.ApplySRT(null, 0);
 									if (model.TextureGroup != null) {
 										foreach (ResourceNode tex in model.TextureGroup.Children) {
 											if (tex is MDL0TextureNode) {

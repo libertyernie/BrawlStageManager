@@ -1,8 +1,17 @@
-﻿Brawl Stage Manager 1.1 - February 14, 2013
+﻿Brawl Stage Manager 2.0 - July 9, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
-Brawl Stage Manager is a program that uses BrawlLib to help you see and organize the stages, module files, and stage portraits that are installed on your SD card (or in whatever folder, on whatever device, you use for Brawl hacks.)
+Brawl Stage Manager is a program that uses BrawlLib to help you see and
+organize the stages, module files, and stage portraits that are installed on
+your SD card (or in whatever folder, on whatever device, you use for Brawl
+hacks.) It can also add PAT0 entries for expansion stages (with an automated
+process) and change certain PAT0 entries (through a special dialog.)
+
+KEYBOARD SHORTCUTS:
+PageUp:		go up one stage (focus does not need to be on the stage list)
+PageDown:	go down one stage (focus does not need to be on the stage list)
+Tilde (~):	Display PAT0 modification dialog
 
 The left side of the window has a list of stage .PAC files in the current
 directory; you can change the directory through the Options menu. Choosing a
@@ -53,12 +62,13 @@ Replace or Export.
 All of these textures are looked up in the PAT0 entries in the common5, so
 they will match the ones you see in-game. You can edit the PAT0 entries for
 MenSelchrMark and MenSelmapMark using the Modify PAT0 button (or by pressing
-the tilde (~) button on your keyboard.) Use BrawlBox to add a texture if you
-need to. MenSelchrMark is I4; MenSelmapMark is IA4.
-ALWAYS REMEMBER TO SAVE YOUR COMMON5 (or sc_selmap) - this program doesn't keep
-track of how long it's been since you last saved it.
+the tilde (~) button on your keyboard.)
+To add a texture, you can use the "Add MenSelmapMark(s)" tool in the File menu,
+or just use BrawlBox. Remember: MenSelchrMark is I4; MenSelmapMark is IA4.
 
 Hint: In the "change directory" dialog, select your SD card and hit OK. If
 there are no .pac files in the root of your SD card, the program should jump
-to /private/wii/app/RSBE/pf/stage/melee instead (if it exists.) You can also
-run BrawlStageManager.exe from the root of your SD card for the same effect.
+to /private/wii/app/RSBE/pf/stage/melee instead, if it exists. (Try using the
+"Start in" field in the shortcut properties.) You can also run
+BrawlStageManager.exe from the root of your SD card for the same effect.
+

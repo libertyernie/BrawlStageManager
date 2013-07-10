@@ -235,8 +235,13 @@ namespace BrawlStageManager {
 				if (orig.Size.Width <= resizeTo.Width && orig.Size.Height <= resizeTo.Height) {
 					File.Copy(filename, tempFile, true);
 				} else {
-					using (Bitmap resized = new Bitmap(orig, resizeTo)) {
-						resized.Save(tempFile);
+					using (Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height)) {
+						using (Graphics g = Graphics.FromImage(thumbnail)) {
+							g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+							g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
+						}
+						thumbnail.Save(tempFile);
 					}
 				}
 			}

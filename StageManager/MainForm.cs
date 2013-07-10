@@ -600,7 +600,7 @@ namespace BrawlStageManager {
 				}
 			} else if (e.KeyCode == Keys.PageUp) {
 				e.Handled = true;
-				if (listBox1.SelectedIndex == 0) {
+				if (listBox1.SelectedIndex <= 0) {
 					listBox1.SelectedIndex = listBox1.Items.Count - 1;
 				} else {
 					listBox1.SelectedIndex--;

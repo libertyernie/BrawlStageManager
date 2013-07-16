@@ -312,8 +312,8 @@ namespace BrawlStageManager {
 			pacFiles = path.GetFiles("*.pac");
 
 			// Special code for the root directory of a drive
-			if (pacFiles.Length == 0 && path.Parent == null) {
-				DirectoryInfo search = new DirectoryInfo(path.FullName + "private\\wii\\app\\RSBE\\pf\\stage\\melee");
+			if (pacFiles.Length == 0) {
+				DirectoryInfo search = new DirectoryInfo(path.FullName + "\\private\\wii\\app\\RSBE\\pf\\stage\\melee");
 				if (search.Exists) {
 					changeDirectory(search); // Change to the typical stage folder used by the FPC, if it exists on the drive
 					return;

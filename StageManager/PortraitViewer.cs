@@ -189,11 +189,11 @@ namespace BrawlStageManager {
 
 		void panel1_DragDrop(object sender, DragEventArgs e) {
 			if (e.Effect == DragDropEffects.Copy) {
-				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0]);
+				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0], false);
 			}
 		}
 
-		public void Replace(object sender, string filename) {
+		public void Replace(object sender, string filename, bool useTextureConverter) {
 			var ig = StringComparison.CurrentCultureIgnoreCase;
 			if (filename.EndsWith(".tex0", ig) || filename.EndsWith(".brres", ig)) {
 				using (ResourceNode node = NodeFactory.FromFile(null, filename)) {
@@ -205,25 +205,39 @@ namespace BrawlStageManager {
 					}
 					string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".png";
 					tex0.Export(tempFile);
-					Replace(sender, tempFile); // call self with new file
+					Replace(sender, tempFile, useTextureConverter); // call self with new file
 					File.Delete(tempFile);
 				}
 			} else {
-				using (TextureConverterDialog dlg = new TextureConverterDialog()) {
+				TEX0Node tex0 = GetTEX0For(sender);
+				if (useTextureConverter) {
+					using (TextureConverterDialog dlg = new TextureConverterDialog()) {
+						if (sender == prevbase && prevbaseResizeTo != null) {
+							dlg.ImageSource = resizeToTempFile(filename, prevbaseResizeTo);
+						} else if (sender == frontstname && frontstnameResizeTo != null) {
+							dlg.ImageSource = resizeToTempFile(filename, frontstnameResizeTo);
+						} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
+							dlg.ImageSource = resizeToTempFile(filename, selmapMarkResizeTo);
+						} else {
+							dlg.ImageSource = filename;
+						}
+						if (dlg.ShowDialog(null, tex0) == DialogResult.OK) {
+							tex0.IsDirty = true;
+							UpdateImage(_iconNum);
+						}
+					}
+				} else {
+					Bitmap bmp = new Bitmap(filename);
 					if (sender == prevbase && prevbaseResizeTo != null) {
-						dlg.ImageSource = resizeToTempFile(filename, prevbaseResizeTo);
+						bmp = Utilities.Resize(bmp, prevbaseResizeTo.Value);
 					} else if (sender == frontstname && frontstnameResizeTo != null) {
-						dlg.ImageSource = resizeToTempFile(filename, frontstnameResizeTo);
+						bmp = Utilities.Resize(bmp, frontstnameResizeTo.Value);
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
-						dlg.ImageSource = resizeToTempFile(filename, selmapMarkResizeTo);
-					} else {
-						dlg.ImageSource = filename;
+						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
-					TEX0Node tex0 = GetTEX0For(sender);
-					if (dlg.ShowDialog(null, tex0) == DialogResult.OK) {
-						tex0.IsDirty = true;
-						UpdateImage(_iconNum);
-					}
+					tex0.Replace(bmp);
+					tex0.IsDirty = true;
+					UpdateImage(_iconNum);
 				}
 			}
 		}
@@ -235,12 +249,7 @@ namespace BrawlStageManager {
 				if (orig.Size.Width <= resizeTo.Width && orig.Size.Height <= resizeTo.Height) {
 					File.Copy(filename, tempFile, true);
 				} else {
-					using (Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height)) {
-						using (Graphics g = Graphics.FromImage(thumbnail)) {
-							g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-							g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
-						}
+					using (Bitmap thumbnail = Utilities.Resize(orig, resizeTo)) {
 						thumbnail.Save(tempFile);
 					}
 				}

@@ -17,5 +17,15 @@ namespace BrawlStageManager {
 			}
 			return ret;
 		}
+
+		public static Bitmap Resize(Bitmap orig, Size resizeTo) {
+			Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height);
+			using (Graphics g = Graphics.FromImage(thumbnail)) {
+				g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+				g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+				g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
+			}
+			return thumbnail;
+		}
 	}
 }

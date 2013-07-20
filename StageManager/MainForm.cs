@@ -431,28 +431,28 @@ namespace BrawlStageManager {
 
 			var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
 			if (prevbases.Any()) {
-				portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName);
+				portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName, true);
 			}
 
 			var icons = dirinfo.EnumerateFiles("*Icon.*");
 			if (icons.Any()) {
-				portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName);
+				portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName, true);
 			}
 
 			var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
 			if (frontstnames.Any()) {
-				portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName);
+				portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName, true);
 			}
 
 			var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
 				.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
 			if (seriesicons.Any()) {
-				portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName);
+				portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName, true);
 			}
 
 			var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
 			if (selmap_marks.Any()) {
-				portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName);
+				portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName, true);
 			}
 		}
 

@@ -188,11 +188,10 @@ namespace BrawlStageManager {
 					changeDirectory(CurrentDirectory);
 				};
 
-				List<ResourceNode> allNodes = _rootNode.FindChild("2", false).Children; // Find all child nodes of "2"
+				List<ResourceNode> allNodes = FindStageARC(_rootNode).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();
 				texNodes = new List<MDL0TextureNode>();
 				foreach (ResourceNode node in allNodes) {
-					Console.WriteLine(node);
 					if (node.ResourceType == ResourceType.MSBin) {
 						msBinNodes.Add((MSBinNode)node); // This is an MSBin node - add it to the list
 					} else if (renderModels.Checked) {
@@ -235,6 +234,18 @@ namespace BrawlStageManager {
 			}
 			portraitViewer1.UpdateImage(PortraitMap.Map[fi.Name]);
 			this.Refresh();
+		}
+
+		public static ResourceNode FindStageARC(ResourceNode node) {
+			foreach (ResourceNode child in node.Children) {
+				foreach (ResourceNode child2 in child.Children) {
+					if (child2.GetType() == typeof(CollisionNode)) {
+						return child;
+					}
+				}
+			}
+			// fallback
+			return node.FindChild("2", false);
 		}
 
 		private void updateTexturesMenu() {

@@ -29,7 +29,6 @@
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -115,10 +114,9 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToToolStripMenuItem,
-            this.deleteToolStripMenuItem});
+            this.copyToToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// copyToToolStripMenuItem
@@ -127,12 +125,6 @@
 			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.copyToToolStripMenuItem.Text = "Copy to...";
 			this.copyToToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.deleteToolStripMenuItem.Text = "Delete";
 			// 
 			// splitContainer2
 			// 
@@ -564,7 +556,6 @@
 		private System.Windows.Forms.ToolStripMenuItem updateScselcharacter2ToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem copyToToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 
 
 

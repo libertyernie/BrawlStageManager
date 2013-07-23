@@ -426,33 +426,35 @@ namespace BrawlStageManager {
 			}
 			FileInfo rel = relfiles.First();
 
-			File.Copy(pac.FullName, _rootPath, true);
-			File.Copy(rel.FullName, stageInfoControl1.RelFile.FullName, true);
+			FileOperations.Copy(pac.FullName, _rootPath);
+			FileOperations.Copy(rel.FullName, stageInfoControl1.RelFile.FullName);
 
-			var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
-			if (prevbases.Any()) {
-				portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName, true);
-			}
+			if (portraitViewer1.SelmapLoaded) {
+				var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
+				if (prevbases.Any()) {
+					portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName, true);
+				}
 
-			var icons = dirinfo.EnumerateFiles("*Icon.*");
-			if (icons.Any()) {
-				portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName, true);
-			}
+				var icons = dirinfo.EnumerateFiles("*Icon.*");
+				if (icons.Any()) {
+					portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName, true);
+				}
 
-			var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
-			if (frontstnames.Any()) {
-				portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName, true);
-			}
+				var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
+				if (frontstnames.Any()) {
+					portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName, true);
+				}
 
-			var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
-				.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
-			if (seriesicons.Any()) {
-				portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName, true);
-			}
+				var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
+					.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
+				if (seriesicons.Any()) {
+					portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName, true);
+				}
 
-			var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
-			if (selmap_marks.Any()) {
-				portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName, true);
+				var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
+				if (selmap_marks.Any()) {
+					portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName, true);
+				}
 			}
 		}
 
@@ -598,9 +600,9 @@ namespace BrawlStageManager {
 		private void exportStage(FileInfo f, string thisdir) {
 			Directory.CreateDirectory(thisdir);
 			string p = readNameFromPac(f);
-			File.Copy(f.FullName, thisdir + "/" + p);
+			FileOperations.Copy(f.FullName, thisdir + "/" + p);
 			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
-			if (rel.Exists) File.Copy(rel.FullName, thisdir + "/st.rel");
+			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
 
 			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
 		}

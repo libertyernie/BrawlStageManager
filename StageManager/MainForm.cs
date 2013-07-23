@@ -580,25 +580,42 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
+		}
+
 		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (FolderDialog.ShowDialog() != DialogResult.OK) {
 				return;
 			}
 
 			string outdir = FolderDialog.SelectedPath;
-			if (Directory.Exists(outdir) && Directory.EnumerateFileSystemEntries(outdir).Any()) {
-				var dr = MessageBox.Show("Is it OK to delete everything in " + outdir + "?", "", MessageBoxButtons.OKCancel);
-				if (dr != DialogResult.OK) {
-					return;
-				}
-				Directory.Delete(outdir, true);
-			}
-
 			exportStage(listBox1.SelectedItem as FileInfo, outdir);
 		}
 
 		private void exportStage(FileInfo f, string thisdir) {
 			Directory.CreateDirectory(thisdir);
+			var pacs = Directory.EnumerateFiles(thisdir, "*.pac");
+			if (pacs.Any()) {
+				var result = MessageBox.Show(this, "This directory already contains a .PAC file. " +
+					"Is it okay to remove it and the other stage files in this folder? " +
+					"(If the recycle bin is enabled, the files will be sent there.)",
+					"Overwrite", MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes) {
+					foreach (string file in pacs) {
+						// Send pac files to recycle bin (if bin is enabled for this drive)
+						FileOperations.Delete(file, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
+					}
+					// Also recycle other files
+					string[] toRecycle = {"st*.rel", "*Prevbase.*", "*Icon.*", "*FrontStname.*",
+											 "*SeriesIcon.*", "*SelchrMark.*", "*SelmapMark.*"};
+					foreach (string filename in toRecycle) {
+						FileOperations.Delete(thisdir + "/" + filename, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
+					}
+				} else {
+					return;
+				}
+			}
 			string p = readNameFromPac(f);
 			FileOperations.Copy(f.FullName, thisdir + "/" + p);
 			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));

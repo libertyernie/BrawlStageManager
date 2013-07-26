@@ -335,11 +335,13 @@ namespace BrawlStageManager {
 					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + SelmapNumForThisSelcharacter2Num[i].ToString("D2"), false) as TEX0Node;
 					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
 					if (prevbase != null && stageswitch != null) {
-						Bitmap b128 = new Bitmap(96, 48);
-						using (var g = Graphics.FromImage(b128)) {
-							g.DrawImage(prevbase.GetImage(0), 0, -24, 96, 96);
+						Bitmap thumbnail = new Bitmap(112, 56);
+						using (Graphics g = Graphics.FromImage(thumbnail)) {
+							g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+							g.DrawImage(prevbase.GetImage(0), 0, -28, 112, 112);
 						}
-						stageswitch.Replace(b128);
+						stageswitch.Replace(thumbnail);
 					}
 
 					w.Update(i);

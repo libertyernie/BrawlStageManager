@@ -8,11 +8,14 @@ namespace BrawlSongManager {
 	public class SongsByStage {
 
 		public class SongInfo {
+			public SongInfo(FileInfo f) {
+				File = f;
+			}
 			public SongInfo(string s) {
-				File = new FileInfo(s+".brstm");
+				File = new FileInfo(s + ".brstm");
 			}
 
-			public FileInfo File;
+			public FileInfo File { get; private set; }
 
 			public override string ToString() {
 				string s = File.Name;

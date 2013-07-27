@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using System.Audio;
+using System.Collections.Generic;
 
 namespace BrawlSongManager {
 	public partial class MainForm : Form {
@@ -228,14 +229,23 @@ namespace BrawlSongManager {
 					return;
 				}
 			}
+			Array.Sort(brstmFiles, delegate(FileInfo f1, FileInfo f2) {
+				return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
+			});
 
 			listBox1.Items.Clear();
 			if (GroupSongs) {
+				List<string> filenamesAdded = new List<string>();
 				listBox1.Items.AddRange(SongsByStage.FromCurrentDir);
+				foreach (object o in SongsByStage.FromCurrentDir) {
+					if (o is SongsByStage.SongInfo) {
+						filenamesAdded.Add(((SongsByStage.SongInfo)o).File.Name);
+					}
+				}
+				foreach (FileInfo f in brstmFiles) {
+					if (!filenamesAdded.Contains(f.Name)) listBox1.Items.Add(new SongsByStage.SongInfo(f));
+				}
 			} else {
-				Array.Sort(brstmFiles, delegate(FileInfo f1, FileInfo f2) {
-					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
-				});
 				listBox1.Items.AddRange(brstmFiles);
 			}
 			listBox1.Refresh();

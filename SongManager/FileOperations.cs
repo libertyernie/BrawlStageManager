@@ -194,11 +194,7 @@ namespace BrawlSongManager {
 			return IntPtr.Size == 8;
 		}
 
-		public static bool Copy(string path1, string path2) {
-			return Copy(path1, path2, 0);
-		}
-
-		public static bool Copy(string path1, string path2, FileOperationFlags flags) {
+		public static bool Copy(string path1, string path2, FileOperationFlags flags = 0) {
 			try {
 				if (IsWOW64Process()) {
 					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
@@ -211,6 +207,31 @@ namespace BrawlSongManager {
 				} else {
 					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
 					fs.wFunc = FileOperationType.FO_COPY;
+					// important to double-terminate the string.
+					fs.pFrom = path1 + '\0' + '\0';
+					fs.pTo = path2 + '\0' + '\0';
+					fs.fFlags = flags;
+					SHFileOperation_x86(ref fs);
+				}
+				return true;
+			} catch {
+				return false;
+			}
+		}
+
+		public static bool Rename(string path1, string path2, FileOperationFlags flags = 0) {
+			try {
+				if (IsWOW64Process()) {
+					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
+					fs.wFunc = FileOperationType.FO_RENAME;
+					// important to double-terminate the string.
+					fs.pFrom = path1 + '\0' + '\0';
+					fs.pTo = path2 + '\0' + '\0';
+					fs.fFlags = flags;
+					SHFileOperation_x64(ref fs);
+				} else {
+					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
+					fs.wFunc = FileOperationType.FO_RENAME;
 					// important to double-terminate the string.
 					fs.pFrom = path1 + '\0' + '\0';
 					fs.pTo = path2 + '\0' + '\0';

@@ -62,70 +62,70 @@ namespace BrawlStageManager {
 			/// Send a warning if a file or folder is being destroyed during a delete operation rather than recycled. This flag partially overrides FOF_NOCONFIRMATION.
 			/// </summary>
 			FOF_WANTNUKEWARNING = 0x4000,
-/*			/// <summary>
-			/// Introduced in Windows 8. The file operation was user-invoked and should be placed on the undo stack. This flag is preferred to FOF_ALLOWUNDO.
-			/// </summary>
-			FOFX_ADDUNDORECORD = 0x20000000,
-			/// <summary>
-			/// Walk into Shell namespace junctions. By default, junctions are not entered. For more information on junctions, see Specifying a Namespace Extension's Location.
-			/// </summary>
-			FOFX_NOSKIPJUNCTIONS = 0x00010000,
-			/// <summary>
-			/// If possible, create a hard link rather than a new instance of the file in the destination.
-			/// </summary>
-			FOFX_PREFERHARDLINK = 0x00020000,
-			/// <summary>
-			/// If an operation requires elevated rights and the FOF_NOERRORUI flag is set to disable error UI, display a UAC UI prompt nonetheless.
-			/// </summary>
-			FOFX_SHOWELEVATIONPROMPT = 0x00040000,
-			/// <summary>
-			/// If FOFX_EARLYFAILURE is set together with FOF_NOERRORUI, the entire set of operations is stopped upon encountering any error in any operation. This flag is valid only when FOF_NOERRORUI is set.
-			/// </summary>
-			FOFX_EARLYFAILURE = 0x00100000,
-			/// <summary>
-			/// Rename collisions in such a way as to preserve file name extensions. This flag is valid only when FOF_RENAMEONCOLLISION is also set.
-			/// </summary>
-			FOFX_PRESERVEFILEEXTENSIONS = 0x00200000,
-			/// <summary>
-			/// Keep the newer file or folder, based on the Date Modified property, if a collision occurs. This is done automatically with no prompt UI presented to the user.
-			/// </summary>
-			FOFX_KEEPNEWERFILE = 0x00400000,
-			/// <summary>
-			/// Do not use copy hooks.
-			/// </summary>
-			FOFX_NOCOPYHOOKS = 0x00800000,
-			/// <summary>
-			/// Do not allow the progress dialog to be minimized.
-			/// </summary>
-			FOFX_NOMINIMIZEBOX = 0x01000000,
-			/// <summary>
-			/// Copy the security attributes of the source item to the destination item when performing a cross-volume move operation. Without this flag, the destination item receives the security attributes of its new folder.
-			/// </summary>
-			FOFX_MOVEACLSACROSSVOLUMES = 0x02000000,
-			/// <summary>
-			/// Do not display the path of the source item in the progress dialog.
-			/// </summary>
-			FOFX_DONTDISPLAYSOURCEPATH = 0x04000000,
-			/// <summary>
-			/// Do not display the path of the destination item in the progress dialog.
-			/// </summary>
-			FOFX_DONTDISPLAYDESTPATH = 0x08000000,
-			/// <summary>
-			/// Introduced in Windows 8. When a file is deleted, send it to the Recycle Bin rather than permanently deleting it.
-			/// </summary>
-			FOFX_RECYCLEONDELETE = 0x00080000,
-			/// <summary>
-			/// Introduced in Windows Vista SP1. The user expects a requirement for rights elevation, so do not display a dialog box asking for a confirmation of the elevation.
-			/// </summary>
-			FOFX_REQUIREELEVATION = 0x10000000,
-			/// <summary>
-			/// Introduced in Windows 7. Display a Downloading instead of Copying message in the progress dialog.
-			/// </summary>
-			FOFX_COPYASDOWNLOAD = 0x40000000,
-			/// <summary>
-			/// Introduced in Windows 7. Do not display the location line in the progress dialog.
-			/// </summary>
-			FOFX_DONTDISPLAYLOCATIONS = 0x80000000,*/
+			/*			/// <summary>
+						/// Introduced in Windows 8. The file operation was user-invoked and should be placed on the undo stack. This flag is preferred to FOF_ALLOWUNDO.
+						/// </summary>
+						FOFX_ADDUNDORECORD = 0x20000000,
+						/// <summary>
+						/// Walk into Shell namespace junctions. By default, junctions are not entered. For more information on junctions, see Specifying a Namespace Extension's Location.
+						/// </summary>
+						FOFX_NOSKIPJUNCTIONS = 0x00010000,
+						/// <summary>
+						/// If possible, create a hard link rather than a new instance of the file in the destination.
+						/// </summary>
+						FOFX_PREFERHARDLINK = 0x00020000,
+						/// <summary>
+						/// If an operation requires elevated rights and the FOF_NOERRORUI flag is set to disable error UI, display a UAC UI prompt nonetheless.
+						/// </summary>
+						FOFX_SHOWELEVATIONPROMPT = 0x00040000,
+						/// <summary>
+						/// If FOFX_EARLYFAILURE is set together with FOF_NOERRORUI, the entire set of operations is stopped upon encountering any error in any operation. This flag is valid only when FOF_NOERRORUI is set.
+						/// </summary>
+						FOFX_EARLYFAILURE = 0x00100000,
+						/// <summary>
+						/// Rename collisions in such a way as to preserve file name extensions. This flag is valid only when FOF_RENAMEONCOLLISION is also set.
+						/// </summary>
+						FOFX_PRESERVEFILEEXTENSIONS = 0x00200000,
+						/// <summary>
+						/// Keep the newer file or folder, based on the Date Modified property, if a collision occurs. This is done automatically with no prompt UI presented to the user.
+						/// </summary>
+						FOFX_KEEPNEWERFILE = 0x00400000,
+						/// <summary>
+						/// Do not use copy hooks.
+						/// </summary>
+						FOFX_NOCOPYHOOKS = 0x00800000,
+						/// <summary>
+						/// Do not allow the progress dialog to be minimized.
+						/// </summary>
+						FOFX_NOMINIMIZEBOX = 0x01000000,
+						/// <summary>
+						/// Copy the security attributes of the source item to the destination item when performing a cross-volume move operation. Without this flag, the destination item receives the security attributes of its new folder.
+						/// </summary>
+						FOFX_MOVEACLSACROSSVOLUMES = 0x02000000,
+						/// <summary>
+						/// Do not display the path of the source item in the progress dialog.
+						/// </summary>
+						FOFX_DONTDISPLAYSOURCEPATH = 0x04000000,
+						/// <summary>
+						/// Do not display the path of the destination item in the progress dialog.
+						/// </summary>
+						FOFX_DONTDISPLAYDESTPATH = 0x08000000,
+						/// <summary>
+						/// Introduced in Windows 8. When a file is deleted, send it to the Recycle Bin rather than permanently deleting it.
+						/// </summary>
+						FOFX_RECYCLEONDELETE = 0x00080000,
+						/// <summary>
+						/// Introduced in Windows Vista SP1. The user expects a requirement for rights elevation, so do not display a dialog box asking for a confirmation of the elevation.
+						/// </summary>
+						FOFX_REQUIREELEVATION = 0x10000000,
+						/// <summary>
+						/// Introduced in Windows 7. Display a Downloading instead of Copying message in the progress dialog.
+						/// </summary>
+						FOFX_COPYASDOWNLOAD = 0x40000000,
+						/// <summary>
+						/// Introduced in Windows 7. Do not display the location line in the progress dialog.
+						/// </summary>
+						FOFX_DONTDISPLAYLOCATIONS = 0x80000000,*/
 		}
 
 		/// <summary>
@@ -194,11 +194,7 @@ namespace BrawlStageManager {
 			return IntPtr.Size == 8;
 		}
 
-		public static bool Copy(string path1, string path2) {
-			return Copy(path1, path2, 0);
-		}
-
-		public static bool Copy(string path1, string path2, FileOperationFlags flags) {
+		public static bool Copy(string path1, string path2, FileOperationFlags flags = 0) {
 			try {
 				if (IsWOW64Process()) {
 					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
@@ -211,6 +207,31 @@ namespace BrawlStageManager {
 				} else {
 					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
 					fs.wFunc = FileOperationType.FO_COPY;
+					// important to double-terminate the string.
+					fs.pFrom = path1 + '\0' + '\0';
+					fs.pTo = path2 + '\0' + '\0';
+					fs.fFlags = flags;
+					SHFileOperation_x86(ref fs);
+				}
+				return true;
+			} catch {
+				return false;
+			}
+		}
+
+		public static bool Rename(string path1, string path2, FileOperationFlags flags = 0) {
+			try {
+				if (IsWOW64Process()) {
+					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
+					fs.wFunc = FileOperationType.FO_RENAME;
+					// important to double-terminate the string.
+					fs.pFrom = path1 + '\0' + '\0';
+					fs.pTo = path2 + '\0' + '\0';
+					fs.fFlags = flags;
+					SHFileOperation_x64(ref fs);
+				} else {
+					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
+					fs.wFunc = FileOperationType.FO_RENAME;
 					// important to double-terminate the string.
 					fs.pFrom = path1 + '\0' + '\0';
 					fs.pTo = path2 + '\0' + '\0';

@@ -437,5 +437,23 @@ namespace BrawlSongManager {
 			st.TextBox = SongsByStage.DEFAULTS;
 			st.Show();
 		}
+
+		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
+			if (e.KeyCode == Keys.PageDown) {
+				e.Handled = true;
+				if (listBox1.SelectedIndex == listBox1.Items.Count - 1) {
+					listBox1.SelectedIndex = 0;
+				} else {
+					listBox1.SelectedIndex++;
+				}
+			} else if (e.KeyCode == Keys.PageUp) {
+				e.Handled = true;
+				if (listBox1.SelectedIndex <= 0) {
+					listBox1.SelectedIndex = listBox1.Items.Count - 1;
+				} else {
+					listBox1.SelectedIndex--;
+				}
+			}
+		}
 	}
 }

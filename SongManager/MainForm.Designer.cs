@@ -39,9 +39,11 @@
 			this.loadBRSTMPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupSongsByStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.defaultSongsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.defaultSongsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.renameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -76,15 +78,17 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem,
+            this.renameToolStripMenuItem,
             this.deleteToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(106, 26);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.deleteToolStripMenuItem.Text = "Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
@@ -108,27 +112,27 @@
             this.saveInfopacToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
 			// 
 			// changeDirectoryToolStripMenuItem
 			// 
 			this.changeDirectoryToolStripMenuItem.Name = "changeDirectoryToolStripMenuItem";
-			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.changeDirectoryToolStripMenuItem.Text = "Change directory...";
 			this.changeDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeDirectoryToolStripMenuItem_Click);
 			// 
 			// saveInfopacToolStripMenuItem
 			// 
 			this.saveInfopacToolStripMenuItem.Name = "saveInfopacToolStripMenuItem";
-			this.saveInfopacToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.saveInfopacToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.saveInfopacToolStripMenuItem.Text = "Save info.pac";
 			this.saveInfopacToolStripMenuItem.Click += new System.EventHandler(this.saveInfopacToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -139,7 +143,7 @@
             this.loadBRSTMPlayerToolStripMenuItem,
             this.groupSongsByStageToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "Options";
 			// 
 			// loadNamesFromInfopacToolStripMenuItem
@@ -147,7 +151,7 @@
 			this.loadNamesFromInfopacToolStripMenuItem.Checked = true;
 			this.loadNamesFromInfopacToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.loadNamesFromInfopacToolStripMenuItem.Name = "loadNamesFromInfopacToolStripMenuItem";
-			this.loadNamesFromInfopacToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.loadNamesFromInfopacToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
 			this.loadNamesFromInfopacToolStripMenuItem.Text = "Load names from info.pac";
 			this.loadNamesFromInfopacToolStripMenuItem.Click += new System.EventHandler(this.loadNamesFromInfopacToolStripMenuItem_Click);
 			// 
@@ -156,14 +160,14 @@
 			this.loadBRSTMPlayerToolStripMenuItem.Checked = true;
 			this.loadBRSTMPlayerToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.loadBRSTMPlayerToolStripMenuItem.Name = "loadBRSTMPlayerToolStripMenuItem";
-			this.loadBRSTMPlayerToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.loadBRSTMPlayerToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
 			this.loadBRSTMPlayerToolStripMenuItem.Text = "Load BRSTM player";
 			this.loadBRSTMPlayerToolStripMenuItem.Click += new System.EventHandler(this.loadBRSTMPlayerToolStripMenuItem_Click);
 			// 
 			// groupSongsByStageToolStripMenuItem
 			// 
 			this.groupSongsByStageToolStripMenuItem.Name = "groupSongsByStageToolStripMenuItem";
-			this.groupSongsByStageToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.groupSongsByStageToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
 			this.groupSongsByStageToolStripMenuItem.Text = "Group songs by stage (SSBB)";
 			this.groupSongsByStageToolStripMenuItem.Click += new System.EventHandler(this.groupSongsByStageToolStripMenuItem_Click);
 			// 
@@ -173,13 +177,20 @@
             this.defaultSongsListToolStripMenuItem,
             this.aboutToolStripMenuItem});
 			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.helpToolStripMenuItem.Text = "Help";
+			// 
+			// defaultSongsListToolStripMenuItem
+			// 
+			this.defaultSongsListToolStripMenuItem.Name = "defaultSongsListToolStripMenuItem";
+			this.defaultSongsListToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+			this.defaultSongsListToolStripMenuItem.Text = "Default Songs List";
+			this.defaultSongsListToolStripMenuItem.Click += new System.EventHandler(this.defaultSongsListToolStripMenuItem_Click);
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
@@ -191,12 +202,19 @@
 			this.statusToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
 			this.statusToolStripMenuItem.Text = "test";
 			// 
-			// defaultSongsListToolStripMenuItem
+			// exportToolStripMenuItem
 			// 
-			this.defaultSongsListToolStripMenuItem.Name = "defaultSongsListToolStripMenuItem";
-			this.defaultSongsListToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-			this.defaultSongsListToolStripMenuItem.Text = "Default Songs List";
-			this.defaultSongsListToolStripMenuItem.Click += new System.EventHandler(this.defaultSongsListToolStripMenuItem_Click);
+			this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exportToolStripMenuItem.Text = "Export";
+			this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+			// 
+			// renameToolStripMenuItem
+			// 
+			this.renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+			this.renameToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.renameToolStripMenuItem.Text = "Rename";
+			this.renameToolStripMenuItem.Click += new System.EventHandler(this.renameToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -239,6 +257,8 @@
 		private System.Windows.Forms.ToolStripMenuItem groupSongsByStageToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem statusToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem defaultSongsListToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
 
 
 

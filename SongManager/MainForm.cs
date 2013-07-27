@@ -287,15 +287,15 @@ namespace BrawlSongManager {
 			string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
 			string filepath = s[0].ToLower();
 			if (sender == listBox1) {
-				NameDialog nd = new NameDialog();
-				nd.Text = "Enter Filename"; // Titlebar
-				nd.EntryText = s[0].Substring(s[0].LastIndexOf('\\')+1); // Textbox on the dialog ("Text" is already used by C#)
-				if (nd.ShowDialog(this) == DialogResult.OK) {
-					if (!nd.EntryText.ToLower().EndsWith(".brstm")) {
-						nd.EntryText += ".brstm"; // Force .brstm extension so it shows up in the list
+				using (NameDialog nd = new NameDialog()) {
+					nd.EntryText = s[0].Substring(s[0].LastIndexOf('\\') + 1); // Textbox on the dialog ("Text" is already used by C#)
+					if (nd.ShowDialog(this) == DialogResult.OK) {
+						if (!nd.EntryText.ToLower().EndsWith(".brstm")) {
+							nd.EntryText += ".brstm"; // Force .brstm extension so it shows up in the list
+						}
+						copyBrstm(filepath, CurrentDirectory + "\\" + nd.EntryText);
+						refreshDirectory();
 					}
-					copyBrstm(filepath, CurrentDirectory + "\\" + nd.EntryText);
-					refreshDirectory();
 				}
 			} else if (_rootPath != null) {
 				if (_rootNode != null) {
@@ -363,6 +363,37 @@ namespace BrawlSongManager {
 			new AboutBSM(Icon).ShowDialog(this);
 		}
 
+		private void exportToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (var dialog = new SaveFileDialog()) {
+				dialog.Filter = "BRSTM stream|*.brstm";
+				dialog.DefaultExt = "brstm";
+				dialog.AddExtension = true;
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+				if (dialog.ShowDialog(this) == DialogResult.OK) {
+					FileOperations.Copy(_rootPath, dialog.FileName, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
+				}
+			}
+		}
+
+		private void renameToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (NameDialog nd = new NameDialog()) {
+				nd.EntryText = Path.GetFileName(_rootPath);
+				if (nd.ShowDialog(this) == DialogResult.OK) {
+					if (!nd.EntryText.ToLower().EndsWith(".brstm")) {
+						nd.EntryText += ".brstm"; // Force .brstm extension so it shows up in the list
+					}
+					string from = _rootPath;
+					RightControl = loadingLabel;
+					if (_rootNode != null) {
+						_rootNode.Dispose(); _rootNode = null;
+					}
+					FileOperations.Rename(from, CurrentDirectory + "\\" + nd.EntryText);
+					refreshDirectory();
+				}
+			}
+		}
+
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (_rootNode != null) {
 				_rootNode.Dispose();
@@ -406,6 +437,5 @@ namespace BrawlSongManager {
 			st.TextBox = SongsByStage.DEFAULTS;
 			st.Show();
 		}
-
 	}
 }

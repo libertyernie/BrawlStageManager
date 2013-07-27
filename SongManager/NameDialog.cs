@@ -19,6 +19,7 @@ namespace BrawlSongManager
 
         public DialogResult ShowDialog(IWin32Window owner, string text)
         {
+			this.EntryText = "NameDialog";
 			Text = text;
 			return ShowDialog(owner);
 		}
@@ -87,11 +88,11 @@ namespace BrawlSongManager
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.txtName);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-			this.EntryText = "NameDialog";
+			this.Name = "NameDialog";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Enter Name";
+			this.Text = "Enter Filename";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

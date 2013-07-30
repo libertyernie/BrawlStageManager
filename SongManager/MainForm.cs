@@ -222,10 +222,10 @@ namespace BrawlSongManager {
 			brstmFiles = dir.GetFiles("*.brstm");
 
 			// Special code for the root directory of a drive
-			if (brstmFiles.Length == 0 && dir.Parent == null) {
-				DirectoryInfo search = new DirectoryInfo(dir.FullName + "private\\wii\\app\\RSBE\\pf\\sound\\strm");
+			if (brstmFiles.Length == 0) {
+				DirectoryInfo search = new DirectoryInfo(dir.FullName + "\\private\\wii\\app\\RSBE\\pf\\sound\\strm");
 				if (search.Exists) {
-					changeDirectory(search); // Change to the typical stage folder used by the FPC, if it exists on the drive
+					changeDirectory(search); // Change to the typical song folder used by the FPC, if it exists on the drive
 					return;
 				}
 			}

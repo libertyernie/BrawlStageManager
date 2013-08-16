@@ -1,4 +1,4 @@
-﻿Brawl Song Manager 1.3 - July 9, 2013
+﻿Brawl Song Manager 2.1 - July 30, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/songmanager
 
@@ -11,9 +11,13 @@ directory; you can change the directory through the File menu. When you choose
 a .BRSTM file, the right side of the window will display the playback module
 from BrawlBox, allowing you to listen to the song.
 
-To replace a song, drag the new .BRSTM or .WAV onto the right panel.
-To add a song, drag a .BRSTM or .WAV onto the left panel and enter a filename.
-To delete a song, right-click the .BRSTM on the left panel and click "Delete."
+To replace a song, drag the new .BRSTM or .WAV onto the main panel.
+To add a song, drag a .BRSTM or .WAV onto the menu and enter a filename.
+Right-click the .BRSTM in the menu for other options (Export, Rename, Delete).
+
+KEYBOARD SHORTCUTS:
+PageUp:		go up one song (focus does not need to be on the song list)
+PageDown:	go down one song (focus does not need to be on the song list)
 
 ----------------------------------------
 

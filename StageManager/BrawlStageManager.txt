@@ -1,4 +1,4 @@
-﻿Brawl Stage Manager 2.0 - July 9, 2013
+﻿Brawl Stage Manager 2.2 - July 30, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
@@ -12,6 +12,8 @@ KEYBOARD SHORTCUTS:
 PageUp:		go up one stage (focus does not need to be on the stage list)
 PageDown:	go down one stage (focus does not need to be on the stage list)
 Tilde (~):	Display PAT0 modification dialog
+Backslash:	Replace border around icon (4-pixel margin) with pixels from
+			border.png in application folder
 
 The left side of the window has a list of stage .PAC files in the current
 directory; you can change the directory through the Options menu. Choosing a

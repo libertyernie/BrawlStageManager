@@ -212,10 +212,9 @@ namespace BrawlStageManager {
 					} else {
 						tex0 = (TEX0Node)node.FindChild("Textures(NW4R)", false).Children[0];
 					}
-					string tempFile = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".png";
+					string tempFile = TempFiles.Create(".png");
 					tex0.Export(tempFile);
 					Replace(sender, tempFile, useTextureConverter); // call self with new file
-					File.Delete(tempFile);
 				}
 			} else {
 				TEX0Node tex0 = GetTEX0For(sender);

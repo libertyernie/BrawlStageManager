@@ -1,6 +1,8 @@
 ﻿using BrawlLib;
+using BrawlLib.SSBB.ResourceNodes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,19 @@ using System.Windows.Forms;
 
 namespace BrawlStageManager {
 	public class ImagePreviewPanel : Panel {
+		private ToolStripMenuItem borderChange;
+		public bool BorderChangeItemEnabled {
+			get {
+				return this.ContextMenuStrip.Items.Contains(borderChange);
+			}
+			set {
+				if (value) {
+					this.ContextMenuStrip.Items.Add(borderChange);
+				} else {
+					this.ContextMenuStrip.Items.Remove(borderChange);
+				}
+			}
+		}
 
 		public ImagePreviewPanel() {
 			this.AllowDrop = true;
@@ -20,6 +35,9 @@ namespace BrawlStageManager {
 
 			this.ContextMenuStrip.Items.Add(replace);
 			this.ContextMenuStrip.Items.Add(export);
+
+			borderChange = new ToolStripMenuItem("Change border (\\)");
+			borderChange.Click += new System.EventHandler(this.borderChange_Click);
 		}
 
 		private PortraitViewer getPVParent() {
@@ -58,6 +76,54 @@ namespace BrawlStageManager {
 					pv.GetTEX0For(this).Export(fileName);
 				}
 			}
+		}
+
+		public void changeBorder() {
+			borderChange.PerformClick();
+		}
+
+		private void borderChange_Click(object sender, EventArgs e) {
+			TEX0Node tex0 = getPVParent().GetTEX0For(this);
+			Bitmap icon = tex0.GetImage(0);
+			Bitmap newIcon = replaceBorder(icon);
+			if (newIcon != null) tex0.Replace(newIcon);
+			getPVParent().UpdateImage();
+		}
+
+		private static Bitmap replaceBorder(Bitmap icon) {
+			Bitmap border;
+			string exeDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			if (File.Exists(exeDir + "\\border.png")) {
+				border = new Bitmap(exeDir + "\\border.png");
+			} else if (File.Exists("border.png")) {
+				border = new Bitmap("border.png");
+			} else {
+				MessageBox.Show("No border.png found.\nPlease place a 64x56 PNG image named \"border.png\" in the current folder or the program folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				border = null;
+				return null;
+			}
+
+			if (border.Width < 64 || border.Height < 56) {
+				MessageBox.Show("The border.png is not big enough - it must be 56x48 pixels.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				border = null;
+				return null;
+			}
+
+			bool[,] mask = new bool[64, 56];
+			for (int y = 4; y < 52; y++) {
+				for (int x = 4; x < 60; x++) {
+					mask[x, y] = true;
+				}
+			}
+
+			Bitmap newIcon = new Bitmap(64, 56);
+			for (int y = 0; y < 56; y++) {
+				for (int x = 0; x < 64; x++) {
+					newIcon.SetPixel(x, y, (mask[x, y] ? icon : border).GetPixel(x, y));
+				}
+			}
+
+			return newIcon;
 		}
 
 		/// <summary>

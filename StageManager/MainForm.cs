@@ -625,6 +625,7 @@ namespace BrawlStageManager {
 		}
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
+			Console.WriteLine(e.KeyCode);
 			if (e.KeyCode == Keys.PageDown) {
 				e.Handled = true;
 				if (listBox1.SelectedIndex == listBox1.Items.Count - 1) {
@@ -642,6 +643,9 @@ namespace BrawlStageManager {
 			} else if (e.KeyCode == Keys.Oemtilde) {
 				e.Handled = true;
 				portraitViewer1.openModifyPAT0Dialog();
+			} else if (e.KeyCode == Keys.Oem5) {
+				e.Handled = true;
+				portraitViewer1.changeIconBorder();
 			}
 		}
 

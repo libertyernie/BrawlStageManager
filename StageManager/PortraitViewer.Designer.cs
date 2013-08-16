@@ -42,6 +42,7 @@
 			// prevbase
 			// 
 			this.prevbase.AllowDrop = true;
+			this.prevbase.BorderChangeItemEnabled = false;
 			this.prevbase.Location = new System.Drawing.Point(0, 0);
 			this.prevbase.Margin = new System.Windows.Forms.Padding(0);
 			this.prevbase.Name = "prevbase";
@@ -88,6 +89,7 @@
 			// icon
 			// 
 			this.icon.AllowDrop = true;
+			this.icon.BorderChangeItemEnabled = true;
 			this.icon.Location = new System.Drawing.Point(0, 176);
 			this.icon.Margin = new System.Windows.Forms.Padding(0);
 			this.icon.Name = "icon";
@@ -97,6 +99,7 @@
 			// frontstname
 			// 
 			this.frontstname.AllowDrop = true;
+			this.frontstname.BorderChangeItemEnabled = false;
 			this.frontstname.Location = new System.Drawing.Point(0, 232);
 			this.frontstname.Margin = new System.Windows.Forms.Padding(0);
 			this.frontstname.Name = "frontstname";
@@ -106,6 +109,7 @@
 			// seriesicon
 			// 
 			this.seriesicon.AllowDrop = true;
+			this.seriesicon.BorderChangeItemEnabled = false;
 			this.seriesicon.Location = new System.Drawing.Point(3, 291);
 			this.seriesicon.Name = "seriesicon";
 			this.seriesicon.Size = new System.Drawing.Size(64, 64);
@@ -114,6 +118,7 @@
 			// selmap_mark
 			// 
 			this.selmap_mark.AllowDrop = true;
+			this.selmap_mark.BorderChangeItemEnabled = false;
 			this.selmap_mark.Location = new System.Drawing.Point(73, 291);
 			this.selmap_mark.Name = "selmap_mark";
 			this.selmap_mark.Size = new System.Drawing.Size(120, 56);

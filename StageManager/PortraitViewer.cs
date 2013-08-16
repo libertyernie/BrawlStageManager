@@ -73,6 +73,10 @@ namespace BrawlStageManager {
 			UpdateDirectory();
 		}
 
+		public void UpdateImage() {
+			UpdateImage(_iconNum);
+		}
+
 		public void UpdateImage(int iconNum) {
 			prevbase.BackgroundImage = null;
 			_iconNum = -1;
@@ -228,7 +232,7 @@ namespace BrawlStageManager {
 						}
 						if (dlg.ShowDialog(null, tex0) == DialogResult.OK) {
 							tex0.IsDirty = true;
-							UpdateImage(_iconNum);
+							UpdateImage();
 						}
 					}
 				} else {
@@ -242,7 +246,7 @@ namespace BrawlStageManager {
 					}
 					tex0.Replace(bmp);
 					tex0.IsDirty = true;
-					UpdateImage(_iconNum);
+					UpdateImage();
 				}
 			}
 		}
@@ -402,7 +406,7 @@ namespace BrawlStageManager {
 			var result = new ModifyPAT0Dialog(textures).ShowDialog();
 			if (result == DialogResult.OK) {
 				// The dialog will mark the pat0 as dirty if changed
-				UpdateImage(_iconNum);
+				UpdateImage();
 			}
 		}
 
@@ -494,6 +498,10 @@ namespace BrawlStageManager {
 			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
 			tex0.ReplaceRaw(TextureConverter.IA4.EncodeTEX0Texture(bitmap, 1));
 			return true;
+		}
+
+		public void changeIconBorder() {
+			icon.changeBorder();
 		}
 	}
 }

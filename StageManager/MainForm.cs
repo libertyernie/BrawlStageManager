@@ -132,15 +132,22 @@ namespace BrawlStageManager {
 			changeDirectory(path);
 		}
 
-		private static long[] sizes_of_broken_files = { 2261408, 3596224, 3728768, 510496, 911680, 3978464 };
+		#region blacklist
+		private static long[] sizes_of_broken_files = { 2261408, 3596224, 3728768, 510496, 911680, 3978464,
+														  3560064, 1411712, 555488, 2906656 };
 		private static string[] md5sums_of_broken_files = {
 			"814f5f640226f1616966317807e1e1a2",  // mewtwo2000 venom
 			"0a0767b84bd67e3cc6582f23a0eab6f9", // new pork city small version
 			"e47bb210fee934c49c25aba7b7456acb", // brawl minus battlefield
 			"feb6ae768107623f3512007bd803b425", // brawl minus yoshi's island melee
 			"438612a2260b8f49d8741a87068c30b9", // brawl plus temple
-			"30382d7f1a19d88beac5a08ca6b7f93d" // brawl plus new pork city
+			"30382d7f1a19d88beac5a08ca6b7f93d", // brawl plus new pork city
+			"cb04c59e27273304eefec6913095bf3b", // rainbow road
+			"0fd97f6cc51cf45c3f586062f4fd949e", // gloam valley
+			"d5ce9dc752e19ffab8efa46a4f9da437", // gatelab
+			"4c587bb2d124c3173819c051063bdf09", // great desert
 			};
+		#endregion
 
 		private void open(FileInfo fi) {
 			if (_rootNode != null) {

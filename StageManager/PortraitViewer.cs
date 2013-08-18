@@ -19,7 +19,9 @@ namespace BrawlStageManager {
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
 
+		public enum Fallback { Existing=0, Auto=1 }
 		public WiiPixelFormat? selmapMarkFormat;
+		public Fallback selmapMarkFallback;
 
 		public bool selmapMarkPreview;
 		public bool selchrMarkAsBG;
@@ -98,9 +100,11 @@ namespace BrawlStageManager {
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P " + size(textures.prevbase_tex0)
-						+ " - F " + size(textures.frontstname_tex0)
-						+ " - M " + size(textures.selmap_mark_tex0)
-						+ textures.selmap_mark_tex0.Format.ToString();
+						+ " F " + size(textures.frontstname_tex0)
+						+ " M " + size(textures.selmap_mark_tex0);
+					if (textures.selmap_mark_tex0 != null) {
+						label1.Text += " " + textures.selmap_mark_tex0.Format;
+					}
 				}
 
 				_iconNum = iconNum;
@@ -260,8 +264,10 @@ namespace BrawlStageManager {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
 					if (sender == selmap_mark) {
-						WiiPixelFormat format = this.selmapMarkFormat // normal
-							?? (Utilities.HasAlpha(bmp) ? WiiPixelFormat.IA4 : WiiPixelFormat.I4); // "auto"
+						WiiPixelFormat format = (selmapMarkFormat != null) ? selmapMarkFormat.Value
+							: (selmapMarkFallback == Fallback.Existing) ? tex0.Format
+							: Utilities.HasAlpha(bmp) ? WiiPixelFormat.IA4
+							: WiiPixelFormat.I4;
 						Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(bmp) : bmp;
 						BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, tex0.LevelOfDetail);
 						tex0.ReplaceRaw(tMap);

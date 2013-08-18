@@ -687,8 +687,12 @@ namespace BrawlStageManager {
 				portraitViewer1.selmapMarkFormat = WiiPixelFormat.I4;
 			} else if (sender == selmapMarkFormatAuto) {
 				portraitViewer1.selmapMarkFormat = null;
+				portraitViewer1.selmapMarkFallback = PortraitViewer.Fallback.Auto;
 			} else if (sender == selmapMarkFormatCMPR) {
 				portraitViewer1.selmapMarkFormat = WiiPixelFormat.CMPR;
+			} else if (sender == selmapMarkFormatExisting) {
+				portraitViewer1.selmapMarkFormat = null;
+				portraitViewer1.selmapMarkFallback = PortraitViewer.Fallback.Existing;
 			}
 		}
 		#endregion

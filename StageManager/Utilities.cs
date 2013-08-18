@@ -22,8 +22,8 @@ namespace BrawlStageManager {
 			int w = fg.Width, h = fg.Height;
 			Bitmap both = new Bitmap(w, h);
 			Graphics g = Graphics.FromImage(both);
-			g.DrawImage(bg, 0, 0, w, h);
-			g.DrawImage(fg, 0, 0, w, h);
+			g.DrawImage(Resize(bg, both.Size), 0, 0);
+			g.DrawImage(Resize(fg, both.Size), 0, 0);
 			return both;
 		}
 
@@ -43,6 +43,7 @@ namespace BrawlStageManager {
 			using (Graphics g = Graphics.FromImage(thumbnail)) {
 				Color c;
 				if (IsSolidColor(orig, out c)) {
+					// Avoid a scaling glitch in .NET when using a 4x4 texture
 					g.FillRectangle(new SolidBrush(c), 0, 0, resizeTo.Width, resizeTo.Height);
 				} else {
 					g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -66,8 +67,14 @@ namespace BrawlStageManager {
 		}
 
 		public static bool HasAlpha(Bitmap bmp) {
-			// TODO only do this if no alpha in the image
-			return true;
+			for (int y = 0; y < bmp.Height; y++) {
+				for (int x = 0; x < bmp.Width; x++) {
+					if (bmp.GetPixel(x, y).A < 255) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		public static Bitmap IA4toI4(Bitmap bmp) {

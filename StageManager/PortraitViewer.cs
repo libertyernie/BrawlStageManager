@@ -96,7 +96,8 @@ namespace BrawlStageManager {
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P " + size(textures.prevbase_tex0)
 						+ " - F " + size(textures.frontstname_tex0)
-						+ " - M " + size(textures.selmap_mark_tex0);
+						+ " - M " + size(textures.selmap_mark_tex0)
+						+ textures.selmap_mark_tex0.Format.ToString();
 				}
 
 				_iconNum = iconNum;
@@ -255,10 +256,15 @@ namespace BrawlStageManager {
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
-					if (sender == selmap_mark && Utilities.HasAlpha(bmp)) {
-						bmp = Utilities.IA4toI4(bmp);
-						BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.I4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
-						tex0.ReplaceRaw(tMap);
+					if (sender == selmap_mark) {
+						//bmp = Utilities.IA4toI4(bmp);
+						if (Utilities.HasAlpha(bmp)) {
+							BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.IA4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
+							tex0.ReplaceRaw(tMap);
+						} else {
+							BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.I4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
+							tex0.ReplaceRaw(tMap);
+						}
 					} else {
 						tex0.Replace(bmp);
 					}

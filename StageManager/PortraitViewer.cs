@@ -243,6 +243,9 @@ namespace BrawlStageManager {
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
+					if (sender == selmap_mark) {
+						// TODO
+					}
 					tex0.Replace(bmp);
 					tex0.IsDirty = true;
 					UpdateImage();
@@ -501,6 +504,12 @@ namespace BrawlStageManager {
 
 		public void changeIconBorder() {
 			icon.changeBorder();
+		}
+
+		public void DowngradeMenSelmapMark(int i) {
+			TextureContainer texs = get_icons(i);
+			if (texs == null) return;
+			Console.WriteLine(i + " " + texs.selmap_mark_pat0);
 		}
 	}
 }

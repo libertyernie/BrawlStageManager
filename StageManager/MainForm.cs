@@ -713,5 +713,12 @@ namespace BrawlStageManager {
 		private void updateScselcharacter2ToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.copyIconsToSelcharacter2();
 		}
+
+		private void downgradeMenSelmapMarksToI4ToolStripMenuItem_Click(object sender, EventArgs e) {
+			foreach (FileInfo f in listBox1.Items) {
+				int i = PortraitMap.Map[f.Name];
+				portraitViewer1.DowngradeMenSelmapMark(i);
+			}
+		}
 	}
 }

@@ -67,6 +67,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.downgradeMenSelmapMarksToI4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -116,13 +117,13 @@
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(126, 26);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// copyToToolStripMenuItem
 			// 
 			this.copyToToolStripMenuItem.Name = "copyToToolStripMenuItem";
-			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.copyToToolStripMenuItem.Text = "Copy to...";
 			this.copyToToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
 			// 
@@ -217,6 +218,7 @@
             this.exportAllToolStripMenuItem,
             this.addmissingPAT0EntriesToolStripMenuItem,
             this.addMenSelmapMarksToolStripMenuItem,
+            this.downgradeMenSelmapMarksToI4ToolStripMenuItem,
             this.updateScselcharacter2ToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -226,59 +228,59 @@
 			// changeDirectoryToolStripMenuItem
 			// 
 			this.changeDirectoryToolStripMenuItem.Name = "changeDirectoryToolStripMenuItem";
-			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.changeDirectoryToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.changeDirectoryToolStripMenuItem.Text = "Change directory...";
 			this.changeDirectoryToolStripMenuItem.Click += new System.EventHandler(this.changeDirectoryToolStripMenuItem_Click);
 			// 
 			// exportStageToolStripMenuItem
 			// 
 			this.exportStageToolStripMenuItem.Name = "exportStageToolStripMenuItem";
-			this.exportStageToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.exportStageToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.exportStageToolStripMenuItem.Text = "Export stage";
 			this.exportStageToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
 			// 
 			// exportAllToolStripMenuItem
 			// 
 			this.exportAllToolStripMenuItem.Name = "exportAllToolStripMenuItem";
-			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.exportAllToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.exportAllToolStripMenuItem.Text = "Export all stages";
 			this.exportAllToolStripMenuItem.Click += new System.EventHandler(this.exportAllToolStripMenuItem_Click);
 			// 
 			// addmissingPAT0EntriesToolStripMenuItem
 			// 
 			this.addmissingPAT0EntriesToolStripMenuItem.Name = "addmissingPAT0EntriesToolStripMenuItem";
-			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addmissingPAT0EntriesToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
 			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
 			// 
 			// addMenSelmapMarksToolStripMenuItem
 			// 
 			this.addMenSelmapMarksToolStripMenuItem.Name = "addMenSelmapMarksToolStripMenuItem";
-			this.addMenSelmapMarksToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.addMenSelmapMarksToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.addMenSelmapMarksToolStripMenuItem.Text = "Add MenSelmapMark(s)";
 			this.addMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.addMenSelmapMarksToolStripMenuItem_Click);
 			// 
 			// updateScselcharacter2ToolStripMenuItem
 			// 
 			this.updateScselcharacter2ToolStripMenuItem.Name = "updateScselcharacter2ToolStripMenuItem";
-			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
 			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.renderModels,
             this.moduleFileDirectoryToolStripMenuItem,
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
-            this.renderModels,
             this.selmapMarkPreviewToolStripMenuItem,
             this.useAFixedStageListToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -465,18 +467,26 @@
 			// aboutToolStripMenuItem
 			// 
 			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
+			this.portraitViewer1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
 			this.portraitViewer1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.portraitViewer1.Location = new System.Drawing.Point(451, 24);
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
+			// 
+			// downgradeMenSelmapMarksToI4ToolStripMenuItem
+			// 
+			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Name = "downgradeMenSelmapMarksToI4ToolStripMenuItem";
+			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Text = "Downgrade MenSelmapMarks to I4";
+			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Click += new System.EventHandler(this.downgradeMenSelmapMarksToI4ToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -556,6 +566,7 @@
 		private System.Windows.Forms.ToolStripMenuItem updateScselcharacter2ToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem copyToToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem downgradeMenSelmapMarksToI4ToolStripMenuItem;
 
 
 

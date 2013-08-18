@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
+using BrawlLib.Wii.Textures;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
@@ -124,6 +125,10 @@ namespace BrawlStageManager {
 			listBox1.AllowDrop = true;
 			listBox1.DragEnter += new DragEventHandler(dragEnter);
 			listBox1.DragDrop += new DragEventHandler(dragDrop);
+
+			foreach (var item in selmapMarkFormat.DropDownItems) {
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.selmapMarkFormatToolStripMenuItem_Click);
+			}
 
 			FormClosing += MainForm_FormClosing;
 			FormClosed += MainForm_FormClosed;
@@ -465,6 +470,66 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private static string readNameFromPac(FileInfo f) {
+			var sb = new System.Text.StringBuilder();
+			using (var stream = new FileStream(f.FullName, FileMode.Open, FileAccess.Read)) {
+				stream.Seek(16, SeekOrigin.Begin);
+				int b = stream.ReadByte();
+				while (b == 0) {
+					b = stream.ReadByte();
+				}
+				while (b != 0) {
+					sb.Append((char)b);
+					b = stream.ReadByte();
+				}
+			}
+			if (sb.ToString().IndexOfAny(Path.GetInvalidFileNameChars()) > -1) {
+				return f.Name;
+			}
+			return sb.ToString() + ".pac";
+		}
+		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (FolderDialog.ShowDialog() != DialogResult.OK) {
+				return;
+			}
+
+			string outdir = FolderDialog.SelectedPath;
+			if (Directory.Exists(outdir) && Directory.EnumerateFileSystemEntries(outdir).Any()) {
+				var dr = MessageBox.Show("Is it OK to delete everything in " + outdir + "?", "", MessageBoxButtons.OKCancel);
+				if (dr != DialogResult.OK) {
+					return;
+				}
+				Directory.Delete(outdir, true);
+			}
+			using (ProgressWindow progress = new ProgressWindow((Control)null, "Exporting...", "", true)) {
+				progress.Begin(0, listBox1.Items.Count, 0);
+				Directory.CreateDirectory(outdir);
+				int i = 0;
+				foreach (FileInfo f in listBox1.Items) {
+					if (progress.Cancelled) {
+						break;
+					}
+					progress.Update(++i);
+					string thisdir = outdir + "/" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
+					exportStage(f, thisdir);
+				}
+			}
+		}
+
+		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
+		}
+
+		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (FolderDialog.ShowDialog() != DialogResult.OK) {
+				return;
+			}
+
+			string outdir = FolderDialog.SelectedPath;
+			exportStage(listBox1.SelectedItem as FileInfo, outdir);
+		}
+
+		#region event handlers
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}
@@ -540,122 +605,6 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private static string readNameFromPac(FileInfo f) {
-			var sb = new System.Text.StringBuilder();
-			using (var stream = new FileStream(f.FullName, FileMode.Open, FileAccess.Read)) {
-				stream.Seek(16, SeekOrigin.Begin);
-				int b = stream.ReadByte();
-				while (b == 0) {
-					b = stream.ReadByte();
-				}
-				while (b != 0) {
-					sb.Append((char)b);
-					b = stream.ReadByte();
-				}
-			}
-			if (sb.ToString().IndexOfAny(Path.GetInvalidFileNameChars()) > -1) {
-				return f.Name;
-			}
-			return sb.ToString() + ".pac";
-		}
-
-		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (FolderDialog.ShowDialog() != DialogResult.OK) {
-				return;
-			}
-
-			string outdir = FolderDialog.SelectedPath;
-			if (Directory.Exists(outdir) && Directory.EnumerateFileSystemEntries(outdir).Any()) {
-				var dr = MessageBox.Show("Is it OK to delete everything in "+outdir+"?", "", MessageBoxButtons.OKCancel);
-				if (dr != DialogResult.OK) {
-					return;
-				}
-				Directory.Delete(outdir, true);
-			}
-			using (ProgressWindow progress = new ProgressWindow((Control)null, "Exporting...", "", true)) {
-				progress.Begin(0, listBox1.Items.Count, 0);
-				Directory.CreateDirectory(outdir);
-				int i = 0;
-				foreach (FileInfo f in listBox1.Items) {
-					if (progress.Cancelled) {
-						break;
-					}
-					progress.Update(++i);
-					string thisdir = outdir + "/" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
-					exportStage(f, thisdir);
-				}
-			}
-		}
-
-		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
-			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
-		}
-
-		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (FolderDialog.ShowDialog() != DialogResult.OK) {
-				return;
-			}
-
-			string outdir = FolderDialog.SelectedPath;
-			exportStage(listBox1.SelectedItem as FileInfo, outdir);
-		}
-
-		private void exportStage(FileInfo f, string thisdir) {
-			Directory.CreateDirectory(thisdir);
-			var pacs = Directory.EnumerateFiles(thisdir, "*.pac");
-			if (pacs.Any()) {
-				var result = MessageBox.Show(this, "This directory already contains a .PAC file. " +
-					"Is it okay to remove it and the other stage files in this folder? " +
-					"(If the recycle bin is enabled, the files will be sent there.)",
-					"Overwrite", MessageBoxButtons.YesNo);
-				if (result == DialogResult.Yes) {
-					foreach (string file in pacs) {
-						// Send pac files to recycle bin (if bin is enabled for this drive)
-						FileOperations.Delete(file, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
-					}
-					// Also recycle other files
-					string[] toRecycle = {"st*.rel", "*Prevbase.*", "*Icon.*", "*FrontStname.*",
-											 "*SeriesIcon.*", "*SelchrMark.*", "*SelmapMark.*"};
-					foreach (string filename in toRecycle) {
-						FileOperations.Delete(thisdir + "/" + filename, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
-					}
-				} else {
-					return;
-				}
-			}
-			string p = readNameFromPac(f);
-			FileOperations.Copy(f.FullName, thisdir + "/" + p);
-			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
-			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
-
-			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
-		}
-
-		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
-			Console.WriteLine(e.KeyCode);
-			if (e.KeyCode == Keys.PageDown) {
-				e.Handled = true;
-				if (listBox1.SelectedIndex == listBox1.Items.Count - 1) {
-					listBox1.SelectedIndex = 0;
-				} else {
-					listBox1.SelectedIndex++;
-				}
-			} else if (e.KeyCode == Keys.PageUp) {
-				e.Handled = true;
-				if (listBox1.SelectedIndex <= 0) {
-					listBox1.SelectedIndex = listBox1.Items.Count - 1;
-				} else {
-					listBox1.SelectedIndex--;
-				}
-			} else if (e.KeyCode == Keys.Oemtilde) {
-				e.Handled = true;
-				portraitViewer1.openModifyPAT0Dialog();
-			} else if (e.KeyCode == Keys.Oem5) {
-				e.Handled = true;
-				portraitViewer1.changeIconBorder();
-			}
-		}
-
 		private void selmapMarkPreviewToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			selchrMarkAsBGBetaToolStripMenuItem.Enabled = selmapMarkPreviewToolStripMenuItem.Checked;
@@ -725,6 +674,78 @@ namespace BrawlStageManager {
 			foreach (FileInfo f in listBox1.Items) {
 				int i = PortraitMap.Map[f.Name];
 				portraitViewer1.DowngradeMenSelmapMark(i);
+			}
+		}
+
+		private void selmapMarkFormatToolStripMenuItem_Click(object sender, EventArgs e) {
+			foreach (ToolStripMenuItem item in selmapMarkFormat.DropDownItems) {
+				item.Checked = (item == sender);
+			}
+			if (sender == selmapMarkFormatIA4) {
+				portraitViewer1.selmapMarkFormat = WiiPixelFormat.IA4;
+			} else if (sender == selmapMarkFormatI4) {
+				portraitViewer1.selmapMarkFormat = WiiPixelFormat.I4;
+			} else if (sender == selmapMarkFormatAuto) {
+				portraitViewer1.selmapMarkFormat = null;
+			} else if (sender == selmapMarkFormatCMPR) {
+				portraitViewer1.selmapMarkFormat = WiiPixelFormat.CMPR;
+			}
+		}
+		#endregion
+
+		private void exportStage(FileInfo f, string thisdir) {
+			Directory.CreateDirectory(thisdir);
+			var pacs = Directory.EnumerateFiles(thisdir, "*.pac");
+			if (pacs.Any()) {
+				var result = MessageBox.Show(this, "This directory already contains a .PAC file. " +
+					"Is it okay to remove it and the other stage files in this folder? " +
+					"(If the recycle bin is enabled, the files will be sent there.)",
+					"Overwrite", MessageBoxButtons.YesNo);
+				if (result == DialogResult.Yes) {
+					foreach (string file in pacs) {
+						// Send pac files to recycle bin (if bin is enabled for this drive)
+						FileOperations.Delete(file, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
+					}
+					// Also recycle other files
+					string[] toRecycle = {"st*.rel", "*Prevbase.*", "*Icon.*", "*FrontStname.*",
+											 "*SeriesIcon.*", "*SelchrMark.*", "*SelmapMark.*"};
+					foreach (string filename in toRecycle) {
+						FileOperations.Delete(thisdir + "/" + filename, FileOperations.FileOperationFlags.FOF_NOCONFIRMATION);
+					}
+				} else {
+					return;
+				}
+			}
+			string p = readNameFromPac(f);
+			FileOperations.Copy(f.FullName, thisdir + "/" + p);
+			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
+			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
+
+			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
+		}
+
+		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
+			Console.WriteLine(e.KeyCode);
+			if (e.KeyCode == Keys.PageDown) {
+				e.Handled = true;
+				if (listBox1.SelectedIndex == listBox1.Items.Count - 1) {
+					listBox1.SelectedIndex = 0;
+				} else {
+					listBox1.SelectedIndex++;
+				}
+			} else if (e.KeyCode == Keys.PageUp) {
+				e.Handled = true;
+				if (listBox1.SelectedIndex <= 0) {
+					listBox1.SelectedIndex = listBox1.Items.Count - 1;
+				} else {
+					listBox1.SelectedIndex--;
+				}
+			} else if (e.KeyCode == Keys.Oemtilde) {
+				e.Handled = true;
+				portraitViewer1.openModifyPAT0Dialog();
+			} else if (e.KeyCode == Keys.Oem5) {
+				e.Handled = true;
+				portraitViewer1.changeIconBorder();
 			}
 		}
 	}

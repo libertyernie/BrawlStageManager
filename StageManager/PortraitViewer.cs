@@ -18,6 +18,9 @@ namespace BrawlStageManager {
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
+
+		public WiiPixelFormat? selmapMarkFormat;
+
 		public bool selmapMarkPreview;
 		public bool selchrMarkAsBG;
 		public bool IsDirty {
@@ -118,7 +121,7 @@ namespace BrawlStageManager {
 				bgi = b;
 			} else {
 				Bitmap image = new Bitmap(tex0.GetImage(0));
-				if (panel == selmap_mark && selmapMarkPreview) {
+				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
 					bgi = Utilities.AlphaSwap(image);
 					// only do this if selmapMarkPreview is enabled too:
 					if (selchrMarkAsBG) {
@@ -257,14 +260,11 @@ namespace BrawlStageManager {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
 					if (sender == selmap_mark) {
-						//bmp = Utilities.IA4toI4(bmp);
-						if (Utilities.HasAlpha(bmp)) {
-							BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.IA4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
-							tex0.ReplaceRaw(tMap);
-						} else {
-							BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.I4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
-							tex0.ReplaceRaw(tMap);
-						}
+						WiiPixelFormat format = this.selmapMarkFormat // normal
+							?? (Utilities.HasAlpha(bmp) ? WiiPixelFormat.IA4 : WiiPixelFormat.I4); // "auto"
+						Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(bmp) : bmp;
+						BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, tex0.LevelOfDetail);
+						tex0.ReplaceRaw(tMap);
 					} else {
 						tex0.Replace(bmp);
 					}

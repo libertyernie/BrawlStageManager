@@ -660,6 +660,10 @@ namespace BrawlStageManager {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 		}
 
+		private void selchrMarkAsBGBetaToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.selchrMarkAsBG = selchrMarkAsBGBetaToolStripMenuItem.Checked;
+		}
+
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
 			var result = MessageBox.Show("This will reload the common5/sc_selmap from the disk.", "Continue?", MessageBoxButtons.YesNo);
 			if (result == DialogResult.Yes) {

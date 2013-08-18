@@ -19,6 +19,7 @@ namespace BrawlStageManager {
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
 		public bool selmapMarkPreview;
+		public bool selchrMarkAsBG;
 		public bool IsDirty {
 			get {
 				return common5 != null ? common5.IsDirty
@@ -118,7 +119,8 @@ namespace BrawlStageManager {
 					tex0.GetImage(0),
 					new Size(panel.Width, panel.Height));
 				if (panel == selmap_mark && selmapMarkPreview) {
-					panel.BackgroundImage = Utilities.AlphaSwap(image);
+					panel.BackgroundImage = Utilities.AlphaSwap(image,
+						selchrMarkAsBG ? GetTEX0For(seriesicon).GetImage(0) : null);
 				} else {
 					panel.BackgroundImage = image;
 				}
@@ -243,10 +245,13 @@ namespace BrawlStageManager {
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
-					if (sender == selmap_mark) {
-						// TODO
+					if (sender == selmap_mark && Utilities.HasAlpha(bmp)) {
+						bmp = Utilities.IA4toI4(bmp);
+						BrawlLib.IO.FileMap tMap = TextureConverter.Get(WiiPixelFormat.I4).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
+						tex0.ReplaceRaw(tMap);
+					} else {
+						tex0.Replace(bmp);
 					}
-					tex0.Replace(bmp);
 					tex0.IsDirty = true;
 					UpdateImage();
 				}

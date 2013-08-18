@@ -110,7 +110,7 @@ namespace BrawlStageManager {
 
 		private void setBG(Panel panel) {
 			TEX0Node tex0 = GetTEX0For(panel);
-			Bitmap bgi;
+			Bitmap bgi = null;
 			if (tex0 == null) {
 				Bitmap b = new Bitmap(1, 1);
 				b.SetPixel(0, 0, Color.Brown);
@@ -118,21 +118,20 @@ namespace BrawlStageManager {
 			} else {
 				Bitmap image = new Bitmap(tex0.GetImage(0));
 				if (panel == selmap_mark && selmapMarkPreview) {
-					Bitmap selmapImage = Utilities.AlphaSwap(image);
+					bgi = Utilities.AlphaSwap(image);
+					// only do this if selmapMarkPreview is enabled too:
 					if (selchrMarkAsBG) {
 						Bitmap selchrImage = Utilities.Invert(Utilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
-						bgi = Utilities.Combine(selchrImage, selmapImage);
-					} else {
-						bgi = selmapImage;
+						bgi = Utilities.Combine(selchrImage, bgi);
 					}
 				} else if (panel == seriesicon && selmapMarkPreview) {
 					bgi = Utilities.Invert(Utilities.AlphaSwap(image));
 				} else {
 					bgi = image;
 				}
-			}
-			if (bgi.Size != panel.Size) {
-				bgi = Utilities.Resize(bgi, panel.Size);
+				if (bgi.Size != panel.Size) {
+					bgi = Utilities.Resize(bgi, panel.Size);
+				}
 			}
 
 			panel.BackgroundImage = bgi;

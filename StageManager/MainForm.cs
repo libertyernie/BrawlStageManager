@@ -658,10 +658,13 @@ namespace BrawlStageManager {
 
 		private void selmapMarkPreviewToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
+			selchrMarkAsBGBetaToolStripMenuItem.Enabled = selmapMarkPreviewToolStripMenuItem.Checked;
+			portraitViewer1.UpdateImage();
 		}
 
 		private void selchrMarkAsBGBetaToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.selchrMarkAsBG = selchrMarkAsBGBetaToolStripMenuItem.Checked;
+			portraitViewer1.UpdateImage();
 		}
 
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {

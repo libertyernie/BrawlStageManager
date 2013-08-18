@@ -110,21 +110,32 @@ namespace BrawlStageManager {
 
 		private void setBG(Panel panel) {
 			TEX0Node tex0 = GetTEX0For(panel);
+			Bitmap bgi;
 			if (tex0 == null) {
 				Bitmap b = new Bitmap(1, 1);
 				b.SetPixel(0, 0, Color.Brown);
-				panel.BackgroundImage = b;
+				bgi = b;
 			} else {
-				Bitmap image = new Bitmap(
-					tex0.GetImage(0),
-					new Size(panel.Width, panel.Height));
+				Bitmap image = new Bitmap(tex0.GetImage(0));
 				if (panel == selmap_mark && selmapMarkPreview) {
-					panel.BackgroundImage = Utilities.AlphaSwap(image,
-						selchrMarkAsBG ? GetTEX0For(seriesicon).GetImage(0) : null);
+					Bitmap selmapImage = Utilities.AlphaSwap(image);
+					if (selchrMarkAsBG) {
+						Bitmap selchrImage = Utilities.Invert(Utilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
+						bgi = Utilities.Combine(selchrImage, selmapImage);
+					} else {
+						bgi = selmapImage;
+					}
+				} else if (panel == seriesicon && selmapMarkPreview) {
+					bgi = Utilities.Invert(Utilities.AlphaSwap(image));
 				} else {
-					panel.BackgroundImage = image;
+					bgi = image;
 				}
 			}
+			if (bgi.Size != panel.Size) {
+				bgi = Utilities.Resize(bgi, panel.Size);
+			}
+
+			panel.BackgroundImage = bgi;
 		}
 
 		private TextureContainer get_icons(int iconNum) {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BrawlStageManager {
 	public class Utilities {
-		public static Bitmap AlphaSwap(Bitmap source, Bitmap behind = null) {
+		public static Bitmap AlphaSwap(Bitmap source) {
 			Bitmap ret = new Bitmap(source.Width, source.Height);
 			for (int x = 0; x < ret.Width; x++) {
 				for (int y = 0; y < ret.Height; y++) {
@@ -15,15 +15,16 @@ namespace BrawlStageManager {
 					ret.SetPixel(x, y, Color.FromArgb(toColor));
 				}
 			}
-			if (behind != null) {
-				int w = source.Width, h = source.Height;
-				Bitmap both = new Bitmap(w, h);
-				Graphics g = Graphics.FromImage(both);
-				g.DrawImage(Invert(AlphaSwap(behind)), 0, 0, w, h);
-				g.DrawImage(ret, 0, 0, w, h);
-				ret = both;
-			}
 			return ret;
+		}
+
+		public static Bitmap Combine(Bitmap bg, Bitmap fg) {
+			int w = fg.Width, h = fg.Height;
+			Bitmap both = new Bitmap(w, h);
+			Graphics g = Graphics.FromImage(both);
+			g.DrawImage(bg, 0, 0, w, h);
+			g.DrawImage(fg, 0, 0, w, h);
+			return both;
 		}
 
 		public static Bitmap Invert(Bitmap source) {
@@ -40,11 +41,28 @@ namespace BrawlStageManager {
 		public static Bitmap Resize(Bitmap orig, Size resizeTo) {
 			Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height);
 			using (Graphics g = Graphics.FromImage(thumbnail)) {
-				g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-				g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-				g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
+				Color c;
+				if (IsSolidColor(orig, out c)) {
+					g.FillRectangle(new SolidBrush(c), 0, 0, resizeTo.Width, resizeTo.Height);
+				} else {
+					g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+					g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+					g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
+				}
 			}
 			return thumbnail;
+		}
+
+		public static bool IsSolidColor(Bitmap bmp, out Color c) {
+			c = bmp.GetPixel(0, 0);
+			for (int y = 0; y < bmp.Height; y++) {
+				for (int x = 0; x < bmp.Width; x++) {
+					if (bmp.GetPixel(x, y) != c) {
+						return false;
+					}
+				}
+			}
+			return true;
 		}
 
 		public static bool HasAlpha(Bitmap bmp) {

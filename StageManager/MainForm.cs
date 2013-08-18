@@ -372,6 +372,7 @@ namespace BrawlStageManager {
 			portraitViewer1.UpdateDirectory();
 		}
 
+		#region drag-and-drop
 		public void dragEnter(object sender, DragEventArgs e) {
 			if (e.Data.GetDataPresent(DataFormats.FileDrop)) { // Must be a file
 				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -420,6 +421,7 @@ namespace BrawlStageManager {
 				listBox1_SelectedIndexChanged(null, null);
 			}
 		}
+		#endregion
 
 		private void importDir(string dirpath) {
 			DirectoryInfo dirinfo = new DirectoryInfo(dirpath);
@@ -520,6 +522,7 @@ namespace BrawlStageManager {
 			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
 		}
 
+		#region event handlers
 		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (FolderDialog.ShowDialog() != DialogResult.OK) {
 				return;
@@ -529,7 +532,6 @@ namespace BrawlStageManager {
 			exportStage(listBox1.SelectedItem as FileInfo, outdir);
 		}
 
-		#region event handlers
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}

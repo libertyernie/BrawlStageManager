@@ -13,6 +13,8 @@ namespace BrawlStageManager {
 	public partial class ModifyPAT0Dialog : Form {
 		private TextureContainer textures;
 
+		private WiiPixelFormat[] SelmapMarkFormats = { WiiPixelFormat.I4, WiiPixelFormat.IA4, WiiPixelFormat.CMPR };
+
 		public ModifyPAT0Dialog(TextureContainer tx) {
 			InitializeComponent();
 			textures = tx;
@@ -23,7 +25,7 @@ namespace BrawlStageManager {
 			} else {
 				var i4 = from tex in textures.TEX0Folder.Children
 						 where tex is TEX0Node && ((TEX0Node)tex).Format == WiiPixelFormat.I4
-						 orderby tex.Name
+						 orderby !tex.Name.Contains("MenSelchrMark") && !tex.Name.Contains("SeriesIcon"), tex.Name
 						 select tex.Name;
 				selchrBox.DataSource = i4.ToList();
 				if (textures.seriesicon_tex0 != null) selchrBox.SelectedItem = textures.seriesicon_tex0.Name;
@@ -34,8 +36,8 @@ namespace BrawlStageManager {
 				selmapBox.Enabled = false;
 			} else {
 				var ia4 = from tex in textures.TEX0Folder.Children
-						  where tex is TEX0Node && ((TEX0Node)tex).Format == WiiPixelFormat.IA4
-						  orderby tex.Name
+						  where tex is TEX0Node && SelmapMarkFormats.Contains(((TEX0Node)tex).Format)
+						  orderby !tex.Name.Contains("MenSelmapMark"), tex.Name
 						  select tex.Name;
 				selmapBox.DataSource = ia4.ToList();
 				if (textures.selmap_mark_tex0 != null) selmapBox.SelectedItem = textures.selmap_mark_tex0.Name;

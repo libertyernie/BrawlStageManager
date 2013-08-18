@@ -264,13 +264,7 @@ namespace BrawlStageManager {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
 					if (sender == selmap_mark) {
-						WiiPixelFormat format = (selmapMarkFormat != null) ? selmapMarkFormat.Value
-							: (selmapMarkFallback == Fallback.Existing) ? tex0.Format
-							: Utilities.HasAlpha(bmp) ? WiiPixelFormat.IA4
-							: WiiPixelFormat.I4;
-						Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(bmp) : bmp;
-						BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, tex0.LevelOfDetail);
-						tex0.ReplaceRaw(tMap);
+						ReplaceSelmapMark(bmp, tex0, tex0.Format);
 					} else {
 						tex0.Replace(bmp);
 					}
@@ -278,6 +272,44 @@ namespace BrawlStageManager {
 					UpdateImage();
 				}
 			}
+		}
+
+		private void ReplaceSelmapMark(Bitmap newBitmap, TEX0Node toReplace, WiiPixelFormat? existingIfAny) {
+			WiiPixelFormat format = determineFormat(newBitmap, existingIfAny);
+			Console.WriteLine(format);
+			Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(newBitmap) : newBitmap;
+			BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, 1);
+			toReplace.ReplaceRaw(tMap);
+		}
+
+		private WiiPixelFormat determineFormat(Bitmap newBitmap, WiiPixelFormat? existingIfAny) {
+			if (selmapMarkFallback != Fallback.Existing) {
+				existingIfAny = null;
+			}
+			return selmapMarkFormat
+				?? existingIfAny
+				?? (Utilities.HasAlpha(newBitmap)
+					? WiiPixelFormat.IA4
+					: WiiPixelFormat.I4);
+		}
+
+		public bool AddMenSelmapMark(string path, bool ask) {
+			Bitmap bitmap = new Bitmap(path);
+			string name = Path.GetFileNameWithoutExtension(path);
+			if (ask) {
+				using (var nameDialog = new AskNameDialog(Utilities.AlphaSwap(bitmap))) {
+					nameDialog.Text = name;
+					if (nameDialog.ShowDialog() != DialogResult.OK) {
+						return false;
+					} else {
+						name = nameDialog.NameText;
+					}
+				}
+			}
+			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
+			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
+			ReplaceSelmapMark(bitmap, tex0, null);
+			return true;
 		}
 
 		private string resizeToTempFile(string filename, Size? resizeToArg) {
@@ -508,25 +540,6 @@ namespace BrawlStageManager {
 					entry.Palette = entry.Texture;
 				}
 			}
-		}
-
-		public bool AddMenSelmapMark(string path, bool ask) {
-			Bitmap bitmap = new Bitmap(path);
-			string name = Path.GetFileNameWithoutExtension(path);
-			if (ask) {
-				using (var nameDialog = new AskNameDialog(bitmap)) {
-					nameDialog.Text = name;
-					if (nameDialog.ShowDialog() != DialogResult.OK) {
-						return false;
-					} else {
-						name = nameDialog.NameText;
-					}
-				}
-			}
-			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
-			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
-			tex0.ReplaceRaw(TextureConverter.IA4.EncodeTEX0Texture(bitmap, 1));
-			return true;
 		}
 
 		public void changeIconBorder() {

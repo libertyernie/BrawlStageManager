@@ -19,9 +19,8 @@ namespace BrawlStageManager {
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
 
-		public enum Fallback { Existing=0, Auto=1 }
+		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
-		public Fallback selmapMarkFallback;
 
 		public bool selmapMarkPreview;
 		public bool selchrMarkAsBG;
@@ -264,7 +263,7 @@ namespace BrawlStageManager {
 						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
 					if (sender == selmap_mark) {
-						ReplaceSelmapMark(bmp, tex0, tex0.Format);
+						ReplaceSelmapMark(bmp, tex0, false);
 					} else {
 						tex0.Replace(bmp);
 					}
@@ -274,23 +273,25 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private void ReplaceSelmapMark(Bitmap newBitmap, TEX0Node toReplace, WiiPixelFormat? existingIfAny) {
-			WiiPixelFormat format = determineFormat(newBitmap, existingIfAny);
+		/// <summary>
+		/// Replace the MenSelmapMark texture in toReplace with the image in newBitmap, flipping the channels if CMPR is chosen.
+		/// </summary>
+		/// <param name="newBitmap">The new texture to use</param>
+		/// <param name="toReplace">The TEX0 to insert the texture in</param>
+		/// <param name="createNew">If true, the format of the existing texture will not be used as a fallback, even if useExistingAsFallback is true</param>
+		private void ReplaceSelmapMark(Bitmap newBitmap, TEX0Node toReplace, bool createNew) {
+			WiiPixelFormat format =
+				selmapMarkFormat != null
+					? selmapMarkFormat.Value
+				: useExistingAsFallback && !createNew
+					? toReplace.Format
+				: Utilities.HasAlpha(newBitmap)
+					? WiiPixelFormat.IA4
+					: WiiPixelFormat.I4;
 			Console.WriteLine(format);
 			Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(newBitmap) : newBitmap;
 			BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, 1);
 			toReplace.ReplaceRaw(tMap);
-		}
-
-		private WiiPixelFormat determineFormat(Bitmap newBitmap, WiiPixelFormat? existingIfAny) {
-			if (selmapMarkFallback != Fallback.Existing) {
-				existingIfAny = null;
-			}
-			return selmapMarkFormat
-				?? existingIfAny
-				?? (Utilities.HasAlpha(newBitmap)
-					? WiiPixelFormat.IA4
-					: WiiPixelFormat.I4);
 		}
 
 		public bool AddMenSelmapMark(string path, bool ask) {
@@ -308,7 +309,7 @@ namespace BrawlStageManager {
 			}
 			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
 			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
-			ReplaceSelmapMark(bitmap, tex0, null);
+			ReplaceSelmapMark(bitmap, tex0, true);
 			return true;
 		}
 
@@ -355,7 +356,7 @@ namespace BrawlStageManager {
 		  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,
 		  50,51,52,53,54,
 		  55,56,57,58,59};
-		
+
 		public void copyIconsToSelcharacter2() {
 			string fileToSaveTo = null;
 
@@ -504,17 +505,17 @@ namespace BrawlStageManager {
 				if (entry.Key != 0) tn.RemoveChild(entry);
 			}
 
-			string basename =  (from e in entries
-							where e.Item1.Contains('.')
-							select e.Item1).First();
+			string basename = (from e in entries
+							   where e.Item1.Contains('.')
+							   select e.Item1).First();
 			basename = basename.Substring(0, basename.LastIndexOf('.'));
 
 			for (int i = 1; i < 80; i++) {
 				string texname =
-					fromExisting? ((from e in entries
-									where e.Item2 <= i
-									orderby e.Item2 descending
-									select e.Item1).FirstOrDefault()
+					fromExisting ? ((from e in entries
+									 where e.Item2 <= i
+									 orderby e.Item2 descending
+									 select e.Item1).FirstOrDefault()
 									?? "ChangeThisTextureNamePlease")
 					: ((i > 31 && i < 50) || (i > 59)) ? basename + "." + "00"
 					: basename + "." + i.ToString("D2");
@@ -569,8 +570,8 @@ namespace BrawlStageManager {
 
 			var q = from c in
 						(from c in tn.Children
-						where c is PAT0TextureEntryNode
-						select (PAT0TextureEntryNode)c)
+						 where c is PAT0TextureEntryNode
+						 select (PAT0TextureEntryNode)c)
 					where marks.Contains(c.Texture)
 					group c by c.Texture into g
 					let count = g.Count()

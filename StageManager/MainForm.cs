@@ -754,5 +754,11 @@ namespace BrawlStageManager {
 				portraitViewer1.changeIconBorder();
 			}
 		}
+
+		private void listMenSelmapMarkUsageToolStripMenuItem_Click(object sender, EventArgs e) {
+			new AboutBSM(null) {
+				AboutText = portraitViewer1.MenSelmapMarkUsageReport()
+			}.ShowDialog(this);
+		}
 	}
 }

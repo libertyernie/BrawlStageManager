@@ -5,6 +5,12 @@ using System.Drawing;
 
 namespace BrawlStageManager {
 	public partial class AboutBSM : Form {
+		public string AboutText {
+			set {
+				textBox1.Text = value;
+			}
+		}
+
 		public AboutBSM(Icon icon) {
 			InitializeComponent();
 

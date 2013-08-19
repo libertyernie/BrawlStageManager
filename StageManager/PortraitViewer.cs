@@ -551,5 +551,43 @@ namespace BrawlStageManager {
 			if (texs == null) return;
 			Console.WriteLine(i + " " + texs.selmap_mark_pat0);
 		}
+
+		public string MenSelmapMarkUsageReport() {
+			Dictionary<string, int> dict = new Dictionary<string, int>();
+			string pathToPAT0TextureNode = "MiscData[80]/AnmTexPat(NW4R)/MenSelmapPreview/pasted__stnamelogoM";
+			var look = sc_selmap.FindChild(pathToPAT0TextureNode, false).Children[0];
+			if (!(look is PAT0TextureNode)) {
+				throw new FormatException(look.Name);
+			}
+			PAT0TextureNode tn = look as PAT0TextureNode;
+
+			string pathToTextures = "MiscData[80]/Textures(NW4R)";
+			ResourceNode textures = sc_selmap.FindChild(pathToTextures, false);
+			List<string> marks = (from c in textures.Children
+								  where c.Name.Contains("MenSelmapMark")
+								  select c.Name).ToList();
+
+			var q = from c in
+						(from c in tn.Children
+						where c is PAT0TextureEntryNode
+						select (PAT0TextureEntryNode)c)
+					where marks.Contains(c.Texture)
+					group c by c.Texture into g
+					let count = g.Count()
+					let one = PortraitMap.StageOrder[(int)g.First().Key]
+					orderby count, g.Key
+					select new { count, g.Key, one };
+			StringBuilder sb = new StringBuilder();
+			foreach (var line in q) {
+				sb.AppendLine(line.Key + ": " +
+					(line.count == 1 ? line.one : line.count.ToString()));
+				marks.Remove(line.Key);
+			}
+
+			foreach (var name in marks) {
+				sb.AppendLine(name + ": NOT USED");
+			}
+			return sb.ToString();
+		}
 	}
 }

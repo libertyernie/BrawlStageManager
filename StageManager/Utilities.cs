@@ -7,6 +7,11 @@ using System.Text;
 namespace BrawlStageManager {
 	public class Utilities {
 		public static Bitmap AlphaSwap(Bitmap source) {
+			Color c;
+			if (IsSolidColor(source, out c) && c.A == 0) {
+				// fully transparent image
+				return source;
+			}
 			Bitmap ret = new Bitmap(source.Width, source.Height);
 			for (int x = 0; x < ret.Width; x++) {
 				for (int y = 0; y < ret.Height; y++) {
@@ -42,7 +47,7 @@ namespace BrawlStageManager {
 			Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height);
 			using (Graphics g = Graphics.FromImage(thumbnail)) {
 				Color c;
-				if (IsSolidColor(orig, out c)) {
+				if (IsSolidColor(orig, out c) && false) {
 					// Avoid a scaling glitch in .NET when using a 4x4 texture
 					g.FillRectangle(new SolidBrush(c), 0, 0, resizeTo.Width, resizeTo.Height);
 				} else {

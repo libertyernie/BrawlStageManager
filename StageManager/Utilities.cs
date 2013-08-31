@@ -92,5 +92,20 @@ namespace BrawlStageManager {
 			ret.Save("test2.png");
 			return ret;
 		}
+
+		public static int CountColors(Bitmap bmp, int max) {
+			int count = 0;
+			HashSet<Color> colors = new HashSet<Color>();
+			for (int y = 0; y < bmp.Height && count < max; y++) {
+				for (int x = 0; x < bmp.Width && count < max; x++) {
+					Color color = bmp.GetPixel(x, y);
+					if (!colors.Contains(color)) {
+						colors.Add(color);
+						count++;
+					}
+				}
+			}
+			return count;
+		}
 	}
 }

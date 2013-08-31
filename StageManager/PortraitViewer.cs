@@ -265,7 +265,16 @@ namespace BrawlStageManager {
 					if (sender == selmap_mark) {
 						ReplaceSelmapMark(bmp, tex0, false);
 					} else {
-						tex0.Replace(bmp);
+						BrawlLib.IO.FileMap tMap, pMap;
+						if (tex0.HasPalette) {
+							PLT0Node pn = tex0.GetPaletteNode();
+							int colorCount = Utilities.CountColors(bmp, 256).Align(16);
+							tMap = TextureConverter.Get(tex0.Format).EncodeTextureIndexed(bmp, tex0.LevelOfDetail, colorCount, pn.Format, QuantizationAlgorithm.MedianCut, out pMap);
+							pn.ReplaceRaw(pMap);
+						} else {
+							tMap = TextureConverter.Get(tex0.Format).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
+						}
+						tex0.ReplaceRaw(tMap);
 					}
 					tex0.IsDirty = true;
 					UpdateImage();

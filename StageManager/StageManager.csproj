@@ -85,6 +85,7 @@
     <Compile Include="AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="DefaultDirectory.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="ImagePreviewPanel.cs">
       <SubType>Component</SubType>
@@ -182,6 +183,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <!--<Compile Include="NameCreator.cs" />
+    <Compile Include="NameCreatorDialog.cs">
+      <SubType>Form</SubType>
+      <DependentUpon>NameCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NameCreatorDialog.Designer.cs">
+      <DependentUpon>NameCreatorDialog.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="NameCreatorDialog.resx">
+      <DependentUpon>NameCreatorDialog.cs</DependentUpon>
+    </EmbeddedResource>-->
   </ItemGroup>
   <ItemGroup>
     <Content Include="BrawlStageManager.txt">

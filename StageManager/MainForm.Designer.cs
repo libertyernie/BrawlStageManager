@@ -30,7 +30,6 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
@@ -59,6 +58,7 @@
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.downgradeMenSelmapMarksToI4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.listMenSelmapMarkUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,8 +75,11 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.registryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveCurrentDirectoryAsDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearDefaultDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.listMenSelmapMarkUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -155,17 +158,6 @@
 			this.splitContainer2.SplitterDistance = 48;
 			this.splitContainer2.TabIndex = 0;
 			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 44);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// splitContainer3
 			// 
 			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -224,6 +216,7 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeDirectoryToolStripMenuItem,
+            this.registryToolStripMenuItem,
             this.exportStageToolStripMenuItem,
             this.exportAllToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -263,10 +256,10 @@
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renderModels,
+            this.useAFixedStageListToolStripMenuItem,
             this.moduleFileDirectoryToolStripMenuItem,
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
-            this.useAFixedStageListToolStripMenuItem,
             this.selmapMarkPreviewToolStripMenuItem,
             this.selchrMarkAsBGBetaToolStripMenuItem,
             this.selmapMarkFormat});
@@ -426,6 +419,13 @@
 			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Visible = false;
 			this.downgradeMenSelmapMarksToI4ToolStripMenuItem.Click += new System.EventHandler(this.downgradeMenSelmapMarksToI4ToolStripMenuItem_Click);
 			// 
+			// listMenSelmapMarkUsageToolStripMenuItem
+			// 
+			this.listMenSelmapMarkUsageToolStripMenuItem.Name = "listMenSelmapMarkUsageToolStripMenuItem";
+			this.listMenSelmapMarkUsageToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
+			this.listMenSelmapMarkUsageToolStripMenuItem.Text = "List MenSelmapMark usage";
+			this.listMenSelmapMarkUsageToolStripMenuItem.Click += new System.EventHandler(this.listMenSelmapMarkUsageToolStripMenuItem_Click);
+			// 
 			// addmissingPAT0EntriesToolStripMenuItem
 			// 
 			this.addmissingPAT0EntriesToolStripMenuItem.Name = "addmissingPAT0EntriesToolStripMenuItem";
@@ -552,6 +552,40 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// registryToolStripMenuItem
+			// 
+			this.registryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveCurrentDirectoryAsDefaultToolStripMenuItem,
+            this.clearDefaultDirectoryToolStripMenuItem});
+			this.registryToolStripMenuItem.Name = "registryToolStripMenuItem";
+			this.registryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+			this.registryToolStripMenuItem.Text = "Registry";
+			// 
+			// saveCurrentDirectoryAsDefaultToolStripMenuItem
+			// 
+			this.saveCurrentDirectoryAsDefaultToolStripMenuItem.Name = "saveCurrentDirectoryAsDefaultToolStripMenuItem";
+			this.saveCurrentDirectoryAsDefaultToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.saveCurrentDirectoryAsDefaultToolStripMenuItem.Text = "Save current directory as default";
+			this.saveCurrentDirectoryAsDefaultToolStripMenuItem.Click += new System.EventHandler(this.saveCurrentDirectoryAsDefaultToolStripMenuItem_Click);
+			// 
+			// clearDefaultDirectoryToolStripMenuItem
+			// 
+			this.clearDefaultDirectoryToolStripMenuItem.Name = "clearDefaultDirectoryToolStripMenuItem";
+			this.clearDefaultDirectoryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.clearDefaultDirectoryToolStripMenuItem.Text = "Clear default directory";
+			this.clearDefaultDirectoryToolStripMenuItem.Click += new System.EventHandler(this.clearDefaultDirectoryToolStripMenuItem_Click);
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.ShouldVerifyIDs = false;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 44);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
+			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
@@ -560,13 +594,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// listMenSelmapMarkUsageToolStripMenuItem
-			// 
-			this.listMenSelmapMarkUsageToolStripMenuItem.Name = "listMenSelmapMarkUsageToolStripMenuItem";
-			this.listMenSelmapMarkUsageToolStripMenuItem.Size = new System.Drawing.Size(259, 22);
-			this.listMenSelmapMarkUsageToolStripMenuItem.Text = "List MenSelmapMark usage";
-			this.listMenSelmapMarkUsageToolStripMenuItem.Click += new System.EventHandler(this.listMenSelmapMarkUsageToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -656,6 +683,9 @@
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkFormatExisting;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem listMenSelmapMarkUsageToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem registryToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveCurrentDirectoryAsDefaultToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearDefaultDirectoryToolStripMenuItem;
 
 
 

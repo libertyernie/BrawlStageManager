@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using BrawlLib.SSBB.ResourceNodes;
 using System.Diagnostics;
+using Microsoft.Win32;
 
 namespace BrawlStageManager {
 	public static class Program {
@@ -37,7 +38,8 @@ namespace BrawlStageManager {
 				}
 			}
 			if (dir == null) {
-				dir = System.IO.Directory.GetCurrentDirectory();
+				dir = (string)Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager").GetValue("LastDirectory")
+					?? System.IO.Directory.GetCurrentDirectory();
 			}
 			form = new MainForm(dir, shouldVerifyIDs, useRelDescription);
 			Application.Run(form);

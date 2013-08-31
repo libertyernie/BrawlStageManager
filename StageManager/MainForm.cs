@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
+using Microsoft.Win32;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
@@ -80,6 +81,10 @@ namespace BrawlStageManager {
 
 		public MainForm(string path, bool shouldVerifyIDs, bool useRelDescription) {
 			InitializeComponent();
+
+			clearDefaultDirectoryToolStripMenuItem.Enabled =
+				Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager")
+				.GetValue("LastDirectory") != null;
 
 			moduleFolderLocation = "../../module";
 
@@ -689,12 +694,12 @@ namespace BrawlStageManager {
 				portraitViewer1.selmapMarkFormat = WiiPixelFormat.I4;
 			} else if (sender == selmapMarkFormatAuto) {
 				portraitViewer1.selmapMarkFormat = null;
-				portraitViewer1.selmapMarkFallback = PortraitViewer.Fallback.Auto;
+				portraitViewer1.useExistingAsFallback = false;
 			} else if (sender == selmapMarkFormatCMPR) {
 				portraitViewer1.selmapMarkFormat = WiiPixelFormat.CMPR;
 			} else if (sender == selmapMarkFormatExisting) {
 				portraitViewer1.selmapMarkFormat = null;
-				portraitViewer1.selmapMarkFallback = PortraitViewer.Fallback.Existing;
+				portraitViewer1.useExistingAsFallback = true;
 			}
 		}
 		#endregion
@@ -759,6 +764,21 @@ namespace BrawlStageManager {
 			new AboutBSM(null) {
 				AboutText = portraitViewer1.MenSelmapMarkUsageReport()
 			}.ShowDialog(this);
+		}
+
+		private void saveCurrentDirectoryAsDefaultToolStripMenuItem_Click(object sender, EventArgs e) {
+			Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager")
+				.SetValue("LastDirectory", CurrentDirectory);
+			clearDefaultDirectoryToolStripMenuItem.Enabled = true;
+			MessageBox.Show("The default directory for this program has been set to:\n" + CurrentDirectory);
+		}
+
+		private void clearDefaultDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
+			var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager");
+			string removed = key.GetValue("LastDirectory").ToString();
+			key.DeleteValue("LastDirectory");
+			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+			MessageBox.Show("The default directory (" + removed + ") has been cleared. From now on, this program will default to the folder it was started in.");
 		}
 	}
 }

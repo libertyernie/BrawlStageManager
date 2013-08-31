@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
-using Microsoft.Win32;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
@@ -82,9 +81,7 @@ namespace BrawlStageManager {
 		public MainForm(string path, bool shouldVerifyIDs, bool useRelDescription) {
 			InitializeComponent();
 
-			clearDefaultDirectoryToolStripMenuItem.Enabled =
-				Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager")
-				.GetValue("LastDirectory") != null;
+			clearDefaultDirectoryToolStripMenuItem.Enabled = (DefaultDirectory.Get() != null);
 
 			moduleFolderLocation = "../../module";
 
@@ -767,18 +764,13 @@ namespace BrawlStageManager {
 		}
 
 		private void saveCurrentDirectoryAsDefaultToolStripMenuItem_Click(object sender, EventArgs e) {
-			Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager")
-				.SetValue("LastDirectory", CurrentDirectory);
+			DefaultDirectory.Set(CurrentDirectory);
 			clearDefaultDirectoryToolStripMenuItem.Enabled = true;
-			MessageBox.Show("The default directory for this program has been set to:\n" + CurrentDirectory);
 		}
 
 		private void clearDefaultDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
-			var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager");
-			string removed = key.GetValue("LastDirectory").ToString();
-			key.DeleteValue("LastDirectory");
+			DefaultDirectory.Clear();
 			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
-			MessageBox.Show("The default directory (" + removed + ") has been cleared. From now on, this program will default to the folder it was started in.");
 		}
 	}
 }

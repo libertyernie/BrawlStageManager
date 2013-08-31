@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 using System.IO;
-using BrawlLib.SSBB.ResourceNodes;
 using System.Diagnostics;
-using Microsoft.Win32;
 
 namespace BrawlStageManager {
 	public static class Program {
@@ -38,7 +34,7 @@ namespace BrawlStageManager {
 				}
 			}
 			if (dir == null) {
-				dir = (string)Registry.CurrentUser.CreateSubKey("SOFTWARE\\libertyernie\\BrawlStageManager").GetValue("LastDirectory")
+				dir = DefaultDirectory.GetIfExists()
 					?? System.IO.Directory.GetCurrentDirectory();
 			}
 			form = new MainForm(dir, shouldVerifyIDs, useRelDescription);

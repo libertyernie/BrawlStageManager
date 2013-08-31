@@ -61,6 +61,7 @@ namespace BrawlStageManager {
 		private string _openFilePath;
 		// In case the image needs to be reloaded after replacing the texture
 		private int _iconNum;
+		private NameCreator.Settings fontSettings;
 
 		public PortraitViewer() {
 			InitializeComponent();
@@ -96,6 +97,9 @@ namespace BrawlStageManager {
 						setBG(child as ImagePreviewPanel);
 					}
 				}
+
+				btnGenerateName.Visible = (textures.prevbase_tex0 != null);
+				btnRepaintIcon.Visible = (textures.icon_tex0 != null);
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P " + size(textures.prevbase_tex0)
@@ -157,7 +161,7 @@ namespace BrawlStageManager {
 			return result;
 		}
 
-		private ResourceNode fcopy(string path) {
+		private static ResourceNode fcopy(string path) {
 			FileInfo f = new FileInfo(path);
 			if (!f.Exists) throw new IOException(f.FullName + " doesn't exist");
 
@@ -199,25 +203,6 @@ namespace BrawlStageManager {
 			} else {
 				fileSizeBar.Value = 0;
 				fileSizeLabel.Text = "";
-			}
-		}
-
-		void panel1_DragEnter(object sender, DragEventArgs e) {
-			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
-				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
-				if (s.Length == 1) { // Can only drag and drop one file
-					string filename = s[0].ToLower();
-					if (filename.EndsWith(".png") || filename.EndsWith(".gif")
-						|| filename.EndsWith(".tex0") || filename.EndsWith(".brres")) {
-						e.Effect = DragDropEffects.Copy;
-					}
-				}
-			}
-		}
-
-		void panel1_DragDrop(object sender, DragEventArgs e) {
-			if (e.Effect == DragDropEffects.Copy) {
-				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0], false);
 			}
 		}
 
@@ -428,10 +413,6 @@ namespace BrawlStageManager {
 			}
 		}
 
-		protected void saveButton_Click(object sender, EventArgs e) {
-			save();
-		}
-
 		private void updateFileSize() {
 			long length;
 			if (common5 != null) {
@@ -444,16 +425,6 @@ namespace BrawlStageManager {
 			}
 			fileSizeBar.Value = Math.Min(fileSizeBar.Maximum, (int)length);
 			fileSizeLabel.Text = length + " / " + fileSizeBar.Maximum;
-		}
-
-		private void button1_Click(object sender, EventArgs e) {
-			if (flowLayoutPanel1.Visible) {
-				flowLayoutPanel1.Visible = false;
-				button1.Text = "<";
-			} else {
-				flowLayoutPanel1.Visible = true;
-				button1.Text = ">";
-			}
 		}
 
 		public void ExportImages(int p, string thisdir) {
@@ -469,16 +440,6 @@ namespace BrawlStageManager {
 
 		public void openModifyPAT0Dialog() {
 			modifyPAT0.PerformClick();
-		}
-
-		private void modifyPAT0_Click(object sender, EventArgs e) {
-			if (textures == null) return;
-
-			var result = new ModifyPAT0Dialog(textures).ShowDialog();
-			if (result == DialogResult.OK) {
-				// The dialog will mark the pat0 as dirty if changed
-				UpdateImage();
-			}
 		}
 
 		public void AddPAT0FromExisting(string pathToPAT0TextureNode) {
@@ -552,8 +513,25 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public void changeIconBorder() {
+		public void generateName() {
+			using (NameDialog n = new NameDialog()) {
+				n.EntryText = "Battlefield";
+				if (n.ShowDialog() == DialogResult.OK) {
+					if (fontSettings == null) changeFrontStnameFont();
+					Bitmap bmp = NameCreator.createImage(fontSettings, n.EntryText);
+					string tempfile = TempFiles.Create(".png");
+					bmp.Save(tempfile);
+					Replace(frontstname, tempfile, false);
+				}
+			}
+		}
+
+		public void repaintIconBorder() {
 			icon.changeBorder();
+		}
+
+		public void changeFrontStnameFont() {
+			fontSettings = NameCreator.selectFont();
 		}
 
 		public void DowngradeMenSelmapMark(int i) {
@@ -598,6 +576,59 @@ namespace BrawlStageManager {
 				sb.AppendLine(name + ": NOT USED");
 			}
 			return sb.ToString();
+		}
+
+		#region event handlers
+		void panel1_DragEnter(object sender, DragEventArgs e) {
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+				string[] s = (string[])e.Data.GetData(DataFormats.FileDrop);
+				if (s.Length == 1) { // Can only drag and drop one file
+					string filename = s[0].ToLower();
+					if (filename.EndsWith(".png") || filename.EndsWith(".gif")
+						|| filename.EndsWith(".tex0") || filename.EndsWith(".brres")) {
+						e.Effect = DragDropEffects.Copy;
+					}
+				}
+			}
+		}
+
+		void panel1_DragDrop(object sender, DragEventArgs e) {
+			if (e.Effect == DragDropEffects.Copy) {
+				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0], false);
+			}
+		}
+
+		protected void saveButton_Click(object sender, EventArgs e) {
+			save();
+		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			if (flowLayoutPanel1.Visible) {
+				flowLayoutPanel1.Visible = false;
+				button1.Text = "<";
+			} else {
+				flowLayoutPanel1.Visible = true;
+				button1.Text = ">";
+			}
+		}
+
+		private void modifyPAT0_Click(object sender, EventArgs e) {
+			if (textures == null) return;
+
+			var result = new ModifyPAT0Dialog(textures).ShowDialog();
+			if (result == DialogResult.OK) {
+				// The dialog will mark the pat0 as dirty if changed
+				UpdateImage();
+			}
+		}
+		#endregion
+
+		private void btnGenerateName_Click(object sender, EventArgs e) {
+			generateName();
+		}
+
+		private void btnRepaintIcon_Click(object sender, EventArgs e) {
+			repaintIconBorder();
 		}
 	}
 }

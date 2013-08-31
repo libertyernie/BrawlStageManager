@@ -36,7 +36,7 @@ namespace BrawlStageManager {
 			this.ContextMenuStrip.Items.Add(replace);
 			this.ContextMenuStrip.Items.Add(export);
 
-			borderChange = new ToolStripMenuItem("Change border (\\)");
+			borderChange = new ToolStripMenuItem("Repaint border ([)");
 			borderChange.Click += new System.EventHandler(this.borderChange_Click);
 		}
 

@@ -733,7 +733,6 @@ namespace BrawlStageManager {
 		}
 
 		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
-			Console.WriteLine(e.KeyCode);
 			if (e.KeyCode == Keys.PageDown) {
 				e.Handled = true;
 				if (listBox1.SelectedIndex == listBox1.Items.Count - 1) {
@@ -751,9 +750,12 @@ namespace BrawlStageManager {
 			} else if (e.KeyCode == Keys.Oemtilde) {
 				e.Handled = true;
 				portraitViewer1.openModifyPAT0Dialog();
-			} else if (e.KeyCode == Keys.Oem5) {
+			} else if (e.KeyCode == Keys.OemOpenBrackets) {
 				e.Handled = true;
-				portraitViewer1.changeIconBorder();
+				portraitViewer1.repaintIconBorder();
+			} else if (e.KeyCode == Keys.OemCloseBrackets) {
+				e.Handled = true;
+				portraitViewer1.repaintIconBorder();
 			}
 		}
 
@@ -771,6 +773,10 @@ namespace BrawlStageManager {
 		private void clearDefaultDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
 			DefaultDirectory.Clear();
 			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+		}
+
+		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.changeFrontStnameFont();
 		}
 	}
 }

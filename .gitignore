@@ -1,7 +1,9 @@
 old.git/
 SongManager/bin
 SongManager/obj
-StageManager/bin
+StageManager/bin/Debug
+StageManager/bin/Release/*
+!StageManager/bin/Release/BrawlStageManager.exe
 StageManager/obj
 StageManager.suo
 *.suo

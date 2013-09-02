@@ -9,11 +9,12 @@ hacks.) It can also add PAT0 entries for expansion stages (with an automated
 process) and change certain PAT0 entries (through a special dialog.)
 
 KEYBOARD SHORTCUTS:
-PageUp:		go up one stage (focus does not need to be on the stage list)
-PageDown:	go down one stage (focus does not need to be on the stage list)
-Tilde (~):	Display PAT0 modification dialog
-Backslash:	Replace border around icon (4-pixel margin) with pixels from
-			border.png in application folder
+PageUp:				Go up one stage (focus does not need to be on the stage list)
+PageDown:			Go down one stage (focus does not need to be on the stage list)
+Tilde (~):			Display PAT0 modification dialog
+Left bracket ([):	Replace border around icon (4-pixel margin) with pixels from
+					border.png in application folder
+Right bracket (]):	Generate a new FrontStname using a custom font
 
 The left side of the window has a list of stage .PAC files in the current
 directory; you can change the directory through the Options menu. Choosing a
@@ -49,9 +50,11 @@ Stage Manager can also perform certain operations on stage and .rel files:
 * Drag and drop a .pac or .rel file onto the center information display to
   replace the current .pac or .rel file. Windows will ask before overwriting.
 
-New for version 2.0! The right sidebar will display (top to bottom):
+The right sidebar will display (top to bottom):
 * Stage preview (MelSelmapPrevbase)
 * Stage icon (MenSelmapIcon)
+* "Repaint border" and "Generate name" buttons
+  (same as "[" and "]" buttons on keyboard)
 * Stage name (MenSelmapFrontStname)
 * Series icon (MenSelchrMark normally; SeriesIcon if using my
   Classic Expansion Pack sc_selmap)

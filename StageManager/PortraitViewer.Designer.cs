@@ -27,18 +27,18 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.saveButton = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.prevbase = new BrawlStageManager.ImagePreviewPanel();
+			this.icon = new BrawlStageManager.ImagePreviewPanel();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.btnGenerateName = new System.Windows.Forms.Button();
+			this.btnRepaintIcon = new System.Windows.Forms.Button();
+			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
+			this.seriesicon = new BrawlStageManager.ImagePreviewPanel();
+			this.selmap_mark = new BrawlStageManager.ImagePreviewPanel();
 			this.fileSizeBar = new System.Windows.Forms.ProgressBar();
 			this.fileSizeLabel = new System.Windows.Forms.Label();
 			this.modifyPAT0 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
-			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-			this.btnRepaintIcon = new System.Windows.Forms.Button();
-			this.prevbase = new BrawlStageManager.ImagePreviewPanel();
-			this.icon = new BrawlStageManager.ImagePreviewPanel();
-			this.frontstname = new BrawlStageManager.ImagePreviewPanel();
-			this.seriesicon = new BrawlStageManager.ImagePreviewPanel();
-			this.selmap_mark = new BrawlStageManager.ImagePreviewPanel();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -48,7 +48,7 @@
 			this.label1.Location = new System.Drawing.Point(0, 446);
 			this.label1.Margin = new System.Windows.Forms.Padding(0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(176, 40);
+			this.label1.Size = new System.Drawing.Size(204, 40);
 			this.label1.TabIndex = 1;
 			this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
@@ -81,6 +81,41 @@
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(210, 500);
 			this.flowLayoutPanel1.TabIndex = 3;
 			// 
+			// prevbase
+			// 
+			this.prevbase.AllowDrop = true;
+			this.prevbase.BorderChangeItemEnabled = false;
+			this.prevbase.Location = new System.Drawing.Point(0, 0);
+			this.prevbase.Margin = new System.Windows.Forms.Padding(0);
+			this.prevbase.Name = "prevbase";
+			this.prevbase.Size = new System.Drawing.Size(176, 176);
+			this.prevbase.TabIndex = 0;
+			// 
+			// icon
+			// 
+			this.icon.AllowDrop = true;
+			this.icon.BorderChangeItemEnabled = true;
+			this.icon.Location = new System.Drawing.Point(0, 176);
+			this.icon.Margin = new System.Windows.Forms.Padding(0);
+			this.icon.Name = "icon";
+			this.icon.Size = new System.Drawing.Size(64, 56);
+			this.icon.TabIndex = 3;
+			// 
+			// tableLayoutPanel1
+			// 
+			this.tableLayoutPanel1.ColumnCount = 1;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Controls.Add(this.btnGenerateName, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.btnRepaintIcon, 0, 0);
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(67, 179);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 2;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(120, 56);
+			this.tableLayoutPanel1.TabIndex = 11;
+			// 
 			// btnGenerateName
 			// 
 			this.btnGenerateName.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -92,6 +127,46 @@
 			this.btnGenerateName.UseVisualStyleBackColor = true;
 			this.btnGenerateName.Visible = false;
 			this.btnGenerateName.Click += new System.EventHandler(this.btnGenerateName_Click);
+			// 
+			// btnRepaintIcon
+			// 
+			this.btnRepaintIcon.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnRepaintIcon.Location = new System.Drawing.Point(3, 3);
+			this.btnRepaintIcon.Name = "btnRepaintIcon";
+			this.btnRepaintIcon.Size = new System.Drawing.Size(114, 22);
+			this.btnRepaintIcon.TabIndex = 11;
+			this.btnRepaintIcon.Text = "[ -- Repaint border";
+			this.btnRepaintIcon.UseVisualStyleBackColor = true;
+			this.btnRepaintIcon.Visible = false;
+			this.btnRepaintIcon.Click += new System.EventHandler(this.btnRepaintIcon_Click);
+			// 
+			// frontstname
+			// 
+			this.frontstname.AllowDrop = true;
+			this.frontstname.BorderChangeItemEnabled = false;
+			this.frontstname.Location = new System.Drawing.Point(0, 238);
+			this.frontstname.Margin = new System.Windows.Forms.Padding(0);
+			this.frontstname.Name = "frontstname";
+			this.frontstname.Size = new System.Drawing.Size(208, 56);
+			this.frontstname.TabIndex = 4;
+			// 
+			// seriesicon
+			// 
+			this.seriesicon.AllowDrop = true;
+			this.seriesicon.BorderChangeItemEnabled = false;
+			this.seriesicon.Location = new System.Drawing.Point(3, 297);
+			this.seriesicon.Name = "seriesicon";
+			this.seriesicon.Size = new System.Drawing.Size(64, 64);
+			this.seriesicon.TabIndex = 7;
+			// 
+			// selmap_mark
+			// 
+			this.selmap_mark.AllowDrop = true;
+			this.selmap_mark.BorderChangeItemEnabled = false;
+			this.selmap_mark.Location = new System.Drawing.Point(73, 297);
+			this.selmap_mark.Name = "selmap_mark";
+			this.selmap_mark.Size = new System.Drawing.Size(120, 56);
+			this.selmap_mark.TabIndex = 8;
 			// 
 			// fileSizeBar
 			// 
@@ -131,81 +206,6 @@
 			this.button1.Text = ">";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
-			// tableLayoutPanel1
-			// 
-			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Controls.Add(this.btnGenerateName, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.btnRepaintIcon, 0, 0);
-			this.tableLayoutPanel1.Location = new System.Drawing.Point(67, 179);
-			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(120, 56);
-			this.tableLayoutPanel1.TabIndex = 11;
-			// 
-			// btnRepaintIcon
-			// 
-			this.btnRepaintIcon.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnRepaintIcon.Location = new System.Drawing.Point(3, 3);
-			this.btnRepaintIcon.Name = "btnRepaintIcon";
-			this.btnRepaintIcon.Size = new System.Drawing.Size(114, 22);
-			this.btnRepaintIcon.TabIndex = 11;
-			this.btnRepaintIcon.Text = "[ -- Repaint icon border";
-			this.btnRepaintIcon.UseVisualStyleBackColor = true;
-			this.btnRepaintIcon.Visible = false;
-			this.btnRepaintIcon.Click += new System.EventHandler(this.btnRepaintIcon_Click);
-			// 
-			// prevbase
-			// 
-			this.prevbase.AllowDrop = true;
-			this.prevbase.BorderChangeItemEnabled = false;
-			this.prevbase.Location = new System.Drawing.Point(0, 0);
-			this.prevbase.Margin = new System.Windows.Forms.Padding(0);
-			this.prevbase.Name = "prevbase";
-			this.prevbase.Size = new System.Drawing.Size(176, 176);
-			this.prevbase.TabIndex = 0;
-			// 
-			// icon
-			// 
-			this.icon.AllowDrop = true;
-			this.icon.BorderChangeItemEnabled = true;
-			this.icon.Location = new System.Drawing.Point(0, 176);
-			this.icon.Margin = new System.Windows.Forms.Padding(0);
-			this.icon.Name = "icon";
-			this.icon.Size = new System.Drawing.Size(64, 56);
-			this.icon.TabIndex = 3;
-			// 
-			// frontstname
-			// 
-			this.frontstname.AllowDrop = true;
-			this.frontstname.BorderChangeItemEnabled = false;
-			this.frontstname.Location = new System.Drawing.Point(0, 238);
-			this.frontstname.Margin = new System.Windows.Forms.Padding(0);
-			this.frontstname.Name = "frontstname";
-			this.frontstname.Size = new System.Drawing.Size(208, 56);
-			this.frontstname.TabIndex = 4;
-			// 
-			// seriesicon
-			// 
-			this.seriesicon.AllowDrop = true;
-			this.seriesicon.BorderChangeItemEnabled = false;
-			this.seriesicon.Location = new System.Drawing.Point(3, 297);
-			this.seriesicon.Name = "seriesicon";
-			this.seriesicon.Size = new System.Drawing.Size(64, 64);
-			this.seriesicon.TabIndex = 7;
-			// 
-			// selmap_mark
-			// 
-			this.selmap_mark.AllowDrop = true;
-			this.selmap_mark.BorderChangeItemEnabled = false;
-			this.selmap_mark.Location = new System.Drawing.Point(73, 297);
-			this.selmap_mark.Name = "selmap_mark";
-			this.selmap_mark.Size = new System.Drawing.Size(120, 56);
-			this.selmap_mark.TabIndex = 8;
 			// 
 			// PortraitViewer
 			// 

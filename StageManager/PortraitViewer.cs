@@ -102,9 +102,10 @@ namespace BrawlStageManager {
 				btnRepaintIcon.Visible = (textures.icon_tex0 != null);
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
-					label1.Text = "P " + size(textures.prevbase_tex0)
-						+ " F " + size(textures.frontstname_tex0)
-						+ " M " + size(textures.selmap_mark_tex0);
+					label1.Text = "P: " + size(textures.prevbase_tex0)
+						+ ", F: " + size(textures.frontstname_tex0)
+						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "c"
+						+ "\nmark: " + size(textures.selmap_mark_tex0);
 					if (textures.selmap_mark_tex0 != null) {
 						label1.Text += " " + textures.selmap_mark_tex0.Format;
 					}
@@ -250,16 +251,8 @@ namespace BrawlStageManager {
 					if (sender == selmap_mark) {
 						ReplaceSelmapMark(bmp, tex0, false);
 					} else {
-						BrawlLib.IO.FileMap tMap, pMap;
-						if (tex0.HasPalette) {
-							PLT0Node pn = tex0.GetPaletteNode();
-							int colorCount = Utilities.CountColors(bmp, 256).Align(16);
-							tMap = TextureConverter.Get(tex0.Format).EncodeTextureIndexed(bmp, tex0.LevelOfDetail, colorCount, pn.Format, QuantizationAlgorithm.MedianCut, out pMap);
-							pn.ReplaceRaw(pMap);
-						} else {
-							tMap = TextureConverter.Get(tex0.Format).EncodeTEX0Texture(bmp, tex0.LevelOfDetail);
-						}
-						tex0.ReplaceRaw(tMap);
+						int colorCount = Utilities.CountColors(bmp, 256).Align(16);
+						tex0.Replace(bmp, colorCount);
 					}
 					tex0.IsDirty = true;
 					UpdateImage();

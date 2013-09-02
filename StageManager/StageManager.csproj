@@ -131,6 +131,7 @@
       <DependentUpon>StageInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TempFiles.cs" />
+    <Compile Include="TEX0Extension.cs" />
     <Compile Include="TextureContainer.cs" />
     <Compile Include="Utilities.cs" />
     <EmbeddedResource Include="AboutBSM.resx">

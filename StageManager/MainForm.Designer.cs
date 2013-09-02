@@ -59,6 +59,7 @@
 			this.selmapMarkFormatAuto = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkFormatCMPR = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkFormatExisting = new System.Windows.Forms.ToolStripMenuItem();
+			this.frontStnameGenerationFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.downgradeMenSelmapMarksToI4ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +81,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.frontStnameGenerationFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -110,7 +110,7 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(451, 462);
+			this.splitContainer1.Size = new System.Drawing.Size(451, 477);
 			this.splitContainer1.SplitterDistance = 135;
 			this.splitContainer1.TabIndex = 0;
 			// 
@@ -121,7 +121,7 @@
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.Location = new System.Drawing.Point(0, 0);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(135, 462);
+			this.listBox1.Size = new System.Drawing.Size(135, 477);
 			this.listBox1.TabIndex = 0;
 			this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
 			// 
@@ -155,8 +155,8 @@
 			// splitContainer2.Panel2
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-			this.splitContainer2.Size = new System.Drawing.Size(312, 462);
-			this.splitContainer2.SplitterDistance = 48;
+			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
+			this.splitContainer2.SplitterDistance = 49;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// stageInfoControl1
@@ -166,7 +166,7 @@
 			this.stageInfoControl1.Name = "stageInfoControl1";
 			this.stageInfoControl1.RelFile = null;
 			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 44);
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
 			this.stageInfoControl1.TabIndex = 0;
 			this.stageInfoControl1.UseRelDescription = false;
 			// 
@@ -184,8 +184,8 @@
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.modelPanel1);
-			this.splitContainer3.Size = new System.Drawing.Size(308, 406);
-			this.splitContainer3.SplitterDistance = 137;
+			this.splitContainer3.Size = new System.Drawing.Size(308, 420);
+			this.splitContainer3.SplitterDistance = 141;
 			this.splitContainer3.TabIndex = 4;
 			// 
 			// rightPanel
@@ -193,7 +193,7 @@
 			this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.rightPanel.Location = new System.Drawing.Point(0, 0);
 			this.rightPanel.Name = "rightPanel";
-			this.rightPanel.Size = new System.Drawing.Size(308, 137);
+			this.rightPanel.Size = new System.Drawing.Size(308, 141);
 			this.rightPanel.TabIndex = 3;
 			// 
 			// modelPanel1
@@ -204,7 +204,7 @@
 			this.modelPanel1.Location = new System.Drawing.Point(0, 0);
 			this.modelPanel1.Name = "modelPanel1";
 			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(308, 265);
+			this.modelPanel1.Size = new System.Drawing.Size(308, 275);
 			this.modelPanel1.TabIndex = 2;
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
@@ -399,25 +399,25 @@
 			// selmapMarkFormatIA4
 			// 
 			this.selmapMarkFormatIA4.Name = "selmapMarkFormatIA4";
-			this.selmapMarkFormatIA4.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatIA4.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatIA4.Text = "IA4";
 			// 
 			// selmapMarkFormatI4
 			// 
 			this.selmapMarkFormatI4.Name = "selmapMarkFormatI4";
-			this.selmapMarkFormatI4.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatI4.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatI4.Text = "I4";
 			// 
 			// selmapMarkFormatAuto
 			// 
 			this.selmapMarkFormatAuto.Name = "selmapMarkFormatAuto";
-			this.selmapMarkFormatAuto.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatAuto.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatAuto.Text = "IA4/I4 (Auto)";
 			// 
 			// selmapMarkFormatCMPR
 			// 
 			this.selmapMarkFormatCMPR.Name = "selmapMarkFormatCMPR";
-			this.selmapMarkFormatCMPR.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatCMPR.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatCMPR.Text = "CMPR";
 			// 
 			// selmapMarkFormatExisting
@@ -425,8 +425,15 @@
 			this.selmapMarkFormatExisting.Checked = true;
 			this.selmapMarkFormatExisting.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.selmapMarkFormatExisting.Name = "selmapMarkFormatExisting";
-			this.selmapMarkFormatExisting.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatExisting.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatExisting.Text = "Existing";
+			// 
+			// frontStnameGenerationFontToolStripMenuItem
+			// 
+			this.frontStnameGenerationFontToolStripMenuItem.Name = "frontStnameGenerationFontToolStripMenuItem";
+			this.frontStnameGenerationFontToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+			this.frontStnameGenerationFontToolStripMenuItem.Text = "FrontStname font...";
+			this.frontStnameGenerationFontToolStripMenuItem.Click += new System.EventHandler(this.frontStnameGenerationFontToolStripMenuItem_Click);
 			// 
 			// toolsToolStripMenuItem
 			// 
@@ -594,21 +601,14 @@
 			this.portraitViewer1.Dock = System.Windows.Forms.DockStyle.Right;
 			this.portraitViewer1.Location = new System.Drawing.Point(451, 24);
 			this.portraitViewer1.Name = "portraitViewer1";
-			this.portraitViewer1.Size = new System.Drawing.Size(233, 462);
+			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// frontStnameGenerationFontToolStripMenuItem
-			// 
-			this.frontStnameGenerationFontToolStripMenuItem.Name = "frontStnameGenerationFontToolStripMenuItem";
-			this.frontStnameGenerationFontToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-			this.frontStnameGenerationFontToolStripMenuItem.Text = "FrontStname font...";
-			this.frontStnameGenerationFontToolStripMenuItem.Click += new System.EventHandler(this.frontStnameGenerationFontToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(684, 486);
+			this.ClientSize = new System.Drawing.Size(684, 501);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.portraitViewer1);
 			this.Controls.Add(this.menuStrip1);

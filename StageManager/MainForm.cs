@@ -703,9 +703,12 @@ namespace BrawlStageManager {
 		}
 
 		private void downgradeMenSelmapMarksToolStripMenuItem_Click(object sender, EventArgs e) {
-			foreach (FileInfo f in listBox1.Items) {
-				int i = PortraitMap.Map[f.Name];
-				portraitViewer1.DowngradeMenSelmapMark(i);
+			if (MessageBox.Show(this, "Are you sure you want to convert all IA4 MenSelmapMarks currently in use to CMPR?" +
+			"This should cut their filesize in half.", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK) {
+				foreach (FileInfo f in listBox1.Items) {
+					int i = PortraitMap.Map[f.Name];
+					portraitViewer1.DowngradeMenSelmapMark(i);
+				}
 			}
 		}
 

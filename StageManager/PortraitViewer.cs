@@ -529,8 +529,12 @@ namespace BrawlStageManager {
 
 		public void DowngradeMenSelmapMark(int i) {
 			TextureContainer texs = get_icons(i);
-			if (texs == null) return;
-			Console.WriteLine(i + " " + texs.selmap_mark_tex0);
+			if (texs == null || texs.selmap_mark_tex0 == null) return;
+			TEX0Node tex0 = texs.selmap_mark_tex0;
+			if (tex0.Format != WiiPixelFormat.IA4) return;
+
+			tex0.ReplaceWithCMPR(Utilities.AlphaSwap(tex0.GetImage(0)));
+			UpdateImage();
 		}
 
 		public string MenSelmapMarkUsageReport() {

@@ -46,11 +46,13 @@
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.renderModels = new System.Windows.Forms.ToolStripMenuItem();
 			this.useAFixedStageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.separator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.moduleFileDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.sameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.moduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.verifyrelStageIDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.useFullrelNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.separator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.selmapMarkPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.selchrMarkAsBGBetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkFormat = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +61,7 @@
 			this.selmapMarkFormatAuto = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkFormatCMPR = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkFormatExisting = new System.Windows.Forms.ToolStripMenuItem();
+			this.separator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.frontStnameGenerationFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +84,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -292,12 +296,16 @@
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.renderModels,
             this.useAFixedStageListToolStripMenuItem,
+            this.backgroundColorToolStripMenuItem,
+            this.separator1,
             this.moduleFileDirectoryToolStripMenuItem,
             this.verifyrelStageIDsToolStripMenuItem,
             this.useFullrelNamesToolStripMenuItem,
+            this.separator2,
             this.selmapMarkPreviewToolStripMenuItem,
             this.selchrMarkAsBGBetaToolStripMenuItem,
             this.selmapMarkFormat,
+            this.separator3,
             this.frontStnameGenerationFontToolStripMenuItem});
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
@@ -319,6 +327,11 @@
 			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
 			this.useAFixedStageListToolStripMenuItem.Text = "Use a static stage list";
 			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
+			// 
+			// separator1
+			// 
+			this.separator1.Name = "separator1";
+			this.separator1.Size = new System.Drawing.Size(196, 6);
 			// 
 			// moduleFileDirectoryToolStripMenuItem
 			// 
@@ -364,6 +377,11 @@
 			this.useFullrelNamesToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
 			this.useFullrelNamesToolStripMenuItem.Text = "Use full .rel names";
 			this.useFullrelNamesToolStripMenuItem.Click += new System.EventHandler(this.useFullrelNamesToolStripMenuItem_Click);
+			// 
+			// separator2
+			// 
+			this.separator2.Name = "separator2";
+			this.separator2.Size = new System.Drawing.Size(196, 6);
 			// 
 			// selmapMarkPreviewToolStripMenuItem
 			// 
@@ -427,6 +445,11 @@
 			this.selmapMarkFormatExisting.Name = "selmapMarkFormatExisting";
 			this.selmapMarkFormatExisting.Size = new System.Drawing.Size(142, 22);
 			this.selmapMarkFormatExisting.Text = "Existing";
+			// 
+			// separator3
+			// 
+			this.separator3.Name = "separator3";
+			this.separator3.Size = new System.Drawing.Size(196, 6);
 			// 
 			// frontStnameGenerationFontToolStripMenuItem
 			// 
@@ -604,6 +627,13 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
+			// backgroundColorToolStripMenuItem
+			// 
+			this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
+			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+			this.backgroundColorToolStripMenuItem.Text = "Right panel BG color...";
+			this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -683,7 +713,6 @@
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem copyToToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem downgradeMenSelmapMarksToI4ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem selchrMarkAsBGBetaToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkFormat;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkFormatIA4;
 		private System.Windows.Forms.ToolStripMenuItem selmapMarkFormatI4;
@@ -696,6 +725,11 @@
 		private System.Windows.Forms.ToolStripMenuItem saveCurrentDirectoryAsDefaultToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearDefaultDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem frontStnameGenerationFontToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem selchrMarkAsBGBetaToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator separator1;
+		private System.Windows.Forms.ToolStripSeparator separator2;
+		private System.Windows.Forms.ToolStripSeparator separator3;
+		private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
 
 
 

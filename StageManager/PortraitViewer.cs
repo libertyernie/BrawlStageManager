@@ -104,7 +104,7 @@ namespace BrawlStageManager {
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P: " + size(textures.prevbase_tex0)
 						+ ", F: " + size(textures.frontstname_tex0)
-						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "c"
+						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "col"
 						+ "\nmark: " + size(textures.selmap_mark_tex0);
 					if (textures.selmap_mark_tex0 != null) {
 						label1.Text += " " + textures.selmap_mark_tex0.Format;

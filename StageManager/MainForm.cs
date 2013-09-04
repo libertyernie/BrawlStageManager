@@ -778,5 +778,14 @@ namespace BrawlStageManager {
 		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.changeFrontStnameFont();
 		}
+
+		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (ColorDialog cd = new ColorDialog()) {
+				cd.Color = portraitViewer1.BackColor;
+				if (cd.ShowDialog() == DialogResult.OK) {
+					portraitViewer1.BackColor = cd.Color;
+				}
+			}
+		}
 	}
 }

@@ -85,7 +85,7 @@
     <Compile Include="AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="DefaultDirectory.cs" />
+    <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="ImagePreviewPanel.cs">
       <SubType>Component</SubType>
@@ -124,6 +124,7 @@
     <Compile Include="NameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RegistryUtilities\ResizeSettings.cs" />
     <Compile Include="StageInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
+using BrawlStageManager.RegistryUtilities;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
@@ -82,6 +83,23 @@ namespace BrawlStageManager {
 			InitializeComponent();
 
 			clearDefaultDirectoryToolStripMenuItem.Enabled = (DefaultDirectory.Get() != null);
+			Size?[] sizes = ResizeSettings.Get();
+
+#region initialize auto-resize selection
+			if (sizes[0] == new Size(88, 88)) {
+				x88ToolStripMenuItem.PerformClick();
+			} else if (sizes[0] == new Size(128, 128)) {
+				x128ToolStripMenuItem.PerformClick();
+			}
+
+			if (sizes[1] == new Size(104, 56)) {
+				x56ToolStripMenuItem.PerformClick();
+			}
+
+			if (sizes[2] == new Size(60, 56)) {
+				x56ToolStripMenuItem1.PerformClick();
+			}
+#endregion
 
 			moduleFolderLocation = "../../module";
 
@@ -130,6 +148,16 @@ namespace BrawlStageManager {
 
 			foreach (var item in selmapMarkFormat.DropDownItems) {
 				((ToolStripMenuItem)item).Click += new System.EventHandler(this.selmapMarkFormatToolStripMenuItem_Click);
+			}
+
+			foreach (var item in prevbaseSize.DropDownItems) {
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.prevbaseSizeToolStripMenuItem_Click);
+			}
+			foreach (var item in frontstnameSizeToolStripMenuItem.DropDownItems) {
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
+			}
+			foreach (var item in selmapMarkSizeToolStripMenuItem.DropDownItems) {
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.selmapMarkSizeToolStripMenuItem_Click);
 			}
 
 			FormClosing += MainForm_FormClosing;
@@ -598,7 +626,7 @@ namespace BrawlStageManager {
 			}
 		}
 
-		private void selmapMarkToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void selmapMarkSizeToolStripMenuItem_Click(object sender, EventArgs e) {
 			foreach (ToolStripMenuItem item in selmapMarkSizeToolStripMenuItem.DropDownItems) {
 				item.Checked = (item == sender);
 			}
@@ -674,7 +702,7 @@ namespace BrawlStageManager {
 			portraitViewer1.copyIconsToSelcharacter2();
 		}
 
-		private void downgradeMenSelmapMarksToI4ToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void downgradeMenSelmapMarksToolStripMenuItem_Click(object sender, EventArgs e) {
 			foreach (FileInfo f in listBox1.Items) {
 				int i = PortraitMap.Map[f.Name];
 				portraitViewer1.DowngradeMenSelmapMark(i);
@@ -786,6 +814,10 @@ namespace BrawlStageManager {
 					portraitViewer1.BackColor = cd.Color;
 				}
 			}
+		}
+
+		private void saveSettingsToRegistryToolStripMenuItem_Click(object sender, EventArgs e) {
+			bool anyNotNull = ResizeSettings.WriteToRegistry(portraitViewer1);
 		}
 	}
 }

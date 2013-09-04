@@ -530,7 +530,7 @@ namespace BrawlStageManager {
 		public void DowngradeMenSelmapMark(int i) {
 			TextureContainer texs = get_icons(i);
 			if (texs == null) return;
-			Console.WriteLine(i + " " + texs.selmap_mark_pat0);
+			Console.WriteLine(i + " " + texs.selmap_mark_tex0);
 		}
 
 		public string MenSelmapMarkUsageReport() {

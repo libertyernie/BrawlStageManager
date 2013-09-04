@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
-using BrawlLib;
 using BrawlLib.Wii.Textures;
+using BrawlStageManager.NameCreatorNS;
 
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
@@ -130,19 +127,19 @@ namespace BrawlStageManager {
 			} else {
 				Bitmap image = new Bitmap(tex0.GetImage(0));
 				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
-					bgi = Utilities.AlphaSwap(image);
+					bgi = BitmapUtilities.AlphaSwap(image);
 					// only do this if selmapMarkPreview is enabled too:
 					if (selchrMarkAsBG) {
-						Bitmap selchrImage = Utilities.Invert(Utilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
-						bgi = Utilities.Combine(selchrImage, bgi);
+						Bitmap selchrImage = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
+						bgi = BitmapUtilities.Combine(selchrImage, bgi);
 					}
 				} else if (panel == seriesicon && selmapMarkPreview) {
-					bgi = Utilities.Invert(Utilities.AlphaSwap(image));
+					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
 				} else {
 					bgi = image;
 				}
 				if (bgi.Size != panel.Size) {
-					bgi = Utilities.Resize(bgi, panel.Size);
+					bgi = BitmapUtilities.Resize(bgi, panel.Size);
 				}
 			}
 
@@ -242,16 +239,16 @@ namespace BrawlStageManager {
 				} else {
 					Bitmap bmp = new Bitmap(filename);
 					if (sender == prevbase && prevbaseResizeTo != null) {
-						bmp = Utilities.Resize(bmp, prevbaseResizeTo.Value);
+						bmp = BitmapUtilities.Resize(bmp, prevbaseResizeTo.Value);
 					} else if (sender == frontstname && frontstnameResizeTo != null) {
-						bmp = Utilities.Resize(bmp, frontstnameResizeTo.Value);
+						bmp = BitmapUtilities.Resize(bmp, frontstnameResizeTo.Value);
 					} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
-						bmp = Utilities.Resize(bmp, selmapMarkResizeTo.Value);
+						bmp = BitmapUtilities.Resize(bmp, selmapMarkResizeTo.Value);
 					}
 					if (sender == selmap_mark) {
 						ReplaceSelmapMark(bmp, tex0, false);
 					} else {
-						int colorCount = Utilities.CountColors(bmp, 256).Align(16);
+						int colorCount = BitmapUtilities.CountColors(bmp, 256).Align(16);
 						tex0.Replace(bmp, colorCount);
 					}
 					tex0.IsDirty = true;
@@ -272,11 +269,11 @@ namespace BrawlStageManager {
 					? selmapMarkFormat.Value
 				: useExistingAsFallback && !createNew
 					? toReplace.Format
-				: Utilities.HasAlpha(newBitmap)
+				: BitmapUtilities.HasAlpha(newBitmap)
 					? WiiPixelFormat.IA4
 					: WiiPixelFormat.I4;
 			Console.WriteLine(format);
-			Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? Utilities.AlphaSwap(newBitmap) : newBitmap;
+			Bitmap toEncode = (format == WiiPixelFormat.CMPR) ? BitmapUtilities.AlphaSwap(newBitmap) : newBitmap;
 			BrawlLib.IO.FileMap tMap = TextureConverter.Get(format).EncodeTEX0Texture(toEncode, 1);
 			toReplace.ReplaceRaw(tMap);
 		}
@@ -285,7 +282,7 @@ namespace BrawlStageManager {
 			Bitmap bitmap = new Bitmap(path);
 			string name = Path.GetFileNameWithoutExtension(path);
 			if (ask) {
-				using (var nameDialog = new AskNameDialog(Utilities.AlphaSwap(bitmap))) {
+				using (var nameDialog = new AskNameDialog(BitmapUtilities.AlphaSwap(bitmap))) {
 					nameDialog.Text = name;
 					if (nameDialog.ShowDialog() != DialogResult.OK) {
 						return false;
@@ -307,7 +304,7 @@ namespace BrawlStageManager {
 				if (orig.Size.Width <= resizeTo.Width && orig.Size.Height <= resizeTo.Height) {
 					File.Copy(filename, tempFile, true);
 				} else {
-					using (Bitmap thumbnail = Utilities.Resize(orig, resizeTo)) {
+					using (Bitmap thumbnail = BitmapUtilities.Resize(orig, resizeTo)) {
 						thumbnail.Save(tempFile);
 					}
 				}
@@ -533,7 +530,7 @@ namespace BrawlStageManager {
 			TEX0Node tex0 = texs.selmap_mark_tex0;
 			if (tex0.Format != WiiPixelFormat.IA4) return;
 
-			tex0.ReplaceWithCMPR(Utilities.AlphaSwap(tex0.GetImage(0)));
+			tex0.ReplaceWithCMPR(BitmapUtilities.AlphaSwap(tex0.GetImage(0)));
 			UpdateImage();
 		}
 

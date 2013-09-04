@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BrawlStageManager {
+namespace BrawlStageManager.NameCreatorNS {
 	public class NameCreator {
 		public class Settings {
 			public Font Font;

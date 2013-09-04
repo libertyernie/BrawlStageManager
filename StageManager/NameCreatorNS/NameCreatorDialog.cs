@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BrawlStageManager {
+namespace BrawlStageManager.NameCreatorNS {
 	public partial class NameCreatorDialog : Form {
 		public Font SelectedFont;
 		public int VerticalOffset { get; private set; }

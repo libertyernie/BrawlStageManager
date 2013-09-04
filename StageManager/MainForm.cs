@@ -786,7 +786,7 @@ namespace BrawlStageManager {
 				portraitViewer1.repaintIconBorder();
 			} else if (e.KeyCode == Keys.OemCloseBrackets) {
 				e.Handled = true;
-				portraitViewer1.repaintIconBorder();
+				portraitViewer1.generateName();
 			}
 		}
 
@@ -807,7 +807,7 @@ namespace BrawlStageManager {
 		}
 
 		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.changeFrontStnameFont();
+			portraitViewer1.generateName();
 		}
 
 		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e) {

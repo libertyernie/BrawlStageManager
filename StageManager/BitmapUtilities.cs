@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace BrawlStageManager {
-	public class Utilities {
+	public class BitmapUtilities {
 		public static Bitmap AlphaSwap(Bitmap source) {
 			Color c;
 			if (IsSolidColor(source, out c) && c.A == 0) {

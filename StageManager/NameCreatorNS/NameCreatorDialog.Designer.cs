@@ -1,4 +1,4 @@
-﻿namespace BrawlStageManager {
+﻿namespace BrawlStageManager.NameCreatorNS {
 	partial class NameCreatorDialog {
 		/// <summary>
 		/// Required designer variable.

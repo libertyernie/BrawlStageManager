@@ -5,7 +5,10 @@ using System.Linq;
 using System.Text;
 
 namespace BrawlStageManager {
-	public class BitmapUtilities {
+	public static class BitmapUtilities {
+		/// <summary>
+		/// Swaps the alpha and value channels of a monochrome image. Transparent areas become black, and black areas become transparent.
+		/// </summary>
 		public static Bitmap AlphaSwap(Bitmap source) {
 			Color c;
 			if (IsSolidColor(source, out c) && c.A == 0) {
@@ -23,15 +26,21 @@ namespace BrawlStageManager {
 			return ret;
 		}
 
+		/// <summary>
+		/// Combines two images. The size of the second (foreground) image will be used for the final image.
+		/// </summary>
 		public static Bitmap Combine(Bitmap bg, Bitmap fg) {
 			int w = fg.Width, h = fg.Height;
 			Bitmap both = new Bitmap(w, h);
 			Graphics g = Graphics.FromImage(both);
 			g.DrawImage(Resize(bg, both.Size), 0, 0);
-			g.DrawImage(Resize(fg, both.Size), 0, 0);
+			g.DrawImage(fg, 0, 0);
 			return both;
 		}
 
+		/// <summary>
+		/// Inverts the colors in a bitmap.
+		/// </summary>
 		public static Bitmap Invert(Bitmap source) {
 			Bitmap ret = new Bitmap(source.Width, source.Height);
 			for (int x = 0; x < ret.Width; x++) {
@@ -43,6 +52,9 @@ namespace BrawlStageManager {
 			return ret;
 		}
 
+		/// <summary>
+		/// Makes a scaled version of an image using SmoothingMode.AntiAlias and InterpolationMode.HighQualityBicubic.
+		/// </summary>
 		public static Bitmap Resize(Bitmap orig, Size resizeTo) {
 			Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height);
 			using (Graphics g = Graphics.FromImage(thumbnail)) {
@@ -59,6 +71,9 @@ namespace BrawlStageManager {
 			return thumbnail;
 		}
 
+		/// <summary>
+		/// Checks if the given bitmap is a single color. If the result is true, its color will be stored in the second parameter.
+		/// </summary>
 		public static bool IsSolidColor(Bitmap bmp, out Color c) {
 			c = bmp.GetPixel(0, 0);
 			for (int y = 0; y < bmp.Height; y++) {
@@ -71,6 +86,9 @@ namespace BrawlStageManager {
 			return true;
 		}
 
+		/// <summary>
+		/// Checks if an image has any transparency.
+		/// </summary>
 		public static bool HasAlpha(Bitmap bmp) {
 			for (int y = 0; y < bmp.Height; y++) {
 				for (int x = 0; x < bmp.Width; x++) {
@@ -82,17 +100,9 @@ namespace BrawlStageManager {
 			return false;
 		}
 
-		public static Bitmap IA4toI4(Bitmap bmp) {
-			int w = bmp.Width, h = bmp.Height;
-			Bitmap ret = new Bitmap(w, h);
-			var graphics = Graphics.FromImage(ret);
-			graphics.FillRectangle(new SolidBrush(Color.Black), 0, 0, w, h);
-			graphics.DrawImage(bmp, 0, 0, w, h);
-			bmp.Save("test1.png");
-			ret.Save("test2.png");
-			return ret;
-		}
-
+		/// <summary>
+		/// Counts the number of colors in a bitmap, up through the given maximum. If the maximum is reached, the method will return early.
+		/// </summary>
 		public static int CountColors(Bitmap bmp, int max) {
 			int count = 0;
 			HashSet<Color> colors = new HashSet<Color>();
@@ -106,6 +116,52 @@ namespace BrawlStageManager {
 				}
 			}
 			return count;
+		}
+
+		/// <summary>
+		/// Creates a new image, 2 pixels wider and taller than the original.
+		/// Each pixel's alpha value is the largest alpha value among adjacent pixels on the original image.
+		/// The color of each pixel will be the color given in the second argument.
+		/// </summary>
+		public static Bitmap Blur(Bitmap orig, Color blurColor) {
+			Bitmap b = new Bitmap(orig.Width + 2, orig.Height + 2);
+			for (int y = -1; y < orig.Height + 1; y++) {
+				for (int x = -1; x < orig.Width + 1; x++) {
+					byte[] vals = {TryGetAlpha(orig, x-1, y-1) ?? 0,
+									TryGetAlpha(orig, x-1, y) ?? 0,
+									TryGetAlpha(orig, x-1, y+1) ?? 0,
+									TryGetAlpha(orig, x, y-1) ?? 0,
+									TryGetAlpha(orig, x, y) ?? 0,
+									TryGetAlpha(orig, x, y+1) ?? 0,
+									TryGetAlpha(orig, x+1, y-1) ?? 0,
+									TryGetAlpha(orig, x+1, y) ?? 0,
+									TryGetAlpha(orig, x+1, y+1) ?? 0};
+					byte alpha = vals.Max();
+					b.SetPixel(x + 1, y + 1, Color.FromArgb(alpha, blurColor));
+				}
+			}
+			return b;
+		}
+
+		/// <summary>
+		/// Used for Blur.
+		/// </summary>
+		private static byte? TryGetAlpha(Bitmap b, int x, int y) {
+			if (x < 0 || x >= b.Width || y < 0 || y >= b.Height) {
+				return null;
+			} else {
+				return b.GetPixel(x, y).A;
+			}
+		}
+
+		/// <summary>
+		/// Creates a new bitmap with the original bitmap centered on top of the result of the Blur function.
+		/// </summary>
+		public static Bitmap BlurCombine(Bitmap fg, Color blurColor) {
+			Bitmap both = Blur(fg, blurColor);
+			Graphics g = Graphics.FromImage(both);
+			g.DrawImage(fg, 1, 1);
+			return both;
 		}
 	}
 }

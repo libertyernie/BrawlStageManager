@@ -53,13 +53,11 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrawlLib, Version=0.15.4949.21520, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\BrawlHacks\BrawlBox\BrawlLib.dll</HintPath>
+    <Reference Include="BrawlLib">
+      <HintPath>..\..\BrawlLib.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\BrawlHacks\BrawlBox\OpenTK.dll</HintPath>
+    <Reference Include="OpenTK">
+      <HintPath>..\..\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

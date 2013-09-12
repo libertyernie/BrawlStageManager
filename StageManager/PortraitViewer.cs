@@ -42,6 +42,11 @@ namespace BrawlStageManager {
 		/// Either the sc_selmap_en archive within common5.pac or the sc_selmap.pac file.
 		/// </summary>
 		private ResourceNode sc_selmap;
+		/// <summary>
+		/// The mu_menumain path to copy changes to, if one was found and the feature is enabled.
+		/// </summary>
+		private string mu_menumain_path;
+		public bool UseMuMenumain;
 
 		public TEX0Node GetTEX0For(object sender) {
 			return
@@ -198,10 +203,26 @@ namespace BrawlStageManager {
 			}
 			if (_openFilePath != null) {
 				updateFileSize();
+				FindMuMenumain();
 			} else {
 				fileSizeBar.Value = 0;
 				fileSizeLabel.Text = "";
 			}
+		}
+
+		private bool FindMuMenumain() {
+			mu_menumain_path = null;
+			string[] lookIn = { "../../menu2/mu_menumain.pac",
+								"../../menu2/mu_menumain_en.pac",
+								"../../../pfmenu2/mu_menumain.pac",
+								"../../../pfmenu2/mu_menumain_en.pac" };
+			foreach (string path in lookIn) {
+				if (File.Exists(path)) {
+					mu_menumain_path = path;
+					return true;
+				}
+			}
+			return false;
 		}
 
 		public void Replace(object sender, string filename, bool useTextureConverter) {
@@ -324,6 +345,14 @@ namespace BrawlStageManager {
 			} catch (IOException) {
 				toSave.Export(_openFilePath + ".out.pac");
 				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
+			}
+
+			if (UseMuMenumain) try {
+				ResourceNode mu_menumain = fcopy(mu_menumain_path);
+				// put other code here
+				throw new Exception();
+			} catch (IOException) {
+				MessageBox.Show(mu_menumain_path + " could not be accessed.");
 			}
 
 			updateFileSize();

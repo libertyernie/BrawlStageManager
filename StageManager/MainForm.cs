@@ -836,5 +836,10 @@ namespace BrawlStageManager {
 				? "The default font has been set to: " + str
 				: "The default font settings have been cleared.");
 		}
+
+		private void clearAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			GeneralRegistry.ClearAllStageManager();
+			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+		}
 	}
 }

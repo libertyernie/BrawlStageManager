@@ -30,6 +30,7 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
@@ -42,6 +43,8 @@
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveFrontStnameFontSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveSettingsToRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.clearAllStageManagerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +90,6 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -166,6 +168,17 @@
 			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
 			this.splitContainer2.SplitterDistance = 49;
 			this.splitContainer2.TabIndex = 0;
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.ShouldVerifyIDs = false;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// splitContainer3
 			// 
@@ -247,7 +260,9 @@
             this.clearDefaultDirectoryToolStripMenuItem,
             this.toolStripSeparator2,
             this.saveFrontStnameFontSettingsToolStripMenuItem,
-            this.saveSettingsToRegistryToolStripMenuItem});
+            this.saveSettingsToRegistryToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.clearAllStageManagerSettingsToolStripMenuItem});
 			this.registryToolStripMenuItem.Name = "registryToolStripMenuItem";
 			this.registryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.registryToolStripMenuItem.Text = "Registry";
@@ -284,6 +299,18 @@
 			this.saveSettingsToRegistryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
 			this.saveSettingsToRegistryToolStripMenuItem.Text = "Save auto-resize settings";
 			this.saveSettingsToRegistryToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToRegistryToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(240, 6);
+			// 
+			// clearAllStageManagerSettingsToolStripMenuItem
+			// 
+			this.clearAllStageManagerSettingsToolStripMenuItem.Name = "clearAllStageManagerSettingsToolStripMenuItem";
+			this.clearAllStageManagerSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.clearAllStageManagerSettingsToolStripMenuItem.Text = "Clear all Stage Manager settings";
+			this.clearAllStageManagerSettingsToolStripMenuItem.Click += new System.EventHandler(this.clearAllStageManagerSettingsToolStripMenuItem_Click);
 			// 
 			// exportStageToolStripMenuItem
 			// 
@@ -640,17 +667,6 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
@@ -760,6 +776,8 @@
 		private System.Windows.Forms.ToolStripMenuItem saveSettingsToRegistryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem saveFrontStnameFontSettingsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem clearAllStageManagerSettingsToolStripMenuItem;
 
 
 

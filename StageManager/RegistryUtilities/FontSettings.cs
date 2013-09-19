@@ -6,7 +6,6 @@ using System.Drawing;
 
 namespace BrawlStageManager.RegistryUtilities {
 	public class FontSettings {
-		private const string SUBKEY = "SOFTWARE\\libertyernie\\BrawlStageManager";
 		private static TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
 
 		public static string WriteToRegistry(NameCreatorSettings settings) {
@@ -16,14 +15,14 @@ namespace BrawlStageManager.RegistryUtilities {
 			}
 			string str = converter.ConvertToString(settings.Font);
 
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(SUBKEY);
+			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 			key.SetValue("FrontStnameFont", str);
 			key.SetValue("FrontStnameVerticalOffset", settings.VerticalOffset);
 			return str;
 		}
 
 		public static NameCreatorSettings Get() {
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(SUBKEY);
+			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 			object fontobj = key.GetValue("FrontStnameFont");
 			object voobj = key.GetValue("FrontStnameVerticalOffset");
 			if (voobj == null || fontobj == null) {
@@ -37,7 +36,7 @@ namespace BrawlStageManager.RegistryUtilities {
 		}
 
 		private static void Clear() {
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(SUBKEY);
+			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 			key.DeleteValue("FrontStnameFont", false);
 			key.DeleteValue("FrontStnameVerticalOffset", false);
 		}

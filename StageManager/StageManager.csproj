@@ -123,6 +123,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RegistryUtilities\FontSettings.cs" />
+    <Compile Include="RegistryUtilities\GeneralRegistry.cs" />
     <Compile Include="RegistryUtilities\ResizeSettings.cs" />
     <Compile Include="StageInfoControl.cs">
       <SubType>UserControl</SubType>

@@ -22,7 +22,7 @@ namespace BrawlStageManager.RegistryUtilities {
 		}
 
 		private static void Set(string texname, Size? size) {
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(SUBKEY);
+			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 			if (size != null) {
 				key.SetValue(texname + "Width", size.Value.Width);
 				key.SetValue(texname + "Height", size.Value.Height);
@@ -33,7 +33,7 @@ namespace BrawlStageManager.RegistryUtilities {
 		}
 
 		private static Size? Get(string texname) {
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(SUBKEY);
+			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 			object w = key.GetValue(texname + "Width");
 			object h = key.GetValue(texname + "Height");
 			if (w == null || h == null) {

@@ -12,15 +12,18 @@ using BrawlStageManager.NameCreatorNS;
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
 
+		#region Public fields and properties
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
+		public NameCreator.Settings fontSettings;
 
 		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
-
 		public bool selmapMarkPreview;
 		public bool selchrMarkAsBG;
+		public bool UseMuMenumain;
+
 		public bool IsDirty {
 			get {
 				return common5 != null ? common5.IsDirty
@@ -34,6 +37,18 @@ namespace BrawlStageManager {
 			}
 		}
 
+		public TEX0Node GetTEX0For(object sender) {
+			return
+				(sender == prevbase) ? textures.prevbase_tex0 :
+				(sender == icon) ? textures.icon_tex0 :
+				(sender == frontstname) ? textures.frontstname_tex0 :
+				(sender == seriesicon) ? textures.seriesicon_tex0 :
+				(sender == selmap_mark) ? textures.selmap_mark_tex0 :
+				null;
+		}
+		#endregion
+
+		#region Private fields
 		/// <summary>
 		/// The common5 currently being used. If using sc_selcharacter.pac instead, this will be null.
 		/// </summary>
@@ -46,24 +61,13 @@ namespace BrawlStageManager {
 		/// The mu_menumain path to copy changes to, if one was found and the feature is enabled.
 		/// </summary>
 		private string mu_menumain_path;
-		public bool UseMuMenumain;
-
-		public TEX0Node GetTEX0For(object sender) {
-			return
-				(sender == prevbase) ? textures.prevbase_tex0 :
-				(sender == icon) ? textures.icon_tex0 :
-				(sender == frontstname) ? textures.frontstname_tex0 :
-				(sender == seriesicon) ? textures.seriesicon_tex0 :
-				(sender == selmap_mark) ? textures.selmap_mark_tex0 :
-				null;
-		}
 
 		private TextureContainer textures;
 
 		private string _openFilePath;
 		// In case the image needs to be reloaded after replacing the texture
 		private int _iconNum;
-		public NameCreator.Settings fontSettings;
+		#endregion
 
 		public PortraitViewer() {
 			InitializeComponent();
@@ -81,6 +85,7 @@ namespace BrawlStageManager {
 			UpdateDirectory();
 		}
 
+		#region Core public methods
 		public void UpdateImage() {
 			UpdateImage(_iconNum);
 		}
@@ -104,10 +109,10 @@ namespace BrawlStageManager {
 				btnRepaintIcon.Visible = (textures.icon_tex0 != null);
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
-					label1.Text = "P: " + size(textures.prevbase_tex0)
-						+ ", F: " + size(textures.frontstname_tex0)
-						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "col"
-						+ "\nmark: " + size(textures.selmap_mark_tex0);
+					label1.Text = "P: " + textures.prevbase_tex0.ToSizeString()
+						+ ", F: " + textures.frontstname_tex0.ToSizeString()
+						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "c"
+						+ "\nmark: " + textures.selmap_mark_tex0.ToSizeString();
 					if (textures.selmap_mark_tex0 != null) {
 						label1.Text += " " + textures.selmap_mark_tex0.Format;
 					}
@@ -115,62 +120,6 @@ namespace BrawlStageManager {
 
 				_iconNum = iconNum;
 			}
-		}
-
-		public static string size(TEX0Node node) {
-			if (node == null) return "null";
-			return node.Width + "x" + node.Height;
-		}
-
-		private void setBG(Panel panel) {
-			TEX0Node tex0 = GetTEX0For(panel);
-			Bitmap bgi = null;
-			if (tex0 == null) {
-				Bitmap b = new Bitmap(1, 1);
-				b.SetPixel(0, 0, Color.Brown);
-				bgi = b;
-			} else {
-				Bitmap image = new Bitmap(tex0.GetImage(0));
-				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
-					bgi = BitmapUtilities.AlphaSwap(image);
-					// only do this if selmapMarkPreview is enabled too:
-					if (selchrMarkAsBG) {
-						Bitmap selchrImage = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
-						bgi = BitmapUtilities.Combine(selchrImage, bgi);
-					}
-				} else if (panel == seriesicon && selmapMarkPreview) {
-					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
-				} else {
-					bgi = image;
-				}
-				if (bgi.Size != panel.Size) {
-					bgi = BitmapUtilities.Resize(bgi, panel.Size);
-				}
-			}
-
-			panel.BackgroundImage = bgi;
-		}
-
-		private TextureContainer get_icons(int iconNum) {
-			if (common5 != null) {
-				saveButton.Text = "Save common5";
-			} else if (sc_selmap != null) {
-				saveButton.Text = "Save sc_selmap";
-			} else {
-				return null;
-			}
-
-			TextureContainer result = new TextureContainer(sc_selmap, iconNum);
-			return result;
-		}
-
-		private static ResourceNode fcopy(string path) {
-			FileInfo f = new FileInfo(path);
-			if (!f.Exists) throw new IOException(f.FullName + " doesn't exist");
-
-			string tempfile = TempFiles.Create();
-			File.Copy(f.FullName, tempfile, true);
-			return NodeFactory.FromFile(null, tempfile);
 		}
 
 		public void UpdateDirectory() {
@@ -208,21 +157,6 @@ namespace BrawlStageManager {
 				fileSizeBar.Value = 0;
 				fileSizeLabel.Text = "";
 			}
-		}
-
-		private bool FindMuMenumain() {
-			mu_menumain_path = null;
-			string[] lookIn = { "../../menu2/mu_menumain.pac",
-								"../../menu2/mu_menumain_en.pac",
-								"../../../pfmenu2/mu_menumain.pac",
-								"../../../pfmenu2/mu_menumain_en.pac" };
-			foreach (string path in lookIn) {
-				if (File.Exists(path)) {
-					mu_menumain_path = path;
-					return true;
-				}
-			}
-			return false;
 		}
 
 		public void Replace(object sender, string filename, bool useTextureConverter) {
@@ -278,6 +212,113 @@ namespace BrawlStageManager {
 			}
 		}
 
+		public void save() {
+			if (sc_selmap == null) {
+				return;
+			}
+
+			ResourceNode toSave = common5 ?? sc_selmap;
+			try {
+				toSave.Merge();
+				toSave.Export(_openFilePath);
+			} catch (IOException) {
+				toSave.Export(_openFilePath + ".out.pac");
+				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
+			}
+
+			if (UseMuMenumain) try {
+					ResourceNode mu_menumain = fcopy(mu_menumain_path);
+					// put other code here
+					throw new Exception();
+				} catch (IOException) {
+					MessageBox.Show(mu_menumain_path + " could not be accessed.");
+				}
+
+			updateFileSize();
+		}
+		#endregion
+
+		#region Private methods
+		private void setBG(Panel panel) {
+			TEX0Node tex0 = GetTEX0For(panel);
+			Bitmap bgi = null;
+			if (tex0 == null) {
+				Bitmap b = new Bitmap(1, 1);
+				b.SetPixel(0, 0, Color.Brown);
+				bgi = b;
+			} else {
+				Bitmap image = new Bitmap(tex0.GetImage(0));
+				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
+					bgi = BitmapUtilities.AlphaSwap(image);
+					// only do this if selmapMarkPreview is enabled too:
+					if (selchrMarkAsBG) {
+						Bitmap selchrImage = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
+						bgi = BitmapUtilities.Combine(selchrImage, bgi);
+					}
+				} else if (panel == seriesicon && selmapMarkPreview) {
+					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
+				} else {
+					bgi = image;
+				}
+				if (bgi.Size != panel.Size) {
+					bgi = BitmapUtilities.Resize(bgi, panel.Size);
+				}
+			}
+
+			panel.BackgroundImage = bgi;
+		}
+
+		private void updateFileSize() {
+			long length;
+			if (common5 != null) {
+				string tempfile = Path.GetTempFileName();
+				sc_selmap.Export(tempfile);
+				length = new FileInfo(tempfile).Length;
+				File.Delete(tempfile);
+			} else {
+				length = new FileInfo(_openFilePath).Length;
+			}
+			fileSizeBar.Value = Math.Min(fileSizeBar.Maximum, (int)length);
+			fileSizeLabel.Text = length + " / " + fileSizeBar.Maximum;
+		}
+
+		private TextureContainer get_icons(int iconNum) {
+			if (common5 != null) {
+				saveButton.Text = "Save common5";
+			} else if (sc_selmap != null) {
+				saveButton.Text = "Save sc_selmap";
+			} else {
+				return null;
+			}
+
+			TextureContainer result = new TextureContainer(sc_selmap, iconNum);
+			return result;
+		}
+
+		private static ResourceNode fcopy(string path) {
+			FileInfo f = new FileInfo(path);
+			if (!f.Exists) throw new IOException(f.FullName + " doesn't exist");
+
+			string tempfile = TempFiles.Create();
+			File.Copy(f.FullName, tempfile, true);
+			return NodeFactory.FromFile(null, tempfile);
+		}
+
+		private bool FindMuMenumain() {
+			mu_menumain_path = null;
+			string[] lookIn = { "../../menu2/mu_menumain.pac",
+								"../../menu2/mu_menumain_en.pac",
+								"../../../pfmenu2/mu_menumain.pac",
+								"../../../pfmenu2/mu_menumain_en.pac" };
+			foreach (string path in lookIn) {
+				if (File.Exists(path)) {
+					mu_menumain_path = path;
+					return true;
+				}
+			}
+			return false;
+		}
+
 		/// <summary>
 		/// Replace the MenSelmapMark texture in toReplace with the image in newBitmap, flipping the channels if CMPR is chosen.
 		/// </summary>
@@ -299,25 +340,6 @@ namespace BrawlStageManager {
 			toReplace.ReplaceRaw(tMap);
 		}
 
-		public bool AddMenSelmapMark(string path, bool ask) {
-			Bitmap bitmap = new Bitmap(path);
-			string name = Path.GetFileNameWithoutExtension(path);
-			if (ask) {
-				using (var nameDialog = new AskNameDialog(BitmapUtilities.AlphaSwap(bitmap))) {
-					nameDialog.Text = name;
-					if (nameDialog.ShowDialog() != DialogResult.OK) {
-						return false;
-					} else {
-						name = nameDialog.NameText;
-					}
-				}
-			}
-			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
-			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
-			ReplaceSelmapMark(bitmap, tex0, true);
-			return true;
-		}
-
 		private string resizeToTempFile(string filename, Size? resizeToArg) {
 			Size resizeTo = resizeToArg ?? Size.Empty;
 			string tempFile = TempFiles.Create();
@@ -331,142 +353,6 @@ namespace BrawlStageManager {
 				}
 			}
 			return tempFile;
-		}
-
-		public void save() {
-			if (sc_selmap == null) {
-				return;
-			}
-
-			ResourceNode toSave = common5 ?? sc_selmap;
-			try {
-				toSave.Merge();
-				toSave.Export(_openFilePath);
-			} catch (IOException) {
-				toSave.Export(_openFilePath + ".out.pac");
-				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
-			}
-
-			if (UseMuMenumain) try {
-				ResourceNode mu_menumain = fcopy(mu_menumain_path);
-				// put other code here
-				throw new Exception();
-			} catch (IOException) {
-				MessageBox.Show(mu_menumain_path + " could not be accessed.");
-			}
-
-			updateFileSize();
-		}
-
-		private static int[] SelmapNumForThisSelcharacter2Num =
-		{ 00,
-		  01,02,03,04,05,
-		  06,08,10,09,11,
-		  12,13,14,15,16,
-		  17,18,21,22,23,
-		  27,26,19,24,07,
-		  25,20,30,31,28,29,
-		  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,
-		  50,51,52,53,54,
-		  55,56,57,58,59};
-
-		public void copyIconsToSelcharacter2() {
-			string fileToSaveTo = null;
-
-			ResourceNode s2 = null;
-			if (common5 != null) {
-				s2 = common5.FindChild("sc_selcharacter2_en", false);
-			} else if (sc_selmap != null) {
-				if (File.Exists("../../menu2/sc_selcharacter2.pac")) {
-					fileToSaveTo = "../../menu2/sc_selcharacter2.pac";
-					s2 = fcopy(fileToSaveTo);
-				} else if (File.Exists("../../menu2/sc_selcharacter2_en.pac")) {
-					fileToSaveTo = "../../menu2/sc_selcharacter2_en.pac";
-					s2 = fcopy(fileToSaveTo);
-				}
-			}
-
-			if (s2 == null) return;
-
-			ResourceNode md0 = s2.FindChild("MenuRule_en/ModelData[0]", false);
-			ResourceNode md80 = sc_selmap.FindChild("MiscData[80]", false);
-			if (md0 == null || md80 == null) return;
-
-			using (ProgressWindow w = new ProgressWindow()) {
-				w.Begin(0, 60, 0);
-				for (int i = 1; i < 60; i++) {
-					if (i == 32) i = 50;
-					string tempFile1 = TempFiles.Create(".tex0");
-					string tempFile2 = TempFiles.Create(".plt0");
-					string nameTo = i.ToString("D2");
-					string nameFrom = SelmapNumForThisSelcharacter2Num[i].ToString("D2");
-					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameFrom, false) as TEX0Node;
-					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameTo, false) as TEX0Node;
-					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameFrom, false);
-					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameTo, false);
-					if (iconFrom != null && iconTo != null && palFrom != null && palTo != null) {
-						iconFrom.Export(tempFile1);
-						iconTo.Replace(tempFile1);
-						palFrom.Export(tempFile2);
-						palTo.Replace(tempFile2);
-					}
-
-					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + SelmapNumForThisSelcharacter2Num[i].ToString("D2"), false) as TEX0Node;
-					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
-					if (prevbase != null && stageswitch != null) {
-						Bitmap thumbnail = new Bitmap(112, 56);
-						using (Graphics g = Graphics.FromImage(thumbnail)) {
-							g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-							g.DrawImage(prevbase.GetImage(0), 0, -28, 112, 112);
-						}
-						stageswitch.Replace(thumbnail);
-					}
-
-					w.Update(i);
-				}
-			}
-
-			if (fileToSaveTo != null) {
-				s2.Export(fileToSaveTo);
-			}
-		}
-
-		private void updateFileSize() {
-			long length;
-			if (common5 != null) {
-				string tempfile = Path.GetTempFileName();
-				sc_selmap.Export(tempfile);
-				length = new FileInfo(tempfile).Length;
-				File.Delete(tempfile);
-			} else {
-				length = new FileInfo(_openFilePath).Length;
-			}
-			fileSizeBar.Value = Math.Min(fileSizeBar.Maximum, (int)length);
-			fileSizeLabel.Text = length + " / " + fileSizeBar.Maximum;
-		}
-
-		public void ExportImages(int p, string thisdir) {
-			TextureContainer texs = get_icons(p);
-			if (texs == null) return;
-
-			if (texs.prevbase_tex0 != null) texs.prevbase_tex0.Export(thisdir + "/MenSelmapPrevbase.png");
-			if (texs.icon_tex0 != null) texs.icon_tex0.Export(thisdir + "/MenSelmapIcon.png");
-			if (texs.frontstname_tex0 != null) texs.frontstname_tex0.Export(thisdir + "/MenSelmapFrontStname.png");
-			if (texs.seriesicon_tex0 != null) texs.seriesicon_tex0.Export(thisdir + "/MenSelchrMark.png");
-			if (texs.selmap_mark_tex0 != null) texs.selmap_mark_tex0.Export(thisdir + "/MenSelmapMark.png");
-		}
-
-		public void openModifyPAT0Dialog() {
-			modifyPAT0.PerformClick();
-		}
-
-		public void AddPAT0FromExisting(string pathToPAT0TextureNode) {
-			AddPAT0(pathToPAT0TextureNode, true);
-		}
-
-		public void AddPAT0ByStageNumber(string pathToPAT0TextureNode) {
-			AddPAT0(pathToPAT0TextureNode, false);
 		}
 
 		private void AddPAT0(string pathToPAT0TextureNode, bool fromExisting) {
@@ -530,6 +416,123 @@ namespace BrawlStageManager {
 					entry.Palette = entry.Texture;
 				}
 			}
+		}
+		#endregion
+
+		#region Public methods - special operations
+		public bool AddMenSelmapMark(string path, bool ask) {
+			Bitmap bitmap = new Bitmap(path);
+			string name = Path.GetFileNameWithoutExtension(path);
+			if (ask) {
+				using (var nameDialog = new AskNameDialog(BitmapUtilities.AlphaSwap(bitmap))) {
+					nameDialog.Text = name;
+					if (nameDialog.ShowDialog() != DialogResult.OK) {
+						return false;
+					} else {
+						name = nameDialog.NameText;
+					}
+				}
+			}
+			BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
+			TEX0Node tex0 = bres.CreateResource<TEX0Node>(name);
+			ReplaceSelmapMark(bitmap, tex0, true);
+			return true;
+		}
+
+		public void copyIconsToSelcharacter2() {
+			string fileToSaveTo = null;
+			int[] SelmapNumForThisSelcharacter2Num =
+			{ 00,
+			  01,02,03,04,05,
+			  06,08,10,09,11,
+			  12,13,14,15,16,
+			  17,18,21,22,23,
+			  27,26,19,24,07,
+			  25,20,30,31,28,29,
+			  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,
+			  50,51,52,53,54,
+			  55,56,57,58,59};
+
+			ResourceNode s2 = null;
+			if (common5 != null) {
+				s2 = common5.FindChild("sc_selcharacter2_en", false);
+			} else if (sc_selmap != null) {
+				if (File.Exists("../../menu2/sc_selcharacter2.pac")) {
+					fileToSaveTo = "../../menu2/sc_selcharacter2.pac";
+					s2 = fcopy(fileToSaveTo);
+				} else if (File.Exists("../../menu2/sc_selcharacter2_en.pac")) {
+					fileToSaveTo = "../../menu2/sc_selcharacter2_en.pac";
+					s2 = fcopy(fileToSaveTo);
+				}
+			}
+
+			if (s2 == null) return;
+
+			ResourceNode md0 = s2.FindChild("MenuRule_en/ModelData[0]", false);
+			ResourceNode md80 = sc_selmap.FindChild("MiscData[80]", false);
+			if (md0 == null || md80 == null) return;
+
+			using (ProgressWindow w = new ProgressWindow()) {
+				w.Begin(0, 60, 0);
+				for (int i = 1; i < 60; i++) {
+					if (i == 32) i = 50;
+					string tempFile1 = TempFiles.Create(".tex0");
+					string tempFile2 = TempFiles.Create(".plt0");
+					string nameTo = i.ToString("D2");
+					string nameFrom = SelmapNumForThisSelcharacter2Num[i].ToString("D2");
+					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameFrom, false) as TEX0Node;
+					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameTo, false) as TEX0Node;
+					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameFrom, false);
+					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameTo, false);
+					if (iconFrom != null && iconTo != null && palFrom != null && palTo != null) {
+						iconFrom.Export(tempFile1);
+						iconTo.Replace(tempFile1);
+						palFrom.Export(tempFile2);
+						palTo.Replace(tempFile2);
+					}
+
+					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + SelmapNumForThisSelcharacter2Num[i].ToString("D2"), false) as TEX0Node;
+					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
+					if (prevbase != null && stageswitch != null) {
+						Bitmap thumbnail = new Bitmap(112, 56);
+						using (Graphics g = Graphics.FromImage(thumbnail)) {
+							g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+							g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+							g.DrawImage(prevbase.GetImage(0), 0, -28, 112, 112);
+						}
+						stageswitch.Replace(thumbnail);
+					}
+
+					w.Update(i);
+				}
+			}
+
+			if (fileToSaveTo != null) {
+				s2.Export(fileToSaveTo);
+			}
+		}
+
+		public void ExportImages(int p, string thisdir) {
+			TextureContainer texs = get_icons(p);
+			if (texs == null) return;
+
+			if (texs.prevbase_tex0 != null) texs.prevbase_tex0.Export(thisdir + "/MenSelmapPrevbase.png");
+			if (texs.icon_tex0 != null) texs.icon_tex0.Export(thisdir + "/MenSelmapIcon.png");
+			if (texs.frontstname_tex0 != null) texs.frontstname_tex0.Export(thisdir + "/MenSelmapFrontStname.png");
+			if (texs.seriesicon_tex0 != null) texs.seriesicon_tex0.Export(thisdir + "/MenSelchrMark.png");
+			if (texs.selmap_mark_tex0 != null) texs.selmap_mark_tex0.Export(thisdir + "/MenSelmapMark.png");
+		}
+
+		public void openModifyPAT0Dialog() {
+			modifyPAT0.PerformClick();
+		}
+
+		public void AddPAT0FromExisting(string pathToPAT0TextureNode) {
+			AddPAT0(pathToPAT0TextureNode, true);
+		}
+
+		public void AddPAT0ByStageNumber(string pathToPAT0TextureNode) {
+			AddPAT0(pathToPAT0TextureNode, false);
 		}
 
 		public void generateName() {
@@ -600,6 +603,7 @@ namespace BrawlStageManager {
 			}
 			return sb.ToString();
 		}
+		#endregion
 
 		#region event handlers
 		void panel1_DragEnter(object sender, DragEventArgs e) {

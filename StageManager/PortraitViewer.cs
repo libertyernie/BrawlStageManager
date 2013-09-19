@@ -16,7 +16,7 @@ namespace BrawlStageManager {
 		public Size? prevbaseResizeTo;
 		public Size? frontstnameResizeTo;
 		public Size? selmapMarkResizeTo;
-		public NameCreator.Settings fontSettings;
+		public NameCreatorSettings fontSettings;
 
 		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
@@ -553,7 +553,7 @@ namespace BrawlStageManager {
 		}
 
 		public void changeFrontStnameFont() {
-			fontSettings = NameCreator.selectFont();
+			fontSettings = NameCreator.selectFont(fontSettings);
 		}
 
 		public void DowngradeMenSelmapMark(int i) {

@@ -1,34 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BrawlStageManager.NameCreatorNS {
-	public class NameCreator {
-		public class Settings {
-			public Font Font;
-			public int VerticalOffset;
+	public class NameCreatorSettings {
+		public Font Font;
+		public int VerticalOffset;
+		public override string ToString() {
+			return String.Format("{0}pt {1} {2} ({3})", Font.SizeInPoints, Font.Name, Font.Style, VerticalOffset);
 		}
+	}
 
-		public static Settings selectFont(Font defaultFont = null) {
+	public class NameCreator {
+		public static NameCreatorSettings selectFont(NameCreatorSettings previous = null) {
 			using (NameCreatorDialog d = new NameCreatorDialog()) {
-				if (defaultFont != null) d.Font = defaultFont;
+				if (previous != null) d.Settings = previous;
 				if (d.ShowDialog() == DialogResult.OK) {
-					Console.WriteLine(d.SelectedFont);
-					return new Settings {
-						Font = d.SelectedFont,
-						VerticalOffset = d.VerticalOffset,
-					};
+					return d.Settings;
 				} else {
 					return null;
 				}
 			}
 		}
 
-		public static Bitmap createImage(Settings fontData, string text) {
+		public static Bitmap createImage(NameCreatorSettings fontData, string text) {
 			Bitmap b = new Bitmap(208, 56);
 			Graphics g = Graphics.FromImage(b);
 			g.FillRectangle(new SolidBrush(Color.Black), 0, 0, 208, 56);

@@ -31,8 +31,13 @@
 			this.nudOffset = new System.Windows.Forms.NumericUpDown();
 			this.lblImpactOffset = new System.Windows.Forms.Label();
 			this.lblEdoOffset = new System.Windows.Forms.Label();
+			this.btnClearFont = new System.Windows.Forms.Button();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.btnOkay = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudOffset)).BeginInit();
+			this.tableLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -47,28 +52,29 @@
 			this.tableLayoutPanel1.Controls.Add(this.nudOffset, 1, 3);
 			this.tableLayoutPanel1.Controls.Add(this.lblImpactOffset, 1, 1);
 			this.tableLayoutPanel1.Controls.Add(this.lblEdoOffset, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.btnClearFont, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 4;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(254, 121);
+			this.tableLayoutPanel1.RowCount = 5;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(254, 154);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// lblCurrentFont
 			// 
 			this.lblCurrentFont.AutoSize = true;
-			this.tableLayoutPanel1.SetColumnSpan(this.lblCurrentFont, 2);
 			this.lblCurrentFont.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.lblCurrentFont.Location = new System.Drawing.Point(3, 0);
 			this.lblCurrentFont.Name = "lblCurrentFont";
-			this.lblCurrentFont.Size = new System.Drawing.Size(248, 30);
+			this.lblCurrentFont.Size = new System.Drawing.Size(188, 30);
 			this.lblCurrentFont.TabIndex = 0;
-			this.lblCurrentFont.Text = "lblCurrentFont";
+			this.lblCurrentFont.Text = "No font selected";
 			this.lblCurrentFont.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// btnImpact
@@ -98,7 +104,7 @@
 			this.btnCustom.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.btnCustom.Location = new System.Drawing.Point(3, 93);
 			this.btnCustom.Name = "btnCustom";
-			this.btnCustom.Size = new System.Drawing.Size(188, 25);
+			this.btnCustom.Size = new System.Drawing.Size(188, 24);
 			this.btnCustom.TabIndex = 3;
 			this.btnCustom.Text = "Custom font...";
 			this.btnCustom.UseVisualStyleBackColor = true;
@@ -144,17 +150,68 @@
 			this.lblEdoOffset.Text = "+2 px";
 			this.lblEdoOffset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// btnClearFont
+			// 
+			this.btnClearFont.Dock = System.Windows.Forms.DockStyle.Right;
+			this.btnClearFont.Location = new System.Drawing.Point(227, 3);
+			this.btnClearFont.Name = "btnClearFont";
+			this.btnClearFont.Size = new System.Drawing.Size(24, 24);
+			this.btnClearFont.TabIndex = 7;
+			this.btnClearFont.Text = "X";
+			this.btnClearFont.UseVisualStyleBackColor = true;
+			this.btnClearFont.Click += new System.EventHandler(this.btnClearFont_Click);
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.ColumnCount = 2;
+			this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 2);
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel2.Controls.Add(this.btnOkay, 1, 0);
+			this.tableLayoutPanel2.Controls.Add(this.btnCancel, 0, 0);
+			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 123);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 1;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(248, 28);
+			this.tableLayoutPanel2.TabIndex = 8;
+			// 
+			// btnOkay
+			// 
+			this.btnOkay.DialogResult = System.Windows.Forms.DialogResult.OK;
+			this.btnOkay.Location = new System.Drawing.Point(127, 3);
+			this.btnOkay.Name = "btnOkay";
+			this.btnOkay.Size = new System.Drawing.Size(75, 22);
+			this.btnOkay.TabIndex = 0;
+			this.btnOkay.Text = "OK";
+			this.btnOkay.UseVisualStyleBackColor = true;
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
+			this.btnCancel.Location = new System.Drawing.Point(46, 3);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 22);
+			this.btnCancel.TabIndex = 1;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
+			// 
 			// NameCreatorDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(254, 121);
+			this.ClientSize = new System.Drawing.Size(254, 154);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "NameCreatorDialog";
 			this.Text = "Choose a font";
+			this.Load += new System.EventHandler(this.NameCreatorDialog_Load);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudOffset)).EndInit();
+			this.tableLayoutPanel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -169,5 +226,9 @@
 		private System.Windows.Forms.NumericUpDown nudOffset;
 		private System.Windows.Forms.Label lblImpactOffset;
 		private System.Windows.Forms.Label lblEdoOffset;
+		private System.Windows.Forms.Button btnClearFont;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+		private System.Windows.Forms.Button btnOkay;
+		private System.Windows.Forms.Button btnCancel;
 	}
 }

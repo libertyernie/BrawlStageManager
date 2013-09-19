@@ -30,7 +30,6 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
@@ -40,6 +39,9 @@
 			this.registryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveCurrentDirectoryAsDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearDefaultDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.saveFrontStnameFontSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveSettingsToRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,10 +84,10 @@
 			this.selmapMarkSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.selmapMarkOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x56ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveSettingsToRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -165,17 +167,6 @@
 			this.splitContainer2.SplitterDistance = 49;
 			this.splitContainer2.TabIndex = 0;
 			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.ShouldVerifyIDs = false;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// splitContainer3
 			// 
 			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -253,7 +244,10 @@
 			// 
 			this.registryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveCurrentDirectoryAsDefaultToolStripMenuItem,
-            this.clearDefaultDirectoryToolStripMenuItem});
+            this.clearDefaultDirectoryToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.saveFrontStnameFontSettingsToolStripMenuItem,
+            this.saveSettingsToRegistryToolStripMenuItem});
 			this.registryToolStripMenuItem.Name = "registryToolStripMenuItem";
 			this.registryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
 			this.registryToolStripMenuItem.Text = "Registry";
@@ -271,6 +265,25 @@
 			this.clearDefaultDirectoryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
 			this.clearDefaultDirectoryToolStripMenuItem.Text = "Clear default directory";
 			this.clearDefaultDirectoryToolStripMenuItem.Click += new System.EventHandler(this.clearDefaultDirectoryToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(240, 6);
+			// 
+			// saveFrontStnameFontSettingsToolStripMenuItem
+			// 
+			this.saveFrontStnameFontSettingsToolStripMenuItem.Name = "saveFrontStnameFontSettingsToolStripMenuItem";
+			this.saveFrontStnameFontSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.saveFrontStnameFontSettingsToolStripMenuItem.Text = "Save FrontStname font settings";
+			this.saveFrontStnameFontSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveFrontStnameFontSettingsToolStripMenuItem_Click);
+			// 
+			// saveSettingsToRegistryToolStripMenuItem
+			// 
+			this.saveSettingsToRegistryToolStripMenuItem.Name = "saveSettingsToRegistryToolStripMenuItem";
+			this.saveSettingsToRegistryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.saveSettingsToRegistryToolStripMenuItem.Text = "Save auto-resize settings";
+			this.saveSettingsToRegistryToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToRegistryToolStripMenuItem_Click);
 			// 
 			// exportStageToolStripMenuItem
 			// 
@@ -525,8 +538,7 @@
 			this.resizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.prevbaseSize,
             this.frontstnameSizeToolStripMenuItem,
-            this.selmapMarkSizeToolStripMenuItem,
-            this.saveSettingsToRegistryToolStripMenuItem});
+            this.selmapMarkSizeToolStripMenuItem});
 			this.resizeToolStripMenuItem.Name = "resizeToolStripMenuItem";
 			this.resizeToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
 			this.resizeToolStripMenuItem.Text = "Auto-resize";
@@ -538,7 +550,7 @@
             this.x128ToolStripMenuItem,
             this.x88ToolStripMenuItem});
 			this.prevbaseSize.Name = "prevbaseSize";
-			this.prevbaseSize.Size = new System.Drawing.Size(198, 22);
+			this.prevbaseSize.Size = new System.Drawing.Size(168, 22);
 			this.prevbaseSize.Text = "Prevbase size:";
 			// 
 			// prevbaseOriginalSizeToolStripMenuItem
@@ -546,19 +558,19 @@
 			this.prevbaseOriginalSizeToolStripMenuItem.Checked = true;
 			this.prevbaseOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.prevbaseOriginalSizeToolStripMenuItem.Name = "prevbaseOriginalSizeToolStripMenuItem";
-			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
 			this.prevbaseOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x128ToolStripMenuItem
 			// 
 			this.x128ToolStripMenuItem.Name = "x128ToolStripMenuItem";
-			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
 			this.x128ToolStripMenuItem.Text = "128x128";
 			// 
 			// x88ToolStripMenuItem
 			// 
 			this.x88ToolStripMenuItem.Name = "x88ToolStripMenuItem";
-			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
 			this.x88ToolStripMenuItem.Text = "88x88";
 			// 
 			// frontstnameSizeToolStripMenuItem
@@ -567,7 +579,7 @@
             this.frontstnameOriginalSizeToolStripMenuItem,
             this.x56ToolStripMenuItem});
 			this.frontstnameSizeToolStripMenuItem.Name = "frontstnameSizeToolStripMenuItem";
-			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.frontstnameSizeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.frontstnameSizeToolStripMenuItem.Text = "Frontstname size:";
 			// 
 			// frontstnameOriginalSizeToolStripMenuItem
@@ -590,7 +602,7 @@
             this.selmapMarkOriginalSizeToolStripMenuItem,
             this.x56ToolStripMenuItem1});
 			this.selmapMarkSizeToolStripMenuItem.Name = "selmapMarkSizeToolStripMenuItem";
-			this.selmapMarkSizeToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.selmapMarkSizeToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
 			this.selmapMarkSizeToolStripMenuItem.Text = "Selmap mark size:";
 			// 
 			// selmapMarkOriginalSizeToolStripMenuItem
@@ -606,13 +618,6 @@
 			this.x56ToolStripMenuItem1.Name = "x56ToolStripMenuItem1";
 			this.x56ToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
 			this.x56ToolStripMenuItem1.Text = "60x56";
-			// 
-			// saveSettingsToRegistryToolStripMenuItem
-			// 
-			this.saveSettingsToRegistryToolStripMenuItem.Name = "saveSettingsToRegistryToolStripMenuItem";
-			this.saveSettingsToRegistryToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-			this.saveSettingsToRegistryToolStripMenuItem.Text = "Save settings to registry";
-			this.saveSettingsToRegistryToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToRegistryToolStripMenuItem_Click);
 			// 
 			// texturesToolStripMenuItem
 			// 
@@ -634,6 +639,17 @@
 			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.ShouldVerifyIDs = false;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// portraitViewer1
 			// 
@@ -742,6 +758,8 @@
 		private System.Windows.Forms.ToolStripSeparator separator4;
 		private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveSettingsToRegistryToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem saveFrontStnameFontSettingsToolStripMenuItem;
 
 
 

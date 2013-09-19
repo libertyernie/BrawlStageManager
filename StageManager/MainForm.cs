@@ -7,6 +7,7 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
 using BrawlStageManager.RegistryUtilities;
+using BrawlStageManager.NameCreatorNS;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
@@ -83,9 +84,10 @@ namespace BrawlStageManager {
 			InitializeComponent();
 
 			clearDefaultDirectoryToolStripMenuItem.Enabled = (DefaultDirectory.Get() != null);
+
+			#region initialize from registry
 			Size?[] sizes = ResizeSettings.Get();
 
-#region initialize auto-resize selection
 			if (sizes[0] == new Size(88, 88)) {
 				x88ToolStripMenuItem.PerformClick();
 			} else if (sizes[0] == new Size(128, 128)) {
@@ -99,7 +101,9 @@ namespace BrawlStageManager {
 			if (sizes[2] == new Size(60, 56)) {
 				x56ToolStripMenuItem1.PerformClick();
 			}
-#endregion
+
+			portraitViewer1.fontSettings = FontSettings.Get() ?? portraitViewer1.fontSettings;
+			#endregion
 
 			moduleFolderLocation = "../../module";
 
@@ -807,7 +811,7 @@ namespace BrawlStageManager {
 		}
 
 		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.generateName();
+			portraitViewer1.changeFrontStnameFont();
 		}
 
 		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -821,6 +825,16 @@ namespace BrawlStageManager {
 
 		private void saveSettingsToRegistryToolStripMenuItem_Click(object sender, EventArgs e) {
 			bool anyNotNull = ResizeSettings.WriteToRegistry(portraitViewer1);
+			MessageBox.Show(anyNotNull
+				? "The default texture sizes have been set in HKEY_CURRENT_USER."
+				: "The auto-resize settings have been cleared (all three set to \"Off.\")");
+		}
+
+		private void saveFrontStnameFontSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			string str = FontSettings.WriteToRegistry(portraitViewer1.fontSettings);
+			MessageBox.Show(str != null
+				? "The default font has been set to: " + str
+				: "The default font settings have been cleared.");
 		}
 	}
 }

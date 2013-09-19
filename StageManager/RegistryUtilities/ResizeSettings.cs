@@ -18,13 +18,7 @@ namespace BrawlStageManager.RegistryUtilities {
 			Set("Prevbase", prevbase);
 			Set("FrontStname", frontstname);
 			Set("SelmapMark", selmapMark);
-			if ((prevbase ?? frontstname ?? selmapMark) == null) {
-				MessageBox.Show("The auto-resize settings have been cleared (all three set to \"Off.\")");
-				return false;
-			} else {
-				MessageBox.Show("The default texture sizes have been set in HKEY_CURRENT_USER.");
-				return true;
-			}
+			return ((prevbase ?? frontstname ?? selmapMark) != null);
 		}
 
 		private static void Set(string texname, Size? size) {
@@ -50,10 +44,6 @@ namespace BrawlStageManager.RegistryUtilities {
 
 		public static Size?[] Get() {
 			return new Size?[] { Get("Prevbase"), Get("FrontStname"), Get("SelmapMark") };
-		}
-
-		public static void Clear() {
-			WriteToRegistry(null, null, null);
 		}
 	}
 }

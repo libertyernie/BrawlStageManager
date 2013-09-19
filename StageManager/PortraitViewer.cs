@@ -63,7 +63,7 @@ namespace BrawlStageManager {
 		private string _openFilePath;
 		// In case the image needs to be reloaded after replacing the texture
 		private int _iconNum;
-		private NameCreator.Settings fontSettings;
+		public NameCreator.Settings fontSettings;
 
 		public PortraitViewer() {
 			InitializeComponent();
@@ -644,7 +644,6 @@ namespace BrawlStageManager {
 				UpdateImage();
 			}
 		}
-		#endregion
 
 		private void btnGenerateName_Click(object sender, EventArgs e) {
 			generateName();
@@ -653,5 +652,6 @@ namespace BrawlStageManager {
 		private void btnRepaintIcon_Click(object sender, EventArgs e) {
 			repaintIconBorder();
 		}
+		#endregion
 	}
 }

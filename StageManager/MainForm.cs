@@ -841,5 +841,12 @@ namespace BrawlStageManager {
 			GeneralRegistry.ClearAllStageManager();
 			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
 		}
+
+		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
+			new OptionsMenuSettings() {
+
+			}.SaveToRegistry();
+			OptionsMenuSettings.LoadFromRegistry();
+		}
 	}
 }

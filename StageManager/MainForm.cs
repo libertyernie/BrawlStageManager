@@ -767,6 +767,35 @@ namespace BrawlStageManager {
 			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
 		}
 
+		#region registry <-> options menu
+		private void SaveToRegistry() {
+			new OptionsMenuSettings() {
+				RenderModels = renderModels.Checked,
+				StaticStageList = useAFixedStageListToolStripMenuItem.Checked,
+				RightPanelColor = portraitViewer1.BackColor,
+				ModuleFolderLocation = moduleFolderLocation,
+				VerifyIDs = verifyrelStageIDsToolStripMenuItem.Checked,
+				UseFullRelNames = useFullrelNamesToolStripMenuItem.Checked,
+				SelmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked,
+				SelmapMarkFormat = selmapMarkFormatIA4.Checked ? "IA4"
+								 : selmapMarkFormatI4.Checked ? "I4"
+								 : selmapMarkFormatAuto.Checked ? "Auto"
+								 : selmapMarkFormatCMPR.Checked ? "CMPR"
+																: "Existing",
+			}.SaveToRegistry();
+		}
+
+		private static void set(ToolStripMenuItem item, bool value) {
+			item.Checked = !value;
+			item.PerformClick();
+		}
+
+		private void LoadFromRegistry() {
+			OptionsMenuSettings settings = OptionsMenuSettings.LoadFromRegistry();
+			set(useAFixedStageListToolStripMenuItem, settings.StaticStageList);
+		}
+		#endregion
+
 		private void MainForm_KeyDown(object sender, KeyEventArgs e) {
 			if (e.KeyCode == Keys.PageDown) {
 				e.Handled = true;
@@ -843,10 +872,15 @@ namespace BrawlStageManager {
 		}
 
 		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
-			new OptionsMenuSettings() {
+			SaveToRegistry();
+		}
 
-			}.SaveToRegistry();
-			OptionsMenuSettings.LoadFromRegistry();
+		private void loadTestToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				LoadFromRegistry();
+			} catch (NullReferenceException) {
+				MessageBox.Show("Could not load settings. They may not be present in the registry.");
+			}
 		}
 	}
 }

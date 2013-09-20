@@ -45,6 +45,7 @@
 			this.saveSettingsToRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearAllStageManagerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +92,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.saveTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -264,7 +265,8 @@
             this.saveSettingsToRegistryToolStripMenuItem,
             this.toolStripSeparator1,
             this.clearAllStageManagerSettingsToolStripMenuItem,
-            this.saveTestToolStripMenuItem});
+            this.saveTestToolStripMenuItem,
+            this.loadTestToolStripMenuItem});
 			this.registryToolStripMenuItem.Name = "registryToolStripMenuItem";
 			this.registryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
 			this.registryToolStripMenuItem.Text = "Registry";
@@ -313,6 +315,13 @@
 			this.clearAllStageManagerSettingsToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
 			this.clearAllStageManagerSettingsToolStripMenuItem.Text = "Clear all Stage Manager settings";
 			this.clearAllStageManagerSettingsToolStripMenuItem.Click += new System.EventHandler(this.clearAllStageManagerSettingsToolStripMenuItem_Click);
+			// 
+			// saveTestToolStripMenuItem
+			// 
+			this.saveTestToolStripMenuItem.Name = "saveTestToolStripMenuItem";
+			this.saveTestToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+			this.saveTestToolStripMenuItem.Text = "save test";
+			this.saveTestToolStripMenuItem.Click += new System.EventHandler(this.saveTestToolStripMenuItem_Click);
 			// 
 			// exportStageToolStripMenuItem
 			// 
@@ -468,25 +477,25 @@
 			// selmapMarkFormatIA4
 			// 
 			this.selmapMarkFormatIA4.Name = "selmapMarkFormatIA4";
-			this.selmapMarkFormatIA4.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatIA4.Size = new System.Drawing.Size(139, 22);
 			this.selmapMarkFormatIA4.Text = "IA4";
 			// 
 			// selmapMarkFormatI4
 			// 
 			this.selmapMarkFormatI4.Name = "selmapMarkFormatI4";
-			this.selmapMarkFormatI4.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatI4.Size = new System.Drawing.Size(139, 22);
 			this.selmapMarkFormatI4.Text = "I4";
 			// 
 			// selmapMarkFormatAuto
 			// 
 			this.selmapMarkFormatAuto.Name = "selmapMarkFormatAuto";
-			this.selmapMarkFormatAuto.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatAuto.Size = new System.Drawing.Size(139, 22);
 			this.selmapMarkFormatAuto.Text = "IA4/I4 (Auto)";
 			// 
 			// selmapMarkFormatCMPR
 			// 
 			this.selmapMarkFormatCMPR.Name = "selmapMarkFormatCMPR";
-			this.selmapMarkFormatCMPR.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatCMPR.Size = new System.Drawing.Size(139, 22);
 			this.selmapMarkFormatCMPR.Text = "CMPR";
 			// 
 			// selmapMarkFormatExisting
@@ -494,7 +503,7 @@
 			this.selmapMarkFormatExisting.Checked = true;
 			this.selmapMarkFormatExisting.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.selmapMarkFormatExisting.Name = "selmapMarkFormatExisting";
-			this.selmapMarkFormatExisting.Size = new System.Drawing.Size(152, 22);
+			this.selmapMarkFormatExisting.Size = new System.Drawing.Size(139, 22);
 			this.selmapMarkFormatExisting.Text = "Existing";
 			// 
 			// separator3
@@ -678,12 +687,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// saveTestToolStripMenuItem
+			// loadTestToolStripMenuItem
 			// 
-			this.saveTestToolStripMenuItem.Name = "saveTestToolStripMenuItem";
-			this.saveTestToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
-			this.saveTestToolStripMenuItem.Text = "save test";
-			this.saveTestToolStripMenuItem.Click += new System.EventHandler(this.saveTestToolStripMenuItem_Click);
+			this.loadTestToolStripMenuItem.Name = "loadTestToolStripMenuItem";
+			this.loadTestToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+			this.loadTestToolStripMenuItem.Text = "load test";
+			this.loadTestToolStripMenuItem.Click += new System.EventHandler(this.loadTestToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -788,6 +797,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem clearAllStageManagerSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveTestToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem loadTestToolStripMenuItem;
 
 
 

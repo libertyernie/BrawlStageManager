@@ -19,14 +19,7 @@ namespace BrawlStageManager.RegistryUtilities {
 		public bool UseFullRelNames;
 
 		public bool SelmapMarkPreview;
-		public enum Format {
-			IA4,
-			I4,
-			Auto,
-			CMPR,
-			Existing
-		};
-		public Format SelmapMarkFormat;
+		public string SelmapMarkFormat;
 
 		public void SaveToRegistry() {
 			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
@@ -37,7 +30,7 @@ namespace BrawlStageManager.RegistryUtilities {
 			} else {
 				key.DeleteValue("RightPanelColor", false);
 			}
-			key.SetValue("ModuleFolderLocation", ModuleFolderLocation ?? "tjrszjtrtj");
+			key.SetValue("ModuleFolderLocation", ModuleFolderLocation);
 			key.SetValue("VerifyIDs", VerifyIDs);
 			key.SetValue("UseFullRelNames", UseFullRelNames);
 			key.SetValue("SelmapMarkPreview", SelmapMarkPreview);
@@ -50,10 +43,6 @@ namespace BrawlStageManager.RegistryUtilities {
 
 		private static bool b(RegistryKey key, string n) {
 			return Boolean.Parse(s(key, n));
-		}
-
-		private static Format f(RegistryKey key, string n) {
-			return (Format)Enum.Parse(typeof(Format), s(key, n));
 		}
 
 		public static OptionsMenuSettings LoadFromRegistry() {
@@ -71,7 +60,7 @@ namespace BrawlStageManager.RegistryUtilities {
 			ret.VerifyIDs = b(key, "VerifyIDs");
 			ret.UseFullRelNames = b(key, "UseFullRelNames");
 			ret.SelmapMarkPreview = b(key, "SelmapMarkPreview");
-			ret.SelmapMarkFormat = f(key, "SelmapMarkFormat");
+			ret.SelmapMarkFormat = s(key, "SelmapMarkFormat");
 			return ret;
 		}
 	}

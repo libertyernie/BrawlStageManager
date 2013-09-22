@@ -168,6 +168,7 @@ namespace BrawlStageManager {
 			FormClosed += MainForm_FormClosed;
 
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
+			LoadFromRegistry();
 			changeDirectory(path);
 		}
 
@@ -795,14 +796,6 @@ namespace BrawlStageManager {
 		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
 			SaveToRegistry();
 		}
-
-		private void loadTestToolStripMenuItem_Click(object sender, EventArgs e) {
-			try {
-				LoadFromRegistry();
-			} catch (NullReferenceException) {
-				MessageBox.Show("Could not load settings. They may not be present in the registry.");
-			}
-		}
 		#endregion
 
 		private void exportStage(FileInfo f, string thisdir) {
@@ -861,9 +854,34 @@ namespace BrawlStageManager {
 
 		private void LoadFromRegistry() {
 			OptionsMenuSettings settings = OptionsMenuSettings.LoadFromRegistry();
+			if (settings == null) {
+				//MessageBox.Show("Could not load settings. They may not be present in the registry.");
+				return;
+			}
+
 			set(useAFixedStageListToolStripMenuItem, settings.StaticStageList);
 			set(renderModels, settings.RenderModels);
 			portraitViewer1.BackColor = settings.RightPanelColor ?? portraitViewer1.BackColor;
+
+			{
+				moduleFolderLocation = settings.ModuleFolderLocation;
+				moduleToolStripMenuItem.Checked = (moduleFolderLocation == "../../module");
+				sameToolStripMenuItem.Checked = (moduleFolderLocation == ".");
+				if (stageInfoControl1.RelFile != null) updateRel(stageInfoControl1.RelFile.Name);
+			}
+			set(verifyrelStageIDsToolStripMenuItem, settings.VerifyIDs);
+			set(useFullrelNamesToolStripMenuItem, settings.UseFullRelNames);
+
+			set(selmapMarkPreviewToolStripMenuItem, settings.SelmapMarkPreview);
+			{
+				string s = settings.SelmapMarkFormat;
+				var menuItem = s == "IA4" ? selmapMarkFormatIA4
+							 : s == "I4" ? selmapMarkFormatI4
+							 : s == "Auto" ? selmapMarkFormatAuto
+							 : s == "CMPR" ? selmapMarkFormatCMPR
+										   : selmapMarkFormatExisting;
+				set(menuItem, true);
+			}
 		}
 		#endregion
 

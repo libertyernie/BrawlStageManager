@@ -46,22 +46,26 @@ namespace BrawlStageManager.RegistryUtilities {
 		}
 
 		public static OptionsMenuSettings LoadFromRegistry() {
-			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
-			OptionsMenuSettings ret = new OptionsMenuSettings();
-			ret.RenderModels = b(key, "RenderModels");
-			ret.StaticStageList = b(key, "StaticStageList");
-			object tmp = key.GetValue("RightPanelColor");
-			if (tmp != null) {
-				ret.RightPanelColor = (Color)colorConverter.ConvertFromString(tmp.ToString());
-			} else {
-				ret.RightPanelColor = null;
+			try {
+				RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
+				OptionsMenuSettings ret = new OptionsMenuSettings();
+				ret.RenderModels = b(key, "RenderModels");
+				ret.StaticStageList = b(key, "StaticStageList");
+				object tmp = key.GetValue("RightPanelColor");
+				if (tmp != null) {
+					ret.RightPanelColor = (Color)colorConverter.ConvertFromString(tmp.ToString());
+				} else {
+					ret.RightPanelColor = null;
+				}
+				ret.ModuleFolderLocation = s(key, "ModuleFolderLocation");
+				ret.VerifyIDs = b(key, "VerifyIDs");
+				ret.UseFullRelNames = b(key, "UseFullRelNames");
+				ret.SelmapMarkPreview = b(key, "SelmapMarkPreview");
+				ret.SelmapMarkFormat = s(key, "SelmapMarkFormat");
+				return ret;
+			} catch (NullReferenceException) {
+				return null;
 			}
-			ret.ModuleFolderLocation = s(key, "ModuleFolderLocation");
-			ret.VerifyIDs = b(key, "VerifyIDs");
-			ret.UseFullRelNames = b(key, "UseFullRelNames");
-			ret.SelmapMarkPreview = b(key, "SelmapMarkPreview");
-			ret.SelmapMarkFormat = s(key, "SelmapMarkFormat");
-			return ret;
 		}
 	}
 }

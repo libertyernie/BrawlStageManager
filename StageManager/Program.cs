@@ -20,13 +20,9 @@ namespace BrawlStageManager {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			string dir = null;
-			bool shouldVerifyIDs = true, useRelDescription = true;
+			bool useRelDescription = true;
 			foreach (string arg in args) {
-				if (arg == "/v") {
-					shouldVerifyIDs = true;
-				} else if (arg == "/V") {
-					shouldVerifyIDs = false;
-				} else if (arg == "/d") {
+				if (arg == "/d") {
 					useRelDescription = true;
 				} else if (arg == "/D") {
 					useRelDescription = false;
@@ -38,7 +34,7 @@ namespace BrawlStageManager {
 				dir = DefaultDirectory.GetIfExists()
 					?? System.IO.Directory.GetCurrentDirectory();
 			}
-			form = new MainForm(dir, shouldVerifyIDs, useRelDescription);
+			form = new MainForm(dir, useRelDescription);
 			Application.Run(form);
 		}
 
@@ -46,8 +42,6 @@ namespace BrawlStageManager {
 			return "Usage: " + Process.GetCurrentProcess().ProcessName + " [args] [path to stage/melee folder]\n" +
 				"\n" +
 				"Arguments:\n" +
-				"  /v  Verify .rel stage IDs (default)\n" +
-				"  /V  Don't bother to verify .rel stage IDs\n" +
 				"  /d  Show .rel description (default)\n" +
 				"  /D  Show .rel original filename";
 		}

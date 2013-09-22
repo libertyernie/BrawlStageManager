@@ -15,7 +15,6 @@ namespace BrawlStageManager.RegistryUtilities {
 		public Color? RightPanelColor;
 
 		public string ModuleFolderLocation;
-		public bool VerifyIDs;
 		public bool UseFullRelNames;
 
 		public bool SelmapMarkPreview;
@@ -31,7 +30,6 @@ namespace BrawlStageManager.RegistryUtilities {
 				key.DeleteValue("RightPanelColor", false);
 			}
 			key.SetValue("ModuleFolderLocation", ModuleFolderLocation);
-			key.SetValue("VerifyIDs", VerifyIDs);
 			key.SetValue("UseFullRelNames", UseFullRelNames);
 			key.SetValue("SelmapMarkPreview", SelmapMarkPreview);
 			key.SetValue("SelmapMarkFormat", SelmapMarkFormat);
@@ -58,7 +56,6 @@ namespace BrawlStageManager.RegistryUtilities {
 					ret.RightPanelColor = null;
 				}
 				ret.ModuleFolderLocation = s(key, "ModuleFolderLocation");
-				ret.VerifyIDs = b(key, "VerifyIDs");
 				ret.UseFullRelNames = b(key, "UseFullRelNames");
 				ret.SelmapMarkPreview = b(key, "SelmapMarkPreview");
 				ret.SelmapMarkFormat = s(key, "SelmapMarkFormat");

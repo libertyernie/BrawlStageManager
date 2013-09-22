@@ -80,7 +80,7 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public MainForm(string path, bool shouldVerifyIDs, bool useRelDescription) {
+		public MainForm(string path, bool useRelDescription) {
 			InitializeComponent();
 
 			clearDefaultDirectoryToolStripMenuItem.Enabled = (DefaultDirectory.Get() != null);
@@ -139,7 +139,6 @@ namespace BrawlStageManager {
 			RightControl = chooseLabel;
 
 			// The defaults for these options depend on the defaults of the menu items that control them
-			stageInfoControl1.ShouldVerifyIDs = verifyrelStageIDsToolStripMenuItem.Checked = shouldVerifyIDs;
 			stageInfoControl1.UseRelDescription = useFullrelNamesToolStripMenuItem.Checked = useRelDescription;
 
 			// Drag and drop for the left and right sides of the window. The dragEnter and dragDrop methods will check which panel the file is dropped onto.
@@ -608,9 +607,6 @@ namespace BrawlStageManager {
 			if (stageInfoControl1.RelFile != null) updateRel(stageInfoControl1.RelFile.Name); // Refresh the .rel
 		}
 
-		private void verifyrelStageIDsToolStripMenuItem_Click(object sender, EventArgs e) {
-			stageInfoControl1.ShouldVerifyIDs = verifyrelStageIDsToolStripMenuItem.Checked;
-		}
 		private void useFullrelNamesToolStripMenuItem_Click(object sender, EventArgs e) {
 			stageInfoControl1.UseRelDescription = useFullrelNamesToolStripMenuItem.Checked;
 		}
@@ -660,12 +656,6 @@ namespace BrawlStageManager {
 
 		private void selmapMarkPreviewToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
-			selchrMarkAsBGBetaToolStripMenuItem.Enabled = selmapMarkPreviewToolStripMenuItem.Checked;
-			portraitViewer1.UpdateImage();
-		}
-
-		private void selchrMarkAsBGBetaToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.selchrMarkAsBG = selchrMarkAsBGBetaToolStripMenuItem.Checked;
 			portraitViewer1.UpdateImage();
 		}
 
@@ -789,8 +779,7 @@ namespace BrawlStageManager {
 		}
 
 		private void clearAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-			GeneralRegistry.ClearAllStageManager();
-			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+			ClearRegistry();
 		}
 
 		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -836,7 +825,6 @@ namespace BrawlStageManager {
 				StaticStageList = useAFixedStageListToolStripMenuItem.Checked,
 				RightPanelColor = portraitViewer1.BackColor,
 				ModuleFolderLocation = moduleFolderLocation,
-				VerifyIDs = verifyrelStageIDsToolStripMenuItem.Checked,
 				UseFullRelNames = useFullrelNamesToolStripMenuItem.Checked,
 				SelmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked,
 				SelmapMarkFormat = selmapMarkFormatIA4.Checked ? "IA4"
@@ -845,6 +833,7 @@ namespace BrawlStageManager {
 								 : selmapMarkFormatCMPR.Checked ? "CMPR"
 																: "Existing",
 			}.SaveToRegistry();
+			MessageBox.Show("Registry settings saved.");
 		}
 
 		private static void set(ToolStripMenuItem item, bool value) {
@@ -869,7 +858,6 @@ namespace BrawlStageManager {
 				sameToolStripMenuItem.Checked = (moduleFolderLocation == ".");
 				if (stageInfoControl1.RelFile != null) updateRel(stageInfoControl1.RelFile.Name);
 			}
-			set(verifyrelStageIDsToolStripMenuItem, settings.VerifyIDs);
 			set(useFullrelNamesToolStripMenuItem, settings.UseFullRelNames);
 
 			set(selmapMarkPreviewToolStripMenuItem, settings.SelmapMarkPreview);
@@ -882,6 +870,12 @@ namespace BrawlStageManager {
 										   : selmapMarkFormatExisting;
 				set(menuItem, true);
 			}
+		}
+
+		private void ClearRegistry() {
+			GeneralRegistry.ClearAllStageManager();
+			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
 

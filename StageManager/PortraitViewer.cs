@@ -21,7 +21,6 @@ namespace BrawlStageManager {
 		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
 		public bool selmapMarkPreview;
-		public bool selchrMarkAsBG;
 		public bool UseMuMenumain;
 
 		public bool IsDirty {
@@ -250,11 +249,6 @@ namespace BrawlStageManager {
 				Bitmap image = new Bitmap(tex0.GetImage(0));
 				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
 					bgi = BitmapUtilities.AlphaSwap(image);
-					// only do this if selmapMarkPreview is enabled too:
-					if (selchrMarkAsBG) {
-						Bitmap selchrImage = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(GetTEX0For(seriesicon).GetImage(0)));
-						bgi = BitmapUtilities.Combine(selchrImage, bgi);
-					}
 				} else if (panel == seriesicon && selmapMarkPreview) {
 					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
 				} else {

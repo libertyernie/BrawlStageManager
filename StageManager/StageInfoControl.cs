@@ -18,7 +18,6 @@ namespace BrawlStageManager {
 		public delegate void PacFileDeletionType();
 		public PacFileDeletionType PacFileDeletion;
 
-		private bool _shouldVerifyIDs;
 		private bool _useRelDescription;
 
 		public void setStageLabels(string v0, string v1, string v2) {
@@ -43,17 +42,6 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public bool ShouldVerifyIDs {
-			get {
-				return _shouldVerifyIDs;
-			}
-			set {
-				_shouldVerifyIDs = value;
-				if (_relFile != null) {
-					refreshRelFile();
-				}
-			}
-		}
 		public bool UseRelDescription {
 			get {
 				return _useRelDescription;
@@ -100,12 +88,7 @@ namespace BrawlStageManager {
 					_relFile.Refresh();
 					setRelLabels(_relFile.Name + ":", getModuleName(_relFile), "(" + _relFile.Length + " bytes)");
 					relFilename.ForeColor = Color.Black;
-					if (ShouldVerifyIDs) { // Set the color/text of the button
-						verifyIDs();
-					} else {
-						relButton.Text = "Edit .rel";
-						relButton.BackColor = Control.DefaultBackColor;
-					}
+					verifyIDs();
 					relButton.Enabled = true;
 				} else {
 					setRelLabels(_relFile.Name + " (doesn't exist)", "", "");

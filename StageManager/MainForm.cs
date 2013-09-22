@@ -552,6 +552,22 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private bool askToSaveCommon5() {
+			if (portraitViewer1.IsDirty) {
+				var result = MessageBox.Show("Would you like to save common5/sc_selmap before closing?", Text, MessageBoxButtons.YesNoCancel);
+				if (result == DialogResult.Cancel) {
+					return false;
+				} else if (result == DialogResult.Yes) {
+					portraitViewer1.save();
+					return true;
+				} else if (result == DialogResult.No) {
+					return true;
+				}
+			}
+			// not dirty
+			return true;
+		}
+
 		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
 			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
 		}
@@ -653,8 +669,8 @@ namespace BrawlStageManager {
 		}
 
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
-			var result = MessageBox.Show("This will reload the common5/sc_selmap from the disk.", "Continue?", MessageBoxButtons.YesNo);
-			if (result == DialogResult.Yes) {
+			bool cont = askToSaveCommon5();
+			if (cont) {
 				changeDirectory(CurrentDirectory); // Refresh .pac list
 			}
 		}
@@ -688,14 +704,7 @@ namespace BrawlStageManager {
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-			if (portraitViewer1.IsDirty) {
-				var result = MessageBox.Show("Would you like to save common5/sc_selmap before closing?", Text, MessageBoxButtons.YesNoCancel);
-				if (result == DialogResult.Cancel) {
-					e.Cancel = true;
-				} else if (result == DialogResult.Yes) {
-					portraitViewer1.save();
-				}
-			}
+			e.Cancel = !askToSaveCommon5();
 		}
 
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e) {
@@ -732,6 +741,66 @@ namespace BrawlStageManager {
 			} else if (sender == selmapMarkFormatExisting) {
 				portraitViewer1.selmapMarkFormat = null;
 				portraitViewer1.useExistingAsFallback = true;
+			}
+		}
+
+		private void listMenSelmapMarkUsageToolStripMenuItem_Click(object sender, EventArgs e) {
+			new AboutBSM(null) {
+				AboutText = portraitViewer1.MenSelmapMarkUsageReport()
+			}.ShowDialog(this);
+		}
+
+		private void saveCurrentDirectoryAsDefaultToolStripMenuItem_Click(object sender, EventArgs e) {
+			DefaultDirectory.Set(CurrentDirectory);
+			clearDefaultDirectoryToolStripMenuItem.Enabled = true;
+		}
+
+		private void clearDefaultDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
+			DefaultDirectory.Clear();
+			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+		}
+
+		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.changeFrontStnameFont();
+		}
+
+		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (ColorDialog cd = new ColorDialog()) {
+				cd.Color = portraitViewer1.BackColor;
+				if (cd.ShowDialog() == DialogResult.OK) {
+					portraitViewer1.BackColor = cd.Color;
+				}
+			}
+		}
+
+		private void saveSettingsToRegistryToolStripMenuItem_Click(object sender, EventArgs e) {
+			bool anyNotNull = ResizeSettings.WriteToRegistry(portraitViewer1);
+			MessageBox.Show(anyNotNull
+				? "The default texture sizes have been set in HKEY_CURRENT_USER."
+				: "The auto-resize settings have been cleared (all three set to \"Off.\")");
+		}
+
+		private void saveFrontStnameFontSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			string str = FontSettings.WriteToRegistry(portraitViewer1.fontSettings);
+			MessageBox.Show(str != null
+				? "The default font has been set to: " + str
+				: "The default font settings have been cleared.");
+		}
+
+		private void clearAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			GeneralRegistry.ClearAllStageManager();
+			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
+		}
+
+		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
+			SaveToRegistry();
+		}
+
+		private void loadTestToolStripMenuItem_Click(object sender, EventArgs e) {
+			try {
+				LoadFromRegistry();
+			} catch (NullReferenceException) {
+				MessageBox.Show("Could not load settings. They may not be present in the registry.");
 			}
 		}
 		#endregion
@@ -793,6 +862,8 @@ namespace BrawlStageManager {
 		private void LoadFromRegistry() {
 			OptionsMenuSettings settings = OptionsMenuSettings.LoadFromRegistry();
 			set(useAFixedStageListToolStripMenuItem, settings.StaticStageList);
+			set(renderModels, settings.RenderModels);
+			portraitViewer1.BackColor = settings.RightPanelColor ?? portraitViewer1.BackColor;
 		}
 		#endregion
 
@@ -820,66 +891,6 @@ namespace BrawlStageManager {
 			} else if (e.KeyCode == Keys.OemCloseBrackets) {
 				e.Handled = true;
 				portraitViewer1.generateName();
-			}
-		}
-
-		private void listMenSelmapMarkUsageToolStripMenuItem_Click(object sender, EventArgs e) {
-			new AboutBSM(null) {
-				AboutText = portraitViewer1.MenSelmapMarkUsageReport()
-			}.ShowDialog(this);
-		}
-
-		private void saveCurrentDirectoryAsDefaultToolStripMenuItem_Click(object sender, EventArgs e) {
-			DefaultDirectory.Set(CurrentDirectory);
-			clearDefaultDirectoryToolStripMenuItem.Enabled = true;
-		}
-
-		private void clearDefaultDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
-			DefaultDirectory.Clear();
-			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
-		}
-
-		private void frontStnameGenerationFontToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.changeFrontStnameFont();
-		}
-
-		private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e) {
-			using (ColorDialog cd = new ColorDialog()) {
-				cd.Color = portraitViewer1.BackColor;
-				if (cd.ShowDialog() == DialogResult.OK) {
-					portraitViewer1.BackColor = cd.Color;
-				}
-			}
-		}
-
-		private void saveSettingsToRegistryToolStripMenuItem_Click(object sender, EventArgs e) {
-			bool anyNotNull = ResizeSettings.WriteToRegistry(portraitViewer1);
-			MessageBox.Show(anyNotNull
-				? "The default texture sizes have been set in HKEY_CURRENT_USER."
-				: "The auto-resize settings have been cleared (all three set to \"Off.\")");
-		}
-
-		private void saveFrontStnameFontSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-			string str = FontSettings.WriteToRegistry(portraitViewer1.fontSettings);
-			MessageBox.Show(str != null
-				? "The default font has been set to: " + str
-				: "The default font settings have been cleared.");
-		}
-
-		private void clearAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-			GeneralRegistry.ClearAllStageManager();
-			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
-		}
-
-		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
-			SaveToRegistry();
-		}
-
-		private void loadTestToolStripMenuItem_Click(object sender, EventArgs e) {
-			try {
-				LoadFromRegistry();
-			} catch (NullReferenceException) {
-				MessageBox.Show("Could not load settings. They may not be present in the registry.");
 			}
 		}
 	}

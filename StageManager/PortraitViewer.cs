@@ -532,6 +532,7 @@ namespace BrawlStageManager {
 		public void generateName() {
 			using (NameDialog n = new NameDialog()) {
 				n.EntryText = "Battlefield";
+				n.LabelText = "Enter the stage name. (Use \\n for a line break.)";
 				if (n.ShowDialog() == DialogResult.OK) {
 					if (fontSettings == null) changeFrontStnameFont();
 					Bitmap bmp = NameCreator.createImage(fontSettings, n.EntryText);
@@ -547,7 +548,7 @@ namespace BrawlStageManager {
 		}
 
 		public void changeFrontStnameFont() {
-			fontSettings = NameCreator.selectFont(fontSettings);
+			fontSettings = NameCreator.selectFont(fontSettings) ?? fontSettings;
 		}
 
 		public void DowngradeMenSelmapMark(int i) {

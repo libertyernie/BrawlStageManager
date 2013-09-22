@@ -433,6 +433,7 @@ namespace BrawlStageManager {
 				NameDialog nd = new NameDialog();
 				nd.Text = "Enter Filename"; // Titlebar
 				nd.EntryText = s[0].Substring(s[0].LastIndexOf('\\')+1); // Textbox on the dialog ("Text" is already used by C#)
+				nd.LabelText = "Enter the filename to copy to (with or without the .pac extension):";
 				if (nd.ShowDialog(this) == DialogResult.OK) {
 					if (!nd.EntryText.ToLower().EndsWith(".pac")) {
 						nd.EntryText += ".pac"; // Force .pac extension so it shows up in the list

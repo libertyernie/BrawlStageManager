@@ -386,7 +386,7 @@ namespace BrawlStageManager {
 									 orderby e.Item2 descending
 									 select e.Item1).FirstOrDefault()
 									?? "ChangeThisTextureNamePlease")
-					: ((i > 31 && i < 50) || (i > 59)) ? basename + "." + "00"
+					/*: ((i > 31 && i < 50) || (i > 59)) ? basename + "." + "00"*/
 					: basename + "." + i.ToString("D2");
 				var entry = new PAT0TextureEntryNode();
 				tn.AddChild(entry);

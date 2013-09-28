@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StageManager", "StageManager\StageManager.csproj", "{758AE6D5-2133-4194-A36C-F371AE01A7C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SongManager", "SongManager\SongManager.csproj", "{B2BE7A35-376E-4D62-96FA-DB400B958D05}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{88B6BE8E-AA63-4F21-A559-2106C1DD554F}"
 	ProjectSection(SolutionItems) = preProject
 		README.txt = README.txt
@@ -50,27 +48,6 @@ Global
 		{758AE6D5-2133-4194-A36C-F371AE01A7C5}.Release|x64.ActiveCfg = Release|x86
 		{758AE6D5-2133-4194-A36C-F371AE01A7C5}.Release|x86.ActiveCfg = Release|x86
 		{758AE6D5-2133-4194-A36C-F371AE01A7C5}.Release|x86.Build.0 = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|Any CPU.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|Itanium.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|Mixed Platforms.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|Mixed Platforms.Build.0 = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|x64.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|x86.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}._DEBUG|x86.Build.0 = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|Itanium.ActiveCfg = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|x64.ActiveCfg = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|x86.ActiveCfg = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Debug|x86.Build.0 = Debug|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|Any CPU.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|Itanium.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|Mixed Platforms.Build.0 = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|x64.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|x86.ActiveCfg = Release|x86
-		{B2BE7A35-376E-4D62-96FA-DB400B958D05}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -104,7 +104,7 @@ namespace BrawlStageManager {
 			}
 
 			if (border.Width < 64 || border.Height < 56) {
-				MessageBox.Show("The border.png is not big enough - it must be 56x48 pixels.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("The border.png is not big enough - it must be 64x56 pixels.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				border = null;
 				return null;
 			}

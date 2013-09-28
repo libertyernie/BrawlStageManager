@@ -57,10 +57,10 @@ namespace BrawlStageManager {
 		/// <summary>
 		/// Labels for RightControl.
 		/// </summary>
-		public Label chooseLabel, loadingLabel, noMSBinLabel, couldNotOpenLabel;
+		private Label chooseLabel, loadingLabel, noMSBinLabel, couldNotOpenLabel;
 
 		/// <summary>
-		/// Change the control used on the bottom-right section of the window (either a label or an MSBinViewer.)
+		/// Change the control used on the middle-right section of the window (either a label or an MSBinViewer.)
 		/// Any existing controls in that panel will be removed, and the new control's Dock property will be set to Fill.
 		/// </summary>
 		public Control RightControl {
@@ -107,7 +107,7 @@ namespace BrawlStageManager {
 
 			moduleFolderLocation = "../../module";
 
-			// Later commands to change the titlebar assume there is a hypen in the title somewhere
+			// Later commands to change the titlebar assume there is a hyphen in the title somewhere
 			this.Text += " -";
 
 			#region labels
@@ -785,6 +785,10 @@ namespace BrawlStageManager {
 
 		private void saveTestToolStripMenuItem_Click(object sender, EventArgs e) {
 			SaveToRegistry();
+		}
+
+		private void updateMumenumainToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.updateMuMenumain();
 		}
 		#endregion
 

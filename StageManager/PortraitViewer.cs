@@ -21,7 +21,6 @@ namespace BrawlStageManager {
 		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
 		public bool selmapMarkPreview;
-		public bool UseMuMenumain;
 
 		public bool IsDirty {
 			get {
@@ -225,14 +224,6 @@ namespace BrawlStageManager {
 				MessageBox.Show(_openFilePath + " could not be accessed.\nFile written to " + _openFilePath + ".out.pac");
 			}
 
-			if (UseMuMenumain) try {
-					ResourceNode mu_menumain = fcopy(mu_menumain_path);
-					// put other code here
-					throw new Exception();
-				} catch (IOException) {
-					MessageBox.Show(mu_menumain_path + " could not be accessed.");
-				}
-
 			updateFileSize();
 		}
 		#endregion
@@ -364,7 +355,7 @@ namespace BrawlStageManager {
 													   select (PAT0TextureEntryNode)c).ToList();
 			if ((from c in childrenList where c.Key >= 40 && c.Key < 50 select c).Count() >= 10) {
 				MessageBox.Show("Skipping " + pathToPAT0TextureNode.Substring(pathToPAT0TextureNode.LastIndexOf('/') + 1) +
-					" - mappings for icon numbers 40-49 already exist.");
+					" - mappings for icon numbersx 40-49 already exist.");
 				return;
 			}
 
@@ -597,6 +588,14 @@ namespace BrawlStageManager {
 				sb.AppendLine(name + ": NOT USED");
 			}
 			return sb.ToString();
+		}
+
+		public void updateMuMenumain() {
+			if (DialogResult.OK == MessageBox.Show("Overwrite the current mu_menumain?", "Overwrite File", MessageBoxButtons.OKCancel)) {
+				ResourceNode mu_menumain = fcopy(mu_menumain_path);
+				IconsToMenumain.Copy(sc_selmap, mu_menumain);
+				mu_menumain.Export(mu_menumain_path);
+			}
 		}
 		#endregion
 

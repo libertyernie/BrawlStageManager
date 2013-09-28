@@ -83,6 +83,7 @@
     <Compile Include="AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="IconsToMenumain.cs" />
     <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="ImagePreviewPanel.cs">

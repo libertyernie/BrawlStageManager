@@ -207,15 +207,16 @@ namespace BrawlStageManager {
 			try {
 				fi.Refresh(); // Update file size
 
-				int isBrokenIndex = Array.IndexOf(sizes_of_broken_files, fi.Length);
+				var md5provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
+				byte[] hash = md5provider.ComputeHash(File.ReadAllBytes(fi.FullName));
+				var sb = new System.Text.StringBuilder();
+				foreach (byte b in hash) {
+					sb.Append(b.ToString("x2").ToLower());
+				}
+				stageInfoControl1.MD5 = sb.ToString();
 
+				int isBrokenIndex = Array.IndexOf(sizes_of_broken_files, fi.Length);
 				if (isBrokenIndex >= 0) { // mewtwo2000's venom causes latest brawllib to crash :(
-					var md5provider = new System.Security.Cryptography.MD5CryptoServiceProvider();
-					byte[] hash = md5provider.ComputeHash(File.ReadAllBytes(fi.FullName));
-					var sb = new System.Text.StringBuilder();
-					foreach (byte b in hash) {
-						sb.Append(b.ToString("x2").ToLower());
-					}
 					if (md5sums_of_broken_files.Contains(sb.ToString())) {
 						throw new FileNotFoundException();
 					}

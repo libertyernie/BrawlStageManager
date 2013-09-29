@@ -43,6 +43,7 @@
 			this.relButton_deletePacFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.panelLeft = new System.Windows.Forms.Panel();
 			this.panelRight = new System.Windows.Forms.Panel();
+			this.lblMD5 = new System.Windows.Forms.Label();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.flowLayoutPanel2.SuspendLayout();
@@ -56,16 +57,17 @@
 			// tableLayoutPanel1
 			// 
 			this.tableLayoutPanel1.ColumnCount = 1;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 1);
+			this.tableLayoutPanel1.Controls.Add(this.lblMD5, 0, 2);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowCount = 3;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(234, 300);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
@@ -76,7 +78,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 3);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(228, 144);
+			this.panel1.Size = new System.Drawing.Size(228, 93);
 			this.panel1.TabIndex = 2;
 			// 
 			// relInfo
@@ -97,7 +99,7 @@
 			this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-			this.flowLayoutPanel2.Size = new System.Drawing.Size(228, 144);
+			this.flowLayoutPanel2.Size = new System.Drawing.Size(228, 93);
 			this.flowLayoutPanel2.TabIndex = 0;
 			// 
 			// relFilename
@@ -126,9 +128,9 @@
 			this.panel2.Controls.Add(this.stageInfo);
 			this.panel2.Controls.Add(this.flowLayoutPanel1);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.panel2.Location = new System.Drawing.Point(3, 153);
+			this.panel2.Location = new System.Drawing.Point(3, 102);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(228, 144);
+			this.panel2.Size = new System.Drawing.Size(228, 93);
 			this.panel2.TabIndex = 3;
 			// 
 			// stageInfo
@@ -149,7 +151,7 @@
 			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(228, 144);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(228, 93);
 			this.flowLayoutPanel1.TabIndex = 0;
 			// 
 			// stageFilename
@@ -192,34 +194,34 @@
             this.relButton_deleteRelFile,
             this.relButton_deletePacFile});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(199, 92);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(209, 92);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// fixStageIDAutomaticallyToolStripMenuItem
 			// 
 			this.fixStageIDAutomaticallyToolStripMenuItem.Name = "fixStageIDAutomaticallyToolStripMenuItem";
-			this.fixStageIDAutomaticallyToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+			this.fixStageIDAutomaticallyToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
 			this.fixStageIDAutomaticallyToolStripMenuItem.Text = "Fix stage ID automatically";
 			this.fixStageIDAutomaticallyToolStripMenuItem.Click += new System.EventHandler(this.fixStageIDAutomaticallyToolStripMenuItem_Click);
 			// 
 			// relButton_changeID
 			// 
 			this.relButton_changeID.Name = "relButton_changeID";
-			this.relButton_changeID.Size = new System.Drawing.Size(198, 22);
+			this.relButton_changeID.Size = new System.Drawing.Size(208, 22);
 			this.relButton_changeID.Text = "Change stage ID";
 			this.relButton_changeID.Click += new System.EventHandler(this.relButton_changeID_Click);
 			// 
 			// relButton_deleteRelFile
 			// 
 			this.relButton_deleteRelFile.Name = "relButton_deleteRelFile";
-			this.relButton_deleteRelFile.Size = new System.Drawing.Size(198, 22);
+			this.relButton_deleteRelFile.Size = new System.Drawing.Size(208, 22);
 			this.relButton_deleteRelFile.Text = "Delete .rel file";
 			this.relButton_deleteRelFile.Click += new System.EventHandler(this.relButton_deleteRelFile_Click);
 			// 
 			// relButton_deletePacFile
 			// 
 			this.relButton_deletePacFile.Name = "relButton_deletePacFile";
-			this.relButton_deletePacFile.Size = new System.Drawing.Size(198, 22);
+			this.relButton_deletePacFile.Size = new System.Drawing.Size(208, 22);
 			this.relButton_deletePacFile.Text = "Delete .pac file";
 			this.relButton_deletePacFile.Click += new System.EventHandler(this.relButton_deletePacFile_Click);
 			// 
@@ -242,6 +244,17 @@
 			this.panelRight.Size = new System.Drawing.Size(66, 300);
 			this.panelRight.TabIndex = 3;
 			// 
+			// lblMD5
+			// 
+			this.lblMD5.AutoSize = true;
+			this.lblMD5.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblMD5.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblMD5.Location = new System.Drawing.Point(3, 201);
+			this.lblMD5.Margin = new System.Windows.Forms.Padding(3);
+			this.lblMD5.Name = "lblMD5";
+			this.lblMD5.Size = new System.Drawing.Size(228, 96);
+			this.lblMD5.TabIndex = 4;
+			// 
 			// StageInfoControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +264,7 @@
 			this.Name = "StageInfoControl";
 			this.Size = new System.Drawing.Size(300, 300);
 			this.tableLayoutPanel1.ResumeLayout(false);
+			this.tableLayoutPanel1.PerformLayout();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.flowLayoutPanel2.ResumeLayout(false);
@@ -287,6 +301,7 @@
 		private System.Windows.Forms.ToolStripMenuItem relButton_deletePacFile;
 		private System.Windows.Forms.Panel panelRight;
 		private System.Windows.Forms.ToolStripMenuItem fixStageIDAutomaticallyToolStripMenuItem;
+		private System.Windows.Forms.Label lblMD5;
 
 
 

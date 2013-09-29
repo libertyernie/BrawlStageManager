@@ -72,8 +72,9 @@
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.listMenSelmapMarkUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.downgradeMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.separator4 = new System.Windows.Forms.ToolStripSeparator();
+			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,7 +91,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -166,7 +166,7 @@
 			// 
 			this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
 			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
-			this.splitContainer2.SplitterDistance = 49;
+			this.splitContainer2.SplitterDistance = 60;
 			this.splitContainer2.TabIndex = 0;
 			// 
 			// stageInfoControl1
@@ -175,7 +175,7 @@
 			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
 			this.stageInfoControl1.Name = "stageInfoControl1";
 			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 45);
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
 			this.stageInfoControl1.TabIndex = 0;
 			this.stageInfoControl1.UseRelDescription = false;
 			// 
@@ -193,8 +193,8 @@
 			// splitContainer3.Panel2
 			// 
 			this.splitContainer3.Panel2.Controls.Add(this.modelPanel1);
-			this.splitContainer3.Size = new System.Drawing.Size(308, 420);
-			this.splitContainer3.SplitterDistance = 141;
+			this.splitContainer3.Size = new System.Drawing.Size(308, 409);
+			this.splitContainer3.SplitterDistance = 137;
 			this.splitContainer3.TabIndex = 4;
 			// 
 			// rightPanel
@@ -202,7 +202,7 @@
 			this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.rightPanel.Location = new System.Drawing.Point(0, 0);
 			this.rightPanel.Name = "rightPanel";
-			this.rightPanel.Size = new System.Drawing.Size(308, 141);
+			this.rightPanel.Size = new System.Drawing.Size(308, 137);
 			this.rightPanel.TabIndex = 3;
 			// 
 			// modelPanel1
@@ -213,7 +213,7 @@
 			this.modelPanel1.Location = new System.Drawing.Point(0, 0);
 			this.modelPanel1.Name = "modelPanel1";
 			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(308, 275);
+			this.modelPanel1.Size = new System.Drawing.Size(308, 268);
 			this.modelPanel1.TabIndex = 2;
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
@@ -528,17 +528,24 @@
 			this.downgradeMenSelmapMarksToolStripMenuItem.Text = "Downgrade MenSelmapMarks to CMPR";
 			this.downgradeMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.downgradeMenSelmapMarksToolStripMenuItem_Click);
 			// 
+			// separator4
+			// 
+			this.separator4.Name = "separator4";
+			this.separator4.Size = new System.Drawing.Size(280, 6);
+			// 
+			// updateMumenumainToolStripMenuItem
+			// 
+			this.updateMumenumainToolStripMenuItem.Name = "updateMumenumainToolStripMenuItem";
+			this.updateMumenumainToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.updateMumenumainToolStripMenuItem.Text = "Update mu_menumain";
+			this.updateMumenumainToolStripMenuItem.Click += new System.EventHandler(this.updateMumenumainToolStripMenuItem_Click);
+			// 
 			// updateScselcharacter2ToolStripMenuItem
 			// 
 			this.updateScselcharacter2ToolStripMenuItem.Name = "updateScselcharacter2ToolStripMenuItem";
 			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
 			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
 			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
-			// 
-			// separator4
-			// 
-			this.separator4.Name = "separator4";
-			this.separator4.Size = new System.Drawing.Size(280, 6);
 			// 
 			// addmissingPAT0EntriesToolStripMenuItem
 			// 
@@ -662,13 +669,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// updateMumenumainToolStripMenuItem
-			// 
-			this.updateMumenumainToolStripMenuItem.Name = "updateMumenumainToolStripMenuItem";
-			this.updateMumenumainToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.updateMumenumainToolStripMenuItem.Text = "Update mu_menumain";
-			this.updateMumenumainToolStripMenuItem.Click += new System.EventHandler(this.updateMumenumainToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

@@ -32,6 +32,12 @@ namespace BrawlStageManager {
 			relInfo.Text = v2;
 		}
 
+		public string MD5 {
+			set {
+				lblMD5.Text = value;
+			}
+		}
+
 		public FileInfo RelFile {
 			get {
 				return _relFile;

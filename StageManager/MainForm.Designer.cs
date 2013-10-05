@@ -76,6 +76,7 @@
 			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.snapshotPortraiticonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -91,7 +92,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.snapshotPortraiticonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -435,7 +435,7 @@
 			this.selmapMarkPreviewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.selmapMarkPreviewToolStripMenuItem.Name = "selmapMarkPreviewToolStripMenuItem";
 			this.selmapMarkPreviewToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-			this.selmapMarkPreviewToolStripMenuItem.Text = "SelmapMark preview";
+			this.selmapMarkPreviewToolStripMenuItem.Text = "Portrait previews";
 			this.selmapMarkPreviewToolStripMenuItem.Click += new System.EventHandler(this.selmapMarkPreviewToolStripMenuItem_Click);
 			// 
 			// selmapMarkFormat
@@ -556,6 +556,13 @@
 			this.addmissingPAT0EntriesToolStripMenuItem.Text = "Add \"missing\" PAT0 entries";
 			this.addmissingPAT0EntriesToolStripMenuItem.Click += new System.EventHandler(this.addmissingPAT0EntriesToolStripMenuItem_Click);
 			// 
+			// snapshotPortraiticonToolStripMenuItem
+			// 
+			this.snapshotPortraiticonToolStripMenuItem.Name = "snapshotPortraiticonToolStripMenuItem";
+			this.snapshotPortraiticonToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.snapshotPortraiticonToolStripMenuItem.Text = "Snapshot -> portrait/icon";
+			this.snapshotPortraiticonToolStripMenuItem.Click += new System.EventHandler(this.snapshotPortraiticonToolStripMenuItem_Click);
+			// 
 			// resizeToolStripMenuItem
 			// 
 			this.resizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -671,13 +678,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// snapshotPortraiticonToolStripMenuItem
-			// 
-			this.snapshotPortraiticonToolStripMenuItem.Name = "snapshotPortraiticonToolStripMenuItem";
-			this.snapshotPortraiticonToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.snapshotPortraiticonToolStripMenuItem.Text = "Snapshot -> portrait/icon";
-			this.snapshotPortraiticonToolStripMenuItem.Click += new System.EventHandler(this.snapshotPortraiticonToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

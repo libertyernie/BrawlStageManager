@@ -26,6 +26,20 @@ namespace BrawlStageManager {
 			return ret;
 		}
 
+		public static Bitmap ApplyMask(Bitmap source, Bitmap mask) {
+			source = Resize(source, mask.Size);
+			Bitmap ret = new Bitmap(source.Width, source.Height);
+			for (int x = 0; x < ret.Width; x++) {
+				for (int y = 0; y < ret.Height; y++) {
+					Color c = source.GetPixel(x, y);
+					ret.SetPixel(x, y, Color.FromArgb(
+						mask.GetPixel(x, y).R,
+						c.R, c.G, c.B));
+				}
+			}
+			return ret;
+		}
+
 		/// <summary>
 		/// Combines two images. The size of the second (foreground) image will be used for the final image.
 		/// </summary>

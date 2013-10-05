@@ -63,6 +63,7 @@ namespace BrawlStageManager {
 		private TextureContainer textures;
 
 		private string _openFilePath;
+		private Bitmap scribble;
 		// In case the image needs to be reloaded after replacing the texture
 		private int _iconNum;
 		#endregion
@@ -150,6 +151,8 @@ namespace BrawlStageManager {
 			}
 			if (_openFilePath != null) {
 				updateFileSize();
+				TEX0Node tex0 = sc_selmap.FindChild("MiscData[80]/Textures(NW4R)/MenSelmapFrontBg", false) as TEX0Node;
+				if (tex0 != null) scribble = tex0.GetImage(0);
 				FindMuMenumain();
 			} else {
 				fileSizeBar.Value = 0;
@@ -242,6 +245,8 @@ namespace BrawlStageManager {
 					bgi = BitmapUtilities.AlphaSwap(image);
 				} else if (panel == seriesicon && selmapMarkPreview) {
 					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
+				} else if (panel == prevbase && selmapMarkPreview && scribble != null) {
+					bgi = BitmapUtilities.ApplyMask(image, scribble);
 				} else {
 					bgi = image;
 				}

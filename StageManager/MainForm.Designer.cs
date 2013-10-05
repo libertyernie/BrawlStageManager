@@ -91,6 +91,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.snapshotPortraiticonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -502,7 +503,8 @@
             this.separator4,
             this.updateMumenumainToolStripMenuItem,
             this.updateScselcharacter2ToolStripMenuItem,
-            this.addmissingPAT0EntriesToolStripMenuItem});
+            this.addmissingPAT0EntriesToolStripMenuItem,
+            this.snapshotPortraiticonToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
 			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolsToolStripMenuItem.Text = "Tools";
@@ -670,6 +672,13 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
+			// snapshotPortraiticonToolStripMenuItem
+			// 
+			this.snapshotPortraiticonToolStripMenuItem.Name = "snapshotPortraiticonToolStripMenuItem";
+			this.snapshotPortraiticonToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.snapshotPortraiticonToolStripMenuItem.Text = "Snapshot -> portrait/icon";
+			this.snapshotPortraiticonToolStripMenuItem.Click += new System.EventHandler(this.snapshotPortraiticonToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -772,6 +781,7 @@
 		private System.Windows.Forms.ToolStripMenuItem clearAllStageManagerSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveRegistrySettings;
 		private System.Windows.Forms.ToolStripMenuItem updateMumenumainToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem snapshotPortraiticonToolStripMenuItem;
 
 
 

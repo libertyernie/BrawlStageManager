@@ -791,6 +791,25 @@ namespace BrawlStageManager {
 		private void updateMumenumainToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.updateMuMenumain();
 		}
+
+		private void snapshotPortraiticonToolStripMenuItem_Click(object sender, EventArgs e) {
+			Bitmap screenshot = modelPanel1.GrabScreenshot(false);
+
+			int size = Math.Min(screenshot.Width, screenshot.Height);
+			Bitmap square = new Bitmap(size, size);
+			using (Graphics g = Graphics.FromImage(square)) {
+				g.DrawImage(screenshot,
+					(screenshot.Width - size) / -2,
+					(screenshot.Height - size) / -2);
+			}
+
+			string iconFile = TempFiles.Create(".png");
+			BitmapUtilities.Resize(square, new Size(64, 56)).Save(iconFile);
+			portraitViewer1.Replace(portraitViewer1.icon, iconFile, false);
+			string prevbaseFile = TempFiles.Create(".png");
+			BitmapUtilities.Resize(square, portraitViewer1.prevbaseResizeTo ?? new Size(176, 176)).Save(prevbaseFile);
+			portraitViewer1.Replace(portraitViewer1.prevbase, prevbaseFile, false);
+		}
 		#endregion
 
 		private void exportStage(FileInfo f, string thisdir) {

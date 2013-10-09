@@ -88,18 +88,30 @@ namespace BrawlStageManager {
 			#region initialize from registry
 			Size?[] sizes = ResizeSettings.Get();
 
-			if (sizes[0] == new Size(88, 88)) {
-				x88ToolStripMenuItem.PerformClick();
-			} else if (sizes[0] == new Size(128, 128)) {
-				x128ToolStripMenuItem.PerformClick();
+			if (sizes[0] != null) {
+				portraitViewer1.prevbaseResizeTo = sizes[0];
+				prevbaseOriginalSizeToolStripMenuItem.Checked = false;
+				if (sizes[0] == new Size(88, 88)) {
+					x88ToolStripMenuItem.Checked = true;
+				} else if (sizes[0] == new Size(128, 128)) {
+					x128ToolStripMenuItem.Checked = true;
+				}
 			}
 
-			if (sizes[1] == new Size(104, 56)) {
-				x56ToolStripMenuItem.PerformClick();
+			if (sizes[1] != null) {
+				portraitViewer1.frontstnameResizeTo = sizes[1];
+				frontstnameOriginalSizeToolStripMenuItem.Checked = false;
+				if (sizes[1] == new Size(104, 56)) {
+					x56ToolStripMenuItem.Checked = true;
+				}
 			}
 
-			if (sizes[2] == new Size(60, 56)) {
-				x56ToolStripMenuItem1.PerformClick();
+			if (sizes[2] != null) {
+				portraitViewer1.selmapMarkResizeTo = sizes[2];
+				selmapMarkOriginalSizeToolStripMenuItem.Checked = false;
+				if (sizes[2] == new Size(60, 56)) {
+					x56ToolStripMenuItem1.Checked = true;
+				}
 			}
 
 			portraitViewer1.fontSettings = FontSettings.Get() ?? portraitViewer1.fontSettings;

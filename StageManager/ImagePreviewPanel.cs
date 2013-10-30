@@ -79,15 +79,23 @@ namespace BrawlStageManager {
 		}
 
 		public void changeBorder() {
-			borderChange.PerformClick();
-		}
-
-		private void borderChange_Click(object sender, EventArgs e) {
 			TEX0Node tex0 = getPVParent().GetTEX0For(this);
 			Bitmap icon = tex0.GetImage(0);
 			Bitmap newIcon = replaceBorder(icon);
-			if (newIcon != null) tex0.Replace(newIcon);
-			getPVParent().UpdateImage();
+			if (newIcon == null) return;
+
+			using (var dialog = new ConfirmIconReplaceDialog()) {
+				dialog.CurrentImage = icon;
+				dialog.NewImage = newIcon;
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					tex0.Replace(newIcon);
+					getPVParent().UpdateImage();
+				}
+			}
+		}
+
+		private void borderChange_Click(object sender, EventArgs e) {
+			changeBorder();
 		}
 
 		private static Bitmap replaceBorder(Bitmap icon) {

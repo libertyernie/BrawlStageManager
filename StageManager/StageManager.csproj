@@ -83,6 +83,12 @@
     <Compile Include="AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConfirmIconReplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfirmIconReplaceDialog.Designer.cs">
+      <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IconsToMenumain.cs" />
     <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
     <Compile Include="FileOperations.cs" />
@@ -143,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AskNameDialog.resx">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfirmIconReplaceDialog.resx">
+      <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

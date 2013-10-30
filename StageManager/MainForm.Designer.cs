@@ -92,6 +92,8 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -497,14 +499,16 @@
 			// toolsToolStripMenuItem
 			// 
 			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addMenSelmapMarksToolStripMenuItem,
-            this.listMenSelmapMarkUsageToolStripMenuItem,
-            this.downgradeMenSelmapMarksToolStripMenuItem,
-            this.separator4,
+            this.snapshotPortraiticonToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.updateMumenumainToolStripMenuItem,
             this.updateScselcharacter2ToolStripMenuItem,
+            this.separator4,
+            this.addMenSelmapMarksToolStripMenuItem,
+            this.listMenSelmapMarkUsageToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.addmissingPAT0EntriesToolStripMenuItem,
-            this.snapshotPortraiticonToolStripMenuItem});
+            this.downgradeMenSelmapMarksToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
 			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolsToolStripMenuItem.Text = "Tools";
@@ -679,6 +683,16 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(280, 6);
+			// 
+			// toolStripMenuItem2
+			// 
+			this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+			this.toolStripMenuItem2.Size = new System.Drawing.Size(280, 6);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -782,6 +796,8 @@
 		private System.Windows.Forms.ToolStripMenuItem saveRegistrySettings;
 		private System.Windows.Forms.ToolStripMenuItem updateMumenumainToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem snapshotPortraiticonToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 
 
 

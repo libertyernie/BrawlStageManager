@@ -107,7 +107,6 @@
     <Compile Include="ModifyPAT0Dialog.Designer.cs">
       <DependentUpon>ModifyPAT0Dialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModuleIDs.cs" />
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>

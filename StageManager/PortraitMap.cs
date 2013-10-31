@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace BrawlStageManager {
 	public class PortraitMap {
@@ -88,25 +89,14 @@ namespace BrawlStageManager {
 			"custom25",
 		};
 
-		private PortraitMap() { }
-
-		private static PortraitMap _map = new PortraitMap();
-		public static PortraitMap Map {
-			get {
-				return _map;
-			}
-		}
-
-		public int this[string filename] {
-			get {
-				string basename = filename.ToLower().Substring(3);
-				for (int i = 0; i < StageOrder.Length; i++) {
-					if (StageOrder[i].Length > 0 && basename.StartsWith(StageOrder[i])) {
-						return i;
-					}
+		public static int ForPac(string filename) {
+			string basename = filename.ToLower().Substring(3);
+			for (int i = 0; i < StageOrder.Length; i++) {
+				if (StageOrder[i].Length > 0 && basename.StartsWith(StageOrder[i])) {
+					return i;
 				}
-				return 0;
 			}
+			return 0;
 		}
 	}
 }

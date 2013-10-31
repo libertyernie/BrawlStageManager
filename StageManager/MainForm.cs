@@ -216,6 +216,8 @@ namespace BrawlStageManager {
 			string relname = matchRel(fi.Name);
 			updateRel(relname);
 
+			//Console.WriteLine(fi.Name + " " + PortraitMap.ForPac(fi.Name) + " " + PortraitMap.FromSSSCode(fi.Name));
+
 			try {
 				fi.Refresh(); // Update file size
 
@@ -295,7 +297,7 @@ namespace BrawlStageManager {
 					RightControl = noMSBinLabel;
 				}
 			}
-			portraitViewer1.UpdateImage(PortraitMap.Map[fi.Name]);
+			portraitViewer1.UpdateImage(PortraitMap.ForPac(fi.Name));
 			this.Refresh();
 		}
 
@@ -728,7 +730,7 @@ namespace BrawlStageManager {
 			if (MessageBox.Show(this, "Are you sure you want to convert all IA4 MenSelmapMarks currently in use to CMPR?" +
 			"This should cut their filesize in half.", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK) {
 				foreach (FileInfo f in listBox1.Items) {
-					int i = PortraitMap.Map[f.Name];
+					int i = PortraitMap.ForPac(f.Name);
 					portraitViewer1.DowngradeMenSelmapMark(i);
 				}
 			}
@@ -856,7 +858,7 @@ namespace BrawlStageManager {
 			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
 			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
 
-			portraitViewer1.ExportImages(PortraitMap.Map[f.Name], thisdir);
+			portraitViewer1.ExportImages(PortraitMap.ForPac(f.Name), thisdir);
 		}
 
 		#region registry <-> options menu

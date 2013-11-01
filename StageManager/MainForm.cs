@@ -213,10 +213,10 @@ namespace BrawlStageManager {
 			_rootPath = fi.FullName;
 			if (renderModels.Checked) modelPanel1.ClearAll();
 
-			string relname = matchRel(fi.Name);
+			string relname = StageIDMap.RelNameForPac(fi.Name);
 			updateRel(relname);
 
-			//Console.WriteLine(fi.Name + " " + PortraitMap.ForPac(fi.Name) + " " + PortraitMap.FromSSSCode(fi.Name));
+			//Console.WriteLine(fi.Name + " " + StageIDMap.ForPac(fi.Name) + " " + PortraitMap.FromSSSCode(fi.Name));
 
 			try {
 				fi.Refresh(); // Update file size
@@ -297,7 +297,7 @@ namespace BrawlStageManager {
 					RightControl = noMSBinLabel;
 				}
 			}
-			portraitViewer1.UpdateImage(PortraitMap.ForPac(fi.Name));
+			portraitViewer1.UpdateImage(StageIDMap.IconForPac(fi.Name));
 			this.Refresh();
 		}
 
@@ -342,40 +342,6 @@ namespace BrawlStageManager {
 			stageInfoControl1.RelFile = new FileInfo(path);
 		}
 
-		/// <summary>
-		/// Finds the appropriate .rel filename for a stage .pac file.
-		/// </summary>
-		/// <param name="pacName">Filename of the .pac file</param>
-		/// <returns>Filename of the .rel file (lowercase)</returns>
-		public static string matchRel(string pacName) {
-			string basename = pacBasename(pacName).ToLower();
-			if (basename == "battlefield") {
-				basename = "battle";
-			} else if (basename == "chararoll") {
-				basename = "croll";
-			} else if (basename == "configtest") {
-				basename = "config";
-			} else if (basename == "onlinetraining") {
-				basename = "otrain";
-			} else if (basename.StartsWith("target")) {
-				basename = "tbreak";
-			}
-			return "st_" + basename + ".rel";
-		}
-
-		/// <summary>
-		/// Finds the base filename of a .pac file (for .rel matching.)
-		/// The first three characters (typically STG) are removed, and the filename is cut off at the first instance of an underscore or period.
-		/// </summary>
-		/// <param name="pacName">Filename of the .pac file</param>
-		/// <returns>"Base" filename of the stage</returns>
-		public static string pacBasename(string pacName) {
-			char[] cutAt = {'.', '_'};
-			int cutAtPos = pacName.IndexOfAny(cutAt);
-			if (cutAtPos <= 3) return "";
-			return pacName.Substring(3, cutAtPos-3);
-		}
-
 		private void changeDirectory(string newpath) {
 			changeDirectory(new DirectoryInfo(newpath));
 		}
@@ -398,18 +364,10 @@ namespace BrawlStageManager {
 
 			if (useAFixedStageListToolStripMenuItem.Checked) {
 				List<string> list = new List<string>();
-				foreach (string s in PortraitMap.StageOrder) {
-					if (s.Length > 0) {
-						list.AddRange(s == "starfox" ? new string[] { "STARFOX_GDIFF" } :
-									  s == "emblem" ? new string[] { "EMBLEM_00", "EMBLEM_01", "EMBLEM_02" } :
-									  s == "mariopast" ? new string[] { "MARIOPAST_00", "MARIOPAST_01" } :
-									  s == "metalgear" ? new string[] { "METALGEAR_00", "METALGEAR_01", "METALGEAR_02" } :
-									  s == "tengan" ? new string[] { "TENGAN_1", "TENGAN_2", "TENGAN_3" } :
-									  s == "village" ? new string[] { "VILLAGE_00", "VILLAGE_01", "VILLAGE_02", "VILLAGE_03", "VILLAGE_04" } :
-									  new string[] { s.ToUpper() });
-					}
+				foreach (var s in StageIDMap.Stages) {
+					list.AddRange(s.PacNames);
 				}
-				pacFiles = list.Select(s => new FileInfo("STG" + s + ".PAC")).ToArray();
+				pacFiles = list.Select(s => new FileInfo(s)).ToArray();
 			} else {
 				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
 					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
@@ -730,7 +688,7 @@ namespace BrawlStageManager {
 			if (MessageBox.Show(this, "Are you sure you want to convert all IA4 MenSelmapMarks currently in use to CMPR?" +
 			"This should cut their filesize in half.", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK) {
 				foreach (FileInfo f in listBox1.Items) {
-					int i = PortraitMap.ForPac(f.Name);
+					int i = StageIDMap.IconForPac(f.Name);
 					portraitViewer1.DowngradeMenSelmapMark(i);
 				}
 			}
@@ -855,10 +813,11 @@ namespace BrawlStageManager {
 			}
 			string p = readNameFromPac(f);
 			FileOperations.Copy(f.FullName, thisdir + "/" + p);
-			FileInfo rel = new FileInfo("../../module/" + matchRel(f.Name));
+			string relname = StageIDMap.RelNameForPac(f.Name);
+			FileInfo rel = new FileInfo("../../module/" + relname);
 			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
 
-			portraitViewer1.ExportImages(PortraitMap.ForPac(f.Name), thisdir);
+			portraitViewer1.ExportImages(StageIDMap.IconForPac(f.Name), thisdir);
 		}
 
 		#region registry <-> options menu

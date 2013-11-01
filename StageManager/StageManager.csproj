@@ -110,7 +110,6 @@
     <Compile Include="MSBinViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PortraitMap.cs" />
     <Compile Include="PortraitViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,6 +131,7 @@
     <Compile Include="RegistryUtilities\GeneralRegistry.cs" />
     <Compile Include="RegistryUtilities\OptionsMenuSettings.cs" />
     <Compile Include="RegistryUtilities\ResizeSettings.cs" />
+    <Compile Include="StageIDMap.cs" />
     <Compile Include="StageInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

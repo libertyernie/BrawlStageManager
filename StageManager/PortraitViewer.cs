@@ -579,7 +579,7 @@ namespace BrawlStageManager {
 					where marks.Contains(c.Texture)
 					group c by c.Texture into g
 					let count = g.Count()
-					let one = PortraitMap.StageOrder[(int)g.First().Key]
+					let one = StageIDMap.PacBasenameForIcon((int)g.First().Key)
 					orderby count, g.Key
 					select new { count, g.Key, one };
 			StringBuilder sb = new StringBuilder();

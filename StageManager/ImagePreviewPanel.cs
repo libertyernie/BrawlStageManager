@@ -55,7 +55,7 @@ namespace BrawlStageManager {
 		private void replace_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
 			if (pv != null) {
-				MainForm.OpenDialog.Filter = ExportFilters.TEX0;
+				MainForm.OpenDialog.Filter = FileFilters.TEX0;
 				if (MainForm.OpenDialog.ShowDialog() == DialogResult.OK) {
 					string fileName = MainForm.OpenDialog.FileName;
 					pv.Replace(this, fileName, true);
@@ -66,7 +66,7 @@ namespace BrawlStageManager {
 		private void export_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
 			if (pv != null) {
-				MainForm.SaveDialog.Filter = ExportFilters.TEX0;
+				MainForm.SaveDialog.Filter = FileFilters.TEX0;
 				MainForm.SaveDialog.FilterIndex = 1;
 				if (MainForm.SaveDialog.ShowDialog() == DialogResult.OK) {
 					int fIndex = MainForm.SaveDialog.FilterIndex;

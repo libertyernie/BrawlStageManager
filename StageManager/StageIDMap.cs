@@ -49,7 +49,7 @@ namespace BrawlStageManager {
 			#endregion
 
 			public bool ContainsPac(string filename) {
-				return filename.ToLower().Contains(PacBasename.ToLower());
+				return filename.ToLower() == "stg" + PacBasename.ToLower() + ".pac";
 			}
 
 			public Stage(byte id, string name, string relname, string pac_basename) {
@@ -186,6 +186,13 @@ namespace BrawlStageManager {
 				return _stages;
 			}
 		}
+		private static ReadOnlyCollection<Tuple<int, int>> _stageIconPairs;
+		public static ReadOnlyCollection<Tuple<int, int>> StageIconPairs {
+			get {
+				if (_stageIconPairs == null) _stageIconPairs = sss.AsReadOnly();
+				return _stageIconPairs;
+			}
+		}
 
 		public static void loadCustomSSS(string code) {
 			code = code.Substring(code.IndexOf("06407AAC 000000"));
@@ -204,15 +211,17 @@ namespace BrawlStageManager {
 		public static int IconForPac(string filename) {
 			int stageID = -1;
 			if (filename.StartsWith("STGCUSTOM", StringComparison.InvariantCultureIgnoreCase)) {
-				stageID = Int32.Parse(filename.Substring(9, 2)) + 0x3F;
+				stageID = Convert.ToInt32(filename.Substring(9, 2), 16) + 0x3F;
 			} else {
 				var q = from s in stageList
 						where s.ContainsPac(filename)
 						select s.ID;
 				if (q.Count() > 1) {
-					throw new Exception("More than one stage matches the search pattern: " + filename);
+					Console.WriteLine("More than one stage matches the search pattern: " + filename);
+					return q.First();
 				} else if (q.Count() < 1) {
-					throw new Exception("No stage matches the search pattern: " + filename);
+					Console.WriteLine("No stage matches the search pattern: " + filename);
+					return -1;
 				}
 				stageID = q.First();
 			}
@@ -243,12 +252,82 @@ namespace BrawlStageManager {
 						where s.ContainsPac(filename)
 						select s.RelName;
 				if (q.Count() > 1) {
-					throw new Exception("More than one stage matches the search pattern: " + filename);
+					Console.WriteLine("More than one stage matches the search pattern: " + filename);
+					return q.First();
 				} else if (q.Count() < 1) {
-					throw new Exception("No stage matches the search pattern: " + filename);
+					Console.WriteLine("No stage matches the search pattern: " + filename);
+					return "none";
 				}
 				return q.First();
 			}
+		}
+
+		private static int[] sc_selcharacter2_icon_from_sc_selmap_icon = {
+			1, // Battlefield
+			2, // Final Destination
+			3, // Delfino Plaza
+			4, // Luigi's Mansion
+			5, // Mushroomy Kingdom
+			6, // Mario Circuit
+			25, // 75 m
+			7, // Rumble Falls
+			9, // Pirate Ship
+			8, // Bridge of Eldin
+			10, // Norfair
+			11, // Frigate Orpheon
+			12, // Yoshi's Island (Brawl)
+			13, // Halberd
+			14, // Lylat Cruise
+			15, // Pokemon Stadium 2
+			16, // Spear Pillar
+			17, // Port Town Aero Dive
+			23, // Summit
+			27, // Flat Zone 2
+			18, // Castle Siege
+			19, // WarioWare Inc.
+			20, // Distant Planet
+			24, // Skyworld
+			26, // Mario Bros.
+			22, // New Pork City
+			21, // Smashville
+			30, // Shadow Moses Island
+			31, // Green Hill Zone
+			28, // PictoChat
+			29, // Hanenbow
+			50, // Temple
+			51, // Yoshi's Island (Melee)
+			52, // Jungle Japes
+			53, // Onett
+			54, // Green Greens
+			55, // Rainbow Cruise
+			56, // Corneria
+			57, // Big Blue
+			58, // Brinstar
+			59, // Pokemon Stadium
+		};
+		public static int selcharacter2Icon(int selmapIcon) {
+			int index = -1;
+			for (int i = 0; i < StageIconPairs.Count; i++) {
+				if (StageIconPairs[i].Item2 == selmapIcon) {
+					index = i;
+					break;
+				}
+			}
+			if (index >= 0 && index < 41) {
+				return sc_selcharacter2_icon_from_sc_selmap_icon[index];
+			} else {
+				return -1;
+			}
+		}
+		public static int selmapIcon(int selcharacter2Icon) {
+			int index = -1;
+			for (int i = 0; i < sc_selcharacter2_icon_from_sc_selmap_icon.Length; i++) {
+				if (sc_selcharacter2_icon_from_sc_selmap_icon[i] == selcharacter2Icon) {
+					index = i;
+					break;
+				}
+			}
+			return StageIconPairs[index].Item2;
 		}
 	}
 }

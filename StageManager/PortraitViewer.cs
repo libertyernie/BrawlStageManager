@@ -358,7 +358,7 @@ namespace BrawlStageManager {
 			List<PAT0TextureEntryNode> childrenList = (from c in tn.Children
 													   where c is PAT0TextureEntryNode
 													   select (PAT0TextureEntryNode)c).ToList();
-			if ((from c in childrenList where c.Key >= 40 && c.Key < 50 select c).Count() >= 10) {
+			if ((from c in childrenList where c.FrameIndex >= 40 && c.FrameIndex < 50 select c).Count() >= 10) {
 				MessageBox.Show("Skipping " + pathToPAT0TextureNode.Substring(pathToPAT0TextureNode.LastIndexOf('/') + 1) +
 					" - mappings for icon numbersx 40-49 already exist.");
 				return;
@@ -366,8 +366,8 @@ namespace BrawlStageManager {
 
 			List<Tuple<string, float>> entries = new List<Tuple<string, float>>();
 			foreach (var entry in childrenList) {
-				entries.Add(new Tuple<string, float>(entry.Texture, entry.Key));
-				if (entry.Key != 0) tn.RemoveChild(entry);
+				entries.Add(new Tuple<string, float>(entry.Texture, entry.FrameIndex));
+				if (entry.FrameIndex != 0) tn.RemoveChild(entry);
 			}
 
 			string basename = (from e in entries
@@ -386,7 +386,7 @@ namespace BrawlStageManager {
 					: basename + "." + i.ToString("D2");
 				var entry = new PAT0TextureEntryNode();
 				tn.AddChild(entry);
-				entry.Key = i;
+				entry.FrameIndex = i;
 				entry.Texture = texname;
 				if (icon) {
 					entry.Palette = entry.Texture;
@@ -400,7 +400,7 @@ namespace BrawlStageManager {
 			foreach (var tuple in moreThan79query) {
 				var entry = new PAT0TextureEntryNode();
 				tn.AddChild(entry);
-				entry.Key = tuple.Item2;
+				entry.FrameIndex = tuple.Item2;
 				entry.Texture = tuple.Item1;
 				if (icon) {
 					entry.Palette = entry.Texture;
@@ -431,7 +431,7 @@ namespace BrawlStageManager {
 
 		public void copyIconsToSelcharacter2() {
 			string fileToSaveTo = null;
-			int[] SelmapNumForThisSelcharacter2Num =
+			/*int[] SelmapNumForThisSelcharacter2Num =
 			{ 00,
 			  01,02,03,04,05,
 			  06,08,10,09,11,
@@ -441,7 +441,7 @@ namespace BrawlStageManager {
 			  25,20,30,31,28,29,
 			  32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,
 			  50,51,52,53,54,
-			  55,56,57,58,59};
+			  55,56,57,58,59};*/
 
 			ResourceNode s2 = null;
 			if (common5 != null) {
@@ -468,12 +468,12 @@ namespace BrawlStageManager {
 					if (i == 32) i = 50;
 					string tempFile1 = TempFiles.Create(".tex0");
 					string tempFile2 = TempFiles.Create(".plt0");
-					string nameTo = i.ToString("D2");
-					string nameFrom = SelmapNumForThisSelcharacter2Num[i].ToString("D2");
-					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameFrom, false) as TEX0Node;
-					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameTo, false) as TEX0Node;
-					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameFrom, false);
-					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameTo, false);
+					string nameSelcharacter2 = i.ToString("D2");
+					string nameSelmap = StageIDMap.selmapIcon(i).ToString("D2");
+					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameSelmap, false) as TEX0Node;
+					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameSelcharacter2, false) as TEX0Node;
+					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameSelmap, false);
+					var palTo = md0.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameSelcharacter2, false);
 					if (iconFrom != null && iconTo != null && palFrom != null && palTo != null) {
 						iconFrom.Export(tempFile1);
 						iconTo.Replace(tempFile1);
@@ -481,8 +481,8 @@ namespace BrawlStageManager {
 						palTo.Replace(tempFile2);
 					}
 
-					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + SelmapNumForThisSelcharacter2Num[i].ToString("D2"), false) as TEX0Node;
-					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + i.ToString("D2"), false) as TEX0Node;
+					TEX0Node prevbase = md80.FindChild("Textures(NW4R)/MenSelmapPrevbase." + nameSelmap, false) as TEX0Node;
+					TEX0Node stageswitch = md0.FindChild("Textures(NW4R)/MenStageSwitch." + nameSelcharacter2, false) as TEX0Node;
 					if (prevbase != null && stageswitch != null) {
 						Bitmap thumbnail = new Bitmap(112, 56);
 						using (Graphics g = Graphics.FromImage(thumbnail)) {
@@ -579,7 +579,7 @@ namespace BrawlStageManager {
 					where marks.Contains(c.Texture)
 					group c by c.Texture into g
 					let count = g.Count()
-					let one = StageIDMap.PacBasenameForIcon((int)g.First().Key)
+					let one = StageIDMap.PacBasenameForIcon((int)g.First().FrameIndex)
 					orderby count, g.Key
 					select new { count, g.Key, one };
 			StringBuilder sb = new StringBuilder();

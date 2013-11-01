@@ -46,7 +46,7 @@ namespace BrawlStageManager {
 		private void populate(out TEX0Node tex0node, out PAT0TextureEntryNode pat0node, string path) {
 			var query = (from n in PAT0Folder.FindChild(path, false).Children[0].Children
 						 where n is PAT0TextureEntryNode
-						 && ((PAT0TextureEntryNode)n).Key == iconNum
+						 && ((PAT0TextureEntryNode)n).FrameIndex == iconNum
 						 select ((PAT0TextureEntryNode)n));
 			if (!query.Any()) {
 				pat0node = null;

@@ -105,7 +105,7 @@ namespace BrawlStageManager {
 				}
 
 				btnGenerateName.Visible = (textures.prevbase_tex0 != null);
-				btnRepaintIcon.Visible = (textures.icon_tex0 != null);
+				lblIconTex.Text = "Icon no.: " + iconNum;
 
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P: " + textures.prevbase_tex0.ToSizeString()
@@ -650,10 +650,6 @@ namespace BrawlStageManager {
 
 		private void btnGenerateName_Click(object sender, EventArgs e) {
 			generateName();
-		}
-
-		private void btnRepaintIcon_Click(object sender, EventArgs e) {
-			repaintIconBorder();
 		}
 		#endregion
 	}

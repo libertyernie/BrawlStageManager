@@ -65,6 +65,7 @@ namespace BrawlStageManager {
 
 		private static List<Stage> stageList = new List<Stage>();
 		private static List<Tuple<int, int>> sss;
+		private static List<int> sss_order;
 		static StageIDMap() {
 			// static initializer
 			#region Arrays containing stage data
@@ -128,54 +129,51 @@ namespace BrawlStageManager {
 			for (int i = 0; i < ids.Length; i++)
 				stageList.Add(new Stage(ids[i], stagenames[i], relnames[i], pac_basenames[i]));
 
-			string s = @"Classic Expansion SSS v5.3
-* 046B8F5C 7C802378
-* 046B8F64 7C6300AE
-* 040AF618 5460083C
-* 040AF68C 38840002
-* 040AF6AC 5463083C
-* 040AF6C0 88030001
-* 040AF6E8 3860FFFF
-* 040AF59C 3860000C
-* 060B91C8 00000018
-* BFA10014 7CDF3378
-* 7CBE2B78 7C7D1B78
-* 2D05FFFF 418A0014
-* 006B929C 00000027
-* 066B99D8 00000027
-* 00010203 04050709
-* 080A0B0C 0D0E0F10
-* 11141516 1A191217
-* 0618132A 1D1E1B1C
-* 2B2C2D2E 2F303100
-* 006B92A4 00000026
-* 066B9A58 00000026
-* 1F202122 23242526
-* 27283233 34353637
-* 38393A3B 3C3D3E3F
-* 40414243 44454647
-* 48494A4B 4C4D0000
-* 06407AAC 0000009C
+			string s = @"* 046b8f5c 7c802378
+* 046b8f64 7c6300ae
+* 040af618 5460083c
+* 040af68c 38840002
+* 040af6ac 5463083c
+* 040af6c0 88030001
+* 040af6e8 3860ffff
+* 040af59c 3860000c
+* 060b91c8 00000018
+* bfa10014 7cdf3378
+* 7cbe2b78 7c7d1b78
+* 2d05ffff 418a0014
+* 006b929c 00000019
+* 066b99d8 00000019
+* 040d140a 032c160c
+* 0e2b151c 2d172000
+* 0f011a23 18071e2e
+* 2f000000 00000000
+* 006b92a4 00000019
+* 066b9a58 00000019
+* 24051208 1b110b1d
+* 21192213 26022806
+* 10091f25 27303132
+* 33000000 00000000
+* 06407aac 0000009c
 * 01010202 03030404
 * 05050606 07070808
-* 0909330A 0B0B0C0C
-* 0D0D0E0E 130F1410
+* 0909330a 0b0b0c0c
+* 0d0d0e0e 130f1410
 * 15111612 17131814
-* 19151C16 1D171E18
-* 1F19201A 211B221C
-* 231D241E 251F2932
-* 2A332B34 2C352D36
-* 2F373038 3139323A
-* 2E3BFFFF 40204121
+* 40151c16 1d171e18
+* 1f19201a 211b221c
+* 231d241e 251f2932
+* 2a332b34 2c352d36
+* 2f373038 3139323a
+* 2e3b0064 40204121
 * 42224323 44244525
 * 46264727 48284929
-* 4A2A4B2B 4C2C4D2D
-* 4E2E4F2F 50305131
-* 523D533E 543F5540
+* 4a2a4b2b 4c2c4d2d
+* 4e2e4f2f 50305131
+* 523d533e 543f5540
 * 56415742 58435944
-* 5A455B46 5C475D48
-* 5E495F4A 604B614C
-* 624D634E 00000000";
+* 5a455b46 5c475d48
+* 5e495f4a 604b614c
+* 624d634e 00000000";
 			loadCustomSSS(s);
 		}
 
@@ -194,7 +192,52 @@ namespace BrawlStageManager {
 			}
 		}
 
+		public static List<string> PacFilesBySSSOrder() {
+			List<string> list = new List<string>();
+			foreach (int index in sss_order) {
+				var tuple = StageIconPairs[index];
+				if (tuple.Item1 >= 0x40) {
+					list.Add("STGCUSTOM" + (tuple.Item1 - 0x3F).ToString("X2") + ".pac");
+				} else {
+					var q = from s in stageList
+							where s.ID == tuple.Item1
+							select s.PacNames;
+					foreach (string[] ss in q) {
+						list.AddRange(ss);
+					}
+				}
+			}
+			return list;
+		}
+
 		public static void loadCustomSSS(string code) {
+			code = code.ToUpper();
+
+			int[] ia = {
+				code.IndexOf("066B99D8 000000"),
+				code.IndexOf("006B92A4 000000"),
+				code.IndexOf("066B9A58 000000"),
+				code.IndexOf("06407AAC 000000"),
+			};
+
+			string screenA = code.Substring(ia[0], ia[1] - ia[0]);
+			string screenB = code.Substring(ia[2], ia[3] - ia[2]);
+			char[] charsA = (from c in screenA
+							  where char.IsLetterOrDigit(c)
+							  select c).ToArray();
+			char[] charsB = (from c in screenB
+							  where char.IsLetterOrDigit(c)
+							  select c).ToArray();
+			sss_order = new List<int>();
+			for (int i = 16 /* skip a line*/; i < charsA.Length; i += 2) {
+				byte index = Convert.ToByte(charsA[i + 0] + "" + charsA[i + 1], 16);
+				sss_order.Add(index);
+			}
+			for (int i = 16 /* skip a line*/; i < charsB.Length; i += 2) {
+				byte index = Convert.ToByte(charsB[i + 0] + "" + charsB[i + 1], 16);
+				sss_order.Add(index);
+			}
+
 			code = code.Substring(code.IndexOf("06407AAC 000000"));
 			char[] chars = (from c in code
 							where char.IsLetterOrDigit(c)
@@ -262,6 +305,7 @@ namespace BrawlStageManager {
 			}
 		}
 
+		#region sc_selcharacter2
 		private static int[] sc_selcharacter2_icon_from_sc_selmap_icon = {
 			1, // Battlefield
 			2, // Final Destination
@@ -305,20 +349,6 @@ namespace BrawlStageManager {
 			58, // Brinstar
 			59, // Pokemon Stadium
 		};
-		public static int selcharacter2Icon(int selmapIcon) {
-			int index = -1;
-			for (int i = 0; i < StageIconPairs.Count; i++) {
-				if (StageIconPairs[i].Item2 == selmapIcon) {
-					index = i;
-					break;
-				}
-			}
-			if (index >= 0 && index < 41) {
-				return sc_selcharacter2_icon_from_sc_selmap_icon[index];
-			} else {
-				return -1;
-			}
-		}
 		public static int selmapIcon(int selcharacter2Icon) {
 			int index = -1;
 			for (int i = 0; i < sc_selcharacter2_icon_from_sc_selmap_icon.Length; i++) {
@@ -329,5 +359,6 @@ namespace BrawlStageManager {
 			}
 			return StageIconPairs[index].Item2;
 		}
+		#endregion
 	}
 }

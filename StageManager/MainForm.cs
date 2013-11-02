@@ -363,11 +363,7 @@ namespace BrawlStageManager {
 			}
 
 			if (useAFixedStageListToolStripMenuItem.Checked) {
-				List<string> list = new List<string>();
-				foreach (var s in StageIDMap.Stages) {
-					list.AddRange(s.PacNames);
-				}
-				pacFiles = list.Select(s => new FileInfo(s)).ToArray();
+				pacFiles = StageIDMap.PacFilesBySSSOrder().Select(s => new FileInfo(s)).ToArray();
 			} else {
 				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
 					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
@@ -766,6 +762,10 @@ namespace BrawlStageManager {
 
 		private void updateMumenumainToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.updateMuMenumain();
+		}
+
+		private void repaintIconBorderToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.repaintIconBorder();
 		}
 
 		private void snapshotPortraiticonToolStripMenuItem_Click(object sender, EventArgs e) {

@@ -89,6 +89,12 @@
     <Compile Include="ConfirmIconReplaceDialog.Designer.cs">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CopyPacRelDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyPacRelDialog.Designer.cs">
+      <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomSSS.cs" />
     <Compile Include="IconsToMenumain.cs" />
     <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmIconReplaceDialog.resx">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyPacRelDialog.resx">
+      <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -448,8 +448,12 @@ namespace BrawlStageManager {
 			}
 			FileInfo rel = relfiles.First();
 
-			FileOperations.Copy(pac.FullName, _rootPath);
-			FileOperations.Copy(rel.FullName, stageInfoControl1.RelFile.FullName);
+			DialogResult r = new CopyPacRelDialog(pac.FullName, _rootPath, rel.FullName, stageInfoControl1.RelFile.FullName).ShowDialog();
+			if (r == DialogResult.Cancel) return;
+			if (r == DialogResult.Yes) {
+				File.Copy(pac.FullName, _rootPath, true);
+				File.Copy(rel.FullName, stageInfoControl1.RelFile.FullName, true);
+			}
 
 			if (portraitViewer1.SelmapLoaded) {
 				var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");

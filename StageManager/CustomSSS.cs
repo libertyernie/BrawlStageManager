@@ -6,6 +6,45 @@ using System.Text.RegularExpressions;
 
 namespace BrawlStageManager {
 	public class CustomSSS {
+		private byte[] sss1, sss2, sss3;
+
+		public Tuple<byte, byte> this[int index] {
+			get {
+				return new Tuple<byte, byte>(sss3[2*index], sss3[2*index + 1]);
+			}
+		}
+
+		public byte[] StageIDsInOrder {
+			get {
+				byte[] b = new byte[sss1.Length + sss2.Length];
+				for (int i = 0; i < sss1.Length; i++) {
+					b[i] = sss3[sss1[i] * 2];
+				}
+				for (int i = 0; i < sss2.Length; i++) {
+					b[sss1.Length + i] = sss3[sss2[i] * 2];
+				}
+				return b;
+			}
+		}
+
+		public byte IconForStage(int stage_id) {
+			for (int i = 0; i < sss3.Length; i += 2) {
+				if (sss3[i] == stage_id) {
+					return sss3[i + 1];
+				}
+			}
+			return 0xFF;
+		}
+
+		public byte StageForIcon(int icon_id) {
+			for (int i = 0; i < sss3.Length; i += 2) {
+				if (sss3[i+1] == icon_id) {
+					return sss3[i];
+				}
+			}
+			return 0xFF;
+		}
+
 		private static byte[] StringToByteArray(string s) {
 			char[] numbers = (from c in s
 							  where char.IsLetterOrDigit(c)
@@ -27,7 +66,6 @@ namespace BrawlStageManager {
 			return true;
 		}
 
-		private static byte[] SSS_HEADER = StringToByteArray("046b8f5c 7c802378");
 		public CustomSSS(string[] s) {
 			Regex r = new Regex(@"(\* )?[A-Fa-f0-9]{8} [A-Fa-f0-9]{8}");
 			var matching_lines = 
@@ -36,6 +74,15 @@ namespace BrawlStageManager {
 				select line;
 
 			byte[] data = StringToByteArray(string.Join("\n", matching_lines));
+			init(data);
+		}
+
+		public CustomSSS(byte[] data) {
+			init(data);
+		}
+
+		private static byte[] SSS_HEADER = StringToByteArray("046b8f5c 7c802378");
+		private void init(byte[] data) {
 			int index = -1;
 			for (int line = 0; line < data.Length; line += 8) {
 				if (ByteArrayEquals(data, line, SSS_HEADER, 0, SSS_HEADER.Length)) {
@@ -49,7 +96,7 @@ namespace BrawlStageManager {
 
 			index += 14 * 8;
 			byte sss1_count = data[index - 1];
-			byte[] sss1 = new byte[sss1_count];
+			sss1 = new byte[sss1_count];
 			Array.ConstrainedCopy(data, index, sss1, 0, sss1_count);
 
 			index += sss1_count;
@@ -57,7 +104,7 @@ namespace BrawlStageManager {
 
 			index += 2 * 8;
 			byte sss2_count = data[index - 1];
-			byte[] sss2 = new byte[sss2_count];
+			sss2 = new byte[sss2_count];
 			Array.ConstrainedCopy(data, index, sss2, 0, sss2_count);
 
 			index += sss2_count;
@@ -65,7 +112,7 @@ namespace BrawlStageManager {
 
 			index += 1 * 8;
 			byte sss3_count = data[index - 1];
-			byte[] sss3 = new byte[sss3_count];
+			sss3 = new byte[sss3_count];
 			Array.ConstrainedCopy(data, index, sss3, 0, sss3_count);
 
 			/*int i = 0;

@@ -70,6 +70,7 @@
 			this.frontStnameGenerationFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.snapshotPortraiticonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.repaintIconBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,7 +95,7 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.repaintIconBorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadNewCustomSSSCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -506,6 +507,7 @@
             this.toolStripMenuItem2,
             this.updateMumenumainToolStripMenuItem,
             this.updateScselcharacter2ToolStripMenuItem,
+            this.loadNewCustomSSSCodeToolStripMenuItem,
             this.separator4,
             this.addMenSelmapMarksToolStripMenuItem,
             this.listMenSelmapMarkUsageToolStripMenuItem,
@@ -522,6 +524,13 @@
 			this.snapshotPortraiticonToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
 			this.snapshotPortraiticonToolStripMenuItem.Text = "Snapshot -> portrait/icon";
 			this.snapshotPortraiticonToolStripMenuItem.Click += new System.EventHandler(this.snapshotPortraiticonToolStripMenuItem_Click);
+			// 
+			// repaintIconBorderToolStripMenuItem
+			// 
+			this.repaintIconBorderToolStripMenuItem.Name = "repaintIconBorderToolStripMenuItem";
+			this.repaintIconBorderToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.repaintIconBorderToolStripMenuItem.Text = "Repaint icon border ([)";
+			this.repaintIconBorderToolStripMenuItem.Click += new System.EventHandler(this.repaintIconBorderToolStripMenuItem_Click);
 			// 
 			// toolStripMenuItem2
 			// 
@@ -696,12 +705,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// repaintIconBorderToolStripMenuItem
+			// loadNewCustomSSSCodeToolStripMenuItem
 			// 
-			this.repaintIconBorderToolStripMenuItem.Name = "repaintIconBorderToolStripMenuItem";
-			this.repaintIconBorderToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.repaintIconBorderToolStripMenuItem.Text = "Repaint icon border ([)";
-			this.repaintIconBorderToolStripMenuItem.Click += new System.EventHandler(this.repaintIconBorderToolStripMenuItem_Click);
+			this.loadNewCustomSSSCodeToolStripMenuItem.Name = "loadNewCustomSSSCodeToolStripMenuItem";
+			this.loadNewCustomSSSCodeToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.loadNewCustomSSSCodeToolStripMenuItem.Text = "Load new Custom SSS code";
+			this.loadNewCustomSSSCodeToolStripMenuItem.Click += new System.EventHandler(this.loadNewCustomSSSCodeToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -809,6 +818,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem repaintIconBorderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem loadNewCustomSSSCodeToolStripMenuItem;
 
 
 

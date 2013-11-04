@@ -772,6 +772,18 @@ namespace BrawlStageManager {
 			portraitViewer1.repaintIconBorder();
 		}
 
+		private void loadNewCustomSSSCodeToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (OpenFileDialog dialog = new OpenFileDialog()) {
+				dialog.Filter = "GCT codesets|*.gct";
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					StageIDMap.sss = new CustomSSS(File.ReadAllBytes(dialog.FileName));
+					if (useAFixedStageListToolStripMenuItem.Checked) {
+						changeDirectory(CurrentDirectory); // Refresh .pac list
+					}
+				}
+			}
+		}
+
 		private void snapshotPortraiticonToolStripMenuItem_Click(object sender, EventArgs e) {
 			Bitmap screenshot = modelPanel1.GrabScreenshot(false);
 

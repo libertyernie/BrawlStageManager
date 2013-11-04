@@ -64,8 +64,7 @@ namespace BrawlStageManager {
 		#endregion
 
 		private static List<Stage> stageList = new List<Stage>();
-		private static List<Tuple<int, int>> sss;
-		private static List<int> sss_order;
+		public static CustomSSS sss;
 		static StageIDMap() {
 			// static initializer
 			#region Arrays containing stage data
@@ -174,7 +173,7 @@ namespace BrawlStageManager {
 * 5a455b46 5c475d48
 * 5e495f4a 604b614c
 * 624d634e 00000000";
-			loadCustomSSS(s);
+			sss = new CustomSSS(s.Split('\n'));
 		}
 
 		private static ReadOnlyCollection<Stage> _stages;
@@ -184,23 +183,15 @@ namespace BrawlStageManager {
 				return _stages;
 			}
 		}
-		private static ReadOnlyCollection<Tuple<int, int>> _stageIconPairs;
-		public static ReadOnlyCollection<Tuple<int, int>> StageIconPairs {
-			get {
-				if (_stageIconPairs == null) _stageIconPairs = sss.AsReadOnly();
-				return _stageIconPairs;
-			}
-		}
 
 		public static List<string> PacFilesBySSSOrder() {
 			List<string> list = new List<string>();
-			foreach (int index in sss_order) {
-				var tuple = StageIconPairs[index];
-				if (tuple.Item1 >= 0x40) {
-					list.Add("STGCUSTOM" + (tuple.Item1 - 0x3F).ToString("X2") + ".pac");
+			foreach (int stage_id in sss.StageIDsInOrder) {
+				if (stage_id >= 0x40) {
+					list.Add("STGCUSTOM" + (stage_id - 0x3F).ToString("X2") + ".pac");
 				} else {
 					var q = from s in stageList
-							where s.ID == tuple.Item1
+							where s.ID == stage_id
 							select s.PacNames;
 					foreach (string[] ss in q) {
 						list.AddRange(ss);
@@ -210,7 +201,7 @@ namespace BrawlStageManager {
 			return list;
 		}
 
-		public static void loadCustomSSS(string code) {
+		/*public static void loadCustomSSS(string code) {
 			code = code.ToUpper();
 
 			int[] ia = {
@@ -229,11 +220,11 @@ namespace BrawlStageManager {
 							  where char.IsLetterOrDigit(c)
 							  select c).ToArray();
 			sss_order = new List<int>();
-			for (int i = 16 /* skip a line*/; i < charsA.Length; i += 2) {
+			for (int i = 16; i < charsA.Length; i += 2) {
 				byte index = Convert.ToByte(charsA[i + 0] + "" + charsA[i + 1], 16);
 				sss_order.Add(index);
 			}
-			for (int i = 16 /* skip a line*/; i < charsB.Length; i += 2) {
+			for (int i = 16; i < charsB.Length; i += 2) {
 				byte index = Convert.ToByte(charsB[i + 0] + "" + charsB[i + 1], 16);
 				sss_order.Add(index);
 			}
@@ -243,13 +234,13 @@ namespace BrawlStageManager {
 							where char.IsLetterOrDigit(c)
 							select c).ToArray();
 			sss = new List<Tuple<int, int>>();
-			for (int i = 16 /* skip a line*/; i < chars.Length; i += 4) {
+			for (int i = 16; i < chars.Length; i += 4) {
 				byte stage = Convert.ToByte(chars[i + 0] + "" + chars[i + 1], 16);
 				byte icon  = Convert.ToByte(chars[i + 2] + "" + chars[i + 3], 16);
 				Tuple<int, int> pair = new Tuple<int, int>(stage, icon);
 				sss.Add(pair);
 			}
-		}
+		}*/
 
 		public static int IconForPac(string filename) {
 			int stageID = -1;
@@ -268,15 +259,11 @@ namespace BrawlStageManager {
 				}
 				stageID = q.First();
 			}
-			return (from pair in sss
-					where pair.Item1 == stageID
-					select pair.Item2).FirstOrDefault();
+			return sss.IconForStage(stageID);
 		}
 
 		public static string PacBasenameForIcon(int iconID) {
-			int stageID = (from pair in sss
-						   where pair.Item2 == iconID
-						   select pair.Item1).FirstOrDefault();
+			int stageID = sss.StageForIcon(iconID);
 			if (stageID >= 0x40) {
 				return "STGCUSTOM" + (stageID - 0x3F).ToString("X2") + ".pac";
 			} else {
@@ -306,7 +293,7 @@ namespace BrawlStageManager {
 		}
 
 		#region sc_selcharacter2
-		private static int[] sc_selcharacter2_icon_from_sc_selmap_icon = {
+		private static int[] sc_selcharacter2_icon_from_sss3_index = {
 			1, // Battlefield
 			2, // Final Destination
 			3, // Delfino Plaza
@@ -351,13 +338,13 @@ namespace BrawlStageManager {
 		};
 		public static int selmapIcon(int selcharacter2Icon) {
 			int index = -1;
-			for (int i = 0; i < sc_selcharacter2_icon_from_sc_selmap_icon.Length; i++) {
-				if (sc_selcharacter2_icon_from_sc_selmap_icon[i] == selcharacter2Icon) {
+			for (int i = 0; i < sc_selcharacter2_icon_from_sss3_index.Length; i++) {
+				if (sc_selcharacter2_icon_from_sss3_index[i] == selcharacter2Icon) {
 					index = i;
 					break;
 				}
 			}
-			return StageIconPairs[index].Item2;
+			return sss[index].Item2;
 		}
 		#endregion
 	}

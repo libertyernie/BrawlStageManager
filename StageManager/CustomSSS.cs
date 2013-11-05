@@ -133,5 +133,10 @@ namespace BrawlStageManager {
 				if (++i % 8 == 0) Console.WriteLine();
 			}*/
 		}
+
+		public override string ToString() {
+			return String.Format("Custom SSS: {0}/{1} stages, from pool of {2} pairs",
+				sss1.Length, sss2.Length, sss3.Length/2);
+		}
 	}
 }

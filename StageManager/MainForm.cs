@@ -362,6 +362,22 @@ namespace BrawlStageManager {
 				}
 			}
 
+			// Find and load GCT, if it exists
+			StageIDMap.AutoSSS = null;
+			portraitViewer1.LoadedMessage = "No custom SSS loaded";
+			foreach (string file in new string[] {
+				"RSBE01.gct",
+				"/data/gecko/codes/RSBE01.gct",
+				"/codes/RSBE01.gct",
+			}) {
+				if (File.Exists(file)) {
+					StageIDMap.AutoSSS = new CustomSSS(File.ReadAllBytes(file));
+					Console.WriteLine("Loaded " + file + ": " + StageIDMap.AutoSSS);
+					portraitViewer1.LoadedMessage = "Loaded " + file + ": " + StageIDMap.AutoSSS;
+					break;
+				}
+			}
+
 			if (useAFixedStageListToolStripMenuItem.Checked) {
 				pacFiles = StageIDMap.PacFilesBySSSOrder().Select(s => new FileInfo(s)).ToArray();
 			} else {
@@ -774,9 +790,12 @@ namespace BrawlStageManager {
 
 		private void loadNewCustomSSSCodeToolStripMenuItem_Click(object sender, EventArgs e) {
 			using (OpenFileDialog dialog = new OpenFileDialog()) {
-				dialog.Filter = "GCT codesets|*.gct";
+				dialog.Filter = "Compatible files|*.gct;*.txt";
 				if (dialog.ShowDialog() == DialogResult.OK) {
-					StageIDMap.sss = new CustomSSS(File.ReadAllBytes(dialog.FileName));
+					string f = dialog.FileName;
+					StageIDMap.ManualSSS = f.EndsWith(".gct", StringComparison.InvariantCultureIgnoreCase)
+						? new CustomSSS(File.ReadAllBytes(f))
+						: new CustomSSS(File.ReadAllLines(f));
 					if (useAFixedStageListToolStripMenuItem.Checked) {
 						changeDirectory(CurrentDirectory); // Refresh .pac list
 					}

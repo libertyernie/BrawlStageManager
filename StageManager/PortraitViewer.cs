@@ -22,6 +22,8 @@ namespace BrawlStageManager {
 		public WiiPixelFormat? selmapMarkFormat;
 		public bool selmapMarkPreview;
 
+		public string LoadedMessage;
+
 		public bool IsDirty {
 			get {
 				return common5 != null ? common5.IsDirty
@@ -126,7 +128,7 @@ namespace BrawlStageManager {
 			if (sc_selmap != null) sc_selmap.Dispose();
 			if (common5 != null) common5.Dispose();
 			_openFilePath = null;
-			label1.Text = "";
+			label1.Text = LoadedMessage;
 			fileSizeBar.Maximum = 1214283;
 			if (File.Exists("../../menu2/sc_selmap.pac")) {
 				common5 = null;

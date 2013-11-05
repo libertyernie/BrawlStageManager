@@ -74,6 +74,7 @@
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadNewCustomSSSCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.separator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.listMenSelmapMarkUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.loadNewCustomSSSCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -370,28 +370,28 @@
 			this.renderModels.CheckOnClick = true;
 			this.renderModels.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.renderModels.Name = "renderModels";
-			this.renderModels.Size = new System.Drawing.Size(191, 22);
+			this.renderModels.Size = new System.Drawing.Size(193, 22);
 			this.renderModels.Text = "Render models";
 			// 
 			// useAFixedStageListToolStripMenuItem
 			// 
 			this.useAFixedStageListToolStripMenuItem.CheckOnClick = true;
 			this.useAFixedStageListToolStripMenuItem.Name = "useAFixedStageListToolStripMenuItem";
-			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-			this.useAFixedStageListToolStripMenuItem.Text = "Use a static stage list";
+			this.useAFixedStageListToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.useAFixedStageListToolStripMenuItem.Text = "List stages in SSS order";
 			this.useAFixedStageListToolStripMenuItem.Click += new System.EventHandler(this.useAFixedStageListToolStripMenuItem_Click);
 			// 
 			// backgroundColorToolStripMenuItem
 			// 
 			this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.backgroundColorToolStripMenuItem.Text = "Right panel BG color...";
 			this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
 			// 
 			// separator1
 			// 
 			this.separator1.Name = "separator1";
-			this.separator1.Size = new System.Drawing.Size(188, 6);
+			this.separator1.Size = new System.Drawing.Size(190, 6);
 			// 
 			// moduleFileDirectoryToolStripMenuItem
 			// 
@@ -399,7 +399,7 @@
             this.sameToolStripMenuItem,
             this.moduleToolStripMenuItem});
 			this.moduleFileDirectoryToolStripMenuItem.Name = "moduleFileDirectoryToolStripMenuItem";
-			this.moduleFileDirectoryToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.moduleFileDirectoryToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.moduleFileDirectoryToolStripMenuItem.Text = "Module file directory";
 			// 
 			// sameToolStripMenuItem
@@ -424,14 +424,14 @@
 			this.useFullrelNamesToolStripMenuItem.CheckOnClick = true;
 			this.useFullrelNamesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.useFullrelNamesToolStripMenuItem.Name = "useFullrelNamesToolStripMenuItem";
-			this.useFullrelNamesToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.useFullrelNamesToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.useFullrelNamesToolStripMenuItem.Text = "Use full .rel names";
 			this.useFullrelNamesToolStripMenuItem.Click += new System.EventHandler(this.useFullrelNamesToolStripMenuItem_Click);
 			// 
 			// separator2
 			// 
 			this.separator2.Name = "separator2";
-			this.separator2.Size = new System.Drawing.Size(188, 6);
+			this.separator2.Size = new System.Drawing.Size(190, 6);
 			// 
 			// selmapMarkPreviewToolStripMenuItem
 			// 
@@ -439,7 +439,7 @@
 			this.selmapMarkPreviewToolStripMenuItem.CheckOnClick = true;
 			this.selmapMarkPreviewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.selmapMarkPreviewToolStripMenuItem.Name = "selmapMarkPreviewToolStripMenuItem";
-			this.selmapMarkPreviewToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.selmapMarkPreviewToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.selmapMarkPreviewToolStripMenuItem.Text = "Portrait previews";
 			this.selmapMarkPreviewToolStripMenuItem.Click += new System.EventHandler(this.selmapMarkPreviewToolStripMenuItem_Click);
 			// 
@@ -452,7 +452,7 @@
             this.selmapMarkFormatCMPR,
             this.selmapMarkFormatExisting});
 			this.selmapMarkFormat.Name = "selmapMarkFormat";
-			this.selmapMarkFormat.Size = new System.Drawing.Size(191, 22);
+			this.selmapMarkFormat.Size = new System.Drawing.Size(193, 22);
 			this.selmapMarkFormat.Text = "SelmapMark format";
 			// 
 			// selmapMarkFormatIA4
@@ -490,12 +490,12 @@
 			// separator3
 			// 
 			this.separator3.Name = "separator3";
-			this.separator3.Size = new System.Drawing.Size(188, 6);
+			this.separator3.Size = new System.Drawing.Size(190, 6);
 			// 
 			// frontStnameGenerationFontToolStripMenuItem
 			// 
 			this.frontStnameGenerationFontToolStripMenuItem.Name = "frontStnameGenerationFontToolStripMenuItem";
-			this.frontStnameGenerationFontToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.frontStnameGenerationFontToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
 			this.frontStnameGenerationFontToolStripMenuItem.Text = "FrontStname font...";
 			this.frontStnameGenerationFontToolStripMenuItem.Click += new System.EventHandler(this.frontStnameGenerationFontToolStripMenuItem_Click);
 			// 
@@ -550,6 +550,13 @@
 			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
 			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
 			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
+			// 
+			// loadNewCustomSSSCodeToolStripMenuItem
+			// 
+			this.loadNewCustomSSSCodeToolStripMenuItem.Name = "loadNewCustomSSSCodeToolStripMenuItem";
+			this.loadNewCustomSSSCodeToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.loadNewCustomSSSCodeToolStripMenuItem.Text = "Load a different Custom SSS code";
+			this.loadNewCustomSSSCodeToolStripMenuItem.Click += new System.EventHandler(this.loadNewCustomSSSCodeToolStripMenuItem_Click);
 			// 
 			// separator4
 			// 
@@ -704,13 +711,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// loadNewCustomSSSCodeToolStripMenuItem
-			// 
-			this.loadNewCustomSSSCodeToolStripMenuItem.Name = "loadNewCustomSSSCodeToolStripMenuItem";
-			this.loadNewCustomSSSCodeToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.loadNewCustomSSSCodeToolStripMenuItem.Text = "Load new Custom SSS code";
-			this.loadNewCustomSSSCodeToolStripMenuItem.Click += new System.EventHandler(this.loadNewCustomSSSCodeToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

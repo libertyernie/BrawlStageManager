@@ -1,6 +1,7 @@
 ﻿using BrawlLib.SSBB.ResourceNodes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -25,6 +26,19 @@ namespace BrawlStageManager {
 			foreach (ResourceNode n in chrToReplace) {
 				string file = tempFiles[n.Name];
 				n.Replace(file);
+			}
+
+			string exeDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			if (File.Exists(exeDir + "\\XX.png")) {
+				foreach (ResourceNode tex in miscData0.FindChild("Textures(NW4R)", false).Children) {
+					byte icon_id;
+					if (tex.Name.StartsWith("MenSelmapIcon.") && Byte.TryParse(tex.Name.Substring(14, 2), out icon_id)) {
+						byte stage_id = StageIDMap.BestSSS.StageForIcon(icon_id);
+						if (icon_id != 100 && (stage_id == 25 || stage_id > 0x33)) {
+							tex.Replace(exeDir + "\\XX.png");
+						}
+					}
+				}
 			}
 		}
 	}

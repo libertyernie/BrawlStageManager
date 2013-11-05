@@ -602,6 +602,14 @@ namespace BrawlStageManager {
 				ResourceNode mu_menumain = fcopy(mu_menumain_path);
 				IconsToMenumain.Copy(sc_selmap, mu_menumain);
 				mu_menumain.Export(mu_menumain_path);
+
+				byte absent_stage_id = StageIDMap.BestSSS[0x1E].Item1;
+				var q = StageIDMap.Stages.Where(s => s.ID == absent_stage_id);
+				string absent = q.Any()
+					? q.First().Name
+					: "STGCUSTOM" + (absent_stage_id - 0x3f).ToString("X2");
+				MessageBox.Show("Done. Based on your current SSS code, " +
+					absent + " will be missing; and Menu will be added to the end of screen 2.");
 			}
 		}
 		#endregion

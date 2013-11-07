@@ -28,17 +28,20 @@ namespace BrawlStageManager {
 				n.Replace(file);
 			}
 
-			string exeDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-			if (File.Exists(exeDir + "\\XX.png")) {
+			ResourceNode xx = miscData0.FindChild("Textures(NW4R)/MenSelmapIcon.XX", false);
+			if (xx != null) {
+				string tempfile = TempFiles.Create(".png");
+				xx.Export(tempfile);
 				foreach (ResourceNode tex in miscData0.FindChild("Textures(NW4R)", false).Children) {
 					byte icon_id;
 					if (tex.Name.StartsWith("MenSelmapIcon.") && Byte.TryParse(tex.Name.Substring(14, 2), out icon_id)) {
 						byte stage_id = StageIDMap.BestSSS.StageForIcon(icon_id);
 						if (icon_id != 100 && (stage_id == 25 || stage_id > 0x33)) {
-							tex.Replace(exeDir + "\\XX.png");
+							tex.Replace(tempfile);
 						}
 					}
 				}
+				File.Delete(tempfile);
 			}
 		}
 	}

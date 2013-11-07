@@ -14,7 +14,30 @@ using BrawlStageManager;
 
 namespace SSSPreview {
 	public partial class SSSPrev : UserControl {
-		private ResourceNode common5, sc_selmap;
+		private BRESNode miscdata80;
+		public ResourceNode RootNode {
+			set {
+				if (miscdata80 != null) {
+					miscdata80.Dispose();
+					miscdata80 = null;
+				}
+				ResourceNode p1icon = value.FindChild("MenSelmapCursorPly.1", true);
+				if (p1icon != null)  miscdata80 = p1icon.Parent.Parent as BRESNode;
+				ReloadIcons();
+			}
+		}
+
+		private bool _myMusic;
+		public bool MyMusic {
+			get {
+				return _myMusic;
+			}
+			set {
+				_myMusic = value;
+				ReloadIcons();
+			}
+		}
+
 		private Tuple<Image, RectangleF>[] icons;
 		private int _numIcons;
 		public int NumIcons {
@@ -30,8 +53,7 @@ namespace SSSPreview {
 		public SSSPrev() {
 			InitializeComponent();
 			this.ResizeRedraw = true;
-			this._numIcons = 25;
-			UpdateDirectory();
+			this._numIcons = 23;
 		}
 
 		private static int BRAWLWIDTH = 75; // an estimate
@@ -40,7 +62,7 @@ namespace SSSPreview {
 			base.OnPaint(e);
 			if (icons == null) return;
 			foreach (var tuple in icons) {
-				e.Graphics.DrawImage(tuple.Item1,
+				if (tuple != null) e.Graphics.DrawImage(tuple.Item1,
 					tuple.Item2.X * Width,
 					tuple.Item2.Y * Height,
 					tuple.Item2.Width * Width,
@@ -48,44 +70,20 @@ namespace SSSPreview {
 			}
 		}
 
-		public void UpdateDirectory() {
-			Console.WriteLine(System.Environment.CurrentDirectory);
-			if (sc_selmap != null) sc_selmap.Dispose();
-			if (common5 != null) common5.Dispose();
-			if (File.Exists("menu2/sc_selmap.pac")) {
-				common5 = null;
-				sc_selmap = fcopy("menu2/sc_selmap.pac");
-			} else if (File.Exists("menu2/sc_selmap_en.pac")) {
-				common5 = null;
-				sc_selmap = fcopy("/menu2/sc_selmap_en.pac");
-			} else if (File.Exists("system/common5.pac")) {
-				common5 = fcopy("system/common5.pac");
-				sc_selmap = common5.FindChild("sc_selmap_en", false);
-			} else if (File.Exists("system/common5_en.pac")) {
-				common5 = fcopy("system/common5_en.pac");
-				sc_selmap = common5.FindChild("sc_selmap_en", false);
-			} else {
-				common5 = null;
-				sc_selmap = null;
-			}
-
-			ReloadIcons();
-		}
-
 		private void ReloadIcons() {
-			if (sc_selmap == null) return;
-			CHR0Node chr0 = sc_selmap.FindChild("MiscData[80]/AnmChr(NW4R)/MenSelmapPos_TopN__0", false) as CHR0Node;
+			if (miscdata80 == null) return;
+			CHR0Node chr0 = miscdata80.FindChild("AnmChr(NW4R)/MenSelmapPos_TopN__" + (MyMusic ? "1" : "0"), false) as CHR0Node;
 
 			icons = new Tuple<Image, RectangleF>[_numIcons + 1];
 
 			CHR0EntryNode entry = chr0.FindChild("MenSelmapPos_TopN", false) as CHR0EntryNode;
 			Vector3 offset = entry.GetAnimFrame(_numIcons + 1).Translation;
 
-			TextureContainer tc = new TextureContainer(sc_selmap, 2);
-			if (tc.icon_tex0 == null) return;
-			Image image = tc.icon_tex0.GetImage(0);
+			//TextureContainer tc = new TextureContainer(miscdata80, 2);
+			//if (tc.icon_tex0 == null) return;
+			//Image image = tc.icon_tex0.GetImage(0);
 
-			for (int i = 0; i <= _numIcons; i++) {
+			for (int i = 1; i <= _numIcons; i++) {
 				entry = chr0.FindChild("pos" + i.ToString("D2"), false) as CHR0EntryNode;
 				AnimationFrame frame = entry.GetAnimFrame(_numIcons + 1);
 				float x = (BRAWLWIDTH / 2 + frame.Translation._x + offset._x) / BRAWLWIDTH;
@@ -94,12 +92,27 @@ namespace SSSPreview {
 				float h = 5.6f * (frame.Scale._y) / BRAWLHEIGHT;
 				RectangleF r = new RectangleF(x, y, w, h);
 
-				//TextureContainer tc = new TextureContainer(sc_selmap, i);
-				//if (tc.icon_tex0 == null) continue;
-				//Image image = tc.icon_tex0.GetImage(0);
+				TextureContainer tc = new TextureContainer(miscdata80, i);
+				if (tc.icon_tex0 == null) continue;
+				Image image = tc.icon_tex0.GetImage(0);
 
 				icons[i] = new Tuple<Image, RectangleF>(image, r);
 			}
+
+			var nexttex0 = miscdata80.FindChild("Textures(NW4R)/MenSelmapIcon_Change.1", false) as TEX0Node;
+			if (nexttex0 != null) {
+				float NEXTOFFSET = 10.8f;
+				entry = chr0.FindChild("pos" + (_numIcons + 1).ToString("D2"), false) as CHR0EntryNode;
+				AnimationFrame frame2 = entry.GetAnimFrame(_numIcons + 1);
+				float x2 = (BRAWLWIDTH / 2 + frame2.Translation._x - NEXTOFFSET) / BRAWLWIDTH;
+				float y2 = (BRAWLHEIGHT / 2 - frame2.Translation._y) / BRAWLHEIGHT;
+				float w2 = 14.4f * (frame2.Scale._x) / BRAWLWIDTH;
+				float h2 = 4.8f * (frame2.Scale._y) / BRAWLHEIGHT;
+				RectangleF r2 = new RectangleF(x2, y2, w2, h2);
+				Image image2 = nexttex0.GetImage(0);
+				icons[0] = new Tuple<Image, RectangleF>(image2, r2); //pos00 is not used anyway, so let's overwrite it
+			}
+
 			this.Invalidate();
 		}
 

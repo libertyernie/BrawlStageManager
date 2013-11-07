@@ -5,5 +5,6 @@ StageManager/obj
 SSSPreview/bin/Debug
 SSSPreview/bin/Release/*
 !SSSPreview/bin/Release/BrawlStageManager.exe
+!SSSPreview/bin/Release/SSSPreview.exe
 SSSPreview/obj
 *.suo

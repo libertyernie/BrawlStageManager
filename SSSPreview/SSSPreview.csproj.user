@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartWorkingDirectory>
     </StartWorkingDirectory>
-    <StartArguments>"D:\Users\Isaac\Desktop\BrawlHacks\pm2.6b nohomebrew\private\wii\app\RSBE\pf\system\common5.pac"</StartArguments>
+    <StartArguments>"D:\Users\Isaac\Desktop\BrawlHacks\pm2.6b nohomebrew\private\wii\app\RSBE\pf\system\common5.pac" "D:\Users\Isaac\Desktop\BrawlHacks\pm2.6b nohomebrew\codes\RSBE01.gct"</StartArguments>
   </PropertyGroup>
 </Project>

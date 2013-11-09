@@ -14,16 +14,37 @@ namespace BrawlStageManager {
 			}
 		}
 
+		private Tuple<byte[], byte[]> _iconsInGroups;
+		public Tuple<byte[], byte[]> IconsInGroups {
+			get {
+				if (_iconsInGroups == null) {
+					byte[] b1 = new byte[sss1.Length];
+					for (int i = 0; i < b1.Length; i++) {
+						b1[i] = sss3[sss1[i] * 2 + 1];
+					}
+					byte[] b2 = new byte[sss2.Length];
+					for (int i = 0; i < b2.Length; i++) {
+						b2[i] = sss3[sss2[i] * 2 + 1];
+					}
+					_iconsInGroups = new Tuple<byte[], byte[]>(b1, b2);
+				}
+				return _iconsInGroups;
+			}
+		}
+
+		private byte[] _stageIDsInOrder;
 		public byte[] StageIDsInOrder {
 			get {
-				byte[] b = new byte[sss1.Length + sss2.Length];
-				for (int i = 0; i < sss1.Length; i++) {
-					b[i] = sss3[sss1[i] * 2];
+				if (_stageIDsInOrder == null) {
+					_stageIDsInOrder = new byte[sss1.Length + sss2.Length];
+					for (int i = 0; i < sss1.Length; i++) {
+						_stageIDsInOrder[i] = sss3[sss1[i] * 2];
+					}
+					for (int i = 0; i < sss2.Length; i++) {
+						_stageIDsInOrder[sss1.Length + i] = sss3[sss2[i] * 2];
+					}
 				}
-				for (int i = 0; i < sss2.Length; i++) {
-					b[sss1.Length + i] = sss3[sss2[i] * 2];
-				}
-				return b;
+				return _stageIDsInOrder;
 			}
 		}
 

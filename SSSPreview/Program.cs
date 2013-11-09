@@ -13,11 +13,9 @@ namespace SSSPreview {
 		static void Main(string[] args) {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Form1 f = new Form1();
-			if (args.Length > 0) {
-				f.RootFile = args[0];
-			}
-			Application.Run(f);
+			Application.Run(args.Length == 0 ? new GCTEnabledForm(null, null)
+						  : args.Length == 1 ? new GCTEnabledForm(args[0], null)
+											 : new GCTEnabledForm(args[0], args[1]));
 		}
 	}
 }

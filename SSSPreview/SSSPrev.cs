@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrawlLib.Wii.Animations;
 using BrawlLib.SSBB.ResourceNodes;
@@ -15,6 +9,10 @@ using BrawlStageManager;
 namespace SSSPreview {
 	public partial class SSSPrev : UserControl {
 		private BRESNode miscdata80;
+
+		/// <summary>
+		/// Specify a root ResourceNode to search for SSS icons in. The node used will be the BRES containing MenSelmapCursorPly.1.
+		/// </summary>
 		public ResourceNode RootNode {
 			set {
 				if (miscdata80 != null) {
@@ -39,6 +37,7 @@ namespace SSSPreview {
 		}
 
 		private Tuple<Image, RectangleF>[] icons;
+
 		private int _numIcons;
 		public int NumIcons {
 			get {
@@ -46,6 +45,17 @@ namespace SSSPreview {
 			}
 			set {
 				_numIcons = value;
+				ReloadIcons();
+			}
+		}
+
+		private byte[] _iconOrder;
+		public byte[] IconOrder {
+			get {
+				return _iconOrder;
+			}
+			set {
+				_iconOrder = value;
 				ReloadIcons();
 			}
 		}
@@ -79,10 +89,6 @@ namespace SSSPreview {
 			CHR0EntryNode entry = chr0.FindChild("MenSelmapPos_TopN", false) as CHR0EntryNode;
 			Vector3 offset = entry.GetAnimFrame(_numIcons + 1).Translation;
 
-			//TextureContainer tc = new TextureContainer(miscdata80, 2);
-			//if (tc.icon_tex0 == null) return;
-			//Image image = tc.icon_tex0.GetImage(0);
-
 			for (int i = 1; i <= _numIcons; i++) {
 				entry = chr0.FindChild("pos" + i.ToString("D2"), false) as CHR0EntryNode;
 				AnimationFrame frame = entry.GetAnimFrame(_numIcons + 1);
@@ -92,7 +98,8 @@ namespace SSSPreview {
 				float h = 5.6f * (frame.Scale._y) / BRAWLHEIGHT;
 				RectangleF r = new RectangleF(x, y, w, h);
 
-				TextureContainer tc = new TextureContainer(miscdata80, i);
+				TextureContainer tc = new TextureContainer(miscdata80,
+					IconOrder != null && i <= IconOrder.Length ? IconOrder[i-1] : 100);
 				if (tc.icon_tex0 == null) continue;
 				Image image = tc.icon_tex0.GetImage(0);
 

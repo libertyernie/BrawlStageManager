@@ -231,16 +231,21 @@ namespace BrawlStageManager {
 			return BestSSS.IconForStage(stageID);
 		}
 
-		public static string PacBasenameForIcon(int iconID) {
-			int stageID = BestSSS.StageForIcon(iconID);
+		public static string PacBasenameForStageID(int stageID) {
 			if (stageID >= 0x40) {
-				return "STGCUSTOM" + (stageID - 0x3F).ToString("X2") + ".pac";
+				return "custom" + (stageID - 0x3F).ToString("X2");
 			} else {
 				var q = from s in stageList
 						where s.ID == stageID
 						select s.PacBasename;
+				if (!q.Any()) return null;
 				return q.First();
 			}
+		}
+
+		public static string PacBasenameForIcon(int iconID) {
+			int stageID = BestSSS.StageForIcon(iconID);
+			return PacBasenameForStageID(stageID);
 		}
 
 		public static string RelNameForPac(string filename) {

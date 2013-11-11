@@ -26,6 +26,7 @@ namespace SSSEditor {
 		}
 
 		private MutableSSS.StagePair _pair;
+		private TextureContainer textures;
 		public MutableSSS.StagePair Pair {
 			get {
 				return _pair;
@@ -55,7 +56,12 @@ namespace SSSEditor {
 			set {
 				if (Pair != null) {
 					Pair.icon = value;
-					pictureBox1.Image = (miscdata80 == null) ? null : new TextureContainer(miscdata80, Icon).icon_tex0.GetImage(0);
+					if (miscdata80 == null) {
+						pictureBox1.Image = null;
+					} else {
+						textures = new TextureContainer(miscdata80, Icon);
+						pictureBox1.Image = (textures.icon_tex0 == null) ? null : textures.icon_tex0.GetImage(0);
+					}
 					nudIconID.Value = value;
 					lblIconID.Text = value.ToString("X2");
 				}
@@ -65,9 +71,9 @@ namespace SSSEditor {
 		public StagePairControl() {
 			InitializeComponent();
 
-			ddlStagePacs.DisplayMember = "PacBasename";
-			ddlStagePacs.ValueMember = "ID";
-			ddlStagePacs.DataSource = StageIDMap.Stages;
+			ddlStagePacs.DisplayMember = "Value";
+			ddlStagePacs.ValueMember = "Key";
+			ddlStagePacs.DataSource = Static.StagesByID;
 		}
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {

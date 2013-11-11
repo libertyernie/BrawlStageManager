@@ -17,6 +17,10 @@ namespace SSSEditor {
 			MutableSSS m = new MutableSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 			ResourceNode node = NodeFactory.FromFile(null, @"F:\private\wii\app\RSBE\pf\system\common5.pac");
 
+			this.FormClosing += delegate(object o, FormClosingEventArgs ea) {
+				MessageBox.Show(m.ToCode());
+			};
+
 			foreach (MutableSSS.StagePair pair in m.screen1) {
 				flowLayoutPanel1.Controls.Add(new StagePairControl {
 					Pair = pair,

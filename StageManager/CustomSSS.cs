@@ -6,7 +6,9 @@ using System.Text.RegularExpressions;
 
 namespace BrawlStageManager {
 	public class CustomSSS {
-		private byte[] sss1, sss2, sss3;
+		public byte[] sss1 { get; private set; }
+		public byte[] sss2 { get; private set; }
+		public byte[] sss3 { get; private set; }
 
 		public Tuple<byte, byte> this[int index] {
 			get {

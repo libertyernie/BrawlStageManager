@@ -7,4 +7,9 @@ SSSPreview/bin/Release/*
 !SSSPreview/bin/Release/BrawlStageManager.exe
 !SSSPreview/bin/Release/SSSPreview.exe
 SSSPreview/obj
+SSSEditor/bin/Debug
+SSSEditor/bin/Release/*
+!SSSEditor/bin/Release/BrawlStageManager.exe
+!SSSEditor/bin/Release/SSSEditor.exe
+SSSEditor/obj
 *.suo

@@ -19,17 +19,15 @@ namespace SSSEditor {
 
 			foreach (MutableSSS.StagePair pair in m.screen1) {
 				flowLayoutPanel1.Controls.Add(new StagePairControl {
+					Pair = pair,
 					RootNode = node,
-					Stage = pair.stage,
-					Icon = pair.icon,
 				});
 			}
 			flowLayoutPanel1.Controls.Add(new Label() { Text = "---------------------" });
 			foreach (MutableSSS.StagePair pair in m.screen2) {
 				flowLayoutPanel1.Controls.Add(new StagePairControl {
+					Pair = pair,
 					RootNode = node,
-					Stage = pair.stage,
-					Icon = pair.icon,
 				});
 			}
 		}

@@ -49,6 +49,7 @@
 			this.ddlStagePacs.Name = "ddlStagePacs";
 			this.ddlStagePacs.Size = new System.Drawing.Size(186, 21);
 			this.ddlStagePacs.TabIndex = 1;
+			this.ddlStagePacs.SelectedIndexChanged += new System.EventHandler(this.ddlStagePacs_SelectedIndexChanged);
 			// 
 			// lblStageID
 			// 
@@ -86,6 +87,7 @@
             0,
             0,
             0});
+			this.nudIconID.ValueChanged += new System.EventHandler(this.nudIconID_ValueChanged);
 			// 
 			// StagePairControl
 			// 

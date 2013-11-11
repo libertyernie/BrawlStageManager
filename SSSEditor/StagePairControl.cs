@@ -25,26 +25,40 @@ namespace SSSEditor {
 			}
 		}
 
-		public byte _stage, _icon;
-		public byte Stage {
+		private MutableSSS.StagePair _pair;
+		public MutableSSS.StagePair Pair {
 			get {
-				return _stage;
+				return _pair;
 			}
 			set {
-				_stage = value;
-				ddlStagePacs.SelectedValue = value;
-				lblStageID.Text = value.ToString("X2");
+				_pair = value;
+				Stage = Stage;
+				Icon = Icon;
+			}
+		}
+		public byte Stage {
+			get {
+				return Pair.stage;
+			}
+			set {
+				if (Pair != null) {
+					Pair.stage = value;
+					ddlStagePacs.SelectedValue = value;
+					lblStageID.Text = value.ToString("X2");
+				}
 			}
 		}
 		public byte Icon {
 			get {
-				return _icon;
+				return Pair.icon;
 			}
 			set {
-				_icon = value;
-				pictureBox1.Image = (miscdata80 == null) ? null : new TextureContainer(miscdata80, _icon).icon_tex0.GetImage(0);
-				nudIconID.Value = value;
-				lblIconID.Text = value.ToString("X2");
+				if (Pair != null) {
+					Pair.icon = value;
+					pictureBox1.Image = (miscdata80 == null) ? null : new TextureContainer(miscdata80, Icon).icon_tex0.GetImage(0);
+					nudIconID.Value = value;
+					lblIconID.Text = value.ToString("X2");
+				}
 			}
 		}
 
@@ -54,6 +68,14 @@ namespace SSSEditor {
 			ddlStagePacs.DisplayMember = "PacBasename";
 			ddlStagePacs.ValueMember = "ID";
 			ddlStagePacs.DataSource = StageIDMap.Stages;
+		}
+
+		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {
+			if (ddlStagePacs.SelectedValue != null) Stage = (byte)ddlStagePacs.SelectedValue;
+		}
+
+		private void nudIconID_ValueChanged(object sender, EventArgs e) {
+			Icon = (byte)nudIconID.Value;
 		}
 	}
 }

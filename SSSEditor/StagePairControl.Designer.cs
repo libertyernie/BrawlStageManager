@@ -30,6 +30,7 @@
 			this.btnDown = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
@@ -112,11 +113,24 @@
 			this.pictureBox1.Size = new System.Drawing.Size(64, 56);
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
+			this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+			// 
+			// radioButton1
+			// 
+			this.radioButton1.AutoSize = true;
+			this.radioButton1.Location = new System.Drawing.Point(190, 27);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(14, 13);
+			this.radioButton1.TabIndex = 8;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.UseVisualStyleBackColor = true;
+			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
 			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.radioButton1);
 			this.Controls.Add(this.btnDown);
 			this.Controls.Add(this.btnUp);
 			this.Controls.Add(this.nudIconID);
@@ -142,5 +156,6 @@
 		private System.Windows.Forms.NumericUpDown nudIconID;
 		private System.Windows.Forms.Button btnUp;
 		private System.Windows.Forms.Button btnDown;
+		private System.Windows.Forms.RadioButton radioButton1;
 	}
 }

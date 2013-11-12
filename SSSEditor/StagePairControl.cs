@@ -25,6 +25,15 @@ namespace SSSEditor {
 			}
 		}
 
+		public bool Checked {
+			get {
+				return radioButton1.Checked;
+			}
+			set {
+				radioButton1.Checked = value;
+			}
+		}
+
 		private StagePair _pair;
 		private TextureContainer textures;
 		public StagePair Pair {
@@ -74,6 +83,8 @@ namespace SSSEditor {
 			ddlStagePacs.DisplayMember = "Value";
 			ddlStagePacs.ValueMember = "Key";
 			ddlStagePacs.DataSource = Static.StagesByID;
+
+			radioButton1.KeyDown += radioButton1_KeyDown;
 		}
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {
@@ -100,6 +111,33 @@ namespace SSSEditor {
 			Control controlBelow = C[index + 1];
 			C.SetChildIndex(this, index + 1);
 			C.SetChildIndex(controlBelow, index);
+		}
+
+		private void pictureBox1_Click(object sender, EventArgs e) {
+			radioButton1.Focus();
+			radioButton1.Checked = true;
+		}
+
+		void radioButton1_KeyDown(object sender, KeyEventArgs e) {
+			if (!radioButton1.Checked) return;
+			if (e.KeyCode == Keys.PageUp) {
+				e.Handled = true;
+				btnUp.PerformClick();
+			} else if (e.KeyCode == Keys.PageDown) {
+				e.Handled = true;
+				btnDown.PerformClick();
+			}
+		}
+
+		private void radioButton1_CheckedChanged(object sender, EventArgs e) {
+			BackColor = radioButton1.Checked ? Color.Blue : SystemColors.Control;
+			if (radioButton1.Checked) {
+				foreach (Control c in Parent.Controls) {
+					if (c is StagePairControl && c != this) {
+						((StagePairControl)c).Checked = false;
+					}
+				}
+			}
 		}
 	}
 }

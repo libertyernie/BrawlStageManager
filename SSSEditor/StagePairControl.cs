@@ -31,6 +31,17 @@ namespace SSSEditor {
 			}
 			set {
 				radioButton1.Checked = value;
+				if (value) radioButton1.Focus();
+			}
+		}
+
+		public bool PairEditingEnabled {
+			get {
+				return ddlStagePacs.Enabled;
+			}
+			set {
+				ddlStagePacs.Enabled = value;
+				nudIconID.Enabled = value;
 			}
 		}
 
@@ -175,6 +186,15 @@ namespace SSSEditor {
 		}
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
+			var C = Parent.Controls;
+			int index = C.IndexOf(this);
+			Control control = (index == C.Count - 1)
+				? C[index - 1]
+				: C[index + 1];
+			if (control is StagePairControl) {
+				((StagePairControl)control).Checked = true;
+			}
+
 			Parent.Controls.Remove(this);
 			this.Dispose();
 		}

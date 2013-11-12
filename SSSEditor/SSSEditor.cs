@@ -40,10 +40,30 @@ namespace SSSEditor {
 				var spc = new StagePairControl {
 					Pair = pair,
 					RootNode = node,
-                    Dock = DockStyle.Fill,
+					Dock = DockStyle.Fill,
 				};
 				tblStageDefinitions.Controls.Add(spc);
 				spc.UpdateColor();
+			}
+
+			foreach (StagePair pair in screen1) {
+				var spc = new StagePairControl {
+					Pair = pair,
+					RootNode = node,
+					Dock = DockStyle.Fill,
+					PairEditingEnabled = false,
+				};
+				tblSSS1.Controls.Add(spc);
+			}
+
+			foreach (StagePair pair in screen2) {
+				var spc = new StagePairControl {
+					Pair = pair,
+					RootNode = node,
+					Dock = DockStyle.Fill,
+					PairEditingEnabled = false,
+				};
+				tblSSS2.Controls.Add(spc);
 			}
 		}
 

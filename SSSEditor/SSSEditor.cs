@@ -12,16 +12,17 @@ using System.Windows.Forms;
 
 namespace SSSEditor {
 	public partial class SSSEditor : Form {
-		private List<StagePair> screen1, screen2;
-
 		public SSSEditor() {
 			InitializeComponent();
 
 			CustomSSS sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 			ResourceNode node = NodeFactory.FromFile(null, @"F:\private\wii\app\RSBE\pf\system\common5.pac");
 
-			screen1 = new List<StagePair>();
-			screen2 = new List<StagePair>();
+			ResourceNode p1icon = node.FindChild("MenSelmapCursorPly.1", true);
+			BRESNode md80 = (p1icon != null) ? p1icon.Parent.Parent as BRESNode : null;
+
+			var screen1 = new List<StagePair>();
+			var screen2 = new List<StagePair>();
 			var definitions = new List<StagePair>();
 			for (int i = 0; i < sss.sss3.Length; i += 2) {
 				definitions.Add(new StagePair {
@@ -39,7 +40,7 @@ namespace SSSEditor {
 			foreach (StagePair pair in definitions) {
 				var spc = new StagePairControl {
 					Pair = pair,
-					RootNode = node,
+					MiscData80 = md80,
 					Dock = DockStyle.Fill,
 				};
 				tblStageDefinitions.Controls.Add(spc);
@@ -47,29 +48,22 @@ namespace SSSEditor {
 			}
 
 			foreach (StagePair pair in screen1) {
-				var spc = new StagePairControl {
+				var spc = new FixedStagePairControl {
 					Pair = pair,
-					RootNode = node,
+					MiscData80 = md80,
 					Dock = DockStyle.Fill,
-					PairEditingEnabled = false,
 				};
 				tblSSS1.Controls.Add(spc);
 			}
 
 			foreach (StagePair pair in screen2) {
-				var spc = new StagePairControl {
+				var spc = new FixedStagePairControl {
 					Pair = pair,
-					RootNode = node,
+					MiscData80 = md80,
 					Dock = DockStyle.Fill,
-					PairEditingEnabled = false,
 				};
 				tblSSS2.Controls.Add(spc);
 			}
-		}
-
-		private void button1_Click(object sender, EventArgs e) {
-			Console.WriteLine();
-			Console.WriteLine(ToCode());
 		}
 
 		#region Conversion to code text
@@ -116,6 +110,18 @@ namespace SSSEditor {
 					definitions.Add(((StagePairControl)c).Pair);
 				}
 			}
+			List<StagePair> screen1 = new List<StagePair>();
+			foreach (Control c in tblSSS1.Controls) {
+				if (c is StagePairControl) {
+					screen1.Add(((StagePairControl)c).Pair);
+				}
+			}
+			List<StagePair> screen2 = new List<StagePair>();
+			foreach (Control c in tblSSS2.Controls) {
+				if (c is StagePairControl) {
+					screen2.Add(((StagePairControl)c).Pair);
+				}
+			}
 			return String.Format(
 @"* 046B8F5C 7C802378
 * 046B8F64 7C6300AE
@@ -140,5 +146,10 @@ namespace SSSEditor {
 	definitions.Count.ToString("X2"), ToCodeLines(definitions));
 		}
 		#endregion
+
+		private void printoutToolStripMenuItem_Click(object sender, EventArgs e) {
+			Console.WriteLine();
+			Console.WriteLine(ToCode());
+		}
 	}
 }

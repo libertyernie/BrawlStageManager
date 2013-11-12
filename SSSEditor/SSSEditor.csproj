@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FixedStagePairControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SSSEditor.cs">
       <SubType>Form</SubType>
     </Compile>

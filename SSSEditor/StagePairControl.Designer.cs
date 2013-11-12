@@ -181,14 +181,14 @@
 
 		#endregion
 
-		private System.Windows.Forms.ComboBox ddlStagePacs;
+		protected System.Windows.Forms.ComboBox ddlStagePacs;
 		private System.Windows.Forms.Label lblStageID;
 		private System.Windows.Forms.Label lblIconID;
-		private System.Windows.Forms.NumericUpDown nudIconID;
+		protected System.Windows.Forms.NumericUpDown nudIconID;
 		private System.Windows.Forms.Button btnUp;
 		private System.Windows.Forms.Button btnDown;
 		private System.Windows.Forms.RadioButton radioButton1;
-		private System.Windows.Forms.Panel colorCode;
+		protected System.Windows.Forms.Panel colorCode;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;

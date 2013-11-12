@@ -13,14 +13,12 @@ using BrawlLib.SSBB.ResourceNodes;
 namespace SSSEditor {
 	public partial class StagePairControl : UserControl {
 		private BRESNode miscdata80;
-		public ResourceNode RootNode {
+		public BRESNode MiscData80 {
 			set {
 				if (miscdata80 != null) {
 					miscdata80.Dispose();
-					miscdata80 = null;
 				}
-				ResourceNode p1icon = value.FindChild("MenSelmapCursorPly.1", true);
-				if (p1icon != null) miscdata80 = p1icon.Parent.Parent as BRESNode;
+				miscdata80 = value;
 				Icon = Icon;
 			}
 		}
@@ -32,16 +30,6 @@ namespace SSSEditor {
 			set {
 				radioButton1.Checked = value;
 				if (value) radioButton1.Focus();
-			}
-		}
-
-		public bool PairEditingEnabled {
-			get {
-				return ddlStagePacs.Enabled;
-			}
-			set {
-				ddlStagePacs.Enabled = value;
-				nudIconID.Enabled = value;
 			}
 		}
 
@@ -144,7 +132,7 @@ namespace SSSEditor {
 			UpdateColor(index + 1);
 		}
 
-		public void UpdateColor(int? index = null) {
+		public virtual void UpdateColor(int? index = null) {
 			int i = index ?? Parent.Controls.GetChildIndex(this);
 			colorCode.BackColor =
 				  i == 0x1E ? Color.Yellow

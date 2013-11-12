@@ -67,9 +67,11 @@ namespace SSSEditor {
 					Pair.icon = value;
 					if (miscdata80 == null) {
 						radioButton1.Image = null;
+                        pictureBox1.Image = null;
 					} else {
-						textures = new TextureContainer(miscdata80, Icon);
-						radioButton1.Image = (textures.icon_tex0 == null) ? null : textures.icon_tex0.GetImage(0);
+                        textures = new TextureContainer(miscdata80, Icon);
+                        radioButton1.Image = (textures.icon_tex0 == null) ? null : textures.icon_tex0.GetImage(0);
+                        pictureBox1.Image = (textures.frontstname_tex0 == null) ? null : textures.frontstname_tex0.GetImage(0);
 					}
 					nudIconID.Value = value;
 					lblIconID.Text = value.ToString("X2");
@@ -79,14 +81,24 @@ namespace SSSEditor {
 
 		public StagePairControl() {
 			InitializeComponent();
+            this.Click += FocusParent;
+            colorCode.Click += FocusParent;
+            pictureBox1.Click += FocusParent;
 
 			ddlStagePacs.DisplayMember = "Value";
 			ddlStagePacs.ValueMember = "Key";
 			ddlStagePacs.DataSource = Static.StagesByID;
+            ddlStagePacs.Resize += (sender, e) => {
+                if (!ddlStagePacs.Focused) ddlStagePacs.SelectionLength = 0;
+            };
 
 			radioButton1.KeyDown += radioButton1_KeyDown;
-			colorCode.Click += colorCode_Click;
+            colorCode.MouseUp += colorCode_MouseUp;
 		}
+
+        private void FocusParent(object sender, EventArgs e) {
+            Parent.Focus();
+        }
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ddlStagePacs.SelectedValue != null) Stage = (byte)ddlStagePacs.SelectedValue;
@@ -102,7 +114,8 @@ namespace SSSEditor {
 			if (index == 0) return;
 			Control controlAbove = C[index - 1];
 			C.SetChildIndex(this, index - 1);
-			C.SetChildIndex(controlAbove, index);
+            C.SetChildIndex(controlAbove, index);
+            if (controlAbove is StagePairControl) ((StagePairControl)controlAbove).UpdateColor(index);
 			UpdateColor(index - 1);
 		}
 
@@ -112,7 +125,8 @@ namespace SSSEditor {
 			if (index == C.Count - 1) return;
 			Control controlBelow = C[index + 1];
 			C.SetChildIndex(this, index + 1);
-			C.SetChildIndex(controlBelow, index);
+            C.SetChildIndex(controlBelow, index);
+            if (controlBelow is StagePairControl) ((StagePairControl)controlBelow).UpdateColor(index);
 			UpdateColor(index + 1);
 		}
 
@@ -124,20 +138,22 @@ namespace SSSEditor {
 				: Color.Blue;
 		}
 
-		private void pictureBox1_Click(object sender, EventArgs e) {
-			radioButton1.Focus();
-			radioButton1.Checked = true;
-		}
-
 		void radioButton1_KeyDown(object sender, KeyEventArgs e) {
 			if (!radioButton1.Checked) return;
 			if (e.KeyCode == Keys.PageUp) {
 				e.Handled = true;
 				btnUp.PerformClick();
-			} else if (e.KeyCode == Keys.PageDown) {
-				e.Handled = true;
-				btnDown.PerformClick();
-			}
+            }
+            else if (e.KeyCode == Keys.PageDown)
+            {
+                e.Handled = true;
+                btnDown.PerformClick();
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                e.Handled = true;
+                deleteToolStripMenuItem.PerformClick();
+            }
 		}
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e) {
@@ -151,8 +167,8 @@ namespace SSSEditor {
 			}
 		}
 
-		void colorCode_Click(object sender, EventArgs e) {
-			contextMenuStrip1.Show(Cursor.Position);
+        void colorCode_MouseUp(object sender, MouseEventArgs e) {
+			if (e.Button == MouseButtons.Right) contextMenuStrip1.Show(Cursor.Position);
 		}
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {

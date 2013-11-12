@@ -36,27 +36,13 @@ namespace SSSEditor {
 				screen2.Add(definitions[b]);
 			}
 
-			foreach (var t in new Tuple<Color, Color, string>[] {
-				new Tuple<Color, Color, string>(Color.Blue, Color.White, "Blue: never gets chosen on random"),
-				new Tuple<Color, Color, string>(Color.Yellow, Color.Blue, "Yellow: missing from My Music (Hanenbow)"),
-				new Tuple<Color, Color, string>(Color.Green, Color.White, "Green: both on My Music AND chosen on random"),
-			}) {
-				tableLayoutPanel1.Controls.Add(new Label() {
-					Text = t.Item3,
-					BackColor = t.Item1,
-					ForeColor = t.Item2,
-					TextAlign = ContentAlignment.MiddleCenter,
-					Width = 256,
-					Anchor = Anchor & AnchorStyles.Right,
-				});
-			}
-
 			foreach (StagePair pair in definitions) {
 				var spc = new StagePairControl {
 					Pair = pair,
 					RootNode = node,
+                    Dock = DockStyle.Fill,
 				};
-				tableLayoutPanel1.Controls.Add(spc);
+				tblStageDefinitions.Controls.Add(spc);
 				spc.UpdateColor();
 			}
 		}
@@ -105,7 +91,7 @@ namespace SSSEditor {
 
 		public string ToCode() {
 			List<StagePair> definitions = new List<StagePair>();
-			foreach (Control c in tableLayoutPanel1.Controls) {
+			foreach (Control c in tblStageDefinitions.Controls) {
 				if (c is StagePairControl) {
 					definitions.Add(((StagePairControl)c).Pair);
 				}

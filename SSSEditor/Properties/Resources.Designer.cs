@@ -73,6 +73,16 @@ namespace SSSEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap stageicon {
+            get {
+                object obj = ResourceManager.GetObject("stageicon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap uparr {
             get {
                 object obj = ResourceManager.GetObject("uparr", resourceCulture);

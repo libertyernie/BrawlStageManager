@@ -66,10 +66,10 @@ namespace SSSEditor {
 				if (Pair != null) {
 					Pair.icon = value;
 					if (miscdata80 == null) {
-						pictureBox1.Image = null;
+						radioButton1.Image = null;
 					} else {
 						textures = new TextureContainer(miscdata80, Icon);
-						pictureBox1.Image = (textures.icon_tex0 == null) ? null : textures.icon_tex0.GetImage(0);
+						radioButton1.Image = (textures.icon_tex0 == null) ? null : textures.icon_tex0.GetImage(0);
 					}
 					nudIconID.Value = value;
 					lblIconID.Text = value.ToString("X2");

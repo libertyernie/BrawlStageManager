@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="downarr.png" />
+    <None Include="stageicon.png" />
     <Content Include="uparr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

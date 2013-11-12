@@ -85,6 +85,7 @@ namespace SSSEditor {
 			ddlStagePacs.DataSource = Static.StagesByID;
 
 			radioButton1.KeyDown += radioButton1_KeyDown;
+			colorCode.Click += colorCode_Click;
 		}
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {
@@ -102,6 +103,7 @@ namespace SSSEditor {
 			Control controlAbove = C[index - 1];
 			C.SetChildIndex(this, index - 1);
 			C.SetChildIndex(controlAbove, index);
+			UpdateColor(index - 1);
 		}
 
 		private void btnDown_Click(object sender, EventArgs e) {
@@ -111,6 +113,15 @@ namespace SSSEditor {
 			Control controlBelow = C[index + 1];
 			C.SetChildIndex(this, index + 1);
 			C.SetChildIndex(controlBelow, index);
+			UpdateColor(index + 1);
+		}
+
+		public void UpdateColor(int? index = null) {
+			int i = index ?? Parent.Controls.GetChildIndex(this);
+			colorCode.BackColor =
+				  i == 0x1E ? Color.Yellow
+				: i < 0x29 ? Color.Green
+				: Color.Blue;
 		}
 
 		private void pictureBox1_Click(object sender, EventArgs e) {
@@ -138,6 +149,15 @@ namespace SSSEditor {
 					}
 				}
 			}
+		}
+
+		void colorCode_Click(object sender, EventArgs e) {
+			contextMenuStrip1.Show(Cursor.Position);
+		}
+
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
+			Parent.Controls.Remove(this);
+			this.Dispose();
 		}
 	}
 }

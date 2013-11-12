@@ -12,14 +12,16 @@ using System.Windows.Forms;
 
 namespace SSSEditor {
 	public partial class SSSEditor : Form {
+		private List<StagePair> screen1, screen2;
+
 		public SSSEditor() {
 			InitializeComponent();
 
 			CustomSSS sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 			ResourceNode node = NodeFactory.FromFile(null, @"F:\private\wii\app\RSBE\pf\system\common5.pac");
 
-			var screen1 = new List<StagePair>();
-			var screen2 = new List<StagePair>();
+			screen1 = new List<StagePair>();
+			screen2 = new List<StagePair>();
 			var definitions = new List<StagePair>();
 			for (int i = 0; i < sss.sss3.Length; i += 2) {
 				definitions.Add(new StagePair {
@@ -34,23 +36,103 @@ namespace SSSEditor {
 				screen2.Add(definitions[b]);
 			}
 
-			foreach (StagePair pair in screen1) {
-				tableLayoutPanel1.Controls.Add(new StagePairControl {
-					Pair = pair,
-					RootNode = node,
+			foreach (var t in new Tuple<Color, Color, string>[] {
+				new Tuple<Color, Color, string>(Color.Blue, Color.White, "Blue: never gets chosen on random"),
+				new Tuple<Color, Color, string>(Color.Yellow, Color.Blue, "Yellow: missing from My Music (Hanenbow)"),
+				new Tuple<Color, Color, string>(Color.Green, Color.White, "Green: both on My Music AND chosen on random"),
+			}) {
+				tableLayoutPanel1.Controls.Add(new Label() {
+					Text = t.Item3,
+					BackColor = t.Item1,
+					ForeColor = t.Item2,
+					TextAlign = ContentAlignment.MiddleCenter,
+					Width = 256,
+					Anchor = Anchor & AnchorStyles.Right,
 				});
 			}
-			tableLayoutPanel1.Controls.Add(new Label() { Text = "---------------------" });
-			foreach (StagePair pair in screen2) {
-				tableLayoutPanel1.Controls.Add(new StagePairControl {
+
+			foreach (StagePair pair in definitions) {
+				var spc = new StagePairControl {
 					Pair = pair,
 					RootNode = node,
-				});
+				};
+				tableLayoutPanel1.Controls.Add(spc);
+				spc.UpdateColor();
 			}
 		}
 
 		private void button1_Click(object sender, EventArgs e) {
-
+			Console.WriteLine();
+			Console.WriteLine(ToCode());
 		}
+
+		#region Conversion to code text
+		private string ToCodeLines(List<StagePair> list, List<StagePair> definitions) {
+			StringBuilder sb = new StringBuilder();
+			string[] s = (from sp in list
+						  select definitions.Contains(sp)
+						  ? definitions.IndexOf(sp).ToString("X2")
+						  : "__").ToArray();
+			for (int i = 0; i < s.Length; i += 8) {
+				sb.Append("* ");
+				for (int j = i; j < i + 4; j++) {
+					sb.Append(j < s.Length ? s[j] : "00");
+				}
+				sb.Append(" ");
+				for (int j = i + 4; j < i + 8; j++) {
+					sb.Append(j < s.Length ? s[j] : "00");
+				}
+				sb.AppendLine();
+			}
+			return sb.ToString();
+		}
+
+		private string ToCodeLines(List<StagePair> definitions) {
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < definitions.Count; i += 4) {
+				sb.Append("* ");
+				for (int j = i; j < i + 2; j++) {
+					sb.Append(j < definitions.Count ? definitions[j].ToUshort().ToString("X4") : "0000");
+				}
+				sb.Append(" ");
+				for (int j = i + 2; j < i + 4; j++) {
+					sb.Append(j < definitions.Count ? definitions[j].ToUshort().ToString("X4") : "0000");
+				}
+				sb.AppendLine();
+			}
+			return sb.ToString();
+		}
+
+		public string ToCode() {
+			List<StagePair> definitions = new List<StagePair>();
+			foreach (Control c in tableLayoutPanel1.Controls) {
+				if (c is StagePairControl) {
+					definitions.Add(((StagePairControl)c).Pair);
+				}
+			}
+			return String.Format(
+@"* 046B8F5C 7C802378
+* 046B8F64 7C6300AE
+* 040AF618 5460083C
+* 040AF68C 38840002
+* 040AF6AC 5463083C
+* 040AF6C0 88030001
+* 040AF6E8 3860FFFF
+* 040AF59C 3860000C
+* 060B91C8 00000018
+* BFA10014 7CDF3378
+* 7CBE2B78 7C7D1B78
+* 2D05FFFF 418A0014
+* 006B929C 000000{0}
+* 066B99D8 000000{0}
+{1}* 006B92A4 000000{2}
+* 066B9A58 000000{2}
+{3}* 06407AAC 000000{4}
+{5}",
+	screen1.Count.ToString("X2"), ToCodeLines(screen1, definitions),
+	screen2.Count.ToString("X2"), ToCodeLines(screen2, definitions),
+	definitions.Count.ToString("X2"), ToCodeLines(definitions));
+		}
+		#endregion
 	}
 }

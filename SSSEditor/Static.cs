@@ -13,7 +13,7 @@ namespace SSSEditor {
 			StagesByID = new List<KeyValuePair<byte,string>>();
 			for (byte b = 1; b <= 100; b++) {
 				string pac = StageIDMap.PacBasenameForStageID(b);
-				if (pac != null) StagesByID.Add(new KeyValuePair<byte, string>(b, pac));
+				if (pac != null) StagesByID.Add(new KeyValuePair<byte, string>(b, pac.ToUpper()));
 			}
 		}
 	}

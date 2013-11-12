@@ -25,9 +25,9 @@ namespace SSSEditor {
 			}
 		}
 
-		private MutableSSS.StagePair _pair;
+		private StagePair _pair;
 		private TextureContainer textures;
-		public MutableSSS.StagePair Pair {
+		public StagePair Pair {
 			get {
 				return _pair;
 			}
@@ -89,8 +89,6 @@ namespace SSSEditor {
 			int index = C.IndexOf(this);
 			if (index == 0) return;
 			Control controlAbove = C[index - 1];
-			Control hey = C[index + 1];
-			Console.WriteLine(hey);
 			C.SetChildIndex(this, index - 1);
 			C.SetChildIndex(controlAbove, index);
 		}

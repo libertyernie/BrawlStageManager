@@ -7,23 +7,6 @@ using System.Threading.Tasks;
 
 namespace SSSEditor {
 	public class MutableSSS {
-		public class StagePair {
-			public byte stage;
-			public byte icon;
-			public override string ToString() {
-				return "[0x" + stage.ToString("X2") + ", " + icon.ToString("D2") + "]";
-			}
-			public ushort ToUshort() {
-				return (ushort)(stage * 0x100 + icon);
-			}
-			public override int GetHashCode() {
-				return ToUshort();
-			}
-			public override bool Equals(object obj) {
-				return (obj is StagePair && ((StagePair)obj).ToUshort() == this.ToUshort());
-			}
-		}
-
 		public List<StagePair> screen1;
 		public List<StagePair> screen2;
 		public List<StagePair> definitions;

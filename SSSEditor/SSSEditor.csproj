@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="SSSEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SSSEditor.Designer.cs">
+      <DependentUpon>SSSEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="MutableSSS.cs" />
     <Compile Include="Program.cs" />
@@ -63,8 +63,8 @@
       <DependentUpon>StagePairControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Static.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="SSSEditor.resx">
+      <DependentUpon>SSSEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -74,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StagePairControl.resx">
       <DependentUpon>StagePairControl.cs</DependentUpon>
@@ -96,6 +97,10 @@
       <Project>{758ae6d5-2133-4194-a36c-f371ae01a7c5}</Project>
       <Name>StageManager</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="downarr.png" />
+    <Content Include="uparr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

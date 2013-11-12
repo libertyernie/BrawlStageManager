@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SSSEditor {
-	public partial class Form1 : Form {
-		public Form1() {
+	public partial class SSSEditor : Form {
+		public SSSEditor() {
 			InitializeComponent();
 
 			MutableSSS m = new MutableSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
@@ -33,6 +33,17 @@ namespace SSSEditor {
 					Pair = pair,
 					RootNode = node,
 				});
+			}
+		}
+
+		private void button1_Click(object sender, EventArgs e) {
+			int i = 0;
+			foreach (Control c in flowLayoutPanel1.Controls) {
+				if (c is StagePairControl) {
+					var control = c as StagePairControl;
+					Console.Write(control.Pair.ToUshort().ToString("X4"));
+					if (++i % 8 == 0) Console.WriteLine();
+				}
 			}
 		}
 	}

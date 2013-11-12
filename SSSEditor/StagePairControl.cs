@@ -83,5 +83,25 @@ namespace SSSEditor {
 		private void nudIconID_ValueChanged(object sender, EventArgs e) {
 			Icon = (byte)nudIconID.Value;
 		}
+
+		private void btnUp_Click(object sender, EventArgs e) {
+			var C = Parent.Controls;
+			int index = C.IndexOf(this);
+			if (index == 0) return;
+			Control controlAbove = C[index - 1];
+			Control hey = C[index + 1];
+			Console.WriteLine(hey);
+			C.SetChildIndex(this, index - 1);
+			C.SetChildIndex(controlAbove, index);
+		}
+
+		private void btnDown_Click(object sender, EventArgs e) {
+			var C = Parent.Controls;
+			int index = C.IndexOf(this);
+			if (index == C.Count - 1) return;
+			Control controlBelow = C[index + 1];
+			C.SetChildIndex(this, index + 1);
+			C.SetChildIndex(controlBelow, index);
+		}
 	}
 }

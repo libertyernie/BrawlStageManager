@@ -81,9 +81,11 @@ namespace SSSEditor {
 
 		public StagePairControl() {
 			InitializeComponent();
-            this.Click += FocusParent;
-            colorCode.Click += FocusParent;
-            pictureBox1.Click += FocusParent;
+            this.Click += CheckRadioButton;
+            colorCode.Click += CheckRadioButton;
+            pictureBox1.Click += CheckRadioButton;
+			lblIconID.Click += CheckRadioButton;
+			lblStageID.Click += CheckRadioButton;
 
 			ddlStagePacs.DisplayMember = "Value";
 			ddlStagePacs.ValueMember = "Key";
@@ -96,8 +98,9 @@ namespace SSSEditor {
             colorCode.MouseUp += colorCode_MouseUp;
 		}
 
-        private void FocusParent(object sender, EventArgs e) {
-            Parent.Focus();
+        private void CheckRadioButton(object sender, EventArgs e) {
+            radioButton1.Focus();
+			radioButton1.Checked = true;
         }
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {

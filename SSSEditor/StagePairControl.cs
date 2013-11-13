@@ -33,6 +33,15 @@ namespace SSSEditor {
 			}
 		}
 
+		public bool StageNameVisible {
+			get {
+				return pictureBox1.Visible;
+			}
+			set {
+				pictureBox1.Visible = value;
+			}
+		}
+
 		private StagePair _pair;
 		private TextureContainer textures;
 		public StagePair Pair {
@@ -47,7 +56,7 @@ namespace SSSEditor {
 		}
 		public byte Stage {
 			get {
-				return Pair.stage;
+				return Pair == null ? (byte)0xff : Pair.stage;
 			}
 			set {
 				if (Pair != null) {
@@ -59,7 +68,7 @@ namespace SSSEditor {
 		}
 		public byte Icon {
 			get {
-				return Pair.icon;
+				return Pair == null ? (byte)0xff : Pair.icon;
 			}
 			set {
 				if (Pair != null) {
@@ -80,9 +89,10 @@ namespace SSSEditor {
 
 		public StagePairControl() {
 			InitializeComponent();
-			foreach (Control c in new Control[] { this, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
+			this.Paint += StagePairControl_Paint;
+			foreach (Control c in new Control[] { panel1, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
 				c.Click += CheckRadioButton;
-				c.MouseUp += colorCode_MouseUp;
+				c.MouseUp += ShowMenuOnRightClick;
 			}
 
 			ddlStagePacs.DisplayMember = "Value";
@@ -95,10 +105,22 @@ namespace SSSEditor {
 			radioButton1.KeyDown += radioButton1_KeyDown;
 		}
 
+		private void StagePairControl_Paint(object sender, PaintEventArgs e) {
+			int i = Parent.Controls.GetChildIndex(this);
+			colorCode.BackColor =
+				  i == 0x1E ? Color.Yellow
+				: i < 0x29 ? Color.Green
+				: Color.Blue;
+		}
+
         private void CheckRadioButton(object sender, EventArgs e) {
             radioButton1.Focus();
 			radioButton1.Checked = true;
         }
+
+		void ShowMenuOnRightClick(object sender, MouseEventArgs e) {
+			if (e.Button == MouseButtons.Right) contextMenuStrip1.Show(Cursor.Position);
+		}
 
 		private void ddlStagePacs_SelectedIndexChanged(object sender, EventArgs e) {
 			if (ddlStagePacs.SelectedValue != null) Stage = (byte)ddlStagePacs.SelectedValue;
@@ -115,8 +137,8 @@ namespace SSSEditor {
 			Control controlAbove = C[index - 1];
 			C.SetChildIndex(this, index - 1);
             C.SetChildIndex(controlAbove, index);
-            if (controlAbove is StagePairControl) ((StagePairControl)controlAbove).UpdateColor(index);
-			UpdateColor(index - 1);
+			controlAbove.Invalidate();
+			this.Invalidate();
 		}
 
 		private void btnDown_Click(object sender, EventArgs e) {
@@ -125,17 +147,9 @@ namespace SSSEditor {
 			if (index == C.Count - 1) return;
 			Control controlBelow = C[index + 1];
 			C.SetChildIndex(this, index + 1);
-            C.SetChildIndex(controlBelow, index);
-            if (controlBelow is StagePairControl) ((StagePairControl)controlBelow).UpdateColor(index);
-			UpdateColor(index + 1);
-		}
-
-		public virtual void UpdateColor(int? index = null) {
-			int i = index ?? Parent.Controls.GetChildIndex(this);
-			colorCode.BackColor =
-				  i == 0x1E ? Color.Yellow
-				: i < 0x29 ? Color.Green
-				: Color.Blue;
+			C.SetChildIndex(controlBelow, index);
+			controlBelow.Invalidate();
+			this.Invalidate();
 		}
 
 		void radioButton1_KeyDown(object sender, KeyEventArgs e) {
@@ -157,7 +171,7 @@ namespace SSSEditor {
 		}
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e) {
-			BackColor = radioButton1.Checked ? Color.Blue : SystemColors.Control;
+			BackColor = radioButton1.Checked ? SystemColors.Highlight : SystemColors.Control;
 			if (radioButton1.Checked) {
 				foreach (Control c in Parent.Controls) {
 					if (c is StagePairControl && c != this) {
@@ -165,10 +179,6 @@ namespace SSSEditor {
 					}
 				}
 			}
-		}
-
-        void colorCode_MouseUp(object sender, MouseEventArgs e) {
-			if (e.Button == MouseButtons.Right) contextMenuStrip1.Show(Cursor.Position);
 		}
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {

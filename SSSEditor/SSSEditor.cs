@@ -44,7 +44,6 @@ namespace SSSEditor {
 					Dock = DockStyle.Fill,
 				};
 				tblStageDefinitions.Controls.Add(spc);
-				spc.UpdateColor();
 			}
 
 			foreach (StagePair pair in screen1) {
@@ -150,6 +149,24 @@ namespace SSSEditor {
 		private void printoutToolStripMenuItem_Click(object sender, EventArgs e) {
 			Console.WriteLine();
 			Console.WriteLine(ToCode());
+		}
+
+		private void switchToFlowLayoutPanelToolStripMenuItem_Click(object sender, EventArgs e) {
+			FlowLayoutPanel p = new FlowLayoutPanel() {
+				Dock = DockStyle.Fill,
+				AutoScroll = true,
+				FlowDirection = FlowDirection.TopDown,
+			};
+			foreach (Control c in tblStageDefinitions.Controls) {
+				c.Dock = DockStyle.None;
+				if (c is StagePairControl) ((StagePairControl)c).StageNameVisible = false;
+				c.Width -= 208;
+				tblStageDefinitions.Controls.Remove(c);
+				p.Controls.Add(c);
+			}
+			tabDefinitions.Controls.Remove(tblStageDefinitions);
+			tabDefinitions.Controls.Add(p);
+			tabDefinitions.Controls.SetChildIndex(p, 0);
 		}
 	}
 }

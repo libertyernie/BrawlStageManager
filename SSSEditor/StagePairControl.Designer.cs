@@ -31,12 +31,14 @@
 			this.radioButton1 = new System.Windows.Forms.RadioButton();
 			this.btnDown = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
-			this.colorCode = new System.Windows.Forms.Panel();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.colorCode = new System.Windows.Forms.Panel();
+			this.panel1 = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
+			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -45,9 +47,9 @@
 			this.ddlStagePacs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ddlStagePacs.FormattingEnabled = true;
-			this.ddlStagePacs.Location = new System.Drawing.Point(87, 3);
+			this.ddlStagePacs.Location = new System.Drawing.Point(3, 3);
 			this.ddlStagePacs.Name = "ddlStagePacs";
-			this.ddlStagePacs.Size = new System.Drawing.Size(177, 21);
+			this.ddlStagePacs.Size = new System.Drawing.Size(183, 21);
 			this.ddlStagePacs.TabIndex = 1;
 			this.ddlStagePacs.SelectedIndexChanged += new System.EventHandler(this.ddlStagePacs_SelectedIndexChanged);
 			// 
@@ -55,7 +57,7 @@
 			// 
 			this.lblStageID.AutoSize = true;
 			this.lblStageID.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblStageID.Location = new System.Drawing.Point(144, 34);
+			this.lblStageID.Location = new System.Drawing.Point(60, 34);
 			this.lblStageID.Name = "lblStageID";
 			this.lblStageID.Size = new System.Drawing.Size(24, 16);
 			this.lblStageID.TabIndex = 3;
@@ -65,7 +67,7 @@
 			// 
 			this.lblIconID.AutoSize = true;
 			this.lblIconID.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblIconID.Location = new System.Drawing.Point(163, 34);
+			this.lblIconID.Location = new System.Drawing.Point(81, 34);
 			this.lblIconID.Name = "lblIconID";
 			this.lblIconID.Size = new System.Drawing.Size(24, 16);
 			this.lblIconID.TabIndex = 4;
@@ -73,7 +75,7 @@
 			// 
 			// nudIconID
 			// 
-			this.nudIconID.Location = new System.Drawing.Point(87, 30);
+			this.nudIconID.Location = new System.Drawing.Point(3, 30);
 			this.nudIconID.Maximum = new decimal(new int[] {
             255,
             0,
@@ -91,6 +93,7 @@
 			// 
 			// radioButton1
 			// 
+			this.radioButton1.Dock = System.Windows.Forms.DockStyle.Left;
 			this.radioButton1.Image = global::SSSEditor.Properties.Resources.stageicon;
 			this.radioButton1.Location = new System.Drawing.Point(0, 0);
 			this.radioButton1.Margin = new System.Windows.Forms.Padding(0);
@@ -103,9 +106,8 @@
 			// 
 			// btnDown
 			// 
-			this.btnDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnDown.Image = global::SSSEditor.Properties.Resources.downarr;
-			this.btnDown.Location = new System.Drawing.Point(244, 30);
+			this.btnDown.Location = new System.Drawing.Point(166, 30);
 			this.btnDown.Name = "btnDown";
 			this.btnDown.Size = new System.Drawing.Size(20, 20);
 			this.btnDown.TabIndex = 7;
@@ -114,23 +116,13 @@
 			// 
 			// btnUp
 			// 
-			this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnUp.Image = global::SSSEditor.Properties.Resources.uparr;
-			this.btnUp.Location = new System.Drawing.Point(218, 30);
+			this.btnUp.Location = new System.Drawing.Point(140, 30);
 			this.btnUp.Name = "btnUp";
 			this.btnUp.Size = new System.Drawing.Size(20, 20);
 			this.btnUp.TabIndex = 6;
 			this.btnUp.UseVisualStyleBackColor = true;
 			this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
-			// 
-			// colorCode
-			// 
-			this.colorCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.colorCode.Location = new System.Drawing.Point(270, 0);
-			this.colorCode.Margin = new System.Windows.Forms.Padding(0);
-			this.colorCode.Name = "colorCode";
-			this.colorCode.Size = new System.Drawing.Size(19, 62);
-			this.colorCode.TabIndex = 9;
 			// 
 			// contextMenuStrip1
 			// 
@@ -146,12 +138,35 @@
 			this.deleteToolStripMenuItem.Text = "Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
+			// colorCode
+			// 
+			this.colorCode.Dock = System.Windows.Forms.DockStyle.Right;
+			this.colorCode.Location = new System.Drawing.Point(273, 0);
+			this.colorCode.Margin = new System.Windows.Forms.Padding(0);
+			this.colorCode.Name = "colorCode";
+			this.colorCode.Size = new System.Drawing.Size(19, 62);
+			this.colorCode.TabIndex = 9;
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.ddlStagePacs);
+			this.panel1.Controls.Add(this.lblStageID);
+			this.panel1.Controls.Add(this.lblIconID);
+			this.panel1.Controls.Add(this.nudIconID);
+			this.panel1.Controls.Add(this.btnUp);
+			this.panel1.Controls.Add(this.btnDown);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel1.Location = new System.Drawing.Point(84, 0);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(189, 62);
+			this.panel1.TabIndex = 11;
+			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.pictureBox1.Location = new System.Drawing.Point(292, 3);
+			this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.pictureBox1.Location = new System.Drawing.Point(292, 0);
 			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(208, 56);
+			this.pictureBox1.Size = new System.Drawing.Size(208, 62);
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
@@ -159,23 +174,19 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.pictureBox1);
+			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.colorCode);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.radioButton1);
-			this.Controls.Add(this.btnDown);
-			this.Controls.Add(this.btnUp);
-			this.Controls.Add(this.nudIconID);
-			this.Controls.Add(this.lblIconID);
-			this.Controls.Add(this.lblStageID);
-			this.Controls.Add(this.ddlStagePacs);
 			this.Margin = new System.Windows.Forms.Padding(0);
 			this.Name = "StagePairControl";
 			this.Size = new System.Drawing.Size(500, 62);
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
 		}
 
@@ -188,9 +199,10 @@
 		private System.Windows.Forms.Button btnUp;
 		private System.Windows.Forms.Button btnDown;
 		private System.Windows.Forms.RadioButton radioButton1;
-		protected System.Windows.Forms.Panel colorCode;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox1;
+		protected System.Windows.Forms.Panel colorCode;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }

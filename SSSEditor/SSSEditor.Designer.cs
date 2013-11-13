@@ -23,27 +23,109 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.printoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tabSSS2 = new System.Windows.Forms.TabPage();
+			this.tblSSS2 = new System.Windows.Forms.TableLayoutPanel();
+			this.tabSSS1 = new System.Windows.Forms.TabPage();
+			this.tblSSS1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tabDefinitions = new System.Windows.Forms.TabPage();
 			this.tblStageDefinitions = new System.Windows.Forms.TableLayoutPanel();
 			this.tblColorCodeKeys = new System.Windows.Forms.TableLayoutPanel();
 			this.lblGreen = new System.Windows.Forms.Label();
 			this.lblYellow = new System.Windows.Forms.Label();
 			this.lblBlue = new System.Windows.Forms.Label();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
-			this.tabDefinitions = new System.Windows.Forms.TabPage();
-			this.tabSSS1 = new System.Windows.Forms.TabPage();
-			this.tblSSS1 = new System.Windows.Forms.TableLayoutPanel();
-			this.tabSSS2 = new System.Windows.Forms.TabPage();
-			this.tblSSS2 = new System.Windows.Forms.TableLayoutPanel();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.printoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.menuStrip1.SuspendLayout();
+			this.tabSSS2.SuspendLayout();
+			this.tabSSS1.SuspendLayout();
+			this.tabDefinitions.SuspendLayout();
 			this.tblColorCodeKeys.SuspendLayout();
 			this.tabControl1.SuspendLayout();
-			this.tabDefinitions.SuspendLayout();
-			this.tabSSS1.SuspendLayout();
-			this.tabSSS2.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// menuStrip1
+			// 
+			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+			this.menuStrip1.Name = "menuStrip1";
+			this.menuStrip1.Size = new System.Drawing.Size(316, 24);
+			this.menuStrip1.TabIndex = 4;
+			this.menuStrip1.Text = "menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printoutToolStripMenuItem});
+			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+			this.fileToolStripMenuItem.Text = "File";
+			// 
+			// printoutToolStripMenuItem
+			// 
+			this.printoutToolStripMenuItem.Name = "printoutToolStripMenuItem";
+			this.printoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.printoutToolStripMenuItem.Text = "Printout";
+			this.printoutToolStripMenuItem.Click += new System.EventHandler(this.printoutToolStripMenuItem_Click);
+			// 
+			// tabSSS2
+			// 
+			this.tabSSS2.Controls.Add(this.tblSSS2);
+			this.tabSSS2.Location = new System.Drawing.Point(4, 22);
+			this.tabSSS2.Name = "tabSSS2";
+			this.tabSSS2.Size = new System.Drawing.Size(308, 411);
+			this.tabSSS2.TabIndex = 2;
+			this.tabSSS2.Text = "SSS #2";
+			this.tabSSS2.UseVisualStyleBackColor = true;
+			// 
+			// tblSSS2
+			// 
+			this.tblSSS2.AutoScroll = true;
+			this.tblSSS2.ColumnCount = 1;
+			this.tblSSS2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tblSSS2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tblSSS2.Location = new System.Drawing.Point(0, 0);
+			this.tblSSS2.Name = "tblSSS2";
+			this.tblSSS2.RowCount = 1;
+			this.tblSSS2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tblSSS2.Size = new System.Drawing.Size(308, 411);
+			this.tblSSS2.TabIndex = 3;
+			// 
+			// tabSSS1
+			// 
+			this.tabSSS1.Controls.Add(this.tblSSS1);
+			this.tabSSS1.Location = new System.Drawing.Point(4, 22);
+			this.tabSSS1.Name = "tabSSS1";
+			this.tabSSS1.Size = new System.Drawing.Size(308, 411);
+			this.tabSSS1.TabIndex = 1;
+			this.tabSSS1.Text = "SSS #1";
+			this.tabSSS1.UseVisualStyleBackColor = true;
+			// 
+			// tblSSS1
+			// 
+			this.tblSSS1.AutoScroll = true;
+			this.tblSSS1.ColumnCount = 1;
+			this.tblSSS1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+			this.tblSSS1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tblSSS1.Location = new System.Drawing.Point(0, 0);
+			this.tblSSS1.Name = "tblSSS1";
+			this.tblSSS1.RowCount = 1;
+			this.tblSSS1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+			this.tblSSS1.Size = new System.Drawing.Size(308, 411);
+			this.tblSSS1.TabIndex = 2;
+			// 
+			// tabDefinitions
+			// 
+			this.tabDefinitions.Controls.Add(this.tblStageDefinitions);
+			this.tabDefinitions.Controls.Add(this.tblColorCodeKeys);
+			this.tabDefinitions.Location = new System.Drawing.Point(4, 22);
+			this.tabDefinitions.Name = "tabDefinitions";
+			this.tabDefinitions.Size = new System.Drawing.Size(308, 411);
+			this.tabDefinitions.TabIndex = 0;
+			this.tabDefinitions.Text = "Stage/Icon Pairs";
+			this.tabDefinitions.UseVisualStyleBackColor = true;
 			// 
 			// tblStageDefinitions
 			// 
@@ -123,88 +205,6 @@
 			this.tabControl1.Size = new System.Drawing.Size(316, 437);
 			this.tabControl1.TabIndex = 3;
 			// 
-			// tabDefinitions
-			// 
-			this.tabDefinitions.Controls.Add(this.tblStageDefinitions);
-			this.tabDefinitions.Controls.Add(this.tblColorCodeKeys);
-			this.tabDefinitions.Location = new System.Drawing.Point(4, 22);
-			this.tabDefinitions.Name = "tabDefinitions";
-			this.tabDefinitions.Size = new System.Drawing.Size(308, 411);
-			this.tabDefinitions.TabIndex = 0;
-			this.tabDefinitions.Text = "Stage/Icon Pairs";
-			this.tabDefinitions.UseVisualStyleBackColor = true;
-			// 
-			// tabSSS1
-			// 
-			this.tabSSS1.Controls.Add(this.tblSSS1);
-			this.tabSSS1.Location = new System.Drawing.Point(4, 22);
-			this.tabSSS1.Name = "tabSSS1";
-			this.tabSSS1.Size = new System.Drawing.Size(311, 435);
-			this.tabSSS1.TabIndex = 1;
-			this.tabSSS1.Text = "SSS #1";
-			this.tabSSS1.UseVisualStyleBackColor = true;
-			// 
-			// tblSSS1
-			// 
-			this.tblSSS1.AutoScroll = true;
-			this.tblSSS1.ColumnCount = 1;
-			this.tblSSS1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tblSSS1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tblSSS1.Location = new System.Drawing.Point(0, 0);
-			this.tblSSS1.Name = "tblSSS1";
-			this.tblSSS1.RowCount = 1;
-			this.tblSSS1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tblSSS1.Size = new System.Drawing.Size(311, 435);
-			this.tblSSS1.TabIndex = 2;
-			// 
-			// tabSSS2
-			// 
-			this.tabSSS2.Controls.Add(this.tblSSS2);
-			this.tabSSS2.Location = new System.Drawing.Point(4, 22);
-			this.tabSSS2.Name = "tabSSS2";
-			this.tabSSS2.Size = new System.Drawing.Size(311, 435);
-			this.tabSSS2.TabIndex = 2;
-			this.tabSSS2.Text = "SSS #2";
-			this.tabSSS2.UseVisualStyleBackColor = true;
-			// 
-			// tblSSS2
-			// 
-			this.tblSSS2.AutoScroll = true;
-			this.tblSSS2.ColumnCount = 1;
-			this.tblSSS2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tblSSS2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tblSSS2.Location = new System.Drawing.Point(0, 0);
-			this.tblSSS2.Name = "tblSSS2";
-			this.tblSSS2.RowCount = 1;
-			this.tblSSS2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tblSSS2.Size = new System.Drawing.Size(311, 435);
-			this.tblSSS2.TabIndex = 3;
-			// 
-			// menuStrip1
-			// 
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(316, 24);
-			this.menuStrip1.TabIndex = 4;
-			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// fileToolStripMenuItem
-			// 
-			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printoutToolStripMenuItem});
-			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-			this.fileToolStripMenuItem.Text = "File";
-			// 
-			// printoutToolStripMenuItem
-			// 
-			this.printoutToolStripMenuItem.Name = "printoutToolStripMenuItem";
-			this.printoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.printoutToolStripMenuItem.Text = "Printout";
-			this.printoutToolStripMenuItem.Click += new System.EventHandler(this.printoutToolStripMenuItem_Click);
-			// 
 			// SSSEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,13 +215,13 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "SSSEditor";
 			this.Text = "SSS Editor";
-			this.tblColorCodeKeys.ResumeLayout(false);
-			this.tabControl1.ResumeLayout(false);
-			this.tabDefinitions.ResumeLayout(false);
-			this.tabSSS1.ResumeLayout(false);
-			this.tabSSS2.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.tabSSS2.ResumeLayout(false);
+			this.tabSSS1.ResumeLayout(false);
+			this.tabDefinitions.ResumeLayout(false);
+			this.tblColorCodeKeys.ResumeLayout(false);
+			this.tabControl1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -229,20 +229,20 @@
 
 		#endregion
 
-		private System.Windows.Forms.TableLayoutPanel tblStageDefinitions;
-        private System.Windows.Forms.TableLayoutPanel tblColorCodeKeys;
-        private System.Windows.Forms.Label lblBlue;
-        private System.Windows.Forms.Label lblGreen;
-        private System.Windows.Forms.Label lblYellow;
-		private System.Windows.Forms.TabControl tabControl1;
-		private System.Windows.Forms.TabPage tabDefinitions;
-		private System.Windows.Forms.TabPage tabSSS1;
-		private System.Windows.Forms.TabPage tabSSS2;
-		private System.Windows.Forms.TableLayoutPanel tblSSS2;
-		private System.Windows.Forms.TableLayoutPanel tblSSS1;
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem printoutToolStripMenuItem;
+		private System.Windows.Forms.TabPage tabSSS2;
+		private System.Windows.Forms.TableLayoutPanel tblSSS2;
+		private System.Windows.Forms.TabPage tabSSS1;
+		private System.Windows.Forms.TableLayoutPanel tblSSS1;
+		private System.Windows.Forms.TabPage tabDefinitions;
+		private System.Windows.Forms.TableLayoutPanel tblStageDefinitions;
+		private System.Windows.Forms.TableLayoutPanel tblColorCodeKeys;
+		private System.Windows.Forms.Label lblGreen;
+		private System.Windows.Forms.Label lblYellow;
+		private System.Windows.Forms.Label lblBlue;
+		private System.Windows.Forms.TabControl tabControl1;
 	}
 }
 

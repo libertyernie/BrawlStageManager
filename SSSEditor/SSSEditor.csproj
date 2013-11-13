@@ -56,7 +56,6 @@
     <Compile Include="SSSEditor.Designer.cs">
       <DependentUpon>SSSEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="MutableSSS.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StagePair.cs" />

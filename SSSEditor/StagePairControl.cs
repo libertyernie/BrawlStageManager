@@ -80,11 +80,10 @@ namespace SSSEditor {
 
 		public StagePairControl() {
 			InitializeComponent();
-            this.Click += CheckRadioButton;
-            colorCode.Click += CheckRadioButton;
-            pictureBox1.Click += CheckRadioButton;
-			lblIconID.Click += CheckRadioButton;
-			lblStageID.Click += CheckRadioButton;
+			foreach (Control c in new Control[] { this, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
+				c.Click += CheckRadioButton;
+				c.MouseUp += colorCode_MouseUp;
+			}
 
 			ddlStagePacs.DisplayMember = "Value";
 			ddlStagePacs.ValueMember = "Key";
@@ -94,7 +93,6 @@ namespace SSSEditor {
             };
 
 			radioButton1.KeyDown += radioButton1_KeyDown;
-            colorCode.MouseUp += colorCode_MouseUp;
 		}
 
         private void CheckRadioButton(object sender, EventArgs e) {

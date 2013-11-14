@@ -36,10 +36,12 @@
 			this.colorCode = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.nudDefIndex = new System.Windows.Forms.NumericUpDown();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ddlStagePacs
@@ -149,6 +151,7 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.nudDefIndex);
 			this.panel1.Controls.Add(this.ddlStagePacs);
 			this.panel1.Controls.Add(this.lblStageID);
 			this.panel1.Controls.Add(this.lblIconID);
@@ -170,6 +173,24 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// nudDefIndex
+			// 
+			this.nudDefIndex.Location = new System.Drawing.Point(3, 30);
+			this.nudDefIndex.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+			this.nudDefIndex.Name = "nudDefIndex";
+			this.nudDefIndex.Size = new System.Drawing.Size(51, 20);
+			this.nudDefIndex.TabIndex = 8;
+			this.nudDefIndex.Value = new decimal(new int[] {
+            123,
+            0,
+            0,
+            0});
+			this.nudDefIndex.Visible = false;
+			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,6 +207,7 @@
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -204,5 +226,6 @@
 		protected System.Windows.Forms.Panel colorCode;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox1;
+		protected System.Windows.Forms.NumericUpDown nudDefIndex;
 	}
 }

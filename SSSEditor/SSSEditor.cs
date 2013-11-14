@@ -72,7 +72,7 @@ namespace SSSEditor {
 			}
 
 			foreach (StagePair pair in screen1) {
-				var spc = new FixedStagePairControl {
+				var spc = new FixedStagePairControl(tblStageDefinitions) {
 					Pair = pair,
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,
@@ -81,7 +81,7 @@ namespace SSSEditor {
 			}
 
 			foreach (StagePair pair in screen2) {
-				var spc = new FixedStagePairControl {
+				var spc = new FixedStagePairControl(tblStageDefinitions) {
 					Pair = pair,
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,

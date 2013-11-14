@@ -42,6 +42,7 @@ namespace SSSEditor {
 			}
 		}
 
+		public event EventHandler PairChanged;
 		private StagePair _pair;
 		private TextureContainer textures;
 		public StagePair Pair {
@@ -52,6 +53,7 @@ namespace SSSEditor {
 				_pair = value;
 				Stage = Stage;
 				Icon = Icon;
+				if (PairChanged != null) PairChanged(this, new EventArgs());
 			}
 		}
 		public byte Stage {

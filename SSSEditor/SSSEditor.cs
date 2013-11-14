@@ -16,8 +16,28 @@ namespace SSSEditor {
 		public SSSEditor() {
 			InitializeComponent();
 
-			sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
+			tabControl1.SelectedIndexChanged += delegate(object o, EventArgs ea) {
+				if (tabControl1.SelectedTab == tabPreview1) {
+					List<StagePair> definitions = new List<StagePair>();
+					foreach (Control c in tblStageDefinitions.Controls) {
+						if (c is StagePairControl) {
+							definitions.Add(((StagePairControl)c).Pair);
+						}
+					}
 
+					sssPrev1.MiscData80 = this.md80;
+					sssPrev1.NumIcons = tblSSS1.Controls.Count;
+					List<byte> list = new List<byte>();
+					foreach (Control c in tblSSS1.Controls) {
+						if (c is StagePairControl) {
+							list.Add(((StagePairControl)c).Pair.icon);
+						}
+					}
+					sssPrev1.IconOrder = list.ToArray();
+				}
+			};
+
+			sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 			ReloadIfValidPac(@"F:\private\wii\app\RSBE\pf\system\common5.pac");
 		}
 

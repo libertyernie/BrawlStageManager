@@ -46,12 +46,15 @@
 			this.openSDCardRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tabPreview1 = new System.Windows.Forms.TabPage();
+			this.sssPrev1 = new SSSPrev();
 			this.menuStrip1.SuspendLayout();
 			this.tabSSS2.SuspendLayout();
 			this.tabSSS1.SuspendLayout();
 			this.tabDefinitions.SuspendLayout();
 			this.tblColorCodeKeys.SuspendLayout();
 			this.tabControl1.SuspendLayout();
+			this.tabPreview1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -203,6 +206,7 @@
 			this.tabControl1.Controls.Add(this.tabDefinitions);
 			this.tabControl1.Controls.Add(this.tabSSS1);
 			this.tabControl1.Controls.Add(this.tabSSS2);
+			this.tabControl1.Controls.Add(this.tabPreview1);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tabControl1.Location = new System.Drawing.Point(0, 24);
 			this.tabControl1.Name = "tabControl1";
@@ -284,6 +288,27 @@
 			this.viewCodeToolStripMenuItem.Text = "View code";
 			this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
 			// 
+			// tabPreview1
+			// 
+			this.tabPreview1.Controls.Add(this.sssPrev1);
+			this.tabPreview1.Location = new System.Drawing.Point(4, 22);
+			this.tabPreview1.Name = "tabPreview1";
+			this.tabPreview1.Size = new System.Drawing.Size(308, 411);
+			this.tabPreview1.TabIndex = 3;
+			this.tabPreview1.Text = "Preview #1";
+			this.tabPreview1.UseVisualStyleBackColor = true;
+			// 
+			// sssPrev1
+			// 
+			this.sssPrev1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.sssPrev1.IconOrder = null;
+			this.sssPrev1.Location = new System.Drawing.Point(0, 0);
+			this.sssPrev1.MyMusic = false;
+			this.sssPrev1.Name = "sssPrev1";
+			this.sssPrev1.NumIcons = 23;
+			this.sssPrev1.Size = new System.Drawing.Size(308, 411);
+			this.sssPrev1.TabIndex = 0;
+			// 
 			// SSSEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -301,6 +326,7 @@
 			this.tabDefinitions.ResumeLayout(false);
 			this.tblColorCodeKeys.ResumeLayout(false);
 			this.tabControl1.ResumeLayout(false);
+			this.tabPreview1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -331,6 +357,8 @@
 		private System.Windows.Forms.ToolStripMenuItem saveSSSCodeOnlytxtToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewCodeToolStripMenuItem;
+		private System.Windows.Forms.TabPage tabPreview1;
+		private SSSPrev sssPrev1;
 	}
 }
 

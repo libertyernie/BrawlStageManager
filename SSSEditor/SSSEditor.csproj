@@ -58,6 +58,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SSSPrev.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SSSPrev.Designer.cs">
+      <DependentUpon>SSSPrev.cs</DependentUpon>
+    </Compile>
     <Compile Include="StagePair.cs" />
     <Compile Include="StagePairControl.cs">
       <SubType>UserControl</SubType>

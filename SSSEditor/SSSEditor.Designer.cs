@@ -25,7 +25,6 @@
 		private void InitializeComponent() {
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.printoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tabSSS2 = new System.Windows.Forms.TabPage();
 			this.tblSSS2 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabSSS1 = new System.Windows.Forms.TabPage();
@@ -37,6 +36,16 @@
 			this.lblYellow = new System.Windows.Forms.Label();
 			this.lblBlue = new System.Windows.Forms.Label();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openCodesetgcttxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openStageIconspacbrresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveCodesetgctToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveSSSCodeOnlytxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openSDCardRootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+			this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tabSSS2.SuspendLayout();
 			this.tabSSS1.SuspendLayout();
@@ -48,7 +57,8 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.viewCodeToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(316, 24);
@@ -58,17 +68,12 @@
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.printoutToolStripMenuItem});
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.exitToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
 			this.fileToolStripMenuItem.Text = "File";
-			// 
-			// printoutToolStripMenuItem
-			// 
-			this.printoutToolStripMenuItem.Name = "printoutToolStripMenuItem";
-			this.printoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.printoutToolStripMenuItem.Text = "Printout";
-			this.printoutToolStripMenuItem.Click += new System.EventHandler(this.printoutToolStripMenuItem_Click);
 			// 
 			// tabSSS2
 			// 
@@ -205,6 +210,80 @@
 			this.tabControl1.Size = new System.Drawing.Size(316, 437);
 			this.tabControl1.TabIndex = 3;
 			// 
+			// openToolStripMenuItem
+			// 
+			this.openToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openCodesetgcttxtToolStripMenuItem,
+            this.openStageIconspacbrresToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.openSDCardRootToolStripMenuItem});
+			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Text = "Open";
+			// 
+			// saveToolStripMenuItem
+			// 
+			this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveCodesetgctToolStripMenuItem,
+            this.saveSSSCodeOnlytxtToolStripMenuItem});
+			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Text = "Save";
+			// 
+			// openCodesetgcttxtToolStripMenuItem
+			// 
+			this.openCodesetgcttxtToolStripMenuItem.Name = "openCodesetgcttxtToolStripMenuItem";
+			this.openCodesetgcttxtToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.openCodesetgcttxtToolStripMenuItem.Text = "Codeset (gct/txt)";
+			this.openCodesetgcttxtToolStripMenuItem.Click += new System.EventHandler(this.openCodesetgcttxtToolStripMenuItem_Click);
+			// 
+			// openStageIconspacbrresToolStripMenuItem
+			// 
+			this.openStageIconspacbrresToolStripMenuItem.Name = "openStageIconspacbrresToolStripMenuItem";
+			this.openStageIconspacbrresToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.openStageIconspacbrresToolStripMenuItem.Text = "Stage icons (pac/brres)";
+			this.openStageIconspacbrresToolStripMenuItem.Click += new System.EventHandler(this.openStageIconspacbrresToolStripMenuItem_Click);
+			// 
+			// saveCodesetgctToolStripMenuItem
+			// 
+			this.saveCodesetgctToolStripMenuItem.Name = "saveCodesetgctToolStripMenuItem";
+			this.saveCodesetgctToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+			this.saveCodesetgctToolStripMenuItem.Text = "Codeset (gct)";
+			this.saveCodesetgctToolStripMenuItem.Click += new System.EventHandler(this.saveCodesetgctToolStripMenuItem_Click);
+			// 
+			// saveSSSCodeOnlytxtToolStripMenuItem
+			// 
+			this.saveSSSCodeOnlytxtToolStripMenuItem.Name = "saveSSSCodeOnlytxtToolStripMenuItem";
+			this.saveSSSCodeOnlytxtToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+			this.saveSSSCodeOnlytxtToolStripMenuItem.Text = "SSS code only (txt)";
+			this.saveSSSCodeOnlytxtToolStripMenuItem.Click += new System.EventHandler(this.saveSSSCodeOnlytxtToolStripMenuItem_Click);
+			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
+			// openSDCardRootToolStripMenuItem
+			// 
+			this.openSDCardRootToolStripMenuItem.Name = "openSDCardRootToolStripMenuItem";
+			this.openSDCardRootToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+			this.openSDCardRootToolStripMenuItem.Text = "SD card root";
+			this.openSDCardRootToolStripMenuItem.Click += new System.EventHandler(this.openSDCardRootToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+			this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 6);
+			// 
+			// viewCodeToolStripMenuItem
+			// 
+			this.viewCodeToolStripMenuItem.Name = "viewCodeToolStripMenuItem";
+			this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+			this.viewCodeToolStripMenuItem.Text = "View code";
+			this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
+			// 
 			// SSSEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,7 +310,6 @@
 
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem printoutToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabSSS2;
 		private System.Windows.Forms.TableLayoutPanel tblSSS2;
 		private System.Windows.Forms.TabPage tabSSS1;
@@ -243,6 +321,16 @@
 		private System.Windows.Forms.Label lblYellow;
 		private System.Windows.Forms.Label lblBlue;
 		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openCodesetgcttxtToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openStageIconspacbrresToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem openSDCardRootToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveCodesetgctToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveSSSCodeOnlytxtToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewCodeToolStripMenuItem;
 	}
 }
 

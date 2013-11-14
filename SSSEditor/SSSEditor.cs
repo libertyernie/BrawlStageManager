@@ -2,24 +2,29 @@
 using BrawlStageManager;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SSSEditor {
 	public partial class SSSEditor : Form {
+		// Source data
+		private CustomSSS sss;
+		private BRESNode md80;
+
 		public SSSEditor() {
 			InitializeComponent();
 
-			CustomSSS sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
-			ResourceNode node = NodeFactory.FromFile(null, @"F:\private\wii\app\RSBE\pf\system\common5.pac");
+			sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 
-			ResourceNode p1icon = node.FindChild("MenSelmapCursorPly.1", true);
-			BRESNode md80 = (p1icon != null) ? p1icon.Parent.Parent as BRESNode : null;
+			ReloadIfValidPac(@"F:\private\wii\app\RSBE\pf\system\common5.pac");
+		}
+
+		private void ReloadData() {
+			tblStageDefinitions.Controls.Clear();
+			tblSSS1.Controls.Clear();
+			tblSSS2.Controls.Clear();
 
 			var screen1 = new List<StagePair>();
 			var screen2 = new List<StagePair>();
@@ -62,6 +67,21 @@ namespace SSSEditor {
 					Dock = DockStyle.Fill,
 				};
 				tblSSS2.Controls.Add(spc);
+			}
+		}
+
+		private void ReloadIfValidPac(string file, CustomSSS sssIfOtherFileValid = null) {
+			ResourceNode node = NodeFactory.FromFile(null, file);
+			ResourceNode p1icon = node.FindChild("MenSelmapCursorPly.1", true);
+			BRESNode candidate = (p1icon != null) ? p1icon.Parent.Parent as BRESNode : null;
+			if (candidate == null) {
+				MessageBox.Show(this, "No SSS icons were found in the selected file.",
+					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			} else {
+				if (md80 != null) md80.Dispose();
+				md80 = candidate;
+				sss = sssIfOtherFileValid ?? sss;
+				ReloadData();
 			}
 		}
 
@@ -146,11 +166,6 @@ namespace SSSEditor {
 		}
 		#endregion
 
-		private void printoutToolStripMenuItem_Click(object sender, EventArgs e) {
-			Console.WriteLine();
-			Console.WriteLine(ToCode());
-		}
-
 		private void switchToFlowLayoutPanelToolStripMenuItem_Click(object sender, EventArgs e) {
 			FlowLayoutPanel p = new FlowLayoutPanel() {
 				Dock = DockStyle.Fill,
@@ -167,6 +182,103 @@ namespace SSSEditor {
 			tabDefinitions.Controls.Remove(tblStageDefinitions);
 			tabDefinitions.Controls.Add(p);
 			tabDefinitions.Controls.SetChildIndex(p, 0);
+		}
+
+		private void openCodesetgcttxtToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (var dialog = new OpenFileDialog()) {
+				dialog.Filter = "Ocarina codes (*.gct, *.txt)|*.gct;*.txt";
+				dialog.Multiselect = false;
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					if (dialog.FileName.EndsWith("gct", StringComparison.InvariantCultureIgnoreCase)) {
+						sss = new CustomSSS(File.ReadAllBytes(dialog.FileName));
+					} else {
+						sss = new CustomSSS(File.ReadAllLines(dialog.FileName));
+					}
+					ReloadData();
+				}
+			}
+		}
+
+		private void openStageIconspacbrresToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (var dialog = new OpenFileDialog()) {
+				dialog.Filter = "Brawl data files (*.pac, *.brres)|*.pac;*.brres";
+				dialog.Multiselect = false;
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					ReloadIfValidPac(dialog.FileName);
+				}
+			}
+		}
+
+		private void openSDCardRootToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (var dialog = new FolderBrowserDialog()) {
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					CustomSSS candidateSSS;
+
+					if (File.Exists(dialog.SelectedPath + "/codes/RSBE01.gct")) {
+						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/codes/RSBE01.gct"));
+					} else if (File.Exists(dialog.SelectedPath + "/data/gecko/codes/RSBE01.gct")) {
+						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/data/gecko/codes/RSBE01.gct"));
+					} else if (File.Exists(dialog.SelectedPath + "/RSBE01.gct")) {
+						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/RSBE01.gct"));
+					} else {
+						MessageBox.Show(this, "Could not find codes/RSBE01.gct or data/gecko/codes/RSBE01.gct.",
+							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					string root;
+					if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap.pac")) {
+						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap.pac";
+					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap_en.pac")) {
+						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap_en.pac";
+					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5.pac")) {
+						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5.pac";
+					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5_en.pac")) {
+						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5_en.pac";
+					} else if (File.Exists(dialog.SelectedPath + "/MiscData[80].brres")) {
+						root = dialog.SelectedPath + "/MiscData[80].brres";
+					} else {
+						MessageBox.Show(this, "Could not find common5 or sc_selmap.",
+							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						return;
+					}
+
+					ReloadIfValidPac(root, candidateSSS);
+				}
+			}
+		}
+
+		private void saveCodesetgctToolStripMenuItem_Click(object sender, EventArgs e) {
+			MessageBox.Show(this, "This feature is not yet implemented.",
+							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+
+		private void saveSSSCodeOnlytxtToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (var dialog = new SaveFileDialog()) {
+				dialog.Filter = "Text files (*.txt)|*.txt";
+				dialog.OverwritePrompt = true;
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					File.WriteAllText(dialog.FileName, ToCode());
+				}
+			}
+		}
+
+		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+			Close();
+		}
+
+		private void viewCodeToolStripMenuItem_Click(object sender, EventArgs e) {
+			using (Form f = new Form() { Text = "Custom SSS Code" }) {
+				TextBox t = new TextBox() {
+					Multiline = true,
+					Dock = DockStyle.Fill,
+					ScrollBars = ScrollBars.Vertical,
+					Text = ToCode(),
+					Font = new System.Drawing.Font("Consolas", 12)
+				};
+				f.Controls.Add(t);
+				f.ShowDialog(this);
+			}
 		}
 	}
 }

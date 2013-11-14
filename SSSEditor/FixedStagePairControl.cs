@@ -10,32 +10,15 @@ namespace SSSEditor {
 	public class FixedStagePairControl : StagePairControl {
 		private Control definitionsContainer;
 
-		public decimal NUDDefValue {
-			get {
-				return nudDefIndex.Value;
-			}
-			set {
-				nudDefIndex.Value = value;
-			}
-		}
-
 		public FixedStagePairControl(Control definitionsContainer) : base() {
-			this.definitionsContainer = definitionsContainer;
+            this.definitionsContainer = definitionsContainer;
+            SetNUDToOwnIndex = false;
 			ddlStagePacs.Enabled = false;
-			nudIconID.Visible = false;
-			colorCode.Visible = false;
-			nudDefIndex.Visible = true;
+			nudIconID.Enabled = false;
+            //colorCode.Visible = false;
+            nudDefIndex.Enabled = true;
 
 			nudDefIndex.ValueChanged += nudDefIndex_ValueChanged;
-			/*this.PairChanged += delegate(object o, EventArgs e) {
-				for (int i = 0; i < definitionsContainer.Controls.Count; i++) {
-					Control c = definitionsContainer.Controls[i];
-					if (c is StagePairControl && ((StagePairControl)c).Pair == this.Pair) {
-						nudDefIndex.Value = i;
-						break;
-					}
-				}
-			};*/
 			this.Paint += FixedStagePairControl_Paint;
 		}
 
@@ -57,14 +40,20 @@ namespace SSSEditor {
 			if (nudDefIndex.Value >= definitionsContainer.Controls.Count) {
 				nudDefIndex.Value = definitionsContainer.Controls.Count - 1;
 			}
-			Control c = definitionsContainer.Controls[(int)nudDefIndex.Value];
-			if (c is StagePairControl) {
-				var p = ((StagePairControl)c).Pair;
-				if (p != lastPairPtr) {
-					lastPairPtr = p;
-					Pair = p;
-				}
-			}
+            if (nudDefIndex.Value == -1) {
+                MessageBox.Show(this, "Resetting entry #" + lblIndex.Text + " to 00 - the previous stage/icon pair has been removed.");
+                nudDefIndex.Value = 0;
+                return;
+            } else {
+                Control c = definitionsContainer.Controls[(int)nudDefIndex.Value];
+                if (c is StagePairControl) {
+                    var p = ((StagePairControl)c).Pair;
+                    if (p != lastPairPtr) {
+                        lastPairPtr = p;
+                        Pair = p;
+                    }
+                }
+            }
 		}
 	}
 }

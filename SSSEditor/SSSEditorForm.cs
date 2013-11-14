@@ -13,13 +13,13 @@ namespace SSSEditor {
 		private CustomSSS sss;
 		private BRESNode md80;
 
-		public SSSEditorForm() {
+		public SSSEditorForm(string gct, string pac) {
 			InitializeComponent();
 
 			tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
 
-			sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
-			ReloadIfValidPac(@"F:\private\wii\app\RSBE\pf\system\common5.pac");
+			sss = new CustomSSS(System.IO.File.ReadAllBytes(gct));
+			ReloadIfValidPac(pac);
 		}
 
 		private void ReloadData() {

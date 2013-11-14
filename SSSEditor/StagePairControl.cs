@@ -23,6 +23,8 @@ namespace SSSEditor {
 			}
 		}
 
+        public bool SetNUDToOwnIndex;
+
 		public bool Checked {
 			get {
 				return radioButton1.Checked;
@@ -41,6 +43,15 @@ namespace SSSEditor {
 				pictureBox1.Visible = value;
 			}
 		}
+
+        public decimal NUDDefValue {
+            get {
+                return nudDefIndex.Value;
+            }
+            set {
+                nudDefIndex.Value = value;
+            }
+        }
 
 		public event EventHandler PairChanged;
 		private StagePair _pair;
@@ -91,28 +102,43 @@ namespace SSSEditor {
 
 		public StagePairControl() {
 			InitializeComponent();
-			this.Paint += StagePairControl_Paint;
-			foreach (Control c in new Control[] { panel1, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
-				c.Click += CheckRadioButton;
-				c.MouseUp += ShowMenuOnRightClick;
-			}
+            SetNUDToOwnIndex = true;
 
-			ddlStagePacs.DisplayMember = "Value";
-			ddlStagePacs.ValueMember = "Key";
-			ddlStagePacs.DataSource = Static.StagesByID;
-            ddlStagePacs.Resize += (sender, e) => {
+            radioButton1.KeyDown += keyHandler;
+            foreach (Control c in new Control[] { panel1, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
+                c.Click += CheckRadioButton;
+                c.MouseUp += ShowMenuOnRightClick;
+            }
+
+            ddlStagePacs.DisplayMember = "Value";
+            ddlStagePacs.ValueMember = "Key";
+            ddlStagePacs.DataSource = Static.StagesByID;
+            ddlStagePacs.Resize += (o, e) =>
+            {
                 if (!ddlStagePacs.Focused) ddlStagePacs.SelectionLength = 0;
             };
 
-			radioButton1.KeyDown += radioButton1_KeyDown;
+            this.ParentChanged += (o, e) => {
+                Recolor();
+            };
+
+            nudDefIndex.ValueChanged += (o, e) => {
+                colorCode.BackColor =
+                  nudDefIndex.Value == 0x1E ? Color.Yellow
+                : nudDefIndex.Value < 0x29 ? Color.Green
+                : Color.Red;
+            };
+
+            nudIconID.ValueChanged += (o, e) => {
+                Icon = (byte)nudIconID.Value;
+            };
 		}
 
-		private void StagePairControl_Paint(object sender, PaintEventArgs e) {
+		private void Recolor() {
 			int i = Parent.Controls.GetChildIndex(this);
-			colorCode.BackColor =
-				  i == 0x1E ? Color.Yellow
-				: i < 0x29 ? Color.Green
-				: Color.Blue;
+            lblIndex.Text = i.ToString("X2");
+            if (SetNUDToOwnIndex) nudDefIndex.Value = i;
+            Invalidate();
 		}
 
         private void CheckRadioButton(object sender, EventArgs e) {
@@ -128,33 +154,37 @@ namespace SSSEditor {
 			if (ddlStagePacs.SelectedValue != null) Stage = (byte)ddlStagePacs.SelectedValue;
 		}
 
-		private void nudIconID_ValueChanged(object sender, EventArgs e) {
-			Icon = (byte)nudIconID.Value;
-		}
-
 		private void btnUp_Click(object sender, EventArgs e) {
 			var C = Parent.Controls;
 			int index = C.IndexOf(this);
 			if (index == 0) return;
-			Control controlAbove = C[index - 1];
-			C.SetChildIndex(this, index - 1);
-            C.SetChildIndex(controlAbove, index);
-			controlAbove.Invalidate();
-			this.Invalidate();
+
+			Control control = C[index - 1];
+            C.SetChildIndex(this, index - 1);
+            C.SetChildIndex(control, index);
+
+            Recolor();
+            if (control is StagePairControl) ((StagePairControl)control).Recolor();
+			/*controlAbove.Invalidate();
+			this.Invalidate();*/
 		}
 
 		private void btnDown_Click(object sender, EventArgs e) {
 			var C = Parent.Controls;
 			int index = C.IndexOf(this);
 			if (index == C.Count - 1) return;
-			Control controlBelow = C[index + 1];
+
+			Control control = C[index + 1];
 			C.SetChildIndex(this, index + 1);
-			C.SetChildIndex(controlBelow, index);
-			controlBelow.Invalidate();
-			this.Invalidate();
+            C.SetChildIndex(control, index);
+
+            Recolor();
+            if (control is StagePairControl) ((StagePairControl)control).Recolor();
+			/*controlBelow.Invalidate();
+			this.Invalidate();*/
 		}
 
-		void radioButton1_KeyDown(object sender, KeyEventArgs e) {
+		void keyHandler(object sender, KeyEventArgs e) {
 			if (!radioButton1.Checked) return;
 			if (e.KeyCode == Keys.PageUp) {
 				e.Handled = true;

@@ -14,7 +14,7 @@ namespace SSSEditor {
 		static void Main() {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new SSSEditor());
+			Application.Run(new SSSEditorForm());
 		}
 	}
 }

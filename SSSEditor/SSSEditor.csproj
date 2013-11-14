@@ -50,11 +50,11 @@
     <Compile Include="FixedStagePairControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SSSEditor.cs">
+    <Compile Include="SSSEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SSSEditor.Designer.cs">
-      <DependentUpon>SSSEditor.cs</DependentUpon>
+    <Compile Include="SSSEditorForm.Designer.cs">
+      <DependentUpon>SSSEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +72,8 @@
       <DependentUpon>StagePairControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Static.cs" />
-    <EmbeddedResource Include="SSSEditor.resx">
-      <DependentUpon>SSSEditor.cs</DependentUpon>
+    <EmbeddedResource Include="SSSEditorForm.resx">
+      <DependentUpon>SSSEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

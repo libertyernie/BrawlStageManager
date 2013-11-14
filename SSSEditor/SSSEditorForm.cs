@@ -8,34 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace SSSEditor {
-	public partial class SSSEditor : Form {
+	public partial class SSSEditorForm : Form {
 		// Source data
 		private CustomSSS sss;
 		private BRESNode md80;
 
-		public SSSEditor() {
+		public SSSEditorForm() {
 			InitializeComponent();
 
-			tabControl1.SelectedIndexChanged += delegate(object o, EventArgs ea) {
-				if (tabControl1.SelectedTab == tabPreview1) {
-					List<StagePair> definitions = new List<StagePair>();
-					foreach (Control c in tblStageDefinitions.Controls) {
-						if (c is StagePairControl) {
-							definitions.Add(((StagePairControl)c).Pair);
-						}
-					}
-
-					sssPrev1.MiscData80 = this.md80;
-					sssPrev1.NumIcons = tblSSS1.Controls.Count;
-					List<byte> list = new List<byte>();
-					foreach (Control c in tblSSS1.Controls) {
-						if (c is StagePairControl) {
-							list.Add(((StagePairControl)c).Pair.icon);
-						}
-					}
-					sssPrev1.IconOrder = list.ToArray();
-				}
-			};
+			tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
 
 			sss = new CustomSSS(System.IO.File.ReadAllBytes("F:\\codes\\RSBE01.gct"));
 			ReloadIfValidPac(@"F:\private\wii\app\RSBE\pf\system\common5.pac");
@@ -182,10 +163,48 @@ namespace SSSEditor {
 {5}",
 	screen1.Count.ToString("X2"), ToCodeLines(screen1, definitions),
 	screen2.Count.ToString("X2"), ToCodeLines(screen2, definitions),
-	definitions.Count.ToString("X2"), ToCodeLines(definitions));
+	(2*definitions.Count).ToString("X2"), ToCodeLines(definitions));
 		}
 		#endregion
 
+		void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+			if (tabControl1.SelectedTab == tabPreview1) {
+				List<StagePair> definitions = new List<StagePair>();
+				foreach (Control c in tblStageDefinitions.Controls) {
+					if (c is StagePairControl) {
+						definitions.Add(((StagePairControl)c).Pair);
+					}
+				}
+
+				sssPrev1.MiscData80 = this.md80;
+				sssPrev1.NumIcons = tblSSS1.Controls.Count;
+				List<byte> list = new List<byte>();
+				foreach (Control c in tblSSS1.Controls) {
+					if (c is StagePairControl) {
+						list.Add(((StagePairControl)c).Pair.icon);
+					}
+				}
+				sssPrev1.IconOrder = list.ToArray();
+			} else if (tabControl1.SelectedTab == tabPreview2) {
+				List<StagePair> definitions = new List<StagePair>();
+				foreach (Control c in tblStageDefinitions.Controls) {
+					if (c is StagePairControl) {
+						definitions.Add(((StagePairControl)c).Pair);
+					}
+				}
+
+				sssPrev2.MiscData80 = this.md80;
+				sssPrev2.NumIcons = tblSSS2.Controls.Count;
+				List<byte> list = new List<byte>();
+				foreach (Control c in tblSSS2.Controls) {
+					if (c is StagePairControl) {
+						list.Add(((StagePairControl)c).Pair.icon);
+					}
+				}
+				sssPrev2.IconOrder = list.ToArray();
+			}
+		}
+		
 		private void switchToFlowLayoutPanelToolStripMenuItem_Click(object sender, EventArgs e) {
 			FlowLayoutPanel p = new FlowLayoutPanel() {
 				Dock = DockStyle.Fill,

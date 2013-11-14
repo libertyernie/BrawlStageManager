@@ -161,21 +161,27 @@ namespace SSSEditor {
 * 066B9A58 000000{2}
 {3}* 06407AAC 000000{4}
 {5}",
-	screen1.Count.ToString("X2"), ToCodeLines(screen1, definitions),
-	screen2.Count.ToString("X2"), ToCodeLines(screen2, definitions),
-	(2*definitions.Count).ToString("X2"), ToCodeLines(definitions));
+			screen1.Count.ToString("X2"), ToCodeLines(screen1, definitions),
+			screen2.Count.ToString("X2"), ToCodeLines(screen2, definitions),
+			(2*definitions.Count).ToString("X2"), ToCodeLines(definitions));
 		}
 		#endregion
 
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-			if (tabControl1.SelectedTab == tabPreview1) {
-				List<StagePair> definitions = new List<StagePair>();
-				foreach (Control c in tblStageDefinitions.Controls) {
-					if (c is StagePairControl) {
-						definitions.Add(((StagePairControl)c).Pair);
+			List<StagePair> definitions = new List<StagePair>();
+			foreach (Control c in tblStageDefinitions.Controls) {
+				if (c is StagePairControl) {
+					definitions.Add(((StagePairControl)c).Pair);
+				}
+			}
+			if (tabControl1.SelectedTab == tabSSS1) {
+				foreach (Control c in tblSSS1.Controls) {
+					if (c is FixedStagePairControl) {
+						var f = ((FixedStagePairControl)c);
+						f.NUDDefValue = definitions.IndexOf(f.Pair);
 					}
 				}
-
+			} else if (tabControl1.SelectedTab == tabPreview1) {
 				sssPrev1.MiscData80 = this.md80;
 				sssPrev1.NumIcons = tblSSS1.Controls.Count;
 				List<byte> list = new List<byte>();
@@ -186,13 +192,6 @@ namespace SSSEditor {
 				}
 				sssPrev1.IconOrder = list.ToArray();
 			} else if (tabControl1.SelectedTab == tabPreview2) {
-				List<StagePair> definitions = new List<StagePair>();
-				foreach (Control c in tblStageDefinitions.Controls) {
-					if (c is StagePairControl) {
-						definitions.Add(((StagePairControl)c).Pair);
-					}
-				}
-
 				sssPrev2.MiscData80 = this.md80;
 				sssPrev2.NumIcons = tblSSS2.Controls.Count;
 				List<byte> list = new List<byte>();

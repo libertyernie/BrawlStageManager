@@ -2,6 +2,7 @@
 using BrawlStageManager;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -316,6 +317,29 @@ namespace SSSEditor {
 				};
 				f.Controls.Add(t);
 				f.ShowDialog(this);
+			}
+		}
+
+		private void highlightUnusedPairsToolStripMenuItem_Click(object sender, EventArgs e) {
+			List<StagePair> screens = new List<StagePair>();
+			foreach (Control c in tblSSS1.Controls) {
+				if (c is StagePairControl) {
+					screens.Add(((StagePairControl)c).Pair);
+				}
+			}
+			foreach (Control c in tblSSS2.Controls) {
+				if (c is StagePairControl) {
+					screens.Add(((StagePairControl)c).Pair);
+				}
+			}
+
+			foreach (Control c in tblStageDefinitions.Controls) {
+				if (c is StagePairControl) {
+					var s = (StagePairControl)c;
+					if (!screens.Contains(s.Pair)) {
+						s.BackColor = Color.LightBlue;
+					}
+				}
 			}
 		}
 	}

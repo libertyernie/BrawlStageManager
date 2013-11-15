@@ -4,6 +4,6 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>../../../RSBE01.gct ../../../common5.pac</StartArguments>
+    <StartArguments>F:\codes\RSBE01.gct F:\private\wii\app\RSBE\pf\system\common5.pac</StartArguments>
   </PropertyGroup>
 </Project>

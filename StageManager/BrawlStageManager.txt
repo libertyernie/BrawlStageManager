@@ -1,4 +1,4 @@
-﻿Brawl Stage Manager 2.3 - September 28, 2013
+﻿Brawl Stage Manager 3.0 - November 16, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
@@ -77,12 +77,15 @@ the tilde (~) button on your keyboard.)
 
 ----------------------------------------
 
-New in 2.3:
-	* The name generator now supports 2-line names (use "\n" to divide the lines)
-	* All settings can now be saved to the Windows registry (loading is automatic
-	  but saving must be done manually)
-	* When adding "missing" PAT0 entries, new Icon/FrontStname/Prevbase entries
-	  will use the stage number instead of .00
-	* New utility: Tools > Update mu_menumain
-	  * This will copy your stage icons to mu_menumain.pac, but leave the
-	    animations intact (e.g. MenSelmapPreview, MenSelmapPos_TopN__1).
+New in 3.0:
+	* The custom SSS code is automatically read from RSBE01.gct if found
+	  Uses for the custom SSS code:
+	  * Mapping between stage IDs and icons
+	  * Determining which stage icons to replace with an X on My Music (only
+	    works if your common5 has a MenSelmapIcon.XX in it)
+	  * Determining which icons to copy to the random stage chooser (in the
+	    options menu)
+	  * Stage sorting, if you choose to do so (replaces the old static list)
+	* A crude picture of the stage can be used as the icon/portrait - look in
+	  the Tools menu
+	* Uses the newest BrawlLib

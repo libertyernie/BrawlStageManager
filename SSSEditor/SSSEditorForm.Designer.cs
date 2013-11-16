@@ -55,6 +55,8 @@
 			this.tblButtonRow = new System.Windows.Forms.TableLayoutPanel();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tabSSS2.SuspendLayout();
 			this.tabSSS1.SuspendLayout();
@@ -71,7 +73,8 @@
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewCodeToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(376, 24);
@@ -182,7 +185,7 @@
 			this.tabSSS2.Controls.Add(this.tblSSS2);
 			this.tabSSS2.Location = new System.Drawing.Point(4, 22);
 			this.tabSSS2.Name = "tabSSS2";
-			this.tabSSS2.Size = new System.Drawing.Size(368, 411);
+			this.tabSSS2.Size = new System.Drawing.Size(368, 379);
 			this.tabSSS2.TabIndex = 2;
 			this.tabSSS2.Text = "SSS #2";
 			this.tabSSS2.UseVisualStyleBackColor = true;
@@ -197,7 +200,7 @@
 			this.tblSSS2.Name = "tblSSS2";
 			this.tblSSS2.RowCount = 1;
 			this.tblSSS2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tblSSS2.Size = new System.Drawing.Size(368, 411);
+			this.tblSSS2.Size = new System.Drawing.Size(368, 379);
 			this.tblSSS2.TabIndex = 3;
 			// 
 			// tabSSS1
@@ -205,7 +208,7 @@
 			this.tabSSS1.Controls.Add(this.tblSSS1);
 			this.tabSSS1.Location = new System.Drawing.Point(4, 22);
 			this.tabSSS1.Name = "tabSSS1";
-			this.tabSSS1.Size = new System.Drawing.Size(368, 411);
+			this.tabSSS1.Size = new System.Drawing.Size(368, 379);
 			this.tabSSS1.TabIndex = 1;
 			this.tabSSS1.Text = "SSS #1";
 			this.tabSSS1.UseVisualStyleBackColor = true;
@@ -220,7 +223,7 @@
 			this.tblSSS1.Name = "tblSSS1";
 			this.tblSSS1.RowCount = 1;
 			this.tblSSS1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tblSSS1.Size = new System.Drawing.Size(368, 411);
+			this.tblSSS1.Size = new System.Drawing.Size(368, 379);
 			this.tblSSS1.TabIndex = 2;
 			// 
 			// tabDefinitions
@@ -319,7 +322,7 @@
 			this.tabPreview1.Controls.Add(this.sssPrev1);
 			this.tabPreview1.Location = new System.Drawing.Point(4, 22);
 			this.tabPreview1.Name = "tabPreview1";
-			this.tabPreview1.Size = new System.Drawing.Size(368, 411);
+			this.tabPreview1.Size = new System.Drawing.Size(368, 379);
 			this.tabPreview1.TabIndex = 3;
 			this.tabPreview1.Text = "Preview #1";
 			this.tabPreview1.UseVisualStyleBackColor = true;
@@ -332,7 +335,7 @@
 			this.sssPrev1.MyMusic = false;
 			this.sssPrev1.Name = "sssPrev1";
 			this.sssPrev1.NumIcons = 23;
-			this.sssPrev1.Size = new System.Drawing.Size(368, 411);
+			this.sssPrev1.Size = new System.Drawing.Size(368, 379);
 			this.sssPrev1.TabIndex = 0;
 			// 
 			// tabPreview2
@@ -340,7 +343,7 @@
 			this.tabPreview2.Controls.Add(this.sssPrev2);
 			this.tabPreview2.Location = new System.Drawing.Point(4, 22);
 			this.tabPreview2.Name = "tabPreview2";
-			this.tabPreview2.Size = new System.Drawing.Size(368, 411);
+			this.tabPreview2.Size = new System.Drawing.Size(368, 379);
 			this.tabPreview2.TabIndex = 4;
 			this.tabPreview2.Text = "Preview #2";
 			this.tabPreview2.UseVisualStyleBackColor = true;
@@ -353,7 +356,7 @@
 			this.sssPrev2.MyMusic = false;
 			this.sssPrev2.Name = "sssPrev2";
 			this.sssPrev2.NumIcons = 23;
-			this.sssPrev2.Size = new System.Drawing.Size(368, 411);
+			this.sssPrev2.Size = new System.Drawing.Size(368, 379);
 			this.sssPrev2.TabIndex = 0;
 			// 
 			// tblButtonRow
@@ -393,6 +396,21 @@
 			this.btnDelete.Text = "Delete (Ctrl+Del)";
 			this.btnDelete.UseVisualStyleBackColor = true;
 			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.aboutToolStripMenuItem.Text = "About";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// SSSEditorForm
 			// 
@@ -454,6 +472,8 @@
 		private System.Windows.Forms.TableLayoutPanel tblButtonRow;
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Button btnDelete;
+		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 	}
 }
 

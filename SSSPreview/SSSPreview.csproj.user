@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartWorkingDirectory>
-    </StartWorkingDirectory>
-    <StartArguments>"D:\Users\Isaac\Desktop\BrawlHacks\pm2.6b nohomebrew\private\wii\app\RSBE\pf\system\common5.pac" "D:\Users\Isaac\Desktop\BrawlHacks\pm2.6b nohomebrew\codes\RSBE01.gct"</StartArguments>
-  </PropertyGroup>
-</Project>

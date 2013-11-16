@@ -17,6 +17,9 @@ namespace SSSEditor {
 		/// The MiscData[80] file to read icons from.
 		/// </summary>
 		public BRESNode MiscData80 {
+			get {
+				return miscdata80;
+			}
 			set {
 				if (miscdata80 != null) {
 					miscdata80.Dispose();

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Brawl Stage Manager")]
-[assembly: AssemblyDescription("This program is provided as-is without any warranty, implied or otherwise. By using this program, the end user agrees to take full responsibility regarding its proper and lawful use. The authors/hosts/distributors cannot be held responsible for any damage resulting in the use of this program, nor can they be held accountable for the manner in which it is used.")]
+[assembly: AssemblyDescription("Manage stage pac/rel files and stage select icons for Super Smash Bros. Brawl.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Brawl Stage Manager")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.4.0.0")]
-[assembly: AssemblyFileVersion("2.4.0.0")]
+[assembly: AssemblyVersion("3.0.0.0")]
+[assembly: AssemblyFileVersion("3.0.0.0")]

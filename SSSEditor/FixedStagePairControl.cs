@@ -55,5 +55,13 @@ namespace SSSEditor {
                 }
             }
 		}
+
+		protected override StagePairControl CreateNewControl() {
+			return new FixedStagePairControl(definitionsContainer) {
+				NUDDefValue = 0,
+				MiscData80 = MiscData80,
+				Dock = Dock,
+			};
+		}
 	}
 }

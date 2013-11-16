@@ -606,7 +606,7 @@ namespace BrawlStageManager {
 		}
 
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
-			new AboutBSM(Icon).ShowDialog(this);
+			new AboutBSM(null, System.Reflection.Assembly.GetExecutingAssembly()).ShowDialog(this);
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -730,7 +730,7 @@ namespace BrawlStageManager {
 		}
 
 		private void listMenSelmapMarkUsageToolStripMenuItem_Click(object sender, EventArgs e) {
-			new AboutBSM(null) {
+			new AboutBSM(null, null) {
 				AboutText = portraitViewer1.MenSelmapMarkUsageReport()
 			}.ShowDialog(this);
 		}

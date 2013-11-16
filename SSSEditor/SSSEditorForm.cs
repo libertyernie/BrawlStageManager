@@ -49,7 +49,7 @@ namespace SSSEditor {
 
 			tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
 
-			sss = new CustomSSS(System.IO.File.ReadAllBytes(gct));
+			sss = new CustomSSS(gct);
 			ReloadIfValidPac(pac);
 		}
 
@@ -225,11 +225,7 @@ namespace SSSEditor {
 				dialog.Filter = "Ocarina codes (*.gct, *.txt)|*.gct;*.txt";
 				dialog.Multiselect = false;
 				if (dialog.ShowDialog() == DialogResult.OK) {
-					if (dialog.FileName.EndsWith("gct", StringComparison.InvariantCultureIgnoreCase)) {
-						sss = new CustomSSS(File.ReadAllBytes(dialog.FileName));
-					} else {
-						sss = new CustomSSS(File.ReadAllLines(dialog.FileName));
-					}
+					sss = new CustomSSS(dialog.FileName);
 					ReloadData();
 				}
 			}
@@ -251,11 +247,11 @@ namespace SSSEditor {
 					CustomSSS candidateSSS;
 
 					if (File.Exists(dialog.SelectedPath + "/codes/RSBE01.gct")) {
-						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/codes/RSBE01.gct"));
+						candidateSSS = new CustomSSS(dialog.SelectedPath + "/codes/RSBE01.gct");
 					} else if (File.Exists(dialog.SelectedPath + "/data/gecko/codes/RSBE01.gct")) {
-						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/data/gecko/codes/RSBE01.gct"));
+						candidateSSS = new CustomSSS(dialog.SelectedPath + "/data/gecko/codes/RSBE01.gct");
 					} else if (File.Exists(dialog.SelectedPath + "/RSBE01.gct")) {
-						candidateSSS = new CustomSSS(File.ReadAllBytes(dialog.SelectedPath + "/RSBE01.gct"));
+						candidateSSS = new CustomSSS(dialog.SelectedPath + "/RSBE01.gct");
 					} else {
 						MessageBox.Show(this, "Could not find codes/RSBE01.gct or data/gecko/codes/RSBE01.gct.",
 							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -285,8 +281,19 @@ namespace SSSEditor {
 		}
 
 		private void saveCodesetgctToolStripMenuItem_Click(object sender, EventArgs e) {
-			MessageBox.Show(this, "This feature is not yet implemented.",
-							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			using (var dialog = new SaveFileDialog()) {
+				dialog.Filter = "Ocarina codes (*.gct)|*.gct";
+				dialog.OverwritePrompt = true;
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					using (var fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write)) {
+						foreach (byte[] b in new byte[][] {
+							sss.DataBefore, ByteUtilities.StringToByteArray(ToCode()), sss.DataAfter
+						}) {
+							fs.Write(b, 0, b.Length);
+						}
+					}
+				}
+			}
 		}
 
 		private void saveSSSCodeOnlytxtToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -362,6 +369,10 @@ namespace SSSEditor {
 					}
 				}
 			}
+		}
+
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
+			new AboutBSM(null, System.Reflection.Assembly.GetExecutingAssembly()).ShowDialog(this);
 		}
 	}
 }

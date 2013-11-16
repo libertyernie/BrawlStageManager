@@ -72,6 +72,9 @@
       <DependentUpon>StagePairControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Static.cs" />
+    <Compile Include="UpDownKeyAwareRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="SSSEditorForm.resx">
       <DependentUpon>SSSEditorForm.cs</DependentUpon>
     </EmbeddedResource>

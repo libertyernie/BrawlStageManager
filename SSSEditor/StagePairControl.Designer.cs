@@ -28,7 +28,7 @@
             this.lblStageID = new System.Windows.Forms.Label();
             this.lblIconID = new System.Windows.Forms.Label();
             this.nudIconID = new System.Windows.Forms.NumericUpDown();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new SSSEditor.UpDownKeyAwareRadioButton();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -236,7 +236,7 @@
 		protected System.Windows.Forms.NumericUpDown nudIconID;
 		private System.Windows.Forms.Button btnUp;
 		private System.Windows.Forms.Button btnDown;
-		private System.Windows.Forms.RadioButton radioButton1;
+		private SSSEditor.UpDownKeyAwareRadioButton radioButton1;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 		protected System.Windows.Forms.Panel colorCode;

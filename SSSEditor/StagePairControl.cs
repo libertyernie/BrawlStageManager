@@ -111,11 +111,18 @@ namespace SSSEditor {
 			InitializeComponent();
             SetNUDToOwnIndex = true;
 
-            radioButton1.KeyDown += keyHandler;
-            foreach (Control c in new Control[] { panel1, colorCode, radioButton1, pictureBox1, lblIconID, lblStageID }) {
-                c.Click += CheckRadioButton;
-                c.MouseUp += ShowMenuOnRightClick;
-            }
+			radioButton1.KeyDown += keyDown;
+			foreach (Control c in this.Controls) {
+				if (!(c is ComboBox || c is NumericUpDown)) {
+					c.Click += CheckRadioButton;
+					c.MouseUp += ShowMenuOnRightClick;
+				}
+			} foreach (Control c in panel1.Controls) {
+				if (!(c is ComboBox || c is NumericUpDown)) {
+					c.Click += CheckRadioButton;
+					c.MouseUp += ShowMenuOnRightClick;
+				}
+			}
 
             ddlStagePacs.DisplayMember = "Value";
             ddlStagePacs.ValueMember = "Key";
@@ -142,10 +149,25 @@ namespace SSSEditor {
 		}
 
 		private void Recolor() {
+			if (Parent == null) return;
 			int i = Parent.Controls.GetChildIndex(this);
             lblIndex.Text = i.ToString("X2");
             if (SetNUDToOwnIndex) nudDefIndex.Value = i;
             Invalidate();
+		}
+
+		public void Delete() {
+			var C = Parent.Controls;
+			int index = C.IndexOf(this);
+			Control control = (index == C.Count - 1)
+				? C[index - 1]
+				: C[index + 1];
+			if (control is StagePairControl) {
+				((StagePairControl)control).Checked = true;
+			}
+
+			Parent.Controls.Remove(this);
+			this.Dispose();
 		}
 
         private void CheckRadioButton(object sender, EventArgs e) {
@@ -172,8 +194,6 @@ namespace SSSEditor {
 
             Recolor();
             if (control is StagePairControl) ((StagePairControl)control).Recolor();
-			/*controlAbove.Invalidate();
-			this.Invalidate();*/
 		}
 
 		private void btnDown_Click(object sender, EventArgs e) {
@@ -187,26 +207,27 @@ namespace SSSEditor {
 
             Recolor();
             if (control is StagePairControl) ((StagePairControl)control).Recolor();
-			/*controlBelow.Invalidate();
-			this.Invalidate();*/
 		}
 
-		void keyHandler(object sender, KeyEventArgs e) {
+		void keyDown(object sender, KeyEventArgs e) {
 			if (!radioButton1.Checked) return;
-			if (e.KeyCode == Keys.PageUp) {
-				e.Handled = true;
-				btnUp.PerformClick();
-            }
-            else if (e.KeyCode == Keys.PageDown)
-            {
-                e.Handled = true;
-                btnDown.PerformClick();
-            }
-            else if (e.KeyCode == Keys.Delete)
-            {
-                e.Handled = true;
-                deleteToolStripMenuItem.PerformClick();
-            }
+			Console.WriteLine(e.KeyCode);
+			switch (e.KeyCode) {
+				case Keys.Up:
+					e.Handled = true;
+					btnUp.PerformClick();
+					if (Parent is Panel) ((Panel)Parent).ScrollControlIntoView(this);
+					break;
+				case Keys.Down:
+					e.Handled = true;
+					btnDown.PerformClick();
+					if (Parent is Panel) ((Panel)Parent).ScrollControlIntoView(this);
+					break;
+				case Keys.Delete:
+					e.Handled = true;
+					Delete();
+					break;
+			}
 		}
 
 		private void radioButton1_CheckedChanged(object sender, EventArgs e) {
@@ -221,17 +242,7 @@ namespace SSSEditor {
 		}
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
-			var C = Parent.Controls;
-			int index = C.IndexOf(this);
-			Control control = (index == C.Count - 1)
-				? C[index - 1]
-				: C[index + 1];
-			if (control is StagePairControl) {
-				((StagePairControl)control).Checked = true;
-			}
-
-			Parent.Controls.Remove(this);
-			this.Dispose();
+			Delete();
 		}
 	}
 }

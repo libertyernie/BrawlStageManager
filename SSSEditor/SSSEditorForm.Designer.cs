@@ -35,6 +35,8 @@
 			this.saveSSSCodeOnlytxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.highlightUnusedPairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tabSSS2 = new System.Windows.Forms.TabPage();
 			this.tblSSS2 = new System.Windows.Forms.TableLayoutPanel();
 			this.tabSSS1 = new System.Windows.Forms.TabPage();
@@ -50,8 +52,9 @@
 			this.sssPrev1 = new SSSEditor.SSSPrev();
 			this.tabPreview2 = new System.Windows.Forms.TabPage();
 			this.sssPrev2 = new SSSEditor.SSSPrev();
-			this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.highlightUnusedPairsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tblButtonRow = new System.Windows.Forms.TableLayoutPanel();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.btnDelete = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			this.tabSSS2.SuspendLayout();
 			this.tabSSS1.SuspendLayout();
@@ -60,6 +63,7 @@
 			this.tabControl1.SuspendLayout();
 			this.tabPreview1.SuspendLayout();
 			this.tabPreview2.SuspendLayout();
+			this.tblButtonRow.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -92,7 +96,7 @@
             this.toolStripMenuItem1,
             this.openSDCardRootToolStripMenuItem});
 			this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-			this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.openToolStripMenuItem.Text = "Open";
 			// 
 			// openCodesetgcttxtToolStripMenuItem
@@ -127,7 +131,7 @@
             this.saveCodesetgctToolStripMenuItem,
             this.saveSSSCodeOnlytxtToolStripMenuItem});
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.saveToolStripMenuItem.Text = "Save";
 			// 
 			// saveCodesetgctToolStripMenuItem
@@ -147,7 +151,7 @@
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
@@ -157,6 +161,21 @@
 			this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
 			this.viewCodeToolStripMenuItem.Text = "View code";
 			this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
+			// 
+			// toolsToolStripMenuItem
+			// 
+			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.highlightUnusedPairsToolStripMenuItem});
+			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+			this.toolsToolStripMenuItem.Text = "Tools";
+			// 
+			// highlightUnusedPairsToolStripMenuItem
+			// 
+			this.highlightUnusedPairsToolStripMenuItem.Name = "highlightUnusedPairsToolStripMenuItem";
+			this.highlightUnusedPairsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+			this.highlightUnusedPairsToolStripMenuItem.Text = "Highlight unused pairs";
+			this.highlightUnusedPairsToolStripMenuItem.Click += new System.EventHandler(this.highlightUnusedPairsToolStripMenuItem_Click);
 			// 
 			// tabSSS2
 			// 
@@ -210,7 +229,7 @@
 			this.tabDefinitions.Controls.Add(this.tblColorCodeKeys);
 			this.tabDefinitions.Location = new System.Drawing.Point(4, 22);
 			this.tabDefinitions.Name = "tabDefinitions";
-			this.tabDefinitions.Size = new System.Drawing.Size(368, 411);
+			this.tabDefinitions.Size = new System.Drawing.Size(368, 379);
 			this.tabDefinitions.TabIndex = 0;
 			this.tabDefinitions.Text = "Stage/Icon Pairs";
 			this.tabDefinitions.UseVisualStyleBackColor = true;
@@ -225,7 +244,7 @@
 			this.tblStageDefinitions.Name = "tblStageDefinitions";
 			this.tblStageDefinitions.RowCount = 1;
 			this.tblStageDefinitions.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tblStageDefinitions.Size = new System.Drawing.Size(368, 347);
+			this.tblStageDefinitions.Size = new System.Drawing.Size(368, 315);
 			this.tblStageDefinitions.TabIndex = 1;
 			// 
 			// tblColorCodeKeys
@@ -292,7 +311,7 @@
 			this.tabControl1.Location = new System.Drawing.Point(0, 24);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(376, 437);
+			this.tabControl1.Size = new System.Drawing.Size(376, 405);
 			this.tabControl1.TabIndex = 3;
 			// 
 			// tabPreview1
@@ -337,20 +356,43 @@
 			this.sssPrev2.Size = new System.Drawing.Size(368, 411);
 			this.sssPrev2.TabIndex = 0;
 			// 
-			// toolsToolStripMenuItem
+			// tblButtonRow
 			// 
-			this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.highlightUnusedPairsToolStripMenuItem});
-			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-			this.toolsToolStripMenuItem.Text = "Tools";
+			this.tblButtonRow.ColumnCount = 2;
+			this.tblButtonRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tblButtonRow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tblButtonRow.Controls.Add(this.btnAdd, 0, 0);
+			this.tblButtonRow.Controls.Add(this.btnDelete, 1, 0);
+			this.tblButtonRow.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tblButtonRow.Location = new System.Drawing.Point(0, 429);
+			this.tblButtonRow.Name = "tblButtonRow";
+			this.tblButtonRow.RowCount = 1;
+			this.tblButtonRow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tblButtonRow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tblButtonRow.Size = new System.Drawing.Size(376, 32);
+			this.tblButtonRow.TabIndex = 0;
 			// 
-			// highlightUnusedPairsToolStripMenuItem
+			// btnAdd
 			// 
-			this.highlightUnusedPairsToolStripMenuItem.Name = "highlightUnusedPairsToolStripMenuItem";
-			this.highlightUnusedPairsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-			this.highlightUnusedPairsToolStripMenuItem.Text = "Highlight unused pairs";
-			this.highlightUnusedPairsToolStripMenuItem.Click += new System.EventHandler(this.highlightUnusedPairsToolStripMenuItem_Click);
+			this.btnAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnAdd.Location = new System.Drawing.Point(3, 3);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(182, 26);
+			this.btnAdd.TabIndex = 0;
+			this.btnAdd.Text = "Add (Ctrl+N)";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnDelete.Location = new System.Drawing.Point(191, 3);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(182, 26);
+			this.btnDelete.TabIndex = 1;
+			this.btnDelete.Text = "Delete (Ctrl+Del)";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// SSSEditorForm
 			// 
@@ -358,6 +400,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(376, 461);
 			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.tblButtonRow);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "SSSEditorForm";
@@ -371,6 +414,7 @@
 			this.tabControl1.ResumeLayout(false);
 			this.tabPreview1.ResumeLayout(false);
 			this.tabPreview2.ResumeLayout(false);
+			this.tblButtonRow.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -407,6 +451,9 @@
 		private SSSPrev sssPrev2;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem highlightUnusedPairsToolStripMenuItem;
+		private System.Windows.Forms.TableLayoutPanel tblButtonRow;
+		private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.Button btnDelete;
 	}
 }
 

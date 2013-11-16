@@ -219,24 +219,6 @@ namespace SSSEditor {
 				sssPrev2.IconOrder = list.ToArray();
 			}
 		}
-		
-		private void switchToFlowLayoutPanelToolStripMenuItem_Click(object sender, EventArgs e) {
-			FlowLayoutPanel p = new FlowLayoutPanel() {
-				Dock = DockStyle.Fill,
-				AutoScroll = true,
-				FlowDirection = FlowDirection.TopDown,
-			};
-			foreach (Control c in tblStageDefinitions.Controls) {
-				c.Dock = DockStyle.None;
-				//if (c is StagePairControl) ((StagePairControl)c).StageNameVisible = false;
-				c.Width -= 208;
-				tblStageDefinitions.Controls.Remove(c);
-				p.Controls.Add(c);
-			}
-			tabDefinitions.Controls.Remove(tblStageDefinitions);
-			tabDefinitions.Controls.Add(p);
-			tabDefinitions.Controls.SetChildIndex(p, 0);
-		}
 
 		private void openCodesetgcttxtToolStripMenuItem_Click(object sender, EventArgs e) {
 			using (var dialog = new OpenFileDialog()) {
@@ -353,6 +335,22 @@ namespace SSSEditor {
 					var s = (StagePairControl)c;
 					if (!screens.Contains(s.Pair)) {
 						s.BackColor = Color.LightBlue;
+					}
+				}
+			}
+		}
+
+		private void btnAdd_Click(object sender, EventArgs e) {
+
+		}
+
+		private void btnDelete_Click(object sender, EventArgs e) {
+			TableLayoutPanel table = tabControl1.SelectedTab.Controls[0] as TableLayoutPanel;
+			if (table != null) {
+				foreach (Control c in table.Controls) {
+					if (c is StagePairControl && ((StagePairControl)c).Checked) {
+						((StagePairControl)c).Delete();
+						return;
 					}
 				}
 			}

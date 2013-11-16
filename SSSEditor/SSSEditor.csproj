@@ -54,6 +54,17 @@
     <Compile Include="FixedStagePairControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="From Stage Manager\AboutBSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="From Stage Manager\AboutBSM.Designer.cs">
+      <DependentUpon>AboutBSM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="From Stage Manager\ByteUtilities.cs" />
+    <Compile Include="From Stage Manager\CustomSSS.cs" />
+    <Compile Include="From Stage Manager\StageIDMap.cs" />
+    <Compile Include="From Stage Manager\TempFiles.cs" />
+    <Compile Include="From Stage Manager\TextureContainer.cs" />
     <Compile Include="SSSEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,6 +90,10 @@
     <Compile Include="UpDownKeyAwareRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="From Stage Manager\AboutBSM.resx">
+      <DependentUpon>AboutBSM.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SSSEditorForm.resx">
       <DependentUpon>SSSEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,12 +122,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\StageManager\StageManager.csproj">
-      <Project>{758ae6d5-2133-4194-a36c-f371ae01a7c5}</Project>
-      <Name>StageManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="downarr.png" />

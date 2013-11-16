@@ -14,6 +14,36 @@ namespace SSSEditor {
 		private CustomSSS sss;
 		private BRESNode md80;
 
+		#region Collect data from controls
+		private List<StagePair> getDefinitions() {
+			List<StagePair> definitions = new List<StagePair>();
+			foreach (Control c in tblStageDefinitions.Controls) {
+				if (c is StagePairControl) {
+					definitions.Add(((StagePairControl)c).Pair);
+				}
+			}
+			return definitions;
+		}
+		private List<StagePair> getScreen1() {
+			List<StagePair> screen1 = new List<StagePair>();
+			foreach (Control c in tblSSS1.Controls) {
+				if (c is StagePairControl) {
+					screen1.Add(((StagePairControl)c).Pair);
+				}
+			}
+			return screen1;
+		}
+		private List<StagePair> getScreen2() {
+			List<StagePair> screen2 = new List<StagePair>();
+			foreach (Control c in tblSSS2.Controls) {
+				if (c is StagePairControl) {
+					screen2.Add(((StagePairControl)c).Pair);
+				}
+			}
+			return screen2;
+		}
+		#endregion
+
 		public SSSEditorForm(string gct, string pac) {
 			InitializeComponent();
 
@@ -125,24 +155,9 @@ namespace SSSEditor {
 		}
 
 		public string ToCode() {
-			List<StagePair> definitions = new List<StagePair>();
-			foreach (Control c in tblStageDefinitions.Controls) {
-				if (c is StagePairControl) {
-					definitions.Add(((StagePairControl)c).Pair);
-				}
-			}
-			List<StagePair> screen1 = new List<StagePair>();
-			foreach (Control c in tblSSS1.Controls) {
-				if (c is StagePairControl) {
-					screen1.Add(((StagePairControl)c).Pair);
-				}
-			}
-			List<StagePair> screen2 = new List<StagePair>();
-			foreach (Control c in tblSSS2.Controls) {
-				if (c is StagePairControl) {
-					screen2.Add(((StagePairControl)c).Pair);
-				}
-			}
+			List<StagePair> definitions = getDefinitions();
+			List<StagePair> screen1 = getScreen1();
+			List<StagePair> screen2 = getScreen2();
 			return String.Format(
 @"* 046B8F5C 7C802378
 * 046B8F64 7C6300AE
@@ -213,7 +228,7 @@ namespace SSSEditor {
 			};
 			foreach (Control c in tblStageDefinitions.Controls) {
 				c.Dock = DockStyle.None;
-				if (c is StagePairControl) ((StagePairControl)c).StageNameVisible = false;
+				//if (c is StagePairControl) ((StagePairControl)c).StageNameVisible = false;
 				c.Width -= 208;
 				tblStageDefinitions.Controls.Remove(c);
 				p.Controls.Add(c);

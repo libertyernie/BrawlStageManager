@@ -13,6 +13,9 @@ using BrawlLib.SSBB.ResourceNodes;
 namespace SSSEditor {
 	public partial class StagePairControl : UserControl {
 		private BRESNode miscdata80;
+		/// <summary>
+		/// The MiscData[80] file to read icons from.
+		/// </summary>
 		public BRESNode MiscData80 {
 			set {
 				if (miscdata80 != null) {
@@ -25,6 +28,9 @@ namespace SSSEditor {
 
         public bool SetNUDToOwnIndex;
 
+		/// <summary>
+		/// Checks the radio button, and if 'true', focuses it as well.
+		/// </summary>
 		public bool Checked {
 			get {
 				return radioButton1.Checked;
@@ -35,15 +41,9 @@ namespace SSSEditor {
 			}
 		}
 
-		public bool StageNameVisible {
-			get {
-				return pictureBox1.Visible;
-			}
-			set {
-				pictureBox1.Visible = value;
-			}
-		}
-
+		/// <summary>
+		/// Gets or sets the value of the leftmost number spinner, which may toggle update events.
+		/// </summary>
         public decimal NUDDefValue {
             get {
                 return nudDefIndex.Value;
@@ -53,9 +53,11 @@ namespace SSSEditor {
             }
         }
 
-		public event EventHandler PairChanged;
 		private StagePair _pair;
 		private TextureContainer textures;
+		/// <summary>
+		/// Gets/sets the pair object being pointed to by this control.
+		/// </summary>
 		public StagePair Pair {
 			get {
 				return _pair;
@@ -64,9 +66,11 @@ namespace SSSEditor {
 				_pair = value;
 				Stage = Stage;
 				Icon = Icon;
-				if (PairChanged != null) PairChanged(this, new EventArgs());
 			}
 		}
+		/// <summary>
+		/// Gets/sets the stage ID of the pair and updates the dropdown list.
+		/// </summary>
 		public byte Stage {
 			get {
 				return Pair == null ? (byte)0xff : Pair.stage;
@@ -79,6 +83,9 @@ namespace SSSEditor {
 				}
 			}
 		}
+		/// <summary>
+		/// Gets/sets the icon ID of the pair and updates the icon ID and images.
+		/// </summary>
 		public byte Icon {
 			get {
 				return Pair == null ? (byte)0xff : Pair.icon;

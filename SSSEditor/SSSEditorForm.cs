@@ -46,6 +46,11 @@ namespace SSSEditor {
 
 		public SSSEditorForm(string gct, string pac) {
 			InitializeComponent();
+			try {
+				Icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetCallingAssembly().Location);
+			} catch (Exception e) {
+				Console.WriteLine(e.StackTrace);
+			}
 
 			tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
 

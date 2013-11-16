@@ -148,6 +148,9 @@ namespace SSSEditor {
             };
 		}
 
+		/// <summary>
+		/// Picks a new color for the color-code panel and (if applicable) updates the leftmost spinner.
+		/// </summary>
 		private void Recolor() {
 			if (Parent == null) return;
 			int i = Parent.Controls.GetChildIndex(this);
@@ -168,6 +171,26 @@ namespace SSSEditor {
 
 			Parent.Controls.Remove(this);
 			this.Dispose();
+		}
+
+		protected virtual StagePairControl CreateNewControl() {
+			return new StagePairControl() {
+				Pair = new StagePair(),
+				MiscData80 = miscdata80,
+				Dock = Dock,
+			};
+		}
+
+		public void Insert() {
+			var C = Parent.Controls;
+			int index = C.IndexOf(this);
+			var newspc = CreateNewControl();
+			C.Add(newspc);
+			C.SetChildIndex(newspc, index+1);
+
+			foreach (Control c in C) {
+				if (c is StagePairControl) ((StagePairControl)c).Recolor();
+			}
 		}
 
         private void CheckRadioButton(object sender, EventArgs e) {
@@ -224,8 +247,16 @@ namespace SSSEditor {
 					if (Parent is Panel) ((Panel)Parent).ScrollControlIntoView(this);
 					break;
 				case Keys.Delete:
-					e.Handled = true;
-					Delete();
+					if (Control.ModifierKeys == Keys.Control) {
+						e.Handled = true;
+						Delete();
+					}
+					break;
+				case Keys.N:
+					if (Control.ModifierKeys == Keys.Control) {
+						e.Handled = true;
+						Insert();
+					}
 					break;
 			}
 		}

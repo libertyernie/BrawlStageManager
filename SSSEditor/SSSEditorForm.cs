@@ -341,7 +341,15 @@ namespace SSSEditor {
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e) {
-
+			TableLayoutPanel table = tabControl1.SelectedTab.Controls[0] as TableLayoutPanel;
+			if (table != null) {
+				foreach (Control c in table.Controls) {
+					if (c is StagePairControl && ((StagePairControl)c).Checked) {
+						((StagePairControl)c).Insert();
+						return;
+					}
+				}
+			}
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e) {

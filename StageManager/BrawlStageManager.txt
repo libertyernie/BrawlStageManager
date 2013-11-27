@@ -1,4 +1,4 @@
-﻿Brawl Stage Manager 3.0 - November 16, 2013
+﻿Brawl Stage Manager 3.0.1 - November 27, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
@@ -89,3 +89,5 @@ New in 3.0:
 	* A crude picture of the stage can be used as the icon/portrait - look in
 	  the Tools menu
 	* Uses the newest BrawlLib
+Version 3.0.1 fixed a bug involving portraits for stages with an underscore in
+the .pac filename.

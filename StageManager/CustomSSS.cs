@@ -14,9 +14,11 @@ namespace BrawlStageManager {
 		public byte[] DataBefore { get; private set; }
 		public byte[] DataAfter { get; private set; }
 
+		public int OtherCodesIgnoredInSameFile { get; private set; }
+
 		public Tuple<byte, byte> this[int index] {
 			get {
-				return new Tuple<byte, byte>(sss3[2*index], sss3[2*index + 1]);
+				return new Tuple<byte, byte>(sss3[2 * index], sss3[2 * index + 1]);
 			}
 		}
 
@@ -65,7 +67,7 @@ namespace BrawlStageManager {
 
 		public byte StageForIcon(int icon_id) {
 			for (int i = 0; i < sss3.Length; i += 2) {
-				if (sss3[i+1] == icon_id) {
+				if (sss3[i + 1] == icon_id) {
 					return sss3[i];
 				}
 			}
@@ -107,11 +109,14 @@ namespace BrawlStageManager {
 
 		private static byte[] SSS_HEADER = ByteUtilities.StringToByteArray("046b8f5c 7c802378");
 		private void init(byte[] data) {
+			OtherCodesIgnoredInSameFile = 0;
 			int index = -1;
 			for (int line = 0; line < data.Length; line += 8) {
 				if (ByteUtilities.ByteArrayEquals(data, line, SSS_HEADER, 0, SSS_HEADER.Length)) {
+					if (index != -1) {
+						OtherCodesIgnoredInSameFile++;
+					}
 					index = line;
-					break;
 				}
 			}
 
@@ -153,7 +158,7 @@ namespace BrawlStageManager {
 
 		public override string ToString() {
 			return String.Format("Custom SSS: {0}/{1} stages, from pool of {2} pairs",
-				sss1.Length, sss2.Length, sss3.Length/2);
+				sss1.Length, sss2.Length, sss3.Length / 2);
 		}
 	}
 }

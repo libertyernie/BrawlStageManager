@@ -63,6 +63,11 @@ namespace SSSEditor {
 			tblSSS1.Controls.Clear();
 			tblSSS2.Controls.Clear();
 
+			if (sss.OtherCodesIgnoredInSameFile > 0) {
+				MessageBox.Show(this, "More than one Custom SSS code found in the codeset. All but the last one will be ignored.",
+					this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+
 			var screen1 = new List<StagePair>();
 			var screen2 = new List<StagePair>();
 			var definitions = new List<StagePair>();

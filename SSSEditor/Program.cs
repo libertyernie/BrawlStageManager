@@ -16,10 +16,12 @@ namespace SSSEditor {
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			string gct = args.Length > 0 ? args[0]
+				: File.Exists(@"data\gecko\codes\RSBE01.gct") ? @"data\gecko\codes\RSBE01.gct"
 				: File.Exists(@"codes\RSBE01.gct") ? @"codes\RSBE01.gct"
 				: null;
-            string pac = args.Length > 1 ? args[1]
+			string pac = args.Length > 1 ? args[1]
 				: File.Exists(@"private\wii\app\RSBE\pf\system\common5.pac") ? @"private\wii\app\RSBE\pf\system\common5.pac"
+				: File.Exists(@"projectm\pf\system\common5.pac") ? @"projectm\pf\system\common5.pac"
 				: null;
 
 			if (gct == null) using (var dialog = new OpenFileDialog()) {

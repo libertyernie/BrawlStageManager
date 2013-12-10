@@ -545,7 +545,8 @@ namespace BrawlStageManager {
 						break;
 					}
 					progress.Update(++i);
-					string thisdir = outdir + "/" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
+					string thisdir = outdir + "\\" + f.Name.Substring(0, f.Name.LastIndexOf('.'));
+					Directory.CreateDirectory(thisdir);
 					exportStage(f, thisdir);
 				}
 			}

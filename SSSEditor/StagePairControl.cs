@@ -134,6 +134,23 @@ namespace SSSEditor {
             {
                 if (!ddlStagePacs.Focused) ddlStagePacs.SelectionLength = 0;
             };
+			ddlStagePacs.LostFocus += (o, e) => {
+				if (ddlStagePacs.SelectedIndex == -1) {
+					byte entered;
+					if (byte.TryParse(ddlStagePacs.Text,
+						System.Globalization.NumberStyles.HexNumber,
+						System.Globalization.CultureInfo.InvariantCulture,
+						out entered)) {
+						ddlStagePacs.SelectedValue = entered;
+					} else if (ddlStagePacs.Text.StartsWith("c")
+						&& byte.TryParse(ddlStagePacs.Text.Substring(1),
+						System.Globalization.NumberStyles.HexNumber,
+						System.Globalization.CultureInfo.InvariantCulture,
+						out entered)) {
+						ddlStagePacs.SelectedValue = (byte)(entered + 0x3F);
+					}
+				}
+			};
 
             this.ParentChanged += (o, e) => {
                 Recolor();

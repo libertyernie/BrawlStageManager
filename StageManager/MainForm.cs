@@ -360,6 +360,11 @@ namespace BrawlStageManager {
 					changeDirectory(search); // Change to the typical stage folder used by the FPC, if it exists on the drive
 					return;
 				}
+				search = new DirectoryInfo(path.FullName + "\\projectm\\pf\\stage\\melee");
+				if (search.Exists) {
+					changeDirectory(search); // Change to the typical stage folder used by Project M, if it exists on the drive
+					return;
+				}
 			}
 
 			// Find and load GCT, if it exists

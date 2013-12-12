@@ -12,7 +12,10 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.Globalization;
 
 namespace SSSEditor {
+	public delegate void FindUsage(StagePair pair);
 	public partial class StagePairControl : UserControl {
+		public event FindUsage FindUsageClick;
+
 		private BRESNode miscdata80;
 		/// <summary>
 		/// The MiscData[80] file to read icons from.
@@ -295,6 +298,10 @@ namespace SSSEditor {
 
 		private void deleteToolStripMenuItem_Click(object sender, EventArgs e) {
 			Delete();
+		}
+
+		private void findUsageToolStripMenuItem_Click(object sender, EventArgs e) {
+			FindUsageClick.Invoke(Pair);
 		}
 	}
 }

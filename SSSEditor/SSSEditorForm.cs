@@ -90,6 +90,7 @@ namespace SSSEditor {
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,
 				};
+				spc.FindUsageClick += spc_FindUsageClick;
 				tblStageDefinitions.Controls.Add(spc);
 			}
 
@@ -99,6 +100,7 @@ namespace SSSEditor {
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,
 				};
+				spc.FindUsageClick += spc_FindUsageClick;
 				tblSSS1.Controls.Add(spc);
 			}
 
@@ -108,8 +110,28 @@ namespace SSSEditor {
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,
 				};
+				spc.FindUsageClick += spc_FindUsageClick;
 				tblSSS2.Controls.Add(spc);
 			}
+		}
+
+		private void spc_FindUsageClick(StagePair pair) {
+			StringBuilder sb = new StringBuilder();
+			sb.AppendLine("SSS #1:");
+			List<StagePair> screen1 = getScreen1();
+			for (int i=0; i<screen1.Count; i++) {
+				if (screen1[i] == pair) {
+					sb.AppendLine(i.ToString());
+				}
+			}
+			sb.AppendLine("SSS #2:");
+			List<StagePair> screen2 = getScreen2();
+			for (int i = 0; i < screen2.Count; i++) {
+				if (screen2[i] == pair) {
+					sb.AppendLine(i.ToString());
+				}
+			}
+			MessageBox.Show(sb.ToString());
 		}
 
 		private void ReloadIfValidPac(string file, CustomSSS sssIfOtherFileValid = null) {
@@ -274,18 +296,16 @@ namespace SSSEditor {
 						return;
 					}
 
-					string root;
-					if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap.pac")) {
-						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap.pac";
-					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap_en.pac")) {
-						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/menu2/sc_selmap_en.pac";
-					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5.pac")) {
-						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5.pac";
-					} else if (File.Exists(dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5_en.pac")) {
-						root = dialog.SelectedPath + "/private/wii/app/RSBE/pf/system/common5_en.pac";
-					} else if (File.Exists(dialog.SelectedPath + "/MiscData[80].brres")) {
-						root = dialog.SelectedPath + "/MiscData[80].brres";
-					} else {
+					string root = null;
+					foreach (string folder in new string[] { "/private/wii/app/RSBE/pf", "/projectm/pf" }) {
+						foreach (string file in new string[] { "menu2/sc_selmap.pac", "sc_selmap_en.pac", "system/common5.pac", "system/common5_en.pac" }) {
+							if (File.Exists(folder + "/" + file)) {
+								root = folder + "/" + file;
+								break;
+							}
+						}
+					}
+					if (root == null) {
 						MessageBox.Show(this, "Could not find common5 or sc_selmap.",
 							"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						return;

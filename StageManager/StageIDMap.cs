@@ -49,7 +49,11 @@ namespace BrawlStageManager {
 			#endregion
 
 			public bool ContainsPac(string filename) {
-				return filename.ToLower() == "stg" + PacBasename.ToLower() + ".pac";
+				int i = filename.IndexOfAny(new char[] { '.', '_' });
+				if (filename.Length < 3 || i < 0) return false;
+
+				string input_basename = filename.Substring(3, i - 3);
+				return String.Equals(input_basename.ToLower(), PacBasename.ToLower(), StringComparison.InvariantCultureIgnoreCase);
 			}
 
 			public Stage(byte id, string name, string relname, string pac_basename) {

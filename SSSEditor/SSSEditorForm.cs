@@ -189,39 +189,45 @@ namespace SSSEditor {
 		#endregion
 
 		void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
-			List<StagePair> definitions = new List<StagePair>();
-			foreach (Control c in tblStageDefinitions.Controls) {
-				if (c is StagePairControl) {
-					definitions.Add(((StagePairControl)c).Pair);
-				}
-			}
+			List<StagePair> definitions = getDefinitions();
 			if (tabControl1.SelectedTab == tabSSS1) {
 				foreach (Control c in tblSSS1.Controls) {
 					if (c is FixedStagePairControl) {
 						var f = ((FixedStagePairControl)c);
-						f.NUDDefValue = definitions.IndexOf(f.Pair);
+						((FixedStagePairControl)c).NUDDefValue = definitions.IndexOf(f.Pair);
+					}
+				}
+			} else if (tabControl1.SelectedTab == tabSSS2) {
+				foreach (Control c in tblSSS2.Controls) {
+					if (c is FixedStagePairControl) {
+						var f = ((FixedStagePairControl)c);
+						((FixedStagePairControl)c).NUDDefValue = definitions.IndexOf(f.Pair);
 					}
 				}
 			} else if (tabControl1.SelectedTab == tabPreview1) {
 				sssPrev1.MiscData80 = this.md80;
 				sssPrev1.NumIcons = tblSSS1.Controls.Count;
-				List<byte> list = new List<byte>();
-				foreach (Control c in tblSSS1.Controls) {
-					if (c is StagePairControl) {
-						list.Add(((StagePairControl)c).Pair.icon);
-					}
-				}
-				sssPrev1.IconOrder = list.ToArray();
+				sssPrev1.IconOrder = (from p in getScreen1()
+									  select p.icon).ToArray();
 			} else if (tabControl1.SelectedTab == tabPreview2) {
 				sssPrev2.MiscData80 = this.md80;
 				sssPrev2.NumIcons = tblSSS2.Controls.Count;
-				List<byte> list = new List<byte>();
-				foreach (Control c in tblSSS2.Controls) {
-					if (c is StagePairControl) {
-						list.Add(((StagePairControl)c).Pair.icon);
-					}
-				}
-				sssPrev2.IconOrder = list.ToArray();
+				sssPrev2.IconOrder = (from p in getScreen2()
+									  select p.icon).ToArray();
+			} else if (tabControl1.SelectedTab == tabMyMusic1) {
+				myMusic1.MiscData80 = this.md80;
+				myMusic1.IconOrder = (from p in getScreen1()
+									  where p != definitions[0x1E]
+									  select p.icon).ToArray();
+				myMusic1.NumIcons = myMusic1.IconOrder.Length;
+			} else if (tabControl1.SelectedTab == tabMyMusic2) {
+				myMusic2.MiscData80 = this.md80;
+				myMusic2.IconOrder = (from p in getScreen2()
+									  where p != definitions[0x1E]
+									  select p.icon).Concat(
+									  from b in new byte[] {0x64}
+									  select b).ToArray();
+				myMusic2.NumIcons = myMusic2.IconOrder.Length;
 			}
 		}
 
@@ -355,11 +361,18 @@ namespace SSSEditor {
 		private void btnAdd_Click(object sender, EventArgs e) {
 			TableLayoutPanel table = tabControl1.SelectedTab.Controls[0] as TableLayoutPanel;
 			if (table != null) {
+				StagePairControl fallback = null;
 				foreach (Control c in table.Controls) {
-					if (c is StagePairControl && ((StagePairControl)c).Checked) {
-						((StagePairControl)c).Insert();
-						return;
+					if (c is StagePairControl) {
+						fallback = (StagePairControl)c;
+						if (fallback.Checked) {
+							fallback.Insert();
+							return;
+						}
 					}
+				}
+				if (fallback != null) {
+					fallback.Insert();
 				}
 			}
 		}

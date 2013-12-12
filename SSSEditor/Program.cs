@@ -18,8 +18,9 @@ namespace SSSEditor {
 			string gct = args.Length > 0 ? args[0]
 				: File.Exists(@"codes\RSBE01.gct") ? @"codes\RSBE01.gct"
 				: null;
-            string pac = args.Length > 1 ? args[1]
+			string pac = args.Length > 1 ? args[1]
 				: File.Exists(@"private\wii\app\RSBE\pf\system\common5.pac") ? @"private\wii\app\RSBE\pf\system\common5.pac"
+				: File.Exists(@"projectm\pf\system\common5.pac") ? @"projectm\system\common5.pac"
 				: null;
 
 			if (gct == null) using (var dialog = new OpenFileDialog()) {

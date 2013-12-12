@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrawlStageManager;
 using BrawlLib.SSBB.ResourceNodes;
+using System.Globalization;
 
 namespace SSSEditor {
 	public partial class StagePairControl : UserControl {
@@ -134,6 +135,16 @@ namespace SSSEditor {
             {
                 if (!ddlStagePacs.Focused) ddlStagePacs.SelectionLength = 0;
             };
+			ddlStagePacs.LostFocus += (o, e) => {
+				if (ddlStagePacs.SelectedIndex == -1) {
+					byte b;
+					if (byte.TryParse(ddlStagePacs.Text, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out b)) {
+						ddlStagePacs.SelectedValue = b;
+					} else if (ddlStagePacs.Text.StartsWith("c", StringComparison.InvariantCultureIgnoreCase) && byte.TryParse(ddlStagePacs.Text.Substring(1), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out b)) {
+						ddlStagePacs.SelectedValue = (byte)(b + 0x3F);
+					}
+				}
+			};
 
             this.ParentChanged += (o, e) => {
                 Recolor();

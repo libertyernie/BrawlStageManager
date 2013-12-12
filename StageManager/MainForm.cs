@@ -463,17 +463,13 @@ namespace BrawlStageManager {
 			FileInfo pac = pacfiles.First();
 
 			var relfiles = dirinfo.EnumerateFiles("*.rel");
-			if (!relfiles.Any()) {
-				MessageBox.Show("No .rel files found in this folder.\nPlease add one that works with the stage.");
-				return;
-			}
-			FileInfo rel = relfiles.First();
+			string rel = relfiles.Any() ? relfiles.First().FullName : "No .rel file found";
 
-			DialogResult r = new CopyPacRelDialog(pac.FullName, _rootPath, rel.FullName, stageInfoControl1.RelFile.FullName).ShowDialog();
+			DialogResult r = new CopyPacRelDialog(pac.FullName, _rootPath, rel, stageInfoControl1.RelFile.FullName).ShowDialog();
 			if (r == DialogResult.Cancel) return;
 			if (r == DialogResult.Yes) {
 				File.Copy(pac.FullName, _rootPath, true);
-				File.Copy(rel.FullName, stageInfoControl1.RelFile.FullName, true);
+				if (File.Exists(rel)) File.Copy(rel, stageInfoControl1.RelFile.FullName, true);
 			}
 
 			if (portraitViewer1.SelmapLoaded) {

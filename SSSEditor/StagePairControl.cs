@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrawlStageManager;
 using BrawlLib.SSBB.ResourceNodes;
+using System.Globalization;
 
 namespace SSSEditor {
 	public partial class StagePairControl : UserControl {

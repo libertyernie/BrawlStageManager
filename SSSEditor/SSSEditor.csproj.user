@@ -4,6 +4,8 @@
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>i:\codes\RSBE01.gct i:\projectm\pf\system\common5.pac</StartArguments>
+    <StartArguments>
+    </StartArguments>
+    <StartWorkingDirectory>I:\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

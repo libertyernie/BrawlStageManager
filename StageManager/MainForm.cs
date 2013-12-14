@@ -398,6 +398,11 @@ namespace BrawlStageManager {
 			stageInfoControl1.RelFile = null;
 
 			portraitViewer1.UpdateDirectory();
+
+			if (StageIDMap.BestSSS.OtherCodesIgnoredInSameFile > 0) {
+				MessageBox.Show(this, "More than one Custom SSS code found in the codeset. All but the last one will be ignored.",
+					this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 		}
 
 		#region drag-and-drop

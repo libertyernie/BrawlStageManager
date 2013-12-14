@@ -135,6 +135,7 @@ namespace SSSEditor {
 		}
 
 		private void ReloadIfValidPac(string file, CustomSSS sssIfOtherFileValid = null) {
+			MessageBox.Show(file + "\n" + sssIfOtherFileValid);
 			ResourceNode node = NodeFactory.FromFile(null, file);
 			ResourceNode p1icon = node.FindChild("MenSelmapCursorPly.1", true);
 			BRESNode candidate = (p1icon != null) ? p1icon.Parent.Parent as BRESNode : null;
@@ -299,8 +300,8 @@ namespace SSSEditor {
 					string root = null;
 					foreach (string folder in new string[] { "/private/wii/app/RSBE/pf", "/projectm/pf" }) {
 						foreach (string file in new string[] { "menu2/sc_selmap.pac", "sc_selmap_en.pac", "system/common5.pac", "system/common5_en.pac" }) {
-							if (File.Exists(folder + "/" + file)) {
-								root = folder + "/" + file;
+							if (File.Exists(dialog.SelectedPath + folder + "/" + file)) {
+								root = dialog.SelectedPath + folder + "/" + file;
 								break;
 							}
 						}

@@ -612,6 +612,29 @@ namespace BrawlStageManager {
 					absent + " will be missing; and Menu will be added to the end of screen 2.");
 			}
 		}
+
+		public void ResizeAllPrevbases() {
+			if (sc_selmap == null) return;
+			if (prevbaseResizeTo == null) {
+				MessageBox.Show("Select an auto-resize option for prevbases first.");
+				return;
+			}
+			var prevbases = from c in sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false).Children
+							where c is TEX0Node && c.Name.Contains("MenSelmapPrevbase")
+							select (TEX0Node)c;
+			int i = 0;
+			foreach (TEX0Node node in prevbases) {
+				Bitmap b = node.GetImage(0);
+				if (b.Width <= prevbaseResizeTo.Value.Width && b.Height <= prevbaseResizeTo.Value.Height) {
+					continue;
+				}
+				b = BitmapUtilities.Resize(b, prevbaseResizeTo.Value);
+				node.Replace(b);
+				Console.WriteLine("Resized " + node);
+				i++;
+			}
+			MessageBox.Show("Resized " + i + " images.");
+		}
 		#endregion
 
 		#region event handlers

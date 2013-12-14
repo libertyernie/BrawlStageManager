@@ -828,6 +828,10 @@ namespace BrawlStageManager {
 			BitmapUtilities.Resize(square, portraitViewer1.prevbaseResizeTo ?? new Size(176, 176)).Save(prevbaseFile);
 			portraitViewer1.Replace(portraitViewer1.prevbase, prevbaseFile, false);
 		}
+
+		private void resizeAllPrevbasesToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.ResizeAllPrevbases();
+		}
 		#endregion
 
 		private void exportStage(FileInfo f, string thisdir) {

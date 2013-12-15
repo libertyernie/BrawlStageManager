@@ -91,6 +91,7 @@ namespace SSSEditor {
 					Dock = DockStyle.Fill,
 				};
 				spc.FindUsageClick += spc_FindUsageClick;
+				spc.SwapWithSelectedClick += spc_SwapWithSelectedClick;
 				tblStageDefinitions.Controls.Add(spc);
 			}
 
@@ -101,6 +102,7 @@ namespace SSSEditor {
 					Dock = DockStyle.Fill,
 				};
 				spc.FindUsageClick += spc_FindUsageClick;
+				spc.SwapWithSelectedClick += spc_SwapWithSelectedClick;
 				tblSSS1.Controls.Add(spc);
 			}
 
@@ -115,7 +117,8 @@ namespace SSSEditor {
 			}
 		}
 
-		private void spc_FindUsageClick(StagePair pair) {
+		private void spc_FindUsageClick(StagePairControl sender) {
+			StagePair pair = sender.Pair;
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine("SSS #1:");
 			List<StagePair> screen1 = getScreen1();
@@ -134,8 +137,28 @@ namespace SSSEditor {
 			MessageBox.Show(sb.ToString());
 		}
 
+		private void spc_SwapWithSelectedClick(StagePairControl sender) {
+			AskSwapDialog dialog = new AskSwapDialog();
+			Control tbl = tabControl1.SelectedTab.Controls[0];
+			foreach (Control c in tbl.Controls) {
+				if (c is StagePairControl && c != sender) {
+					StagePairControl spc = (StagePairControl)c;
+					dialog.Add(spc);
+				}
+			}
+			if (dialog.ShowDialog(this) == DialogResult.OK) {
+				int index1 = tbl.Controls.GetChildIndex(sender);
+				int index2 = tbl.Controls.GetChildIndex(dialog.Selected);
+				tbl.Controls.SetChildIndex(sender, index2);
+				tbl.Controls.SetChildIndex(dialog.Selected, index1);
+			} foreach (Control c in tbl.Controls) {
+				if (c is StagePairControl) {
+					((StagePairControl)c).Recolor();
+				}
+			}
+		}
+
 		private void ReloadIfValidPac(string file, CustomSSS sssIfOtherFileValid = null) {
-			MessageBox.Show(file + "\n" + sssIfOtherFileValid);
 			ResourceNode node = NodeFactory.FromFile(null, file);
 			ResourceNode p1icon = node.FindChild("MenSelmapCursorPly.1", true);
 			BRESNode candidate = (p1icon != null) ? p1icon.Parent.Parent as BRESNode : null;

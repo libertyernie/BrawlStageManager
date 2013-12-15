@@ -12,9 +12,10 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.Globalization;
 
 namespace SSSEditor {
-	public delegate void FindUsage(StagePair pair);
+	public delegate void SPCEvent(StagePairControl sender);
 	public partial class StagePairControl : UserControl {
-		public event FindUsage FindUsageClick;
+		public event SPCEvent FindUsageClick;
+		public event SPCEvent SwapWithSelectedClick;
 
 		private BRESNode miscdata80;
 		/// <summary>
@@ -175,7 +176,7 @@ namespace SSSEditor {
 		/// <summary>
 		/// Picks a new color for the color-code panel and (if applicable) updates the leftmost spinner.
 		/// </summary>
-		private void Recolor() {
+		public void Recolor() {
 			if (Parent == null) return;
 			int i = Parent.Controls.GetChildIndex(this);
             lblIndex.Text = i.ToString("X2");
@@ -301,7 +302,11 @@ namespace SSSEditor {
 		}
 
 		private void findUsageToolStripMenuItem_Click(object sender, EventArgs e) {
-			FindUsageClick.Invoke(Pair);
+			FindUsageClick.Invoke(this);
+		}
+
+		private void swapWithSelectedToolStripMenuItem_Click(object sender, EventArgs e) {
+			SwapWithSelectedClick.Invoke(this);
 		}
 	}
 }

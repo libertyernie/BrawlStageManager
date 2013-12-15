@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AskSwapDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AskSwapDialog.Designer.cs">
+      <DependentUpon>AskSwapDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FixedStagePairControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="UpDownKeyAwareRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="AskSwapDialog.resx">
+      <DependentUpon>AskSwapDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="From Stage Manager\AboutBSM.resx">
       <DependentUpon>AboutBSM.cs</DependentUpon>
       <SubType>Designer</SubType>

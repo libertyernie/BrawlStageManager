@@ -33,12 +33,13 @@
 			this.btnUp = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.findUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.swapWithSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorCode = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.lblIndex = new System.Windows.Forms.Label();
 			this.nudDefIndex = new System.Windows.Forms.NumericUpDown();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.findUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -131,9 +132,10 @@
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteToolStripMenuItem,
-            this.findUsageToolStripMenuItem});
+            this.findUsageToolStripMenuItem,
+            this.swapWithSelectedToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
 			// 
 			// deleteToolStripMenuItem
 			// 
@@ -141,6 +143,20 @@
 			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.deleteToolStripMenuItem.Text = "Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+			// 
+			// findUsageToolStripMenuItem
+			// 
+			this.findUsageToolStripMenuItem.Name = "findUsageToolStripMenuItem";
+			this.findUsageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.findUsageToolStripMenuItem.Text = "Find Usage";
+			this.findUsageToolStripMenuItem.Click += new System.EventHandler(this.findUsageToolStripMenuItem_Click);
+			// 
+			// swapWithSelectedToolStripMenuItem
+			// 
+			this.swapWithSelectedToolStripMenuItem.Name = "swapWithSelectedToolStripMenuItem";
+			this.swapWithSelectedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.swapWithSelectedToolStripMenuItem.Text = "Swap with...";
+			this.swapWithSelectedToolStripMenuItem.Click += new System.EventHandler(this.swapWithSelectedToolStripMenuItem_Click);
 			// 
 			// colorCode
 			// 
@@ -209,13 +225,6 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
-			// findUsageToolStripMenuItem
-			// 
-			this.findUsageToolStripMenuItem.Name = "findUsageToolStripMenuItem";
-			this.findUsageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.findUsageToolStripMenuItem.Text = "Find Usage";
-			this.findUsageToolStripMenuItem.Click += new System.EventHandler(this.findUsageToolStripMenuItem_Click);
-			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,5 +263,6 @@
 		protected System.Windows.Forms.NumericUpDown nudDefIndex;
         protected System.Windows.Forms.Label lblIndex;
 		private System.Windows.Forms.ToolStripMenuItem findUsageToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem swapWithSelectedToolStripMenuItem;
 	}
 }

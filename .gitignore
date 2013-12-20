@@ -13,3 +13,4 @@ SSSEditor/bin/Release/*
 !SSSEditor/bin/Release/SSSEditor.exe
 SSSEditor/obj
 *.suo
+SSSEditor/From Stage Manager/*

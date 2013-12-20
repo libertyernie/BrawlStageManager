@@ -21,6 +21,7 @@ namespace BrawlStageManager {
 		public bool useExistingAsFallback = true;
 		public WiiPixelFormat? selmapMarkFormat;
 		public bool selmapMarkPreview;
+		public bool useTextureConverter;
 
 		public string LoadedMessage;
 
@@ -162,7 +163,7 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public void Replace(object sender, string filename, bool useTextureConverter) {
+		public void Replace(object sender, string filename) {
 			var ig = StringComparison.CurrentCultureIgnoreCase;
 			if (filename.EndsWith(".tex0", ig) || filename.EndsWith(".brres", ig)) {
 				using (ResourceNode node = NodeFactory.FromFile(null, filename)) {
@@ -174,7 +175,7 @@ namespace BrawlStageManager {
 					}
 					string tempFile = TempFiles.Create(".png");
 					tex0.Export(tempFile);
-					Replace(sender, tempFile, useTextureConverter); // call self with new file
+					Replace(sender, tempFile); // call self with new file
 				}
 			} else {
 				TEX0Node tex0 = GetTEX0For(sender);
@@ -536,7 +537,7 @@ namespace BrawlStageManager {
 					Bitmap bmp = NameCreator.createImage(fontSettings, n.EntryText);
 					string tempfile = TempFiles.Create(".png");
 					bmp.Save(tempfile);
-					Replace(frontstname, tempfile, false);
+					Replace(frontstname, tempfile);
 				}
 			}
 		}
@@ -629,11 +630,23 @@ namespace BrawlStageManager {
 					continue;
 				}
 				b = BitmapUtilities.Resize(b, prevbaseResizeTo.Value);
-				node.Replace(b);
+				string file = TempFiles.Create(".png");
+				b.Save(file);
+				if (useTextureConverter) {
+					TextureConverterDialog d = new TextureConverterDialog();
+					d.ImageSource = file;
+					
+					if (d.ShowDialog(null, node) == DialogResult.OK) {
+						node.IsDirty = true;
+					}
+				} else {
+					node.Replace(file);
+				}
 				Console.WriteLine("Resized " + node);
 				i++;
 			}
 			MessageBox.Show("Resized " + i + " images.");
+			UpdateImage();
 		}
 		#endregion
 
@@ -653,7 +666,7 @@ namespace BrawlStageManager {
 
 		void panel1_DragDrop(object sender, DragEventArgs e) {
 			if (e.Effect == DragDropEffects.Copy) {
-				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0], false);
+				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0]);
 			}
 		}
 

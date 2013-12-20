@@ -50,6 +50,8 @@
 			this.exportAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.useTextureConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
 			this.renderModels = new System.Windows.Forms.ToolStripMenuItem();
 			this.useAFixedStageListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -351,6 +353,8 @@
 			// optionsToolStripMenuItem
 			// 
 			this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.useTextureConverterToolStripMenuItem,
+            this.toolStripMenuItem5,
             this.renderModels,
             this.useAFixedStageListToolStripMenuItem,
             this.backgroundColorToolStripMenuItem,
@@ -365,6 +369,21 @@
 			this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
 			this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
 			this.optionsToolStripMenuItem.Text = "Options";
+			// 
+			// useTextureConverterToolStripMenuItem
+			// 
+			this.useTextureConverterToolStripMenuItem.Checked = true;
+			this.useTextureConverterToolStripMenuItem.CheckOnClick = true;
+			this.useTextureConverterToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.useTextureConverterToolStripMenuItem.Name = "useTextureConverterToolStripMenuItem";
+			this.useTextureConverterToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.useTextureConverterToolStripMenuItem.Text = "Use Texture Converter";
+			this.useTextureConverterToolStripMenuItem.Click += new System.EventHandler(this.useTextureConverterToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem5
+			// 
+			this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+			this.toolStripMenuItem5.Size = new System.Drawing.Size(190, 6);
 			// 
 			// renderModels
 			// 
@@ -631,25 +650,25 @@
 			this.prevbaseOriginalSizeToolStripMenuItem.Checked = true;
 			this.prevbaseOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.prevbaseOriginalSizeToolStripMenuItem.Name = "prevbaseOriginalSizeToolStripMenuItem";
-			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.prevbaseOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x128ToolStripMenuItem
 			// 
 			this.x128ToolStripMenuItem.Name = "x128ToolStripMenuItem";
-			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.x128ToolStripMenuItem.Text = "128x128";
 			// 
 			// x88ToolStripMenuItem
 			// 
 			this.x88ToolStripMenuItem.Name = "x88ToolStripMenuItem";
-			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.x88ToolStripMenuItem.Text = "88x88";
 			// 
 			// customPrevbaseSizeToolStripMenuItem
 			// 
 			this.customPrevbaseSizeToolStripMenuItem.Name = "customPrevbaseSizeToolStripMenuItem";
-			this.customPrevbaseSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.customPrevbaseSizeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
 			this.customPrevbaseSizeToolStripMenuItem.Text = "Custom...";
 			// 
 			// frontstnameSizeToolStripMenuItem
@@ -666,13 +685,13 @@
 			this.frontstnameOriginalSizeToolStripMenuItem.Checked = true;
 			this.frontstnameOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
-			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x56ToolStripMenuItem
 			// 
 			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
-			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
 			this.x56ToolStripMenuItem.Text = "104x56";
 			// 
 			// selmapMarkSizeToolStripMenuItem
@@ -837,6 +856,8 @@
 		private System.Windows.Forms.ToolStripMenuItem loadNewCustomSSSCodeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resizeAllPrevbasesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem customPrevbaseSizeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem useTextureConverterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
 
 
 

@@ -482,28 +482,28 @@ namespace BrawlStageManager {
 			if (portraitViewer1.SelmapLoaded) {
 				var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
 				if (prevbases.Any()) {
-					portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName, true);
+					portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName);
 				}
 
 				var icons = dirinfo.EnumerateFiles("*Icon.*");
 				if (icons.Any()) {
-					portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName, true);
+					portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName);
 				}
 
 				var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
 				if (frontstnames.Any()) {
-					portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName, true);
+					portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName);
 				}
 
 				var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
 					.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
 				if (seriesicons.Any()) {
-					portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName, true);
+					portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName);
 				}
 
 				var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
 				if (selmap_marks.Any()) {
-					portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName, true);
+					portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName);
 				}
 			}
 		}
@@ -831,10 +831,10 @@ namespace BrawlStageManager {
 
 			string iconFile = TempFiles.Create(".png");
 			BitmapUtilities.Resize(square, new Size(64, 56)).Save(iconFile);
-			portraitViewer1.Replace(portraitViewer1.icon, iconFile, false);
+			portraitViewer1.Replace(portraitViewer1.icon, iconFile);
 			string prevbaseFile = TempFiles.Create(".png");
 			BitmapUtilities.Resize(square, portraitViewer1.prevbaseResizeTo ?? new Size(176, 176)).Save(prevbaseFile);
-			portraitViewer1.Replace(portraitViewer1.prevbase, prevbaseFile, false);
+			portraitViewer1.Replace(portraitViewer1.prevbase, prevbaseFile);
 		}
 
 		private void resizeAllPrevbasesToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -960,6 +960,10 @@ namespace BrawlStageManager {
 				e.Handled = true;
 				portraitViewer1.generateName();
 			}
+		}
+
+		private void useTextureConverterToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 		}
 	}
 }

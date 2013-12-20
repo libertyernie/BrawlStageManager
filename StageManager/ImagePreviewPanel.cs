@@ -58,7 +58,7 @@ namespace BrawlStageManager {
 				MainForm.OpenDialog.Filter = FileFilters.TEX0;
 				if (MainForm.OpenDialog.ShowDialog() == DialogResult.OK) {
 					string fileName = MainForm.OpenDialog.FileName;
-					pv.Replace(this, fileName, true);
+					pv.Replace(this, fileName);
 				}
 			}
 		}

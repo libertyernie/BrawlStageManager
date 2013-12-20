@@ -12,7 +12,7 @@ namespace BrawlStageManager {
 		static TempFiles() {
 			string p = Path.Combine(Path.GetTempPath(), "StageManager");
 			if (Directory.Exists(p)) {
-				Directory.Delete(p);
+				Directory.Delete(p, true);
 				Directory.CreateDirectory(p);
 			}
 		}

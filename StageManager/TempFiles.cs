@@ -6,31 +6,45 @@ using System.Text;
 
 namespace BrawlStageManager {
 	public class TempFiles {
-		private static Stack<string> tempFiles = new Stack<string>();
+		//private static Stack<string> tempFiles = new Stack<string>();
+		public static bool Printout = true;
+
+		static TempFiles() {
+			string p = Path.Combine(Path.GetTempPath(), "StageManager");
+			if (Directory.Exists(p)) {
+				Directory.Delete(p);
+				Directory.CreateDirectory(p);
+			}
+		}
 
 		public static string Create() {
-			string file = Path.GetTempFileName();
-			tempFiles.Push(file);
-			return file;
+			return Create(".dat");
 		}
 
 		public static string Create(string extension) {
-			string from = Path.GetTempFileName();
-			string file = from + extension;
-			File.Move(from, file);
-			tempFiles.Push(file);
-			return file;
+			if (!extension.StartsWith(".")) extension = "." + extension;
+			string f = Path.Combine(Path.GetTempPath(), "StageManager", Guid.NewGuid() + extension);
+			//tempFiles.Push(f);
+			if (Printout) Console.WriteLine("Returning path: " + f);
+			return f;
 		}
 
 		public static void TryToDeleteAll() {
-			while (tempFiles.Any()) {
-				string s = tempFiles.Pop();
+			foreach (string s in Directory.EnumerateFiles(Path.Combine(Path.GetTempPath(), "StageManager"))) {
 				try {
 					File.Delete(s);
 				} catch (Exception e) {
 					Console.WriteLine(s + ": " + e.Message);
 				}
 			}
+			/*while (tempFiles.Any()) {
+				string s = tempFiles.Pop();
+				try {
+					File.Delete(s);
+				} catch (Exception e) {
+					Console.WriteLine(s + ": " + e.Message);
+				}
+			}*/
 		}
 	}
 }

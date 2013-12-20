@@ -97,6 +97,12 @@
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomSSS.cs" />
+    <Compile Include="EnterSizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterSizeDialog.Designer.cs">
+      <DependentUpon>EnterSizeDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="IconsToMenumain.cs" />
     <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
     <Compile Include="FileOperations.cs" />
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CopyPacRelDialog.resx">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterSizeDialog.resx">
+      <DependentUpon>EnterSizeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

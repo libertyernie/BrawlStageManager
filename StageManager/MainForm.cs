@@ -95,6 +95,8 @@ namespace BrawlStageManager {
 					x88ToolStripMenuItem.Checked = true;
 				} else if (sizes[0] == new Size(128, 128)) {
 					x128ToolStripMenuItem.Checked = true;
+				} else {
+					customPrevbaseSizeToolStripMenuItem.Checked = true;
 				}
 			}
 
@@ -630,6 +632,12 @@ namespace BrawlStageManager {
 				portraitViewer1.prevbaseResizeTo = new Size(128, 128);
 			} else if (sender == x88ToolStripMenuItem) {
 				portraitViewer1.prevbaseResizeTo = new Size(88, 88);
+			} else if (sender == customPrevbaseSizeToolStripMenuItem) {
+				EnterSizeDialog dialog = new EnterSizeDialog();
+				dialog.SizeEntry = portraitViewer1.prevbaseResizeTo ?? new Size(128, 128);
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					portraitViewer1.prevbaseResizeTo = dialog.SizeEntry;
+				}
 			}
 		}
 

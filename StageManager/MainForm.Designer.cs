@@ -81,11 +81,13 @@
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.addmissingPAT0EntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.downgradeMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resizeAllPrevbasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseSize = new System.Windows.Forms.ToolStripMenuItem();
 			this.prevbaseOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x128ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x88ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.customPrevbaseSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.frontstnameSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.frontstnameOriginalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.x56ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +98,6 @@
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.resizeAllPrevbasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -558,7 +559,6 @@
 			this.loadNewCustomSSSCodeToolStripMenuItem.Name = "loadNewCustomSSSCodeToolStripMenuItem";
 			this.loadNewCustomSSSCodeToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
 			this.loadNewCustomSSSCodeToolStripMenuItem.Text = "Load a different Custom SSS code";
-			this.loadNewCustomSSSCodeToolStripMenuItem.Click += new System.EventHandler(this.loadNewCustomSSSCodeToolStripMenuItem_Click);
 			// 
 			// separator4
 			// 
@@ -598,6 +598,13 @@
 			this.downgradeMenSelmapMarksToolStripMenuItem.Text = "Downgrade MenSelmapMarks to CMPR";
 			this.downgradeMenSelmapMarksToolStripMenuItem.Click += new System.EventHandler(this.downgradeMenSelmapMarksToolStripMenuItem_Click);
 			// 
+			// resizeAllPrevbasesToolStripMenuItem
+			// 
+			this.resizeAllPrevbasesToolStripMenuItem.Name = "resizeAllPrevbasesToolStripMenuItem";
+			this.resizeAllPrevbasesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.resizeAllPrevbasesToolStripMenuItem.Text = "Resize all Prevbases to selected size";
+			this.resizeAllPrevbasesToolStripMenuItem.Click += new System.EventHandler(this.resizeAllPrevbasesToolStripMenuItem_Click);
+			// 
 			// resizeToolStripMenuItem
 			// 
 			this.resizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -613,7 +620,8 @@
 			this.prevbaseSize.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.prevbaseOriginalSizeToolStripMenuItem,
             this.x128ToolStripMenuItem,
-            this.x88ToolStripMenuItem});
+            this.x88ToolStripMenuItem,
+            this.customPrevbaseSizeToolStripMenuItem});
 			this.prevbaseSize.Name = "prevbaseSize";
 			this.prevbaseSize.Size = new System.Drawing.Size(168, 22);
 			this.prevbaseSize.Text = "Prevbase size:";
@@ -623,20 +631,26 @@
 			this.prevbaseOriginalSizeToolStripMenuItem.Checked = true;
 			this.prevbaseOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.prevbaseOriginalSizeToolStripMenuItem.Name = "prevbaseOriginalSizeToolStripMenuItem";
-			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+			this.prevbaseOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.prevbaseOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x128ToolStripMenuItem
 			// 
 			this.x128ToolStripMenuItem.Name = "x128ToolStripMenuItem";
-			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+			this.x128ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.x128ToolStripMenuItem.Text = "128x128";
 			// 
 			// x88ToolStripMenuItem
 			// 
 			this.x88ToolStripMenuItem.Name = "x88ToolStripMenuItem";
-			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(115, 22);
+			this.x88ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.x88ToolStripMenuItem.Text = "88x88";
+			// 
+			// customPrevbaseSizeToolStripMenuItem
+			// 
+			this.customPrevbaseSizeToolStripMenuItem.Name = "customPrevbaseSizeToolStripMenuItem";
+			this.customPrevbaseSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.customPrevbaseSizeToolStripMenuItem.Text = "Custom...";
 			// 
 			// frontstnameSizeToolStripMenuItem
 			// 
@@ -652,13 +666,13 @@
 			this.frontstnameOriginalSizeToolStripMenuItem.Checked = true;
 			this.frontstnameOriginalSizeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.frontstnameOriginalSizeToolStripMenuItem.Name = "frontstnameOriginalSizeToolStripMenuItem";
-			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+			this.frontstnameOriginalSizeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.frontstnameOriginalSizeToolStripMenuItem.Text = "Off";
 			// 
 			// x56ToolStripMenuItem
 			// 
 			this.x56ToolStripMenuItem.Name = "x56ToolStripMenuItem";
-			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+			this.x56ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.x56ToolStripMenuItem.Text = "104x56";
 			// 
 			// selmapMarkSizeToolStripMenuItem
@@ -713,13 +727,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// resizeAllPrevbasesToolStripMenuItem
-			// 
-			this.resizeAllPrevbasesToolStripMenuItem.Name = "resizeAllPrevbasesToolStripMenuItem";
-			this.resizeAllPrevbasesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.resizeAllPrevbasesToolStripMenuItem.Text = "Resize all Prevbases to selected size";
-			this.resizeAllPrevbasesToolStripMenuItem.Click += new System.EventHandler(this.resizeAllPrevbasesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -829,6 +836,7 @@
 		private System.Windows.Forms.ToolStripMenuItem repaintIconBorderToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem loadNewCustomSSSCodeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resizeAllPrevbasesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem customPrevbaseSizeToolStripMenuItem;
 
 
 

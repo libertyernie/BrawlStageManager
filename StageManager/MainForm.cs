@@ -181,6 +181,7 @@ namespace BrawlStageManager {
 			FormClosed += MainForm_FormClosed;
 
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
+			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 			LoadFromRegistry();
 			changeDirectory(path);
 		}

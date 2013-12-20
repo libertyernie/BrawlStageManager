@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace BrawlStageManager {
 	public static class BitmapUtilities {
@@ -67,22 +68,10 @@ namespace BrawlStageManager {
 		}
 
 		/// <summary>
-		/// Makes a scaled version of an image using SmoothingMode.AntiAlias and InterpolationMode.HighQualityBicubic.
+		/// Makes a scaled version of an image using BrawlLib's texture converter.
 		/// </summary>
 		public static Bitmap Resize(Bitmap orig, Size resizeTo) {
-			Bitmap thumbnail = new Bitmap(resizeTo.Width, resizeTo.Height);
-			using (Graphics g = Graphics.FromImage(thumbnail)) {
-				Color c;
-				if (IsSolidColor(orig, out c) && false) {
-					// Avoid a scaling glitch in .NET when using a 4x4 texture
-					g.FillRectangle(new SolidBrush(c), 0, 0, resizeTo.Width, resizeTo.Height);
-				} else {
-					g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-					g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-					g.DrawImage(orig, 0, 0, resizeTo.Width, resizeTo.Height);
-				}
-			}
-			return thumbnail;
+			return TextureConverterDialog.ResizeImage(orig, resizeTo.Width, resizeTo.Height);
 		}
 
 		/// <summary>

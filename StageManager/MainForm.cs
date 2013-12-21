@@ -262,7 +262,7 @@ namespace BrawlStageManager {
 						ResourceNode modelfolder = node.FindChild("3DModels(NW4R)", false);
 						if (modelfolder != null) {
 							foreach (ResourceNode child in modelfolder.Children) {
-								if (child is MDL0Node) {
+								if (child is MDL0Node && !child.Name.StartsWith("MShadow")) {
 									try {
 										MDL0Node model = child as MDL0Node;
 										model.Populate();

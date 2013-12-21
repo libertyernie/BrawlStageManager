@@ -621,24 +621,31 @@ namespace BrawlStageManager {
 							select (TEX0Node)c;
 			int i = 0;
 			foreach (TEX0Node node in prevbases) {
-				Bitmap b = node.GetImage(0);
-				if (b.Width <= newSize.Width && b.Height <= newSize.Height) {
+				Bitmap origImage = node.GetImage(0);
+				if (origImage.Width <= newSize.Width && origImage.Height <= newSize.Height) {
 					continue;
 				}
-				b = BitmapUtilities.Resize(b, newSize);
+
 				string file = TempFiles.Create(".png");
-				b.Save(file);
 				if (useTextureConverter) {
+					origImage.Save(file);
+
 					TextureConverterDialog d = new TextureConverterDialog();
 					d.ImageSource = file;
+					d.InitialSize = newSize;
 					if (d.ShowDialog(null, node) == DialogResult.OK) {
 						node.IsDirty = true;
 					} else if (MessageBox.Show(this, "Stop resizing textures here?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 						break;
 					}
 				} else {
+					Bitmap b = BitmapUtilities.Resize(origImage, newSize);
+					b.Save(file);
+
 					node.Replace(file);
 				}
+
+				File.Delete(file);
 				Console.WriteLine("Resized " + node);
 				i++;
 			}

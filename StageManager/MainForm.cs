@@ -839,7 +839,16 @@ namespace BrawlStageManager {
 		}
 
 		private void resizeAllPrevbasesToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.ResizeAllPrevbases();
+			var dialog = new EnterSizeDialog() {
+				SizeEntry = portraitViewer1.prevbaseResizeTo ?? new Size(176, 176)
+			};
+			if (dialog.ShowDialog() == DialogResult.OK) {
+				portraitViewer1.ResizeAllPrevbases(dialog.SizeEntry);
+			}
+		}
+
+		private void useTextureConverterToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 		}
 		#endregion
 
@@ -961,10 +970,6 @@ namespace BrawlStageManager {
 				e.Handled = true;
 				portraitViewer1.generateName();
 			}
-		}
-
-		private void useTextureConverterToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 		}
 	}
 }

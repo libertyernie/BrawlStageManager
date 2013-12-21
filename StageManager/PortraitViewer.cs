@@ -614,30 +614,27 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public void ResizeAllPrevbases() {
+		public void ResizeAllPrevbases(Size newSize) {
 			if (sc_selmap == null) return;
-			if (prevbaseResizeTo == null) {
-				MessageBox.Show("Select an auto-resize option for prevbases first.");
-				return;
-			}
 			var prevbases = from c in sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false).Children
 							where c is TEX0Node && c.Name.Contains("MenSelmapPrevbase")
 							select (TEX0Node)c;
 			int i = 0;
 			foreach (TEX0Node node in prevbases) {
 				Bitmap b = node.GetImage(0);
-				if (b.Width <= prevbaseResizeTo.Value.Width && b.Height <= prevbaseResizeTo.Value.Height) {
+				if (b.Width <= newSize.Width && b.Height <= newSize.Height) {
 					continue;
 				}
-				b = BitmapUtilities.Resize(b, prevbaseResizeTo.Value);
+				b = BitmapUtilities.Resize(b, newSize);
 				string file = TempFiles.Create(".png");
 				b.Save(file);
 				if (useTextureConverter) {
 					TextureConverterDialog d = new TextureConverterDialog();
 					d.ImageSource = file;
-					
 					if (d.ShowDialog(null, node) == DialogResult.OK) {
 						node.IsDirty = true;
+					} else if (MessageBox.Show(this, "Stop resizing textures here?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+						break;
 					}
 				} else {
 					node.Replace(file);

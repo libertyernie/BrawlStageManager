@@ -30,10 +30,13 @@ namespace BrawlStageManager {
 
 			ToolStripMenuItem replace = new ToolStripMenuItem("Replace");
 			replace.Click += new System.EventHandler(this.replace_Click);
+			ToolStripMenuItem copy = new ToolStripMenuItem("Copy");
+			copy.Click += copy_Click;
 			ToolStripMenuItem export = new ToolStripMenuItem("Export");
 			export.Click += new System.EventHandler(this.export_Click);
 
 			this.ContextMenuStrip.Items.Add(replace);
+			this.ContextMenuStrip.Items.Add(copy);
 			this.ContextMenuStrip.Items.Add(export);
 
 			borderChange = new ToolStripMenuItem("Repaint border ([)");
@@ -60,6 +63,14 @@ namespace BrawlStageManager {
 					string fileName = MainForm.OpenDialog.FileName;
 					pv.Replace(this, fileName);
 				}
+			}
+		}
+
+		private void copy_Click(object sender, EventArgs e) {
+			PortraitViewer pv = getPVParent();
+			if (pv != null) {
+				Bitmap bmp = pv.GetTEX0For(this).GetImage(0);
+				Clipboard.SetImage(bmp);
 			}
 		}
 

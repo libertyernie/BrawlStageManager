@@ -1,11 +1,14 @@
-﻿using System;
+﻿using BrawlStageManager;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace SSSEditor {
-	public class SDSLScanner {
-		public static class Song {
+	public static class SDSLScanner {
+		#region Song names, ids, filenames
+		public class Song {
 			public string Name {get; private set;}
 			public string Filename {get; private set;}
 			public ushort ID {get; private set;}
@@ -21,7 +24,16 @@ namespace SSSEditor {
 			}
 		}
 
-		public static Dictionary<ushort, Song> 
+		private static Dictionary<ushort, Song> songs;
+
+		public static Song SongFromID(ushort id) {
+			return songs[id];
+		}
+
+		private static void songadd(string name, string filename, int id, bool unsure) {
+			ushort nid = (ushort)id;
+			songs.Add(nid, new Song(name, filename, nid));
+		}
 
 		public static SDSLScanner() {
 			songadd("Super Smash Bros. Brawl Main Theme", "X01", 0x26f9, false);
@@ -308,6 +320,31 @@ namespace SSSEditor {
 			songadd("???", "Z56", 0x2869, false);
 			songadd("???", "Z57", 0x286a, false);
 			songadd("???", "Z58", 0x286b, false);
+		}
+		#endregion
+
+		private static byte[] SDSL_HEADER = { 0x28, 0x70, 0x8c, 0xeb, 0x00, 0x00, 0x00 };
+		public static Dictionary<byte, Song> SongsByStage(string filename) {
+			if (filename.EndsWith("gct", StringComparison.InvariantCultureIgnoreCase)) {
+				return SongsByStage(File.ReadAllBytes(filename));
+			} else {
+				return null;// SongsByStage(File.ReadAllLines(filename));
+			}
+		}
+		public static Dictionary<byte, Song> SongsByStage(byte[] data) {
+			Dictionary<byte, Song> dict = new Dictionary<byte, Song>();
+			for (int line = 0; line < data.Length; line += 8) {
+				if (ByteUtilities.ByteArrayEquals(data, line, SDSL_HEADER, 0, SDSL_HEADER.Length)) {
+					byte stageID = data[line + 7];
+					byte songID1 = data[line + 22];
+					byte songID2 = data[line + 23];
+					ushort songID = (ushort)(0x100 * songID1 + songID2);
+
+					dict.Add(stageID, SongFromID(songID));
+					line += 24;
+				}
+			}
+			return dict;
 		}
 	}
 }

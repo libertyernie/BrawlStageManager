@@ -56,11 +56,12 @@ namespace SSSEditor {
 			tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
 
 			sss = new CustomSSS(gct);
-			songCodes = SDSLScanner.SongsByStage(gct);
 			ReloadIfValidPac(pac);
 		}
 
 		private void ReloadData() {
+			songCodes = SDSLScanner.SongsByStage(sss);
+
 			tblStageDefinitions.Controls.Clear();
 			tblSSS1.Controls.Clear();
 			tblSSS2.Controls.Clear();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SSSEditor {
 	public static class SDSLScanner {
@@ -35,7 +36,8 @@ namespace SSSEditor {
 			songs.Add(nid, new Song(name, filename, nid));
 		}
 
-		public static SDSLScanner() {
+		static SDSLScanner() {
+			songs = new Dictionary<ushort, Song>();
 			songadd("Super Smash Bros. Brawl Main Theme", "X01", 0x26f9, false);
 			songadd("Menu 1", "X02", 0x26fa, false);
 			songadd("Menu 2", "X03", 0x26fb, false);
@@ -324,12 +326,8 @@ namespace SSSEditor {
 		#endregion
 
 		private static byte[] SDSL_HEADER = { 0x28, 0x70, 0x8c, 0xeb, 0x00, 0x00, 0x00 };
-		public static Dictionary<byte, Song> SongsByStage(string filename) {
-			if (filename.EndsWith("gct", StringComparison.InvariantCultureIgnoreCase)) {
-				return SongsByStage(File.ReadAllBytes(filename));
-			} else {
-				return null;// SongsByStage(File.ReadAllLines(filename));
-			}
+		public static Dictionary<byte, Song> SongsByStage(CustomSSS sss) {
+			return SongsByStage(sss.DataBefore.Concat(sss.DataAfter).ToArray());
 		}
 		public static Dictionary<byte, Song> SongsByStage(byte[] data) {
 			Dictionary<byte, Song> dict = new Dictionary<byte, Song>();
@@ -339,7 +337,11 @@ namespace SSSEditor {
 					byte songID1 = data[line + 22];
 					byte songID2 = data[line + 23];
 					ushort songID = (ushort)(0x100 * songID1 + songID2);
-
+					if (dict.ContainsKey(stageID)) {
+						Console.WriteLine(String.Format("WARNING: code mapping stage {0} to song {1} will not " +
+							"take effect, since a later code maps it to song {2}", stageID, dict[stageID].ID, songID));
+						dict.Remove(stageID);
+					}
 					dict.Add(stageID, SongFromID(songID));
 					line += 24;
 				}

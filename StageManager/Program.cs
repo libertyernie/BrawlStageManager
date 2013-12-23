@@ -20,6 +20,11 @@ namespace BrawlStageManager {
 			}
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			var D = BrawlLib.Properties.Settings.Default;
+			if (D.GetType().GetProperty("HideMDL0Errors") != null) {
+				D.GetType().InvokeMember("HideMDL0Errors", System.Reflection.BindingFlags.SetProperty, null, D, new object[] { true });
+			}
+
 			string dir = null;
 			bool useRelDescription = true;
 			foreach (string arg in args) {

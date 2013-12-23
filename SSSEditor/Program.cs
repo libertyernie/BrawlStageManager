@@ -14,6 +14,10 @@ namespace SSSEditor {
 		static void Main(string[] args) {
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			var D = BrawlLib.Properties.Settings.Default;
+			if (D.GetType().GetProperty("HideMDL0Errors") != null) {
+				D.GetType().InvokeMember("HideMDL0Errors", System.Reflection.BindingFlags.SetProperty, null, D, new object[] { true });
+			}
 
 			string gct = args.Length > 0 ? args[0]
 				: File.Exists(@"data\gecko\codes\RSBE01.gct") ? @"data\gecko\codes\RSBE01.gct"

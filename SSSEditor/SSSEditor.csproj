@@ -71,6 +71,7 @@
     <Compile Include="From Stage Manager\StageIDMap.cs" />
     <Compile Include="From Stage Manager\TempFiles.cs" />
     <Compile Include="From Stage Manager\TextureContainer.cs" />
+    <Compile Include="SDSLScanner.cs" />
     <Compile Include="SSSEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>

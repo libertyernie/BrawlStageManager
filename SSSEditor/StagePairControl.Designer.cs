@@ -37,17 +37,17 @@
 			this.swapWithSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorCode = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.lblSong = new System.Windows.Forms.Label();
 			this.lblIndex = new System.Windows.Forms.Label();
 			this.nudDefIndex = new System.Windows.Forms.NumericUpDown();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.lblSong = new System.Windows.Forms.Label();
-			this.panel2 = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ddlStagePacs
@@ -185,6 +185,28 @@
 			this.panel1.Size = new System.Drawing.Size(249, 62);
 			this.panel1.TabIndex = 11;
 			// 
+			// panel2
+			// 
+			this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel2.Controls.Add(this.ddlStagePacs);
+			this.panel2.Controls.Add(this.lblSong);
+			this.panel2.Location = new System.Drawing.Point(3, 3);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(243, 21);
+			this.panel2.TabIndex = 12;
+			// 
+			// lblSong
+			// 
+			this.lblSong.Dock = System.Windows.Forms.DockStyle.Right;
+			this.lblSong.Location = new System.Drawing.Point(211, 0);
+			this.lblSong.Name = "lblSong";
+			this.lblSong.Size = new System.Drawing.Size(32, 21);
+			this.lblSong.TabIndex = 10;
+			this.lblSong.Text = "M88";
+			this.lblSong.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.lblSong.Visible = false;
+			// 
 			// lblIndex
 			// 
 			this.lblIndex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -227,26 +249,6 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
-			// lblSong
-			// 
-			this.lblSong.Dock = System.Windows.Forms.DockStyle.Right;
-			this.lblSong.Location = new System.Drawing.Point(211, 0);
-			this.lblSong.Name = "lblSong";
-			this.lblSong.Size = new System.Drawing.Size(32, 21);
-			this.lblSong.TabIndex = 10;
-			this.lblSong.Text = "M88";
-			this.lblSong.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.lblSong.Visible = false;
-			// 
-			// panel2
-			// 
-			this.panel2.Controls.Add(this.ddlStagePacs);
-			this.panel2.Controls.Add(this.lblSong);
-			this.panel2.Location = new System.Drawing.Point(3, 3);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(243, 21);
-			this.panel2.TabIndex = 12;
-			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,9 +264,9 @@
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

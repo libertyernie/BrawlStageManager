@@ -36,7 +36,7 @@ namespace BrawlStageManager {
 					byte icon_id;
 					if (tex.Name.StartsWith("MenSelmapIcon.") && Byte.TryParse(tex.Name.Substring(14, 2), out icon_id)) {
 						byte stage_id = StageIDMap.BestSSS.StageForIcon(icon_id);
-						if (icon_id != 100 && (stage_id == 25 || stage_id > 0x33)) {
+						if (icon_id != 100 && (stage_id == 0x25 || stage_id > 0x33)) {
 							tex.Replace(tempfile);
 						}
 					}

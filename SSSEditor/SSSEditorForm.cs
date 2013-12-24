@@ -47,6 +47,11 @@ namespace SSSEditor {
 
 		public SSSEditorForm(string gct, string pac) {
 			InitializeComponent();
+			foreach (Control c in tblColorCodeKeys.Controls) {
+				c.DoubleClick += (o, e) => {
+					tblColorCodeKeys.Visible = false;
+				};
+			}
 			try {
 				Icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetCallingAssembly().Location);
 			} catch (Exception e) {

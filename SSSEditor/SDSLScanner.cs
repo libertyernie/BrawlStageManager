@@ -309,11 +309,11 @@ namespace SSSEditor {
 		#endregion
 
 		private static byte[] SDSL_HEADER = { 0x28, 0x70, 0x8c, 0xeb, 0x00, 0x00, 0x00 };
-		public static Dictionary<byte, string> SongsByStage(CustomSSS sss) {
+		public static Dictionary<byte, Tuple<string, ushort>> SongsByStage(CustomSSS sss) {
 			return SongsByStage(sss.DataBefore.Concat(sss.DataAfter).ToArray());
 		}
-		public static Dictionary<byte, string> SongsByStage(byte[] data) {
-			Dictionary<byte, string> dict = new Dictionary<byte, string>();
+		public static Dictionary<byte, Tuple<string, ushort>> SongsByStage(byte[] data) {
+			Dictionary<byte, Tuple<string, ushort>> dict = new Dictionary<byte, Tuple<string, ushort>>();
 			for (int line = 0; line < data.Length; line += 8) {
 				if (ByteUtilities.ByteArrayEquals(data, line, SDSL_HEADER, 0, SDSL_HEADER.Length)) {
 					byte stageID = data[line + 7];
@@ -326,7 +326,7 @@ namespace SSSEditor {
 							"take effect, since a later code maps it to song {2}", stageID, dict[stageID], n));
 						dict.Remove(stageID);
 					}
-					dict.Add(stageID, n);
+					dict.Add(stageID, new Tuple<string, ushort>(n, songID));
 					line += 24;
 				}
 			}

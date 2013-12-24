@@ -70,6 +70,14 @@ namespace SSSEditor {
 				lblSong.Visible = (value != null);
 			}
 		}
+		public string SongToolTip {
+			get {
+				return toolTip1.GetToolTip(lblSong);
+			}
+			set {
+				toolTip1.SetToolTip(lblSong, value);
+			}
+		}
 
 		private StagePair _pair;
 		private TextureContainer textures;

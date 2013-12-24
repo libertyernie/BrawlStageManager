@@ -28,7 +28,6 @@
 			this.lblStageID = new System.Windows.Forms.Label();
 			this.lblIconID = new System.Windows.Forms.Label();
 			this.nudIconID = new System.Windows.Forms.NumericUpDown();
-			this.radioButton1 = new SSSEditor.UpDownKeyAwareRadioButton();
 			this.btnDown = new System.Windows.Forms.Button();
 			this.btnUp = new System.Windows.Forms.Button();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -42,6 +41,8 @@
 			this.lblIndex = new System.Windows.Forms.Label();
 			this.nudDefIndex = new System.Windows.Forms.NumericUpDown();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.radioButton1 = new SSSEditor.UpDownKeyAwareRadioButton();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -96,19 +97,6 @@
             0,
             0,
             0});
-			// 
-			// radioButton1
-			// 
-			this.radioButton1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.radioButton1.Image = global::SSSEditor.Properties.Resources.stageicon;
-			this.radioButton1.Location = new System.Drawing.Point(0, 0);
-			this.radioButton1.Margin = new System.Windows.Forms.Padding(0);
-			this.radioButton1.Name = "radioButton1";
-			this.radioButton1.Size = new System.Drawing.Size(84, 62);
-			this.radioButton1.TabIndex = 8;
-			this.radioButton1.TabStop = true;
-			this.radioButton1.UseVisualStyleBackColor = true;
-			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
 			// 
 			// btnDown
 			// 
@@ -205,6 +193,7 @@
 			this.lblSong.TabIndex = 10;
 			this.lblSong.Text = "M88";
 			this.lblSong.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.toolTip1.SetToolTip(this.lblSong, "Song");
 			this.lblSong.Visible = false;
 			// 
 			// lblIndex
@@ -249,6 +238,19 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// radioButton1
+			// 
+			this.radioButton1.Dock = System.Windows.Forms.DockStyle.Left;
+			this.radioButton1.Image = global::SSSEditor.Properties.Resources.stageicon;
+			this.radioButton1.Location = new System.Drawing.Point(0, 0);
+			this.radioButton1.Margin = new System.Windows.Forms.Padding(0);
+			this.radioButton1.Name = "radioButton1";
+			this.radioButton1.Size = new System.Drawing.Size(84, 62);
+			this.radioButton1.TabIndex = 8;
+			this.radioButton1.TabStop = true;
+			this.radioButton1.UseVisualStyleBackColor = true;
+			this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,5 +293,6 @@
 		private System.Windows.Forms.ToolStripMenuItem swapWithSelectedToolStripMenuItem;
 		private System.Windows.Forms.Label lblSong;
 		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }

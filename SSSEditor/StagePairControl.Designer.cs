@@ -40,21 +40,23 @@
 			this.lblIndex = new System.Windows.Forms.Label();
 			this.nudDefIndex = new System.Windows.Forms.NumericUpDown();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.lblSong = new System.Windows.Forms.Label();
+			this.panel2 = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.nudIconID)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ddlStagePacs
 			// 
-			this.ddlStagePacs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ddlStagePacs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ddlStagePacs.FormattingEnabled = true;
-			this.ddlStagePacs.Location = new System.Drawing.Point(3, 3);
+			this.ddlStagePacs.Location = new System.Drawing.Point(0, 0);
 			this.ddlStagePacs.Name = "ddlStagePacs";
-			this.ddlStagePacs.Size = new System.Drawing.Size(243, 21);
+			this.ddlStagePacs.Size = new System.Drawing.Size(211, 21);
 			this.ddlStagePacs.TabIndex = 1;
 			this.ddlStagePacs.SelectedIndexChanged += new System.EventHandler(this.ddlStagePacs_SelectedIndexChanged);
 			// 
@@ -135,26 +137,26 @@
             this.findUsageToolStripMenuItem,
             this.swapWithSelectedToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(138, 70);
 			// 
 			// deleteToolStripMenuItem
 			// 
 			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
 			this.deleteToolStripMenuItem.Text = "Delete";
 			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
 			// findUsageToolStripMenuItem
 			// 
 			this.findUsageToolStripMenuItem.Name = "findUsageToolStripMenuItem";
-			this.findUsageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.findUsageToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
 			this.findUsageToolStripMenuItem.Text = "Find Usage";
 			this.findUsageToolStripMenuItem.Click += new System.EventHandler(this.findUsageToolStripMenuItem_Click);
 			// 
 			// swapWithSelectedToolStripMenuItem
 			// 
 			this.swapWithSelectedToolStripMenuItem.Name = "swapWithSelectedToolStripMenuItem";
-			this.swapWithSelectedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.swapWithSelectedToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
 			this.swapWithSelectedToolStripMenuItem.Text = "Swap with...";
 			this.swapWithSelectedToolStripMenuItem.Click += new System.EventHandler(this.swapWithSelectedToolStripMenuItem_Click);
 			// 
@@ -169,9 +171,9 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.panel2);
 			this.panel1.Controls.Add(this.lblIndex);
 			this.panel1.Controls.Add(this.nudDefIndex);
-			this.panel1.Controls.Add(this.ddlStagePacs);
 			this.panel1.Controls.Add(this.lblStageID);
 			this.panel1.Controls.Add(this.lblIconID);
 			this.panel1.Controls.Add(this.nudIconID);
@@ -225,6 +227,26 @@
 			this.pictureBox1.TabIndex = 10;
 			this.pictureBox1.TabStop = false;
 			// 
+			// lblSong
+			// 
+			this.lblSong.Dock = System.Windows.Forms.DockStyle.Right;
+			this.lblSong.Location = new System.Drawing.Point(211, 0);
+			this.lblSong.Name = "lblSong";
+			this.lblSong.Size = new System.Drawing.Size(32, 21);
+			this.lblSong.TabIndex = 10;
+			this.lblSong.Text = "M88";
+			this.lblSong.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.lblSong.Visible = false;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.ddlStagePacs);
+			this.panel2.Controls.Add(this.lblSong);
+			this.panel2.Location = new System.Drawing.Point(3, 3);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(243, 21);
+			this.panel2.TabIndex = 12;
+			// 
 			// StagePairControl
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,6 +264,7 @@
 			this.panel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudDefIndex)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.panel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -264,5 +287,7 @@
         protected System.Windows.Forms.Label lblIndex;
 		private System.Windows.Forms.ToolStripMenuItem findUsageToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem swapWithSelectedToolStripMenuItem;
+		private System.Windows.Forms.Label lblSong;
+		private System.Windows.Forms.Panel panel2;
 	}
 }

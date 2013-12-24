@@ -61,6 +61,16 @@ namespace SSSEditor {
             }
         }
 
+		public string Song {
+			get {
+				return lblSong.Text;
+			}
+			set {
+				lblSong.Text = value;
+				lblSong.Visible = (value != null);
+			}
+		}
+
 		private StagePair _pair;
 		private TextureContainer textures;
 		/// <summary>

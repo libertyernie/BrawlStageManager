@@ -12,7 +12,7 @@ namespace SSSEditor {
 	public partial class SSSEditorForm : Form {
 		// Source data
 		private CustomSSS sss;
-		private Dictionary<byte, SDSLScanner.Song> songCodes;
+		private Dictionary<byte, string> songCodes;
 		private BRESNode md80;
 
 		#region Collect data from controls
@@ -93,6 +93,7 @@ namespace SSSEditor {
 					MiscData80 = md80,
 					Dock = DockStyle.Fill,
 				};
+				if (songCodes.ContainsKey(pair.stage)) spc.Song = songCodes[pair.stage];
 				spc.FindUsageClick += spc_FindUsageClick;
 				spc.SwapWithSelectedClick += spc_SwapWithSelectedClick;
 				tblStageDefinitions.Controls.Add(spc);

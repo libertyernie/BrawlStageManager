@@ -93,6 +93,11 @@ namespace BrawlStageManager {
 		}
 
 		public void UpdateImage(int iconNum) {
+			if (btnGenerateName.InvokeRequired) {
+				this.Invoke((MethodInvoker)(() => { UpdateImage(iconNum); }));
+				return;
+			}
+
 			prevbase.BackgroundImage = null;
 			_iconNum = -1;
 
@@ -672,7 +677,10 @@ namespace BrawlStageManager {
 
 		void panel1_DragDrop(object sender, DragEventArgs e) {
 			if (e.Effect == DragDropEffects.Copy) {
-				Replace(sender, (e.Data.GetData(DataFormats.FileDrop) as string[])[0]);
+				string s = (e.Data.GetData(DataFormats.FileDrop) as string[])[0];
+				new System.Threading.ThreadStart(() => {
+					Replace(sender, s);
+				}).BeginInvoke(null, null);
 			}
 		}
 

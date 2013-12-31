@@ -186,15 +186,12 @@ namespace BrawlStageManager {
 				TEX0Node tex0 = GetTEX0For(sender);
 				if (useTextureConverter) {
 					using (TextureConverterDialog dlg = new TextureConverterDialog()) {
-						if (sender == prevbase && prevbaseResizeTo != null) {
-							dlg.ImageSource = resizeToTempFile(filename, prevbaseResizeTo);
-						} else if (sender == frontstname && frontstnameResizeTo != null) {
-							dlg.ImageSource = resizeToTempFile(filename, frontstnameResizeTo);
-						} else if (sender == selmap_mark && selmapMarkResizeTo != null) {
-							dlg.ImageSource = resizeToTempFile(filename, selmapMarkResizeTo);
-						} else {
-							dlg.ImageSource = filename;
-						}
+						dlg.ImageSource = filename;
+						dlg.InitialSize =
+							sender == prevbase ? prevbaseResizeTo
+							: sender == frontstname ? frontstnameResizeTo
+							: sender == selmap_mark ? selmapMarkResizeTo
+							: null;
 						if (dlg.ShowDialog(null, tex0) == DialogResult.OK) {
 							tex0.IsDirty = true;
 							UpdateImage();

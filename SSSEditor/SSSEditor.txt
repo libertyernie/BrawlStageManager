@@ -58,6 +58,13 @@ IMPORTANT: If you have 39 stages on page 2, one of them should be the stage
 with the yellow bar! Otherwise, you'll end up with 40 when you go to My Music,
 and the game will freeze.
 
+-------- SSS Preview --------
+
+Tabs 4 through 7 will give you a rough preview of what the SSS looks like.
+You can't edit the layout from SSS Editor; instead, use BrawlBox to edit the
+animation MenSelmapPos_TopN__0 (normal) or MenSelmapPos_TopN__1 (My Music),
+frame (n+2), where "n" is the number of icons on the screen.
+
 -------- Custom SSS code (behind the scenes) --------
 
 The Custom SSS code [Spunit, Phantom Wings] has this format:

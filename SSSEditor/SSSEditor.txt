@@ -67,6 +67,9 @@ You can't edit the layout from SSS Editor; instead, use BrawlBox to edit the
 animation MenSelmapPos_TopN__0 (normal) or MenSelmapPos_TopN__1 (My Music),
 frame (n+2), where "n" is the number of icons on the screen.
 
+If you want to look at the My Music layout, you should load mu_menumain.pac
+instead of common5.pac - this is where Brawl reads the My Music data from!
+
 -------- Custom SSS code (behind the scenes) --------
 
 The Custom SSS code [Spunit, Phantom Wings] has this format:

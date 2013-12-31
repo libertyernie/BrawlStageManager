@@ -137,6 +137,9 @@
     <Content Include="downarr.png" />
     <None Include="stageicon.png" />
     <Content Include="icon.ico" />
+    <Content Include="SSSEditor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="uparr.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

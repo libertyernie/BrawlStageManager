@@ -17,7 +17,9 @@ code, and a common5/sc_selmap/mu_menumain file (which will not be modified.)
 | Icon | 0. [ BATTLEFIELD       ↓] mmm |C|
 | Icon |    [ PP ] SS II [ NN ] [↑][↓] |C|
 
-BATTLEFIELD	The stage to load. Editable on tab 1.
+BATTLEFIELD	The stage to load. You can choose a stage from the dropdown, enter
+			a stage ID in hex, or enter "c" followed by a hex byte for the
+			corresponding STGCUSTOM.
 mmm			The song that plays on the stage - only appears if you have a
 			Stage-Dependent Song Loader code for this stage in your codeset.
 CC			A color indicating whether your stage will be shown on My Music

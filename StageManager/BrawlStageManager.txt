@@ -22,6 +22,18 @@ Left bracket ([):	Replace border around icon (4-pixel margin) with pixels from
 					border.png in application folder
 Right bracket (]):	Generate a new FrontStname using a custom font
 
+-------- Notes --------
+
+You can copy your icons to the sc_selcharacter2 (Random Stage Select menu) and
+to the mu_menumain (for My Music) from the Tools menu. For sc_selcharacter2,
+Stage Manager will read your Custom SSS code (if any) to figure out which
+stages will be selectable and copy the icons accordingly; for mu_menumain,
+if you have a texture named "MenSelmapIcon.XX" along with the other icons,
+Stage Manager will replace each of the STGCUSTOM stages with this icon for My
+Music only. (Project M also uses MenSelmapIcon.XX for stage striking.)
+
+-------- Detailed Instructions --------
+
 The left side of the window has a list of stage .PAC files in the current
 directory; you can change the directory through the Options menu. Choosing a
 stage file will display:

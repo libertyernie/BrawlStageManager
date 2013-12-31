@@ -41,7 +41,7 @@ namespace SSSEditor {
 				nudDefIndex.Value = definitionsContainer.Controls.Count - 1;
 			}
             if (nudDefIndex.Value == -1) {
-                MessageBox.Show(this, "Resetting entry #" + lblIndex.Text + " to 00 - the previous stage/icon pair has been removed.");
+                MessageBox.Show(this, "Resetting entry " + lblIndex.Text + " to 00 - the previous stage/icon pair has been removed.");
                 nudDefIndex.Value = 0;
                 return;
             } else {

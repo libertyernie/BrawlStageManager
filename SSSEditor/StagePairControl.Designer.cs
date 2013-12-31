@@ -55,9 +55,9 @@
 			// 
 			this.ddlStagePacs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ddlStagePacs.FormattingEnabled = true;
-			this.ddlStagePacs.Location = new System.Drawing.Point(0, 0);
+			this.ddlStagePacs.Location = new System.Drawing.Point(26, 0);
 			this.ddlStagePacs.Name = "ddlStagePacs";
-			this.ddlStagePacs.Size = new System.Drawing.Size(211, 21);
+			this.ddlStagePacs.Size = new System.Drawing.Size(185, 21);
 			this.ddlStagePacs.TabIndex = 1;
 			this.ddlStagePacs.SelectedIndexChanged += new System.EventHandler(this.ddlStagePacs_SelectedIndexChanged);
 			// 
@@ -160,7 +160,6 @@
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.panel2);
-			this.panel1.Controls.Add(this.lblIndex);
 			this.panel1.Controls.Add(this.nudDefIndex);
 			this.panel1.Controls.Add(this.lblStageID);
 			this.panel1.Controls.Add(this.lblIconID);
@@ -178,6 +177,7 @@
 			this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel2.Controls.Add(this.ddlStagePacs);
+			this.panel2.Controls.Add(this.lblIndex);
 			this.panel2.Controls.Add(this.lblSong);
 			this.panel2.Location = new System.Drawing.Point(3, 3);
 			this.panel2.Name = "panel2";
@@ -198,18 +198,20 @@
 			// 
 			// lblIndex
 			// 
-			this.lblIndex.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lblIndex.Location = new System.Drawing.Point(3, 30);
+			this.lblIndex.Dock = System.Windows.Forms.DockStyle.Left;
+			this.lblIndex.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lblIndex.Location = new System.Drawing.Point(0, 0);
 			this.lblIndex.Name = "lblIndex";
-			this.lblIndex.Size = new System.Drawing.Size(26, 20);
+			this.lblIndex.Size = new System.Drawing.Size(26, 21);
 			this.lblIndex.TabIndex = 9;
-			this.lblIndex.Text = "1D";
+			this.lblIndex.Text = "88.";
 			this.lblIndex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// nudDefIndex
 			// 
 			this.nudDefIndex.Enabled = false;
-			this.nudDefIndex.Location = new System.Drawing.Point(35, 30);
+			this.nudDefIndex.Hexadecimal = true;
+			this.nudDefIndex.Location = new System.Drawing.Point(29, 30);
 			this.nudDefIndex.Maximum = new decimal(new int[] {
             255,
             0,
@@ -288,11 +290,11 @@
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		protected System.Windows.Forms.NumericUpDown nudDefIndex;
-        protected System.Windows.Forms.Label lblIndex;
 		private System.Windows.Forms.ToolStripMenuItem findUsageToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem swapWithSelectedToolStripMenuItem;
 		private System.Windows.Forms.Label lblSong;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.ToolTip toolTip1;
+		protected System.Windows.Forms.Label lblIndex;
 	}
 }

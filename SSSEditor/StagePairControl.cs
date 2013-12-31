@@ -197,7 +197,7 @@ namespace SSSEditor {
 		public void Recolor() {
 			if (Parent == null) return;
 			int i = Parent.Controls.GetChildIndex(this);
-            lblIndex.Text = i.ToString("X2");
+            lblIndex.Text = i + ".";
             if (SetNUDToOwnIndex) nudDefIndex.Value = i;
             Invalidate();
 		}

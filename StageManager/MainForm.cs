@@ -887,6 +887,7 @@ namespace BrawlStageManager {
 		#region registry <-> options menu
 		private void SaveToRegistry() {
 			new OptionsMenuSettings() {
+				UseTextureConverter = portraitViewer1.useTextureConverter,
 				RenderModels = renderModels.Checked,
 				StaticStageList = useAFixedStageListToolStripMenuItem.Checked,
 				RightPanelColor = portraitViewer1.BackColor,
@@ -914,6 +915,7 @@ namespace BrawlStageManager {
 				return;
 			}
 
+			set(useTextureConverterToolStripMenuItem, settings.UseTextureConverter);
 			set(useAFixedStageListToolStripMenuItem, settings.StaticStageList);
 			set(renderModels, settings.RenderModels);
 			portraitViewer1.BackColor = settings.RightPanelColor ?? portraitViewer1.BackColor;

@@ -1,4 +1,4 @@
-﻿Brawl Stage Manager 3.0.1 - November 27, 2013
+﻿Brawl Stage Manager 3.1 - December 31, 2013
 Copyright © 2013 libertyernie
 http://lakora.us/brawl/stagemanager
 
@@ -34,6 +34,7 @@ stage file will display:
 	  * This ID should match the ID of the stage you're replacing; if it doesn't,
 		the button will turn red. (If the program doesn't know what ID your .rel file
 		should have due to an unrecognized .pac name, the button will turn beige.)
+	  * Right-click this button for some more options!
 	* Any MSBin nodes in the .pac file, starting with the last (shown by default)
 	  * Some stage authors often put info about the stage in these nodes. This
 		program will display them read-only; you can edit them with BrawlBox.
@@ -77,17 +78,9 @@ the tilde (~) button on your keyboard.)
 
 ----------------------------------------
 
-New in 3.0:
-	* The custom SSS code is automatically read from RSBE01.gct if found
-	  Uses for the custom SSS code:
-	  * Mapping between stage IDs and icons
-	  * Determining which stage icons to replace with an X on My Music (only
-	    works if your common5 has a MenSelmapIcon.XX in it)
-	  * Determining which icons to copy to the random stage chooser (in the
-	    options menu)
-	  * Stage sorting, if you choose to do so (replaces the old static list)
-	* A crude picture of the stage can be used as the icon/portrait - look in
-	  the Tools menu
-	* Uses the newest BrawlLib
-Version 3.0.1 fixed a bug involving portraits for stages with an underscore in
-the .pac filename.
+New in 3.1:
+	* The program will now look in /projectm/pf as well as /private/wii/app/RSBE/pf
+	* You can still copy a stage folder if a .pac or .rel is missing (but make sure you have the right .rel in that case!)
+	* Stage Manager will give you a warning if there is more than one Custom SSS code in your GCT (it'll use the last one)
+	* You can downsize all MenSelmapPrevbase images at once to a custom size
+	* Option added to turn BrawlBox's Texture Converter on/off

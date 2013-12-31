@@ -10,6 +10,7 @@ namespace BrawlStageManager.RegistryUtilities {
 	public class OptionsMenuSettings {
 		private static TypeConverter colorConverter = TypeDescriptor.GetConverter(typeof(Color));
 
+		public bool UseTextureConverter;
 		public bool RenderModels;
 		public bool StaticStageList;
 		public Color? RightPanelColor;
@@ -22,6 +23,7 @@ namespace BrawlStageManager.RegistryUtilities {
 
 		public void SaveToRegistry() {
 			RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
+			key.SetValue("UseTextureConverter", UseTextureConverter);
 			key.SetValue("RenderModels", RenderModels);
 			key.SetValue("StaticStageList", StaticStageList);
 			if (RightPanelColor != null) {
@@ -47,6 +49,7 @@ namespace BrawlStageManager.RegistryUtilities {
 			try {
 				RegistryKey key = Registry.CurrentUser.CreateSubKey(GeneralRegistry.SUBKEY);
 				OptionsMenuSettings ret = new OptionsMenuSettings();
+				ret.UseTextureConverter = b(key, "UseTextureConverter");
 				ret.RenderModels = b(key, "RenderModels");
 				ret.StaticStageList = b(key, "StaticStageList");
 				object tmp = key.GetValue("RightPanelColor");

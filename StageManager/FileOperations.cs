@@ -3,12 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.IO;
+using System.Windows.Forms;
 
 namespace BrawlStageManager {
 	/// <summary>
 	///  A modification of David Amenta's RecycleBin code
 	/// </summary>
 	public static class FileOperations {
+		public static bool Copy(string path1, string path2) {
+			if (File.Exists(path2)) {
+				using (CopyDialog dialog = new CopyDialog(path2, path1) { Text = "Copy" }) {
+					DialogResult r = dialog.ShowDialog();
+					if (r != DialogResult.Yes) {
+						return false;
+					}
+				}
+			}
+			File.Copy(path1, path2, true);
+			return true;
+		}
+
+		public static bool Rename(string path1, string path2) {
+			if (File.Exists(path2)) {
+				using (CopyDialog dialog = new CopyDialog(path2, path1) { Text = "Move" }) {
+					DialogResult r = dialog.ShowDialog();
+					if (r == DialogResult.Yes) {
+						File.Delete(path2);
+					} else {
+						return false;
+					}
+				}
+			}
+			File.Move(path1, path2);
+			return true;
+		}
+
 		// From http://msdn.microsoft.com/en-us/library/windows/desktop/bb775799%28v=vs.85%29.aspx
 		/// <summary>
 		/// Possible flags for the SHFileOperation method.
@@ -192,56 +222,6 @@ namespace BrawlStageManager {
 
 		private static bool IsWOW64Process() {
 			return IntPtr.Size == 8;
-		}
-
-		public static bool Copy(string path1, string path2, FileOperationFlags flags = 0) {
-			try {
-				if (IsWOW64Process()) {
-					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
-					fs.wFunc = FileOperationType.FO_COPY;
-					// important to double-terminate the string.
-					fs.pFrom = path1 + '\0' + '\0';
-					fs.pTo = path2 + '\0' + '\0';
-					fs.fFlags = flags;
-					SHFileOperation_x64(ref fs);
-				} else {
-					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
-					fs.wFunc = FileOperationType.FO_COPY;
-					// important to double-terminate the string.
-					fs.pFrom = path1 + '\0' + '\0';
-					fs.pTo = path2 + '\0' + '\0';
-					fs.fFlags = flags;
-					SHFileOperation_x86(ref fs);
-				}
-				return true;
-			} catch {
-				return false;
-			}
-		}
-
-		public static bool Rename(string path1, string path2, FileOperationFlags flags = 0) {
-			try {
-				if (IsWOW64Process()) {
-					SHFILEOPSTRUCT_x64 fs = new SHFILEOPSTRUCT_x64();
-					fs.wFunc = FileOperationType.FO_RENAME;
-					// important to double-terminate the string.
-					fs.pFrom = path1 + '\0' + '\0';
-					fs.pTo = path2 + '\0' + '\0';
-					fs.fFlags = flags;
-					SHFileOperation_x64(ref fs);
-				} else {
-					SHFILEOPSTRUCT_x86 fs = new SHFILEOPSTRUCT_x86();
-					fs.wFunc = FileOperationType.FO_RENAME;
-					// important to double-terminate the string.
-					fs.pFrom = path1 + '\0' + '\0';
-					fs.pTo = path2 + '\0' + '\0';
-					fs.fFlags = flags;
-					SHFileOperation_x86(ref fs);
-				}
-				return true;
-			} catch {
-				return false;
-			}
 		}
 
 		/// <summary>

@@ -90,6 +90,12 @@
     <Compile Include="ConfirmIconReplaceDialog.Designer.cs">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CopyDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyDialog.Designer.cs">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CopyPacRelDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConfirmIconReplaceDialog.resx">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyDialog.resx">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CopyPacRelDialog.resx">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>

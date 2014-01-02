@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BrawlStageManager {
-	public class ByteUtilities {
+	public static class ByteUtilities {
 		public static byte[] StringToByteArray(string s) {
 			char[] numbers = (from c in s
 							  where char.IsLetterOrDigit(c)
@@ -24,6 +26,31 @@ namespace BrawlStageManager {
 				}
 			}
 			return true;
+		}
+
+		private static MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+
+		/// <summary>
+		/// Calculates the MD5 sum of a file.
+		/// </summary>
+		public static string MD5Sum(string path) {
+			if (File.Exists(path)) {
+				return MD5Sum(File.ReadAllBytes(path));
+			} else {
+				return "File not found";
+			}
+		}
+
+		/// <summary>
+		/// Calculates the MD5 sum of the data in a byte array.
+		/// </summary>
+		public static string MD5Sum(byte[] data) {
+			byte[] hash = md5provider.ComputeHash(data);
+			var sb = new System.Text.StringBuilder();
+			foreach (byte b in hash) {
+				sb.Append(b.ToString("x2").ToLower());
+			}
+			return sb.ToString();
 		}
 	}
 }

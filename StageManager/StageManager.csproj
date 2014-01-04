@@ -77,36 +77,36 @@
     <Compile Include="AboutBSM.Designer.cs">
       <DependentUpon>AboutBSM.cs</DependentUpon>
     </Compile>
-    <Compile Include="AskNameDialog.cs">
+    <Compile Include="SingleUseDialogs\AskNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AskNameDialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="ByteUtilities.cs" />
-    <Compile Include="ConfirmIconReplaceDialog.cs">
+    <Compile Include="SingleUseDialogs\ConfirmIconReplaceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfirmIconReplaceDialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\ConfirmIconReplaceDialog.Designer.cs">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopyDialog.cs">
+    <Compile Include="SingleUseDialogs\CopyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopyDialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\CopyDialog.Designer.cs">
       <DependentUpon>CopyDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="CopyPacRelDialog.cs">
+    <Compile Include="SingleUseDialogs\CopyPacRelDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CopyPacRelDialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\CopyPacRelDialog.Designer.cs">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomSSS.cs" />
-    <Compile Include="EnterSizeDialog.cs">
+    <Compile Include="SingleUseDialogs\EnterSizeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EnterSizeDialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\EnterSizeDialog.Designer.cs">
       <DependentUpon>EnterSizeDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="IconsToMenumain.cs" />
@@ -121,10 +121,10 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ModifyPAT0Dialog.cs">
+    <Compile Include="SingleUseDialogs\ModifyPAT0Dialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModifyPAT0Dialog.Designer.cs">
+    <Compile Include="SingleUseDialogs\ModifyPAT0Dialog.Designer.cs">
       <DependentUpon>ModifyPAT0Dialog.cs</DependentUpon>
     </Compile>
     <Compile Include="MSBinViewer.cs">
@@ -144,7 +144,7 @@
     <Compile Include="ListControl.Designer.cs">
       <DependentUpon>ListControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="NameDialog.cs">
+    <Compile Include="SingleUseDialogs\NameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RegistryUtilities\FontSettings.cs" />
@@ -166,26 +166,26 @@
       <DependentUpon>AboutBSM.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="AskNameDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\AskNameDialog.resx">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfirmIconReplaceDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\ConfirmIconReplaceDialog.resx">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\CopyDialog.resx">
       <DependentUpon>CopyDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CopyPacRelDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\CopyPacRelDialog.resx">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EnterSizeDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\EnterSizeDialog.resx">
       <DependentUpon>EnterSizeDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModifyPAT0Dialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\ModifyPAT0Dialog.resx">
       <DependentUpon>ModifyPAT0Dialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MSBinViewer.resx">
@@ -209,7 +209,7 @@
       <DependentUpon>ListControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NameDialog.resx">
+    <EmbeddedResource Include="SingleUseDialogs\NameDialog.resx">
       <DependentUpon>NameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StageInfoControl.resx">

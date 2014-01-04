@@ -83,12 +83,6 @@
     <Compile Include="SingleUseDialogs\ConfirmIconReplaceDialog.Designer.cs">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="SingleUseDialogs\CopyDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SingleUseDialogs\CopyDialog.Designer.cs">
-      <DependentUpon>CopyDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="SingleUseDialogs\CopyPacRelDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,7 +97,6 @@
     </Compile>
     <Compile Include="IconsToMenumain.cs" />
     <Compile Include="RegistryUtilities\DefaultDirectory.cs" />
-    <Compile Include="FileOperations.cs" />
     <Compile Include="ImagePreviewPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -156,9 +149,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SingleUseDialogs\ConfirmIconReplaceDialog.resx">
       <DependentUpon>ConfirmIconReplaceDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SingleUseDialogs\CopyDialog.resx">
-      <DependentUpon>CopyDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SingleUseDialogs\CopyPacRelDialog.resx">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>

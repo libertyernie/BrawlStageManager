@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using BrawlLib.SSBB.ResourceNodes;
+using BrawlManagerLib;
 
 namespace BrawlStageManager {
 	public partial class StageInfoControl : UserControl {

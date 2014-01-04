@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using BrawlStageManager;
 using BrawlLib.SSBB.ResourceNodes;
-using System.Globalization;
+using BrawlManagerLib;
 
 namespace SSSEditor {
 	public delegate void SPCEvent(StagePairControl sender);
@@ -152,7 +145,7 @@ namespace SSSEditor {
 
             ddlStagePacs.DisplayMember = "Value";
             ddlStagePacs.ValueMember = "Key";
-            ddlStagePacs.DataSource = Static.StagesByID;
+            ddlStagePacs.DataSource = StageIDMap.StagesByID;
             ddlStagePacs.Resize += (o, e) =>
             {
                 if (!ddlStagePacs.Focused) ddlStagePacs.SelectionLength = 0;

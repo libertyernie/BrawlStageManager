@@ -71,19 +71,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBSM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AboutBSM.Designer.cs">
-      <DependentUpon>AboutBSM.cs</DependentUpon>
-    </Compile>
     <Compile Include="SingleUseDialogs\AskNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SingleUseDialogs\AskNameDialog.Designer.cs">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="ByteUtilities.cs" />
     <Compile Include="SingleUseDialogs\ConfirmIconReplaceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,7 +95,6 @@
     <Compile Include="SingleUseDialogs\CopyPacRelDialog.Designer.cs">
       <DependentUpon>CopyPacRelDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomSSS.cs" />
     <Compile Include="SingleUseDialogs\EnterSizeDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,21 +143,14 @@
     <Compile Include="RegistryUtilities\GeneralRegistry.cs" />
     <Compile Include="RegistryUtilities\OptionsMenuSettings.cs" />
     <Compile Include="RegistryUtilities\ResizeSettings.cs" />
-    <Compile Include="StageIDMap.cs" />
     <Compile Include="StageInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="StageInfoControl.Designer.cs">
       <DependentUpon>StageInfoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TempFiles.cs" />
     <Compile Include="TEX0Extension.cs" />
-    <Compile Include="TextureContainer.cs" />
     <Compile Include="BitmapUtilities.cs" />
-    <EmbeddedResource Include="AboutBSM.resx">
-      <DependentUpon>AboutBSM.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SingleUseDialogs\AskNameDialog.resx">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -262,6 +247,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BrawlManagerLib\BrawlManagerLib.csproj">
+      <Project>{b5d693d8-3952-44f9-8952-8c1af74f0634}</Project>
+      <Name>BrawlManagerLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

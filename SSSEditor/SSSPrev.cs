@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using BrawlLib.Wii.Animations;
 using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
-using BrawlStageManager;
+using BrawlManagerLib;
 
 namespace SSSEditor {
 	public partial class SSSPrev : UserControl {

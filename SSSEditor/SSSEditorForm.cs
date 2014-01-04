@@ -1,5 +1,5 @@
 ﻿using BrawlLib.SSBB.ResourceNodes;
-using BrawlStageManager;
+using BrawlManagerLib;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

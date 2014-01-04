@@ -8,6 +8,7 @@ using System.IO;
 using BrawlLib.Wii.Textures;
 using BrawlStageManager.RegistryUtilities;
 using BrawlStageManager.NameCreatorNS;
+using BrawlManagerLib;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {

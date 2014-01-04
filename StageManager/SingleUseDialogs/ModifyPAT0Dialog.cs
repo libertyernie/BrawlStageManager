@@ -1,5 +1,6 @@
 ﻿using BrawlLib.SSBB.ResourceNodes;
 using BrawlLib.Wii.Textures;
+using BrawlManagerLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

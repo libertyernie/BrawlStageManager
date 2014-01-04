@@ -60,17 +60,6 @@
     <Compile Include="FixedStagePairControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="From Stage Manager\AboutBSM.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="From Stage Manager\AboutBSM.Designer.cs">
-      <DependentUpon>AboutBSM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="From Stage Manager\ByteUtilities.cs" />
-    <Compile Include="From Stage Manager\CustomSSS.cs" />
-    <Compile Include="From Stage Manager\StageIDMap.cs" />
-    <Compile Include="From Stage Manager\TempFiles.cs" />
-    <Compile Include="From Stage Manager\TextureContainer.cs" />
     <Compile Include="SDSLScanner.cs" />
     <Compile Include="SSSEditorForm.cs">
       <SubType>Form</SubType>
@@ -93,16 +82,11 @@
     <Compile Include="StagePairControl.Designer.cs">
       <DependentUpon>StagePairControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Static.cs" />
     <Compile Include="UpDownKeyAwareRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="AskSwapDialog.resx">
       <DependentUpon>AskSwapDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="From Stage Manager\AboutBSM.resx">
-      <DependentUpon>AboutBSM.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SSSEditorForm.resx">
       <DependentUpon>SSSEditorForm.cs</DependentUpon>
@@ -142,15 +126,16 @@
     </Content>
     <Content Include="uparr.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BrawlManagerLib\BrawlManagerLib.csproj">
+      <Project>{b5d693d8-3952-44f9-8952-8c1af74f0634}</Project>
+      <Name>BrawlManagerLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>copy /y "$(SolutionDir)StageManager\AboutBSM.*" "$(SolutionDir)SSSEditor\From Stage Manager"
-copy /y "$(SolutionDir)StageManager\ByteUtilities.cs" "$(SolutionDir)SSSEditor\From Stage Manager"
-copy /y "$(SolutionDir)StageManager\CustomSSS.cs" "$(SolutionDir)SSSEditor\From Stage Manager"
-copy /y "$(SolutionDir)StageManager\StageIDMap.cs" "$(SolutionDir)SSSEditor\From Stage Manager"
-copy /y "$(SolutionDir)StageManager\TempFiles.cs" "$(SolutionDir)SSSEditor\From Stage Manager"
-copy /y "$(SolutionDir)StageManager\TextureContainer.cs" "$(SolutionDir)SSSEditor\From Stage Manager"
-</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

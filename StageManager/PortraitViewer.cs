@@ -8,6 +8,7 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
 using BrawlStageManager.NameCreatorNS;
+using BrawlManagerLib;
 
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {

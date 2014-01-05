@@ -140,7 +140,6 @@
       <DependentUpon>StageInfoControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TEX0Extension.cs" />
-    <Compile Include="BitmapUtilities.cs" />
     <EmbeddedResource Include="SingleUseDialogs\AskNameDialog.resx">
       <DependentUpon>AskNameDialog.cs</DependentUpon>
     </EmbeddedResource>

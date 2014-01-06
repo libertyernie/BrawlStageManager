@@ -580,6 +580,14 @@ namespace BrawlStageManager {
 			exportStage(listBox1.SelectedItem as FileInfo, outdir);
 		}
 
+		private void deletepacrelToolStripMenuItem_Click(object sender, EventArgs e) {
+			_rootNode.Dispose();
+			_rootNode = null;
+			FileOperations.Delete(stageInfoControl1.RelFile.FullName);
+			FileOperations.Delete((listBox1.SelectedItem as FileInfo).FullName);
+			changeDirectory(CurrentDirectory);
+		}
+
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}

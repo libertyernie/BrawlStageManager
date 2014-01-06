@@ -26,10 +26,13 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clbTextures = new System.Windows.Forms.CheckedListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
@@ -98,14 +101,16 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
-			this.clbTextures = new System.Windows.Forms.CheckedListBox();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
+			this.splitContainerLeft.Panel1.SuspendLayout();
+			this.splitContainerLeft.Panel2.SuspendLayout();
+			this.splitContainerLeft.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
 			this.splitContainer2.Panel1.SuspendLayout();
@@ -116,10 +121,6 @@
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
-			this.splitContainerLeft.Panel1.SuspendLayout();
-			this.splitContainerLeft.Panel2.SuspendLayout();
-			this.splitContainerLeft.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -139,6 +140,25 @@
 			this.splitContainer1.SplitterDistance = 135;
 			this.splitContainer1.TabIndex = 0;
 			// 
+			// splitContainerLeft
+			// 
+			this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+			this.splitContainerLeft.Name = "splitContainerLeft";
+			this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainerLeft.Panel1
+			// 
+			this.splitContainerLeft.Panel1.Controls.Add(this.listBox1);
+			// 
+			// splitContainerLeft.Panel2
+			// 
+			this.splitContainerLeft.Panel2.Controls.Add(this.clbTextures);
+			this.splitContainerLeft.Panel2Collapsed = true;
+			this.splitContainerLeft.Size = new System.Drawing.Size(135, 477);
+			this.splitContainerLeft.SplitterDistance = 238;
+			this.splitContainerLeft.TabIndex = 1;
+			// 
 			// listBox1
 			// 
 			this.listBox1.ContextMenuStrip = this.contextMenuStrip1;
@@ -154,17 +174,27 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToToolStripMenuItem});
+            this.copyToToolStripMenuItem,
+            this.deletepacrelToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(126, 26);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(154, 70);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// copyToToolStripMenuItem
 			// 
 			this.copyToToolStripMenuItem.Name = "copyToToolStripMenuItem";
-			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-			this.copyToToolStripMenuItem.Text = "Copy to...";
+			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.copyToToolStripMenuItem.Text = "Export to...";
 			this.copyToToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
+			// 
+			// clbTextures
+			// 
+			this.clbTextures.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.clbTextures.FormattingEnabled = true;
+			this.clbTextures.Location = new System.Drawing.Point(0, 0);
+			this.clbTextures.Name = "clbTextures";
+			this.clbTextures.Size = new System.Drawing.Size(150, 46);
+			this.clbTextures.TabIndex = 0;
 			// 
 			// splitContainer2
 			// 
@@ -184,6 +214,16 @@
 			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
 			this.splitContainer2.SplitterDistance = 60;
 			this.splitContainer2.TabIndex = 0;
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// splitContainer3
 			// 
@@ -737,44 +777,6 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// splitContainerLeft
-			// 
-			this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
-			this.splitContainerLeft.Name = "splitContainerLeft";
-			this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
-			// 
-			// splitContainerLeft.Panel1
-			// 
-			this.splitContainerLeft.Panel1.Controls.Add(this.listBox1);
-			// 
-			// splitContainerLeft.Panel2
-			// 
-			this.splitContainerLeft.Panel2.Controls.Add(this.clbTextures);
-			this.splitContainerLeft.Panel2Collapsed = true;
-			this.splitContainerLeft.Size = new System.Drawing.Size(135, 477);
-			this.splitContainerLeft.SplitterDistance = 238;
-			this.splitContainerLeft.TabIndex = 1;
-			// 
-			// clbTextures
-			// 
-			this.clbTextures.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.clbTextures.FormattingEnabled = true;
-			this.clbTextures.Location = new System.Drawing.Point(0, 0);
-			this.clbTextures.Name = "clbTextures";
-			this.clbTextures.Size = new System.Drawing.Size(135, 235);
-			this.clbTextures.TabIndex = 0;
-			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
@@ -783,6 +785,13 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
+			// 
+			// deletepacrelToolStripMenuItem
+			// 
+			this.deletepacrelToolStripMenuItem.Name = "deletepacrelToolStripMenuItem";
+			this.deletepacrelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.deletepacrelToolStripMenuItem.Text = "Delete .pac/.rel";
+			this.deletepacrelToolStripMenuItem.Click += new System.EventHandler(this.deletepacrelToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -802,6 +811,10 @@
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
+			this.splitContainerLeft.Panel1.ResumeLayout(false);
+			this.splitContainerLeft.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
+			this.splitContainerLeft.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);
@@ -813,10 +826,6 @@
 			this.splitContainer3.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.splitContainerLeft.Panel1.ResumeLayout(false);
-			this.splitContainerLeft.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
-			this.splitContainerLeft.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -901,6 +910,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
 		private System.Windows.Forms.SplitContainer splitContainerLeft;
 		private System.Windows.Forms.CheckedListBox clbTextures;
+		private System.Windows.Forms.ToolStripMenuItem deletepacrelToolStripMenuItem;
 
 
 

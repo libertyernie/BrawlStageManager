@@ -30,7 +30,6 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
 			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
@@ -99,6 +98,9 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
+			this.clbTextures = new System.Windows.Forms.CheckedListBox();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -114,6 +116,10 @@
 			this.splitContainer3.Panel2.SuspendLayout();
 			this.splitContainer3.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).BeginInit();
+			this.splitContainerLeft.Panel1.SuspendLayout();
+			this.splitContainerLeft.Panel2.SuspendLayout();
+			this.splitContainerLeft.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -124,7 +130,7 @@
 			// 
 			// splitContainer1.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.listBox1);
+			this.splitContainer1.Panel1.Controls.Add(this.splitContainerLeft);
 			// 
 			// splitContainer1.Panel2
 			// 
@@ -138,6 +144,7 @@
 			this.listBox1.ContextMenuStrip = this.contextMenuStrip1;
 			this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listBox1.FormattingEnabled = true;
+			this.listBox1.IntegralHeight = false;
 			this.listBox1.Location = new System.Drawing.Point(0, 0);
 			this.listBox1.Name = "listBox1";
 			this.listBox1.Size = new System.Drawing.Size(135, 477);
@@ -177,16 +184,6 @@
 			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
 			this.splitContainer2.SplitterDistance = 60;
 			this.splitContainer2.TabIndex = 0;
-			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// splitContainer3
 			// 
@@ -719,9 +716,11 @@
 			// 
 			// texturesToolStripMenuItem
 			// 
+			this.texturesToolStripMenuItem.CheckOnClick = true;
 			this.texturesToolStripMenuItem.Name = "texturesToolStripMenuItem";
 			this.texturesToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
 			this.texturesToolStripMenuItem.Text = "Model Textures";
+			this.texturesToolStripMenuItem.Click += new System.EventHandler(this.texturesToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -737,6 +736,44 @@
 			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
+			// splitContainerLeft
+			// 
+			this.splitContainerLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerLeft.Location = new System.Drawing.Point(0, 0);
+			this.splitContainerLeft.Name = "splitContainerLeft";
+			this.splitContainerLeft.Orientation = System.Windows.Forms.Orientation.Horizontal;
+			// 
+			// splitContainerLeft.Panel1
+			// 
+			this.splitContainerLeft.Panel1.Controls.Add(this.listBox1);
+			// 
+			// splitContainerLeft.Panel2
+			// 
+			this.splitContainerLeft.Panel2.Controls.Add(this.clbTextures);
+			this.splitContainerLeft.Panel2Collapsed = true;
+			this.splitContainerLeft.Size = new System.Drawing.Size(135, 477);
+			this.splitContainerLeft.SplitterDistance = 238;
+			this.splitContainerLeft.TabIndex = 1;
+			// 
+			// clbTextures
+			// 
+			this.clbTextures.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.clbTextures.FormattingEnabled = true;
+			this.clbTextures.Location = new System.Drawing.Point(0, 0);
+			this.clbTextures.Name = "clbTextures";
+			this.clbTextures.Size = new System.Drawing.Size(135, 235);
+			this.clbTextures.TabIndex = 0;
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
 			// 
 			// portraitViewer1
 			// 
@@ -776,6 +813,10 @@
 			this.splitContainer3.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.splitContainerLeft.Panel1.ResumeLayout(false);
+			this.splitContainerLeft.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
+			this.splitContainerLeft.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -858,6 +899,8 @@
 		private System.Windows.Forms.ToolStripMenuItem customPrevbaseSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem useTextureConverterToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+		private System.Windows.Forms.SplitContainer splitContainerLeft;
+		private System.Windows.Forms.CheckedListBox clbTextures;
 
 
 

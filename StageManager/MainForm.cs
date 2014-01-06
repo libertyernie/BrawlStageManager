@@ -181,6 +181,11 @@ namespace BrawlStageManager {
 			FormClosing += MainForm_FormClosing;
 			FormClosed += MainForm_FormClosed;
 
+			clbTextures.ItemCheck += (o, e) => {
+				texNodes[e.Index].Enabled = (e.NewValue == CheckState.Checked);
+				modelPanel1.Invalidate();
+			};
+
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 			LoadFromRegistry();
@@ -318,22 +323,10 @@ namespace BrawlStageManager {
 		}
 
 		private void updateTexturesMenu() {
-			var items = texturesToolStripMenuItem.DropDownItems;
+			var items = clbTextures.Items;
 			items.Clear();
 			foreach (MDL0TextureNode tex in texNodes) {
-				ToolStripMenuItem item = new ToolStripMenuItem() {
-					Text = tex.Name,
-					Checked = true,
-					CheckOnClick = true
-				};
-				item.Click += new EventHandler((sender, args) => {
-					var menuitem = (sender as ToolStripMenuItem);
-					int index = items.IndexOf(menuitem);
-					//Console.WriteLine(index + " -> " + texNodes[index]);
-					texNodes[index].Enabled = menuitem.Checked;
-					modelPanel1.Invalidate();
-				});
-				items.Add(item);
+				items.Add(tex, true);
 			}
 		}
 
@@ -850,6 +843,10 @@ namespace BrawlStageManager {
 
 		private void useTextureConverterToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
+		}
+
+		private void texturesToolStripMenuItem_Click(object sender, EventArgs e) {
+			splitContainerLeft.Panel2Collapsed = !texturesToolStripMenuItem.Checked;
 		}
 		#endregion
 

@@ -252,11 +252,6 @@ namespace BrawlStageManager {
 			if (_rootNode != null) {
 				// Set the stage info labels. Equivalent labels for the .rel file are set when RelFile is changed in StageInfoControl
 				stageInfoControl1.setStageLabels(fi.Name + ":", _rootNode.Name, "(" + fi.Length + " bytes)");
-				stageInfoControl1.PacFileDeletion = delegate() {
-					_rootNode.Dispose(); _rootNode = null;
-					FileOperations.Delete(fi.FullName);
-					changeDirectory(CurrentDirectory);
-				};
 
 				List<ResourceNode> allNodes = FindStageARC(_rootNode).Children; // Find all child nodes of "2"
 				List<MSBinNode> msBinNodes = new List<MSBinNode>();

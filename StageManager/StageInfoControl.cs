@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using BrawlLib.SSBB.ResourceNodes;
-using BrawlManagerLib;
 
 namespace BrawlStageManager {
 	public partial class StageInfoControl : UserControl {
@@ -145,9 +138,6 @@ namespace BrawlStageManager {
 		// _relFile should only be null on startup, when no stage is selected.
 		// It's OK to have it pointing to a file that doesn't exist.
 		private FileInfo _relFile;
-		// The PacFileDeletion delegate is used to delete .pac files from within MainForm.
-		public delegate void PacFileDeletionType();
-		public PacFileDeletionType PacFileDeletion;
 
 		private bool _useRelDescription;
 
@@ -218,21 +208,18 @@ namespace BrawlStageManager {
 		private void refreshRelFile() {
 			if (_relFile == null) { // When no stage .pac has been selected
 				setRelLabels("", "", "");
-				relButton.Text = "N/A";
-				relButton.Enabled = false;
+				MD5 = "";
+				relButton.Visible = false;
 			} else {
 				if (_relFile.Exists) { // If there is a rel, display the filename/name/size (this is done for .pac files in MainForm)
 					_relFile.Refresh();
 					setRelLabels(_relFile.Name + ":", getModuleName(_relFile), "(" + _relFile.Length + " bytes)");
-					relFilename.ForeColor = Color.Black;
+					relName.ForeColor = Color.Black;
 					verifyIDs();
-					relButton.Enabled = true;
 				} else {
-					setRelLabels(_relFile.Name + " (doesn't exist)", "", "");
+					setRelLabels(_relFile.Name, "doesn't exist", "(Brawl .rel will be used)");
 					relButton.BackColor = Control.DefaultBackColor;
-					relFilename.ForeColor = Color.Gray;
-					relButton.Text = "N/A";
-					relButton.Enabled = false;
+					relName.ForeColor = Color.Red;
 				}
 			}
 		}
@@ -292,51 +279,21 @@ namespace BrawlStageManager {
 			if (_relFile == null) return;
 			int currentID = getCurrentStageID(_relFile);
 			int idealID = getIdealStageID(_relFile.Name);
-			relButton.Text = currentID.ToString("X2");
 			if (currentID == idealID) {
-				relButton.BackColor = Control.DefaultBackColor;
-			} else if (idealID == -1) {
-				relButton.BackColor = Color.Beige;
+				relButton.Visible = false;
 			} else {
-				relButton.BackColor = Color.Red;
+				relName.ForeColor = Color.Red;
+				relInfo.Text = " (mismatch with filename)";
+				relButton.Visible = true;
 			}
 		}
 		#endregion
 
 		private void relButton_Click(object sender, EventArgs e) {
-			fixStageIDAutomaticallyToolStripMenuItem_Click(sender, e);
-		}
-
-		private void fixStageIDAutomaticallyToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (_relFile != null && _relFile.Exists) {
 				stageIDScan(_relFile, true);
 			}
 			refreshRelFile();
-		}
-
-		private void relButton_changeID_Click(object sender, EventArgs e) {
-			using (StageModuleConverter dlg = new StageModuleConverter()) {
-				dlg.Path = _relFile.FullName;
-				if (dlg.ShowDialog() == DialogResult.OK) {
-					using (FileStream output = _relFile.OpenWrite()) {
-						output.Write(dlg.Data, 0, dlg.Data.Length);
-					}
-				}
-			}
-			refreshRelFile();
-		}
-
-		private void relButton_deleteRelFile_Click(object sender, EventArgs e) {
-			FileOperations.Delete(_relFile.FullName);
-			RelFile = new FileInfo(_relFile.FullName);
-		}
-
-		private void relButton_deletePacFile_Click(object sender, EventArgs e) {
-			PacFileDeletion();
-		}
-
-		private void contextMenuStrip1_Opening(object sender, CancelEventArgs e) {
-			relButton_changeID.Enabled = relButton_deleteRelFile.Enabled = (_relFile != null && _relFile.Exists);
 		}
 	}
 }

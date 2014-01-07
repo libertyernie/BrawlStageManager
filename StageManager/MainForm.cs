@@ -66,7 +66,7 @@ namespace BrawlStageManager {
 		/// </summary>
 		public Control RightControl {
 			get {
-				Control.ControlCollection controls = rightPanel.Controls;
+				Control.ControlCollection controls = msBinPanel.Controls;
 				if (controls.Count > 0) {
 					return controls[0];
 				} else {
@@ -74,7 +74,7 @@ namespace BrawlStageManager {
 				}
 			}
 			set {
-				Control.ControlCollection controls = rightPanel.Controls;
+				Control.ControlCollection controls = msBinPanel.Controls;
 				controls.Clear();
 				value.Dock = System.Windows.Forms.DockStyle.Fill;
 				controls.Add(value);

@@ -30,12 +30,12 @@
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clbTextures = new System.Windows.Forms.CheckedListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
-			this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-			this.rightPanel = new System.Windows.Forms.Panel();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
+			this.audioPlaybackPanel1 = new System.Windows.Forms.AudioPlaybackPanel();
+			this.msBinPanel = new System.Windows.Forms.Panel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,8 +101,8 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -116,10 +116,6 @@
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-			this.splitContainer3.Panel1.SuspendLayout();
-			this.splitContainer3.Panel2.SuspendLayout();
-			this.splitContainer3.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -177,7 +173,7 @@
             this.copyToToolStripMenuItem,
             this.deletepacrelToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(154, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(154, 48);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
 			// 
 			// copyToToolStripMenuItem
@@ -186,6 +182,13 @@
 			this.copyToToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.copyToToolStripMenuItem.Text = "Export to...";
 			this.copyToToolStripMenuItem.Click += new System.EventHandler(this.exportStageToolStripMenuItem_Click);
+			// 
+			// deletepacrelToolStripMenuItem
+			// 
+			this.deletepacrelToolStripMenuItem.Name = "deletepacrelToolStripMenuItem";
+			this.deletepacrelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.deletepacrelToolStripMenuItem.Text = "Delete .pac/.rel";
+			this.deletepacrelToolStripMenuItem.Click += new System.EventHandler(this.deletepacrelToolStripMenuItem_Click);
 			// 
 			// clbTextures
 			// 
@@ -210,46 +213,12 @@
 			// 
 			// splitContainer2.Panel2
 			// 
-			this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
+			this.splitContainer2.Panel2.Controls.Add(this.modelPanel1);
+			this.splitContainer2.Panel2.Controls.Add(this.audioPlaybackPanel1);
+			this.splitContainer2.Panel2.Controls.Add(this.msBinPanel);
 			this.splitContainer2.Size = new System.Drawing.Size(312, 477);
 			this.splitContainer2.SplitterDistance = 60;
 			this.splitContainer2.TabIndex = 0;
-			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
-			// splitContainer3
-			// 
-			this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer3.Name = "splitContainer3";
-			this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-			// 
-			// splitContainer3.Panel1
-			// 
-			this.splitContainer3.Panel1.Controls.Add(this.rightPanel);
-			// 
-			// splitContainer3.Panel2
-			// 
-			this.splitContainer3.Panel2.Controls.Add(this.modelPanel1);
-			this.splitContainer3.Size = new System.Drawing.Size(308, 409);
-			this.splitContainer3.SplitterDistance = 137;
-			this.splitContainer3.TabIndex = 4;
-			// 
-			// rightPanel
-			// 
-			this.rightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.rightPanel.Location = new System.Drawing.Point(0, 0);
-			this.rightPanel.Name = "rightPanel";
-			this.rightPanel.Size = new System.Drawing.Size(308, 137);
-			this.rightPanel.TabIndex = 3;
 			// 
 			// modelPanel1
 			// 
@@ -257,13 +226,32 @@
 			this.modelPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.modelPanel1.InitialYFactor = 100;
 			this.modelPanel1.InitialZoomFactor = 5;
-			this.modelPanel1.Location = new System.Drawing.Point(0, 0);
+			this.modelPanel1.Location = new System.Drawing.Point(0, 101);
 			this.modelPanel1.Name = "modelPanel1";
 			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(308, 268);
+			this.modelPanel1.Size = new System.Drawing.Size(308, 197);
 			this.modelPanel1.TabIndex = 2;
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
+			// 
+			// audioPlaybackPanel1
+			// 
+			this.audioPlaybackPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.audioPlaybackPanel1.Enabled = false;
+			this.audioPlaybackPanel1.Location = new System.Drawing.Point(0, 298);
+			this.audioPlaybackPanel1.Name = "audioPlaybackPanel1";
+			this.audioPlaybackPanel1.Size = new System.Drawing.Size(308, 111);
+			this.audioPlaybackPanel1.TabIndex = 4;
+			this.audioPlaybackPanel1.TargetStreams = null;
+			this.audioPlaybackPanel1.Visible = false;
+			// 
+			// msBinPanel
+			// 
+			this.msBinPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.msBinPanel.Location = new System.Drawing.Point(0, 0);
+			this.msBinPanel.Name = "msBinPanel";
+			this.msBinPanel.Size = new System.Drawing.Size(308, 101);
+			this.msBinPanel.TabIndex = 3;
 			// 
 			// menuStrip1
 			// 
@@ -777,6 +765,16 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
+			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
@@ -785,13 +783,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(233, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// deletepacrelToolStripMenuItem
-			// 
-			this.deletepacrelToolStripMenuItem.Name = "deletepacrelToolStripMenuItem";
-			this.deletepacrelToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-			this.deletepacrelToolStripMenuItem.Text = "Delete .pac/.rel";
-			this.deletepacrelToolStripMenuItem.Click += new System.EventHandler(this.deletepacrelToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -820,10 +811,6 @@
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
 			this.splitContainer2.ResumeLayout(false);
-			this.splitContainer3.Panel1.ResumeLayout(false);
-			this.splitContainer3.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-			this.splitContainer3.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -850,8 +837,7 @@
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ModelPanel modelPanel1;
 		private System.Windows.Forms.ToolStripMenuItem texturesToolStripMenuItem;
-		private System.Windows.Forms.Panel rightPanel;
-		private System.Windows.Forms.SplitContainer splitContainer3;
+		private System.Windows.Forms.Panel msBinPanel;
 		private PortraitViewer portraitViewer1;
 		private System.Windows.Forms.ToolStripMenuItem prevbaseSize;
 		private System.Windows.Forms.ToolStripMenuItem prevbaseOriginalSizeToolStripMenuItem;
@@ -911,6 +897,7 @@
 		private System.Windows.Forms.SplitContainer splitContainerLeft;
 		private System.Windows.Forms.CheckedListBox clbTextures;
 		private System.Windows.Forms.ToolStripMenuItem deletepacrelToolStripMenuItem;
+		private System.Windows.Forms.AudioPlaybackPanel audioPlaybackPanel1;
 
 
 

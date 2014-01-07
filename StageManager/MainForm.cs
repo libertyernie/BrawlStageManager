@@ -12,7 +12,6 @@ using BrawlManagerLib;
 
 namespace BrawlStageManager {
 	public partial class MainForm : Form {
-
 		public static OpenFileDialog OpenDialog { get; private set; }
 		public static SaveFileDialog SaveDialog { get; private set; }
 		public static FolderBrowserDialog FolderDialog { get; private set; }
@@ -301,7 +300,7 @@ namespace BrawlStageManager {
 					RightControl = noMSBinLabel;
 				}
 			}
-			portraitViewer1.UpdateImage(StageIDMap.IconForPac(fi.Name));
+			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(StageIDMap.StageIDForPac(fi.Name)));
 			this.Refresh();
 		}
 
@@ -359,24 +358,8 @@ namespace BrawlStageManager {
 				}
 			}
 
-			// Find and load GCT, if it exists
-			StageIDMap.AutoSSS = null;
-			portraitViewer1.LoadedMessage = "No custom SSS loaded";
-			foreach (string file in new string[] {
-				"RSBE01.gct",
-				"/data/gecko/codes/RSBE01.gct",
-				"/codes/RSBE01.gct",
-			}) {
-				if (File.Exists(file)) {
-					StageIDMap.AutoSSS = new CustomSSS(File.ReadAllBytes(file));
-					Console.WriteLine("Loaded " + file + ": " + StageIDMap.AutoSSS);
-					portraitViewer1.LoadedMessage = "Loaded " + file + ": " + StageIDMap.AutoSSS;
-					break;
-				}
-			}
-
 			if (useAFixedStageListToolStripMenuItem.Checked) {
-				pacFiles = StageIDMap.PacFilesBySSSOrder().Select(s => new FileInfo(s)).ToArray();
+				pacFiles = StageIDMap.PacFilesBySSSOrder(portraitViewer1.BestSSS).Select(s => new FileInfo(s)).ToArray();
 			} else {
 				Array.Sort(pacFiles, delegate(FileInfo f1, FileInfo f2) {
 					return f1.Name.ToLower().CompareTo(f2.Name.ToLower()); // Sort by filename, case-insensitive
@@ -391,7 +374,7 @@ namespace BrawlStageManager {
 
 			portraitViewer1.UpdateDirectory();
 
-			if (StageIDMap.BestSSS.OtherCodesIgnoredInSameFile > 0) {
+			if (portraitViewer1.BestSSS.OtherCodesIgnoredInSameFile > 0) {
 				MessageBox.Show(this, "More than one Custom SSS code found in the codeset. All but the last one will be ignored.",
 					this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
@@ -717,7 +700,7 @@ namespace BrawlStageManager {
 			if (MessageBox.Show(this, "Are you sure you want to convert all IA4 MenSelmapMarks currently in use to CMPR?" +
 			"This should cut their filesize in half.", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK) {
 				foreach (FileInfo f in listBox1.Items) {
-					int i = StageIDMap.IconForPac(f.Name);
+					int i = portraitViewer1.BestSSS.IconForStage(StageIDMap.StageIDForPac(f.Name));
 					portraitViewer1.DowngradeMenSelmapMark(i);
 				}
 			}
@@ -867,7 +850,7 @@ namespace BrawlStageManager {
 			FileInfo rel = new FileInfo("../../module/" + relname);
 			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
 
-			portraitViewer1.ExportImages(StageIDMap.IconForPac(f.Name), thisdir);
+			portraitViewer1.ExportImages(portraitViewer1.BestSSS.IconForStage(StageIDMap.StageIDForPac(f.Name)), thisdir);
 		}
 
 		#region registry <-> options menu

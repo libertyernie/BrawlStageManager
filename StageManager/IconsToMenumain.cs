@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BrawlStageManager {
 	public static class IconsToMenumain {
-		public static void Copy(ResourceNode scSelmap, ResourceNode muMenumain) {
+		public static void Copy(ResourceNode scSelmap, ResourceNode muMenumain, CustomSSS sss) {
 			ResourceNode miscData0 = muMenumain.FindChild("MiscData[0]", false);
 			List<ResourceNode> chrToKeep = miscData0.FindChild("AnmChr(NW4R)", false).Children;
 			Dictionary<string, string> tempFiles = new Dictionary<string, string>(chrToKeep.Count);
@@ -36,7 +36,7 @@ namespace BrawlStageManager {
 				foreach (ResourceNode tex in miscData0.FindChild("Textures(NW4R)", false).Children) {
 					byte icon_id;
 					if (tex.Name.StartsWith("MenSelmapIcon.") && Byte.TryParse(tex.Name.Substring(14, 2), out icon_id)) {
-						byte stage_id = StageIDMap.BestSSS.StageForIcon(icon_id);
+						byte stage_id = sss.StageForIcon(icon_id);
 						if (icon_id != 100 && (stage_id == 0x25 || stage_id > 0x33)) {
 							tex.Replace(tempfile);
 						}

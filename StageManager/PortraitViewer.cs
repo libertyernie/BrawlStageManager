@@ -24,8 +24,6 @@ namespace BrawlStageManager {
 		public bool selmapMarkPreview;
 		public bool useTextureConverter;
 
-		public string LoadedMessage;
-
 		public bool IsDirty {
 			get {
 				return common5 != null ? common5.IsDirty
@@ -72,8 +70,69 @@ namespace BrawlStageManager {
 		private int _iconNum;
 		#endregion
 
+		#region Custom SSS
+		public CustomSSS AutoSSS, DefaultSSS;
+		public CustomSSS BestSSS {
+			get {
+				return AutoSSS ?? DefaultSSS;
+			}
+		}
+		#endregion
+
 		public PortraitViewer() {
 			InitializeComponent();
+
+			#region default sss
+			string s = @"Pretty generic custom SSS (based on CEP 5.5)
+* 046B8F5C 7C802378
+* 046B8F64 7C6300AE
+* 040AF618 5460083C
+* 040AF68C 38840002
+* 040AF6AC 5463083C
+* 040AF6C0 88030001
+* 040AF6E8 3860FFFF
+* 040AF59C 3860000C
+* 060B91C8 00000018
+* BFA10014 7CDF3378
+* 7CBE2B78 7C7D1B78
+* 2D05FFFF 418A0014
+* 006B929C 00000027
+* 066B99D8 00000027
+* 00010203 04050709
+* 080A0B0C 0D0E0F10
+* 11141516 1A191217
+* 0618131D 1E1B1C1F
+* 20212223 24252600
+* 006B92A4 00000027
+* 066B9A58 00000027
+* 27282A2B 2C2D2E2F
+* 30313233 34353637
+* 38393A3B 3C3D3E3F
+* 40414243 44454647
+* 48494A4B 4C4D4E00
+* 06407AAC 0000009E
+* 01010202 03030404
+* 05050606 07070808
+* 0909330A 0B0B0C0C
+* 0D0D0E0E 130F1410
+* 15111612 17131814
+* 19151C16 1D171E18
+* 1F19201A 211B221C
+* 231D241E 251F2932
+* 2A332B34 2C352D36
+* 2F373038 3139323A
+* 2E3BFFFF 40204121
+* 42224323 44244525
+* 46264727 48284929
+* 4A2A4B2B 4C2C4D2D
+* 4E2E4F2F 50305131
+* 523D533E 543F5540
+* 56415742 58435944
+* 5A455B46 5C475D48
+* 5E495F4A 604B614C
+* 624D634E 644F0000";
+			DefaultSSS = new CustomSSS(s.Split('\n'));
+			#endregion
 
 			_iconNum = -1;
 			fileSizeBar.Style = ProgressBarStyle.Continuous;
@@ -135,7 +194,6 @@ namespace BrawlStageManager {
 			if (sc_selmap != null) sc_selmap.Dispose();
 			if (common5 != null) common5.Dispose();
 			_openFilePath = null;
-			label1.Text = LoadedMessage;
 			fileSizeBar.Maximum = 1214283;
 			if (File.Exists("../../menu2/sc_selmap.pac")) {
 				common5 = null;
@@ -166,6 +224,22 @@ namespace BrawlStageManager {
 			} else {
 				fileSizeBar.Value = 0;
 				fileSizeLabel.Text = "";
+			}
+
+			// Find and load GCT, if it exists
+			AutoSSS = null;
+			label1.Text = "No custom SSS loaded";
+			foreach (string file in new string[] {
+				"RSBE01.gct",
+				"/data/gecko/codes/RSBE01.gct",
+				"/codes/RSBE01.gct",
+			}) {
+				if (File.Exists(file)) {
+					AutoSSS = new CustomSSS(File.ReadAllBytes(file));
+					Console.WriteLine("Loaded " + file + ": " + AutoSSS);
+					label1.Text = "Loaded " + file + ": " + AutoSSS;
+					break;
+				}
 			}
 		}
 
@@ -475,7 +549,7 @@ namespace BrawlStageManager {
 					string tempFile1 = TempFiles.Create(".tex0");
 					string tempFile2 = TempFiles.Create(".plt0");
 					string nameSelcharacter2 = i.ToString("D2");
-					string nameSelmap = StageIDMap.selmapIcon(i).ToString("D2");
+					string nameSelmap = BestSSS[StageIDMap.sssPositionForSelcharacter2Icon(i)].Item2.ToString("D2");
 					TEX0Node iconFrom = md80.FindChild("Textures(NW4R)/MenSelmapIcon." + nameSelmap, false) as TEX0Node;
 					TEX0Node iconTo = md0.FindChild("Textures(NW4R)/MenSelmapIcon." + nameSelcharacter2, false) as TEX0Node;
 					var palFrom = md80.FindChild("Palettes(NW4R)/MenSelmapIcon." + nameSelmap, false);
@@ -585,7 +659,8 @@ namespace BrawlStageManager {
 					where marks.Contains(c.Texture)
 					group c by c.Texture into g
 					let count = g.Count()
-					let one = StageIDMap.PacBasenameForIcon((int)g.First().FrameIndex)
+					let stageID = BestSSS.StageForIcon((int)g.First().FrameIndex)
+					let one = StageIDMap.PacBasenameForStageID(stageID)
 					orderby count, g.Key
 					select new { count, g.Key, one };
 			StringBuilder sb = new StringBuilder();
@@ -604,11 +679,11 @@ namespace BrawlStageManager {
 		public void updateMuMenumain() {
 			if (DialogResult.OK == MessageBox.Show("Overwrite the current mu_menumain?", "Overwrite File", MessageBoxButtons.OKCancel)) {
 				ResourceNode mu_menumain = fcopy(mu_menumain_path);
-				IconsToMenumain.Copy(sc_selmap, mu_menumain);
+				IconsToMenumain.Copy(sc_selmap, mu_menumain, BestSSS);
 				mu_menumain.Export(mu_menumain_path);
 
-				byte absent_stage_id = StageIDMap.BestSSS[0x1E].Item1;
-				int sss2_count = StageIDMap.BestSSS.sss2.Where(b => b != 0x1E).Count() + 1;
+				byte absent_stage_id = BestSSS[0x1E].Item1;
+				int sss2_count = BestSSS.sss2.Where(b => b != 0x1E).Count() + 1;
 				string warn = sss2_count <= 39 ? "" : "\nWARNING: screen 2 of the SSS has more than 39 stages - My Music will crash on page 2.";
 				var q = StageIDMap.Stages.Where(s => s.ID == absent_stage_id);
 				string absent = q.Any()

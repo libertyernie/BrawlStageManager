@@ -78,7 +78,6 @@
 			this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
 			this.updateMumenumainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.updateScselcharacter2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.loadNewCustomSSSCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.separator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.addMenSelmapMarksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.listMenSelmapMarkUsageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -553,7 +552,6 @@
             this.toolStripMenuItem2,
             this.updateMumenumainToolStripMenuItem,
             this.updateScselcharacter2ToolStripMenuItem,
-            this.loadNewCustomSSSCodeToolStripMenuItem,
             this.separator4,
             this.addMenSelmapMarksToolStripMenuItem,
             this.listMenSelmapMarkUsageToolStripMenuItem,
@@ -597,12 +595,6 @@
 			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
 			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
 			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
-			// 
-			// loadNewCustomSSSCodeToolStripMenuItem
-			// 
-			this.loadNewCustomSSSCodeToolStripMenuItem.Name = "loadNewCustomSSSCodeToolStripMenuItem";
-			this.loadNewCustomSSSCodeToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.loadNewCustomSSSCodeToolStripMenuItem.Text = "Load a different Custom SSS code";
 			// 
 			// separator4
 			// 
@@ -889,7 +881,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem repaintIconBorderToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem loadNewCustomSSSCodeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resizeAllPrevbasesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem customPrevbaseSizeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem useTextureConverterToolStripMenuItem;

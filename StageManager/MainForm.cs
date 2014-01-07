@@ -801,21 +801,6 @@ namespace BrawlStageManager {
 			portraitViewer1.repaintIconBorder();
 		}
 
-		private void loadNewCustomSSSCodeToolStripMenuItem_Click(object sender, EventArgs e) {
-			using (OpenFileDialog dialog = new OpenFileDialog()) {
-				dialog.Filter = "Compatible files|*.gct;*.txt";
-				if (dialog.ShowDialog() == DialogResult.OK) {
-					string f = dialog.FileName;
-					StageIDMap.ManualSSS = f.EndsWith(".gct", StringComparison.InvariantCultureIgnoreCase)
-						? new CustomSSS(File.ReadAllBytes(f))
-						: new CustomSSS(File.ReadAllLines(f));
-					if (useAFixedStageListToolStripMenuItem.Checked) {
-						changeDirectory(CurrentDirectory); // Refresh .pac list
-					}
-				}
-			}
-		}
-
 		private void snapshotPortraiticonToolStripMenuItem_Click(object sender, EventArgs e) {
 			Bitmap screenshot = modelPanel1.GrabScreenshot(false);
 

@@ -1,5 +1,5 @@
-﻿Brawl Stage Manager 3.1 - December 31, 2013
-Copyright © 2013 libertyernie
+﻿Brawl Stage Manager 3.1.1 - January 7, 2013
+Copyright © 2014 libertyernie
 http://lakora.us/brawl/stagemanager
 
 Brawl Stage Manager is a program that uses BrawlLib to help you see and

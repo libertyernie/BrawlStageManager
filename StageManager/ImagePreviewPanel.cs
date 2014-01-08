@@ -57,10 +57,11 @@ namespace BrawlStageManager {
 
 		private void replace_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
-			if (pv != null) {
-				MainForm.OpenDialog.Filter = FileFilters.TEX0;
-				if (MainForm.OpenDialog.ShowDialog() == DialogResult.OK) {
-					string fileName = MainForm.OpenDialog.FileName;
+			if (pv == null) return;
+			using (OpenFileDialog OpenDialog = new OpenFileDialog()) {
+				OpenDialog.Filter = FileFilters.TEX0;
+				if (OpenDialog.ShowDialog() == DialogResult.OK) {
+					string fileName = OpenDialog.FileName;
 					pv.Replace(this, fileName);
 				}
 			}
@@ -76,14 +77,15 @@ namespace BrawlStageManager {
 
 		private void export_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
-			if (pv != null) {
-				MainForm.SaveDialog.Filter = FileFilters.TEX0;
-				MainForm.SaveDialog.FilterIndex = 1;
-				if (MainForm.SaveDialog.ShowDialog() == DialogResult.OK) {
-					int fIndex = MainForm.SaveDialog.FilterIndex;
+			if (pv == null) return;
+			using (SaveFileDialog SaveDialog = new SaveFileDialog()) {
+				SaveDialog.Filter = FileFilters.TEX0;
+				SaveDialog.FilterIndex = 1;
+				if (SaveDialog.ShowDialog() == DialogResult.OK) {
+					int fIndex = SaveDialog.FilterIndex;
 
 					//Fix extension
-					string fileName = ApplyExtension(MainForm.SaveDialog.FileName, MainForm.SaveDialog.Filter, fIndex - 1);
+					string fileName = ApplyExtension(SaveDialog.FileName, SaveDialog.Filter, fIndex - 1);
 					pv.GetTEX0For(this).Export(fileName);
 				}
 			}

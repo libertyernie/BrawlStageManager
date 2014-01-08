@@ -33,6 +33,7 @@
 			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clbTextures = new System.Windows.Forms.CheckedListBox();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
 			this.audioPlaybackPanel1 = new System.Windows.Forms.AudioPlaybackPanel();
 			this.msBinPanel = new System.Windows.Forms.Panel();
@@ -44,7 +45,7 @@
 			this.clearDefaultDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.saveFrontStnameFontSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveSettingsToRegistryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveAutoResizeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveRegistrySettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearAllStageManagerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -100,7 +101,6 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -219,6 +219,16 @@
 			this.splitContainer2.SplitterDistance = 60;
 			this.splitContainer2.TabIndex = 0;
 			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
+			// 
 			// modelPanel1
 			// 
 			this.modelPanel1.DefaultTranslate = ((System.Vector3)(resources.GetObject("modelPanel1.DefaultTranslate")));
@@ -293,7 +303,7 @@
             this.clearDefaultDirectoryToolStripMenuItem,
             this.toolStripSeparator2,
             this.saveFrontStnameFontSettingsToolStripMenuItem,
-            this.saveSettingsToRegistryToolStripMenuItem,
+            this.saveAutoResizeSettingsToolStripMenuItem,
             this.saveRegistrySettings,
             this.toolStripSeparator1,
             this.clearAllStageManagerSettingsToolStripMenuItem});
@@ -327,19 +337,19 @@
 			this.saveFrontStnameFontSettingsToolStripMenuItem.Text = "Save FrontStname font settings";
 			this.saveFrontStnameFontSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveFrontStnameFontSettingsToolStripMenuItem_Click);
 			// 
-			// saveSettingsToRegistryToolStripMenuItem
+			// saveAutoResizeSettingsToolStripMenuItem
 			// 
-			this.saveSettingsToRegistryToolStripMenuItem.Name = "saveSettingsToRegistryToolStripMenuItem";
-			this.saveSettingsToRegistryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-			this.saveSettingsToRegistryToolStripMenuItem.Text = "Save auto-resize settings";
-			this.saveSettingsToRegistryToolStripMenuItem.Click += new System.EventHandler(this.saveSettingsToRegistryToolStripMenuItem_Click);
+			this.saveAutoResizeSettingsToolStripMenuItem.Name = "saveAutoResizeSettingsToolStripMenuItem";
+			this.saveAutoResizeSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.saveAutoResizeSettingsToolStripMenuItem.Text = "Save auto-resize settings";
+			this.saveAutoResizeSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveAutoResizeSettingsToolStripMenuItem_Click);
 			// 
 			// saveRegistrySettings
 			// 
 			this.saveRegistrySettings.Name = "saveRegistrySettings";
 			this.saveRegistrySettings.Size = new System.Drawing.Size(243, 22);
 			this.saveRegistrySettings.Text = "Save all other settings";
-			this.saveRegistrySettings.Click += new System.EventHandler(this.saveTestToolStripMenuItem_Click);
+			this.saveRegistrySettings.Click += new System.EventHandler(this.saveRegistrySettingsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -757,16 +767,6 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(308, 56);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// portraitViewer1
 			// 
 			this.portraitViewer1.AutoSize = true;
@@ -870,7 +870,7 @@
 		private System.Windows.Forms.ToolStripSeparator separator3;
 		private System.Windows.Forms.ToolStripSeparator separator4;
 		private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveSettingsToRegistryToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveAutoResizeSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem saveFrontStnameFontSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

@@ -306,7 +306,19 @@ namespace BrawlStageManager {
 				#endregion
 			}
 
-			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(StageIDMap.StageIDForPac(fi.Name)));
+			int stage_id = StageIDMap.StageIDForPac(fi.Name);
+			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(stage_id));
+			#region finding .brstm
+			audioPlaybackPanel1.Visible = false;
+			Song song;
+			if (portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
+				RSTMNode node = NodeFactory.FromFile(null, "../../sound/strm/" + song.Filename + ".brstm") as RSTMNode;
+				if (node != null) {
+					audioPlaybackPanel1.Visible = true;
+					audioPlaybackPanel1.TargetSource = node;
+				}
+			}
+			#endregion
 
 			this.Refresh();
 		}

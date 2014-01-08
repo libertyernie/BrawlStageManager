@@ -71,8 +71,8 @@ namespace BrawlStageManager {
 		#endregion
 
 		#region Custom SSS
-		public CustomSSS AutoSSS, DefaultSSS;
-		public CustomSSS BestSSS {
+		public CustomSSSwithSDSL AutoSSS, DefaultSSS;
+		public CustomSSSwithSDSL BestSSS {
 			get {
 				return AutoSSS ?? DefaultSSS;
 			}
@@ -131,7 +131,7 @@ namespace BrawlStageManager {
 * 5A455B46 5C475D48
 * 5E495F4A 604B614C
 * 624D634E 644F0000";
-			DefaultSSS = new CustomSSS(s.Split('\n'));
+			DefaultSSS = new CustomSSSwithSDSL(s.Split('\n'));
 			#endregion
 
 			_iconNum = -1;
@@ -235,7 +235,7 @@ namespace BrawlStageManager {
 				"/codes/RSBE01.gct",
 			}) {
 				if (File.Exists(file)) {
-					AutoSSS = new CustomSSS(File.ReadAllBytes(file));
+					AutoSSS = new CustomSSSwithSDSL(File.ReadAllBytes(file));
 					Console.WriteLine("Loaded " + file + ": " + AutoSSS);
 					label1.Text = "Loaded " + file + ": " + AutoSSS;
 					break;

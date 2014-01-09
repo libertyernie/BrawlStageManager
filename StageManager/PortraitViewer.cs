@@ -761,16 +761,6 @@ namespace BrawlStageManager {
 			save();
 		}
 
-		private void button1_Click(object sender, EventArgs e) {
-			if (flowLayoutPanel1.Visible) {
-				flowLayoutPanel1.Visible = false;
-				button1.Text = "<";
-			} else {
-				flowLayoutPanel1.Visible = true;
-				button1.Text = ">";
-			}
-		}
-
 		private void modifyPAT0_Click(object sender, EventArgs e) {
 			if (textures == null) return;
 

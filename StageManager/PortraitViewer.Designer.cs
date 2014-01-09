@@ -38,7 +38,6 @@
 			this.fileSizeBar = new System.Windows.Forms.ProgressBar();
 			this.fileSizeLabel = new System.Windows.Forms.Label();
 			this.modifyPAT0 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -76,7 +75,7 @@
 			this.flowLayoutPanel1.Controls.Add(this.fileSizeLabel);
 			this.flowLayoutPanel1.Controls.Add(this.modifyPAT0);
 			this.flowLayoutPanel1.Controls.Add(this.label1);
-			this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 0);
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
 			this.flowLayoutPanel1.Size = new System.Drawing.Size(210, 500);
 			this.flowLayoutPanel1.TabIndex = 3;
@@ -194,25 +193,13 @@
 			this.modifyPAT0.UseVisualStyleBackColor = true;
 			this.modifyPAT0.Click += new System.EventHandler(this.modifyPAT0_Click);
 			// 
-			// button1
-			// 
-			this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-			this.button1.Location = new System.Drawing.Point(0, 0);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(20, 500);
-			this.button1.TabIndex = 4;
-			this.button1.Text = ">";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// PortraitViewer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.flowLayoutPanel1);
-			this.Controls.Add(this.button1);
 			this.Name = "PortraitViewer";
-			this.Size = new System.Drawing.Size(230, 500);
+			this.Size = new System.Drawing.Size(210, 500);
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);
@@ -229,7 +216,6 @@
 		protected System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button saveButton;
 		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.ProgressBar fileSizeBar;
 		private System.Windows.Forms.Label fileSizeLabel;
 		private System.Windows.Forms.Button modifyPAT0;

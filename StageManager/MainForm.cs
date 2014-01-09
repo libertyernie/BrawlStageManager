@@ -295,14 +295,17 @@ namespace BrawlStageManager {
 			int stage_id = StageIDMap.StageIDForPac(fi.Name);
 			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(stage_id));
 			#region finding .brstm
-			audioPlaybackPanel1.Visible = false;
-			Song song;
-			RSTMNode noded = null;
-			if (portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
-				noded = NodeFactory.FromFile(null, "../../sound/strm/" + song.Filename + ".brstm") as RSTMNode;
+			if (!loadbrstmsToolStripMenuItem.Checked) {
+				audioPlaybackPanel1.Enabled = false;
+			} else {
+				Song song;
+				RSTMNode noded = null;
+				if (loadbrstmsToolStripMenuItem.Checked && portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
+					noded = NodeFactory.FromFile(null, "../../sound/strm/" + song.Filename + ".brstm") as RSTMNode;
+				}
+				audioPlaybackPanel1.TargetSource = noded;
+				audioPlaybackPanel1.Visible = audioPlaybackPanel1.Enabled = (noded != null);
 			}
-			audioPlaybackPanel1.TargetSource = noded;
-			audioPlaybackPanel1.Visible = audioPlaybackPanel1.Enabled = (noded != null);
 			#endregion
 
 			this.Refresh();
@@ -843,6 +846,7 @@ namespace BrawlStageManager {
 			new OptionsMenuSettings() {
 				UseTextureConverter = portraitViewer1.useTextureConverter,
 				RenderModels = renderModels.Checked,
+				LoadBrstms = loadbrstmsToolStripMenuItem.Checked,
 				StaticStageList = useAFixedStageListToolStripMenuItem.Checked,
 				RightPanelColor = portraitViewer1.BackColor,
 				ModuleFolderLocation = moduleFolderLocation,
@@ -872,6 +876,7 @@ namespace BrawlStageManager {
 			set(useTextureConverterToolStripMenuItem, settings.UseTextureConverter);
 			set(useAFixedStageListToolStripMenuItem, settings.StaticStageList);
 			set(renderModels, settings.RenderModels);
+			set(loadbrstmsToolStripMenuItem, settings.LoadBrstms);
 			portraitViewer1.BackColor = settings.RightPanelColor ?? portraitViewer1.BackColor;
 
 			{

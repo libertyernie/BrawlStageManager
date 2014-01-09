@@ -37,18 +37,12 @@
 			this.audioPlaybackPanel1 = new System.Windows.Forms.AudioPlaybackPanel();
 			this.collapsibleSplitter2 = new BrawlManagerLib.CollapsibleSplitter();
 			this.msBinPanel = new System.Windows.Forms.Panel();
-			this.collapsibleSplitter1 = new BrawlManagerLib.CollapsibleSplitter();
-			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.registryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveCurrentDirectoryAsDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearDefaultDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.saveFrontStnameFontSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveAutoResizeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveRegistrySettings = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearAllStageManagerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportStageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,9 +97,12 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadbrstmsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveAllStageManagerSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.collapsibleSplitter1 = new BrawlManagerLib.CollapsibleSplitter();
+			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.collapsibleSplitter4 = new BrawlManagerLib.CollapsibleSplitter();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.loadbrstmsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -269,32 +266,6 @@
 			this.msBinPanel.Size = new System.Drawing.Size(321, 76);
 			this.msBinPanel.TabIndex = 3;
 			// 
-			// collapsibleSplitter1
-			// 
-			this.collapsibleSplitter1.AnimationDelay = 20;
-			this.collapsibleSplitter1.AnimationStep = 20;
-			this.collapsibleSplitter1.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.collapsibleSplitter1.ControlToHide = this.stageInfoControl1;
-			this.collapsibleSplitter1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.collapsibleSplitter1.ExpandParentForm = false;
-			this.collapsibleSplitter1.Location = new System.Drawing.Point(0, 56);
-			this.collapsibleSplitter1.Name = "collapsibleSplitter1";
-			this.collapsibleSplitter1.Size = new System.Drawing.Size(321, 8);
-			this.collapsibleSplitter1.TabIndex = 0;
-			this.collapsibleSplitter1.TabStop = false;
-			this.collapsibleSplitter1.UseAnimations = false;
-			this.collapsibleSplitter1.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
-			// 
-			// stageInfoControl1
-			// 
-			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
-			this.stageInfoControl1.Name = "stageInfoControl1";
-			this.stageInfoControl1.RelFile = null;
-			this.stageInfoControl1.Size = new System.Drawing.Size(321, 56);
-			this.stageInfoControl1.TabIndex = 0;
-			this.stageInfoControl1.UseRelDescription = false;
-			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -334,11 +305,8 @@
 			this.registryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveCurrentDirectoryAsDefaultToolStripMenuItem,
             this.clearDefaultDirectoryToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.saveFrontStnameFontSettingsToolStripMenuItem,
-            this.saveAutoResizeSettingsToolStripMenuItem,
-            this.saveRegistrySettings,
             this.toolStripSeparator1,
+            this.saveAllStageManagerSettingsToolStripMenuItem,
             this.clearAllStageManagerSettingsToolStripMenuItem});
 			this.registryToolStripMenuItem.Name = "registryToolStripMenuItem";
 			this.registryToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
@@ -357,32 +325,6 @@
 			this.clearDefaultDirectoryToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
 			this.clearDefaultDirectoryToolStripMenuItem.Text = "Clear default directory";
 			this.clearDefaultDirectoryToolStripMenuItem.Click += new System.EventHandler(this.clearDefaultDirectoryToolStripMenuItem_Click);
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(240, 6);
-			// 
-			// saveFrontStnameFontSettingsToolStripMenuItem
-			// 
-			this.saveFrontStnameFontSettingsToolStripMenuItem.Name = "saveFrontStnameFontSettingsToolStripMenuItem";
-			this.saveFrontStnameFontSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-			this.saveFrontStnameFontSettingsToolStripMenuItem.Text = "Save FrontStname font settings";
-			this.saveFrontStnameFontSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveFrontStnameFontSettingsToolStripMenuItem_Click);
-			// 
-			// saveAutoResizeSettingsToolStripMenuItem
-			// 
-			this.saveAutoResizeSettingsToolStripMenuItem.Name = "saveAutoResizeSettingsToolStripMenuItem";
-			this.saveAutoResizeSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
-			this.saveAutoResizeSettingsToolStripMenuItem.Text = "Save auto-resize settings";
-			this.saveAutoResizeSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveAutoResizeSettingsToolStripMenuItem_Click);
-			// 
-			// saveRegistrySettings
-			// 
-			this.saveRegistrySettings.Name = "saveRegistrySettings";
-			this.saveRegistrySettings.Size = new System.Drawing.Size(243, 22);
-			this.saveRegistrySettings.Text = "Save all other settings";
-			this.saveRegistrySettings.Click += new System.EventHandler(this.saveRegistrySettingsToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -801,6 +743,48 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// loadbrstmsToolStripMenuItem
+			// 
+			this.loadbrstmsToolStripMenuItem.Checked = true;
+			this.loadbrstmsToolStripMenuItem.CheckOnClick = true;
+			this.loadbrstmsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.loadbrstmsToolStripMenuItem.Name = "loadbrstmsToolStripMenuItem";
+			this.loadbrstmsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+			this.loadbrstmsToolStripMenuItem.Text = "Load .brstms";
+			// 
+			// saveAllStageManagerSettingsToolStripMenuItem
+			// 
+			this.saveAllStageManagerSettingsToolStripMenuItem.Name = "saveAllStageManagerSettingsToolStripMenuItem";
+			this.saveAllStageManagerSettingsToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
+			this.saveAllStageManagerSettingsToolStripMenuItem.Text = "Save all Stage Manager settings";
+			this.saveAllStageManagerSettingsToolStripMenuItem.Click += new System.EventHandler(this.saveAllStageManagerSettingsToolStripMenuItem_Click);
+			// 
+			// collapsibleSplitter1
+			// 
+			this.collapsibleSplitter1.AnimationDelay = 20;
+			this.collapsibleSplitter1.AnimationStep = 20;
+			this.collapsibleSplitter1.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+			this.collapsibleSplitter1.ControlToHide = this.stageInfoControl1;
+			this.collapsibleSplitter1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.collapsibleSplitter1.ExpandParentForm = false;
+			this.collapsibleSplitter1.Location = new System.Drawing.Point(0, 56);
+			this.collapsibleSplitter1.Name = "collapsibleSplitter1";
+			this.collapsibleSplitter1.Size = new System.Drawing.Size(321, 8);
+			this.collapsibleSplitter1.TabIndex = 0;
+			this.collapsibleSplitter1.TabStop = false;
+			this.collapsibleSplitter1.UseAnimations = false;
+			this.collapsibleSplitter1.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
+			// 
+			// stageInfoControl1
+			// 
+			this.stageInfoControl1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.stageInfoControl1.Location = new System.Drawing.Point(0, 0);
+			this.stageInfoControl1.Name = "stageInfoControl1";
+			this.stageInfoControl1.RelFile = null;
+			this.stageInfoControl1.Size = new System.Drawing.Size(321, 56);
+			this.stageInfoControl1.TabIndex = 0;
+			this.stageInfoControl1.UseRelDescription = false;
+			// 
 			// collapsibleSplitter4
 			// 
 			this.collapsibleSplitter4.AnimationDelay = 20;
@@ -825,15 +809,6 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(213, 477);
 			this.portraitViewer1.TabIndex = 2;
-			// 
-			// loadbrstmsToolStripMenuItem
-			// 
-			this.loadbrstmsToolStripMenuItem.Checked = true;
-			this.loadbrstmsToolStripMenuItem.CheckOnClick = true;
-			this.loadbrstmsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.loadbrstmsToolStripMenuItem.Name = "loadbrstmsToolStripMenuItem";
-			this.loadbrstmsToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
-			this.loadbrstmsToolStripMenuItem.Text = "Load .brstms";
 			// 
 			// MainForm
 			// 
@@ -925,12 +900,8 @@
 		private System.Windows.Forms.ToolStripSeparator separator3;
 		private System.Windows.Forms.ToolStripSeparator separator4;
 		private System.Windows.Forms.ToolStripMenuItem backgroundColorToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveAutoResizeSettingsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripMenuItem saveFrontStnameFontSettingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem clearAllStageManagerSettingsToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveRegistrySettings;
 		private System.Windows.Forms.ToolStripMenuItem updateMumenumainToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem snapshotPortraiticonToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
@@ -949,6 +920,7 @@
 		private BrawlManagerLib.CollapsibleSplitter collapsibleSplitter3;
 		private BrawlManagerLib.CollapsibleSplitter collapsibleSplitter4;
 		private System.Windows.Forms.ToolStripMenuItem loadbrstmsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveAllStageManagerSettingsToolStripMenuItem;
 
 
 

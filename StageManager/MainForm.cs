@@ -607,20 +607,20 @@ namespace BrawlStageManager {
 			DefaultDirectory.Clear();
 			clearDefaultDirectoryToolStripMenuItem.Enabled = false;
 		}
-		private void saveAutoResizeSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void saveAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
+			DefaultDirectory.Set(CurrentDirectory);
 			bool anyNotNull = ResizeSettings.WriteToRegistry(portraitViewer1);
-			MessageBox.Show(anyNotNull
-				? "The default texture sizes have been set in HKEY_CURRENT_USER."
-				: "The auto-resize settings have been cleared (all three set to \"Off.\")");
-		}
-		private void saveRegistrySettingsToolStripMenuItem_Click(object sender, EventArgs e) {
-			SaveToRegistry();
-		}
-		private void saveFrontStnameFontSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
 			string str = FontSettings.WriteToRegistry(portraitViewer1.fontSettings);
-			MessageBox.Show(str != null
-				? "The default font has been set to: " + str
-				: "The default font settings have been cleared.");
+			SaveToRegistry();
+			MessageBox.Show(
+				(str != null
+					? "The default font has been set to: " + str
+					: "The default font settings have been cleared.")
+				+ "\n"
+				+ (anyNotNull
+					? "The default texture sizes have been set in HKEY_CURRENT_USER."
+					: "The auto-resize settings have been cleared (all three set to \"Off.\")"));
+
 		}
 		private void clearAllStageManagerSettingsToolStripMenuItem_Click(object sender, EventArgs e) {
 			ClearRegistry();

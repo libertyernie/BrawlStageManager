@@ -56,7 +56,7 @@ namespace BrawlStageManager {
 		/// <summary>
 		/// Labels for the MSBin viewer area.
 		/// </summary>
-		private Label chooseLabel, loadingLabel, noMSBinLabel, couldNotOpenLabel;
+		private Label noMSBinLabel, couldNotOpenLabel;
 
 		/// <summary>
 		/// Change the control used on the upper-middle section of the window (either a label or an MSBinViewer.)
@@ -74,8 +74,8 @@ namespace BrawlStageManager {
 			set {
 				Control.ControlCollection controls = msBinPanel.Controls;
 				controls.Clear();
-				value.Dock = System.Windows.Forms.DockStyle.Fill;
-				controls.Add(value);
+				if (value != null) value.Dock = System.Windows.Forms.DockStyle.Fill;
+				if (value != null) controls.Add(value);
 			}
 		}
 		#endregion
@@ -125,23 +125,9 @@ namespace BrawlStageManager {
 			this.Text += " -";
 
 			#region labels
-			this.chooseLabel = new Label();
-			this.chooseLabel.Name = "chooseLabel";
-			this.chooseLabel.Text = "Choose a stage from the list on the left-hand side.";
-			this.chooseLabel.BackColor = Color.White;
-			this.chooseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-			this.loadingLabel = new Label();
-			this.loadingLabel.Name = "loadingLabel";
-			this.loadingLabel.Text = "Loading...";
-			/*this.loadingLabel.BackColor = Color.Gray;
-			this.loadingLabel.ForeColor = Color.White;*/
-			this.loadingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
 			this.noMSBinLabel = new Label();
 			this.noMSBinLabel.Name = "noTextLabel";
 			this.noMSBinLabel.Text = "There are no MSBin nodes in this stage.";
-			this.noMSBinLabel.BackColor = Color.White;
 			this.noMSBinLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 
 			this.couldNotOpenLabel = new Label();
@@ -150,7 +136,7 @@ namespace BrawlStageManager {
 			this.couldNotOpenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			#endregion
 
-			RightControl = chooseLabel;
+			RightControl = null;
 
 			// The defaults for these options depend on the defaults of the menu items that control them
 			stageInfoControl1.UseRelDescription = useFullrelNamesToolStripMenuItem.Checked = useRelDescription;
@@ -219,7 +205,7 @@ namespace BrawlStageManager {
 				_rootPath = null;
 			}
 			if (fi == null) { // No .pac file selected (i.e. you just opened the program)
-				RightControl = chooseLabel;
+				RightControl = null;
 				return;
 			}
 
@@ -340,7 +326,7 @@ namespace BrawlStageManager {
 			CurrentDirectory = path.FullName; // Update the program's working directory
 			this.Text = this.Text.Substring(0, this.Text.IndexOf('-')) + "- " + path.FullName; // Update titlebar
 
-			RightControl = chooseLabel;
+			RightControl = null;
 
 			pacFiles = path.GetFiles("*.pac");
 

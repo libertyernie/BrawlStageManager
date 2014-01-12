@@ -150,19 +150,23 @@ namespace BrawlStageManager {
 			listBox1.DragDrop += new DragEventHandler(dragDrop);
 
 			foreach (var item in selmapMarkFormat.DropDownItems) {
-				((ToolStripMenuItem)item).Click += new System.EventHandler(this.selmapMarkFormatToolStripMenuItem_Click);
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.switchSelmapMarkFormat);
 			}
 
 			foreach (var item in prevbaseSize.DropDownItems) {
-				((ToolStripMenuItem)item).Click += new System.EventHandler(this.prevbaseSizeToolStripMenuItem_Click);
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.switchPrevbaseSize);
 			}
 			foreach (var item in frontstnameSizeToolStripMenuItem.DropDownItems) {
-				((ToolStripMenuItem)item).Click += new System.EventHandler(this.frontstnameSizeToolStripMenuItem_Click);
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.switchFrontstnameSize);
 			}
 			foreach (var item in selmapMarkSizeToolStripMenuItem.DropDownItems) {
-				((ToolStripMenuItem)item).Click += new System.EventHandler(this.selmapMarkSizeToolStripMenuItem_Click);
+				((ToolStripMenuItem)item).Click += new System.EventHandler(this.switchSelmapMarkSize);
 			}
 
+			fileToolStripMenuItem.DropDownOpening += (o, e) => {
+				MoveToolStripItems(contextMenuStrip1.Items, currentStageToolStripMenuItem.DropDownItems);
+			};
+			
 			FormClosing += MainForm_FormClosing;
 			FormClosed += MainForm_FormClosed;
 
@@ -175,6 +179,12 @@ namespace BrawlStageManager {
 			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 			LoadFromRegistry();
 			changeDirectory(path);
+		}
+
+		private static void MoveToolStripItems(ToolStripItemCollection from, ToolStripItemCollection to) {
+			ToolStripItem[] arr = new ToolStripItem[from.Count];
+			from.CopyTo(arr, 0);
+			to.AddRange(arr);
 		}
 
 		/// <summary>
@@ -296,16 +306,19 @@ namespace BrawlStageManager {
 			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(stage_id));
 			#region finding .brstm
 			if (!loadbrstmsToolStripMenuItem.Checked) {
-				audioPlaybackPanel1.Enabled = false;
+				songPanel1.Close();
 			} else {
 				Song song;
-				RSTMNode noded = null;
 				if (loadbrstmsToolStripMenuItem.Checked && portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
-					noded = NodeFactory.FromFile(null, "../../sound/strm/" + song.Filename + ".brstm") as RSTMNode;
+					songPanel1.Visible = true;
+					var songfi = new FileInfo("../../sound/strm/" + song.Filename + ".brstm");
+					songPanel1.Open(songfi);
+				} else {
+					songPanel1.Close();
+					songPanel1.Visible = false;
 				}
-				audioPlaybackPanel1.TargetSource = noded;
-				audioPlaybackPanel1.Visible = audioPlaybackPanel1.Enabled = (noded != null);
 			}
+			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;
 			#endregion
 
 			this.Refresh();
@@ -360,6 +373,8 @@ namespace BrawlStageManager {
 
 			stageInfoControl1.setStageLabels("", "", "");
 			stageInfoControl1.RelFile = null;
+
+			Console.WriteLine(songPanel1.findInfoFile());
 
 			portraitViewer1.UpdateDirectory();
 
@@ -539,6 +554,14 @@ namespace BrawlStageManager {
 		#endregion
 
 		#region event handlers
+		private void exportpacrelToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (FolderDialog.ShowDialog() != DialogResult.OK) {
+				return;
+			}
+
+			string outdir = FolderDialog.SelectedPath;
+			exportStage(listBox1.SelectedItem as FileInfo, outdir);
+		}
 		private void deletepacrelToolStripMenuItem_Click(object sender, EventArgs e) {
 			_rootNode.Dispose();
 			_rootNode = null;
@@ -546,11 +569,19 @@ namespace BrawlStageManager {
 			FileOperations.Delete((listBox1.SelectedItem as FileInfo).FullName);
 			changeDirectory(CurrentDirectory);
 		}
+		private void exportbrstmToolStripMenuItem_Click(object sender, EventArgs e) {
+			songPanel1.Export();
+		}
+		private void deletebrstmToolStripMenuItem_Click(object sender, EventArgs e) {
+			songPanel1.Delete();
+		}
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}
 		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
 			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
+			MoveToolStripItems(currentStageToolStripMenuItem.DropDownItems, contextMenuStrip1.Items);
+			e.Cancel = false;
 		}
 
 		private void changeDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -558,14 +589,6 @@ namespace BrawlStageManager {
 			if (FolderDialog.ShowDialog() == DialogResult.OK) {
 				changeDirectory(FolderDialog.SelectedPath);
 			}
-		}
-		private void exportStageToolStripMenuItem_Click(object sender, EventArgs e) {
-			if (FolderDialog.ShowDialog() != DialogResult.OK) {
-				return;
-			}
-
-			string outdir = FolderDialog.SelectedPath;
-			exportStage(listBox1.SelectedItem as FileInfo, outdir);
 		}
 		private void exportAllToolStripMenuItem_Click(object sender, EventArgs e) {
 			if (FolderDialog.ShowDialog() != DialogResult.OK) {
@@ -662,7 +685,7 @@ namespace BrawlStageManager {
 			portraitViewer1.selmapMarkPreview = selmapMarkPreviewToolStripMenuItem.Checked;
 			portraitViewer1.UpdateImage();
 		}
-		private void selmapMarkFormatToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void switchSelmapMarkFormat(object sender, EventArgs e) {
 			foreach (ToolStripMenuItem item in selmapMarkFormat.DropDownItems) {
 				item.Checked = (item == sender);
 			}
@@ -760,7 +783,7 @@ namespace BrawlStageManager {
 			}
 		}
 		
-		private void prevbaseSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void switchPrevbaseSize(object sender, EventArgs e) {
 			foreach (ToolStripMenuItem item in prevbaseSize.DropDownItems) {
 				item.Checked = (item == sender);
 			}
@@ -778,7 +801,7 @@ namespace BrawlStageManager {
 				}
 			}
 		}
-		private void frontstnameSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void switchFrontstnameSize(object sender, EventArgs e) {
 			foreach (ToolStripMenuItem item in frontstnameSizeToolStripMenuItem.DropDownItems) {
 				item.Checked = (item == sender);
 			}
@@ -788,7 +811,7 @@ namespace BrawlStageManager {
 				portraitViewer1.frontstnameResizeTo = new Size(104, 56);
 			}
 		}
-		private void selmapMarkSizeToolStripMenuItem_Click(object sender, EventArgs e) {
+		private void switchSelmapMarkSize(object sender, EventArgs e) {
 			foreach (ToolStripMenuItem item in selmapMarkSizeToolStripMenuItem.DropDownItems) {
 				item.Checked = (item == sender);
 			}

@@ -676,10 +676,13 @@ namespace BrawlStageManager {
 			return sb.ToString();
 		}
 
-		public void updateMuMenumain() {
+		public void updateMuMenumain(string msBinPath = null) {
 			if (DialogResult.OK == MessageBox.Show("Overwrite the current mu_menumain?", "Overwrite File", MessageBoxButtons.OKCancel)) {
 				ResourceNode mu_menumain = fcopy(mu_menumain_path);
 				IconsToMenumain.Copy(sc_selmap, mu_menumain, BestSSS);
+				if (msBinPath != null) {
+					mu_menumain.FindChild("MiscData[7]", false).Replace(msBinPath);
+				}
 				mu_menumain.Export(mu_menumain_path);
 
 				byte absent_stage_id = BestSSS[0x1E].Item1;
@@ -689,7 +692,9 @@ namespace BrawlStageManager {
 				string absent = q.Any()
 					? q.First().Name
 					: "STGCUSTOM" + (absent_stage_id - 0x3f).ToString("X2");
-				MessageBox.Show("Done. Based on your current SSS code, " +
+				MessageBox.Show("Done" +
+					(msBinPath != null ? " (song titles copied too)" : "") +
+					". Based on your current SSS code, " +
 					absent + " will be missing; and Menu will be added to the end of screen 2." + warn);
 			}
 		}

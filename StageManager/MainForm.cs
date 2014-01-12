@@ -729,7 +729,14 @@ namespace BrawlStageManager {
 			portraitViewer1.repaintIconBorder();
 		}
 		private void updateMumenumainToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.updateMuMenumain();
+			if (songPanel1.IsInfoBarDirty()) {
+				var dr = MessageBox.Show(this, "This will copy the song titles that are currently entered, including those not saved to info.pac yet. Is this OK?",
+					"Note", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+				if (dr == DialogResult.No) return;
+			}
+			string msbintmp = TempFiles.Create();
+			songPanel1.ExportMSBin(msbintmp);
+			portraitViewer1.updateMuMenumain(msbintmp);
 		}
 		private void updateScselcharacter2ToolStripMenuItem_Click(object sender, EventArgs e) {
 			portraitViewer1.copyIconsToSelcharacter2();

@@ -314,23 +314,16 @@ namespace BrawlStageManager {
 					songContainerPanel.Visible = true;
 					listBoxSongs.Items.Add(new SongListItem("../../sound/strm/" + song.Filename + ".brstm"));
 					listBoxSongs.SelectedIndex = 0;
-				} else if (stage_id == 0x25) {
-					songContainerPanel.Visible = true;
-					listBoxSongs.Items.Add(new SongListItem("../../sound/strm/R03.brstm"));
-					listBoxSongs.SelectedIndex = 0;
-				} else if (stage_id == 0x01) {
-					songContainerPanel.Visible = true;
-					listBoxSongs.Items.AddRange(new object[] {
-						new SongListItem("../../sound/strm/X04.brstm"),
-						new SongListItem("../../sound/strm/T02.brstm"),
-						new SongListItem("../../sound/strm/X25.brstm"),
-						new SongListItem("../../sound/strm/W21.brstm"),
-						new SongListItem("../../sound/strm/W23.brstm"),
-					});
-					listBoxSongs.SelectedIndex = 0;
 				} else {
-					songContainerPanel.Visible = false;
-					songPanel1.Close();
+					string[] arr = SongsByStageID.ForPac(fi.Name);
+					if (arr != null) {
+						songContainerPanel.Visible = true;
+						listBoxSongs.Items.AddRange(arr);
+						listBoxSongs.SelectedIndex = 0;
+					} else {
+						songContainerPanel.Visible = false;
+						songPanel1.Close();
+					}
 				}
 			}
 			if (listBoxSongs.Items.Count > 0) {
@@ -884,6 +877,11 @@ namespace BrawlStageManager {
 				portraitViewer1.generateName();
 			}
 		}
+
+		private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e) {
+			songPanel1.Open(new FileInfo("../../sound/strm/" + listBoxSongs.SelectedItem + ".brstm"));
+		}
+
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
 			e.Cancel = !saveCommon5IfNecessary();
 		}
@@ -956,9 +954,5 @@ namespace BrawlStageManager {
 			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
-
-		private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e) {
-			songPanel1.Open(((SongListItem)listBoxSongs.SelectedItem).File);
-		}
 	}
 }

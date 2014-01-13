@@ -131,6 +131,7 @@
     <Compile Include="RegistryUtilities\GeneralRegistry.cs" />
     <Compile Include="RegistryUtilities\OptionsMenuSettings.cs" />
     <Compile Include="RegistryUtilities\ResizeSettings.cs" />
+    <Compile Include="SongsByStageID.cs" />
     <Compile Include="StageInfoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

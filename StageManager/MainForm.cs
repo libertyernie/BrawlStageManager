@@ -461,45 +461,48 @@ namespace BrawlStageManager {
 			DirectoryInfo dirinfo = new DirectoryInfo(dirpath);
 
 			var pacfiles = dirinfo.EnumerateFiles("*.pac");
-			if (!pacfiles.Any()) {
-				MessageBox.Show("No .pac files found in this folder.");
+			var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
+			var icons = dirinfo.EnumerateFiles("*Icon.*").Where(f => !f.Name.Contains("SeriesIcon"));
+			var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
+			var seriesicons = dirinfo.EnumerateFiles("*SelchrMark.*").Concat(dirinfo.EnumerateFiles("*SeriesIcon.*"));
+			var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
+			bool any = pacfiles.Any() || prevbases.Any() || icons.Any() || frontstnames.Any() || seriesicons.Any() || selmap_marks.Any();
+			if (!any) {
+				MessageBox.Show("No .pac files or images found in this folder.");
 				return;
 			}
-			FileInfo pac = pacfiles.First();
 
-			var relfiles = dirinfo.EnumerateFiles("*.rel");
-			string rel = relfiles.Any() ? relfiles.First().FullName : "No .rel file found";
+			if (pacfiles.Any()) {
+				FileInfo pac = pacfiles.First();
 
-			DialogResult r = new CopyPacRelDialog(pac.FullName, _rootPath, rel, stageInfoControl1.RelFile.FullName).ShowDialog();
-			if (r == DialogResult.Cancel) return;
-			if (r == DialogResult.Yes) {
-				File.Copy(pac.FullName, _rootPath, true);
-				if (File.Exists(rel)) File.Copy(rel, stageInfoControl1.RelFile.FullName, true);
+				var relfiles = dirinfo.EnumerateFiles("*.rel");
+				string rel = relfiles.Any() ? relfiles.First().FullName : "No .rel file found";
+
+				DialogResult r = new CopyPacRelDialog(pac.FullName, _rootPath, rel, stageInfoControl1.RelFile.FullName).ShowDialog();
+				if (r == DialogResult.Cancel) return;
+				if (r == DialogResult.Yes) {
+					File.Copy(pac.FullName, _rootPath, true);
+					if (File.Exists(rel)) File.Copy(rel, stageInfoControl1.RelFile.FullName, true);
+				}
 			}
 
 			if (portraitViewer1.SelmapLoaded) {
-				var prevbases = dirinfo.EnumerateFiles("*Prevbase.*");
 				if (prevbases.Any()) {
 					portraitViewer1.Replace(portraitViewer1.prevbase, prevbases.First().FullName);
 				}
 
-				var icons = dirinfo.EnumerateFiles("*Icon.*");
 				if (icons.Any()) {
 					portraitViewer1.Replace(portraitViewer1.icon, icons.First().FullName);
 				}
 
-				var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
 				if (frontstnames.Any()) {
 					portraitViewer1.Replace(portraitViewer1.frontstname, frontstnames.First().FullName);
 				}
 
-				var seriesicons = dirinfo.EnumerateFiles("*SeriesIcon.*")
-					.Concat(dirinfo.EnumerateFiles("*SelchrMark.*"));
 				if (seriesicons.Any()) {
 					portraitViewer1.Replace(portraitViewer1.seriesicon, seriesicons.First().FullName);
 				}
 
-				var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
 				if (selmap_marks.Any()) {
 					portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName);
 				}

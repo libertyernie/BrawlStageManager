@@ -164,7 +164,8 @@ namespace BrawlStageManager {
 			}
 
 			fileToolStripMenuItem.DropDownOpening += (o, e) => {
-				MoveToolStripItems(contextMenuStrip1.Items, currentStageToolStripMenuItem.DropDownItems);
+				MoveToolStripItems(stageContextMenu.Items, currentStageToolStripMenuItem.DropDownItems);
+				MoveToolStripItems(songContextMenu.Items, currentSongToolStripMenuItem.DropDownItems);
 			};
 			
 			FormClosing += MainForm_FormClosing;
@@ -332,7 +333,6 @@ namespace BrawlStageManager {
 			} else {
 				listBoxSongs.Visible = false;
 			}
-			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;
 			#endregion
 
 			this.Refresh();
@@ -592,9 +592,15 @@ namespace BrawlStageManager {
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}
-		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+		private void stageContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
 			listBox1.SelectedIndex = listBox1.IndexFromPoint(listBox1.PointToClient(Cursor.Position));
-			MoveToolStripItems(currentStageToolStripMenuItem.DropDownItems, contextMenuStrip1.Items);
+			MoveToolStripItems(currentStageToolStripMenuItem.DropDownItems, stageContextMenu.Items);
+			e.Cancel = false;
+		}
+
+		private void songContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+			listBoxSongs.SelectedIndex = listBoxSongs.IndexFromPoint(listBoxSongs.PointToClient(Cursor.Position));
+			MoveToolStripItems(currentSongToolStripMenuItem.DropDownItems, songContextMenu.Items);
 			e.Cancel = false;
 		}
 
@@ -880,6 +886,7 @@ namespace BrawlStageManager {
 
 		private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e) {
 			songPanel1.Open(new FileInfo("../../sound/strm/" + listBoxSongs.SelectedItem + ".brstm"));
+			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {

@@ -16,6 +16,8 @@ namespace BrawlStageManager {
 
 		private WiiPixelFormat[] SelmapMarkFormats = { WiiPixelFormat.I4, WiiPixelFormat.IA4, WiiPixelFormat.CMPR };
 
+		private List<string> selchrList, selmapList;
+
 		public ModifyPAT0Dialog(TextureContainer tx) {
 			InitializeComponent();
 			textures = tx;
@@ -28,7 +30,8 @@ namespace BrawlStageManager {
 						 where tex is TEX0Node && ((TEX0Node)tex).Format == WiiPixelFormat.I4
 						 orderby !tex.Name.Contains("MenSelchrMark") && !tex.Name.Contains("SeriesIcon"), tex.Name
 						 select tex.Name;
-				selchrBox.DataSource = i4.ToList();
+				selchrList = i4.ToList();
+				selchrBox.DataSource = selchrList;
 				if (textures.seriesicon_tex0 != null) selchrBox.SelectedItem = textures.seriesicon_tex0.Name;
 				selchrBox.Enabled = true;
 			}
@@ -40,20 +43,24 @@ namespace BrawlStageManager {
 						  where tex is TEX0Node && SelmapMarkFormats.Contains(((TEX0Node)tex).Format)
 						  orderby !tex.Name.Contains("MenSelmapMark"), tex.Name
 						  select tex.Name;
-				selmapBox.DataSource = ia4.ToList();
+				selmapList = ia4.ToList();
+				selmapBox.DataSource = selmapList;
 				if (textures.selmap_mark_tex0 != null) selmapBox.SelectedItem = textures.selmap_mark_tex0.Name;
 				selmapBox.Enabled = true;
 			}
 		}
 
 		private void btnCancel_Click(object sender, EventArgs e) {
-			//DialogResult = DialogResult.Cancel;
-			Close();
+			//Close();
 		}
 
 		private void btnOkay_Click(object sender, EventArgs e) {
-			//DialogResult = DialogResult.OK;
-
+			if (selchrBox.SelectedItem == null) {
+				selchrBox.SelectedIndex = selchrList.IndexOf(selchrBox.Text);
+			}
+			if (selmapBox.SelectedItem == null) {
+				selmapBox.SelectedIndex = selmapList.IndexOf(selmapBox.Text);
+			}
 			if (selchrBox.Enabled && selchrBox.SelectedItem != null && selchrBox.SelectedItem.ToString() != textures.seriesicon_pat0.Texture) {
 				textures.seriesicon_pat0.Texture = selchrBox.SelectedItem.ToString();
 				textures.seriesicon_pat0.IsDirty = true;
@@ -63,7 +70,7 @@ namespace BrawlStageManager {
 				textures.selmap_mark_pat0.IsDirty = true;
 			}
 
-			Close();
+			//Close();
 		}
 	}
 }

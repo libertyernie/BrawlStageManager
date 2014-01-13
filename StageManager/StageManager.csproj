@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SongListItem.cs" />
     <Compile Include="SingleUseDialogs\AskNameDialog.cs">
       <SubType>Form</SubType>
     </Compile>

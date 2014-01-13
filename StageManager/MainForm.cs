@@ -305,22 +305,39 @@ namespace BrawlStageManager {
 			int stage_id = StageIDMap.StageIDForPac(fi.Name);
 			portraitViewer1.UpdateImage(portraitViewer1.BestSSS.IconForStage(stage_id));
 			#region finding .brstm
+			listBoxSongs.Items.Clear();
 			if (!loadbrstmsToolStripMenuItem.Checked) {
 				songPanel1.Close();
 			} else {
 				Song song;
 				if (portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
-					songPanel1.Visible = true;
-					var songfi = new FileInfo("../../sound/strm/" + song.Filename + ".brstm");
-					songPanel1.Open(songfi);
+					songContainerPanel.Visible = true;
+					listBoxSongs.Items.Add(new SongListItem("../../sound/strm/" + song.Filename + ".brstm"));
+					listBoxSongs.SelectedIndex = 0;
 				} else if (stage_id == 0x25) {
-					songPanel1.Visible = true;
-					var songfi = new FileInfo("../../sound/strm/R03.brstm");
-					songPanel1.Open(songfi);
+					songContainerPanel.Visible = true;
+					listBoxSongs.Items.Add(new SongListItem("../../sound/strm/R03.brstm"));
+					listBoxSongs.SelectedIndex = 0;
+				} else if (stage_id == 0x01) {
+					songContainerPanel.Visible = true;
+					listBoxSongs.Items.AddRange(new object[] {
+						new SongListItem("../../sound/strm/X04.brstm"),
+						new SongListItem("../../sound/strm/T02.brstm"),
+						new SongListItem("../../sound/strm/X25.brstm"),
+						new SongListItem("../../sound/strm/W21.brstm"),
+						new SongListItem("../../sound/strm/W23.brstm"),
+					});
+					listBoxSongs.SelectedIndex = 0;
 				} else {
-					songPanel1.Visible = false;
+					songContainerPanel.Visible = false;
 					songPanel1.Close();
 				}
+			}
+			if (listBoxSongs.Items.Count > 0) {
+				listBoxSongs.Visible = true;
+				listBoxSongs.SelectedIndex = 0;
+			} else {
+				listBoxSongs.Visible = false;
 			}
 			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;
 			#endregion
@@ -939,5 +956,9 @@ namespace BrawlStageManager {
 			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
+
+		private void listBoxSongs_SelectedIndexChanged(object sender, EventArgs e) {
+			songPanel1.Open(((SongListItem)listBoxSongs.SelectedItem).File);
+		}
 	}
 }

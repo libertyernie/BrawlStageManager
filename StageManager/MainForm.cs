@@ -310,19 +310,16 @@ namespace BrawlStageManager {
 			} else {
 				Song song;
 				if (portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
-					lblSong.Text = "Stage-dependent song loader: " + song.Filename + ".brstm (" + song.ID.ToString("X4") + ")";
-					pnlSong.Visible = true;
+					songPanel1.Visible = true;
 					var songfi = new FileInfo("../../sound/strm/" + song.Filename + ".brstm");
 					songPanel1.Open(songfi);
 				} else if (stage_id == 0x25) {
-					lblSong.Text = "Hanenbow: R03.brstm";
-					pnlSong.Visible = true;
+					songPanel1.Visible = true;
 					var songfi = new FileInfo("../../sound/strm/R03.brstm");
 					songPanel1.Open(songfi);
 				} else {
-					lblSong.Text = "No music code for this stage";
+					songPanel1.Visible = false;
 					songPanel1.Close();
-					pnlSong.Visible = false;
 				}
 			}
 			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;

@@ -31,11 +31,9 @@
 			this.stageContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.clbTextures = new System.Windows.Forms.CheckedListBox();
 			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
-			this.collapsibleSplitter3 = new BrawlManagerLib.CollapsibleSplitter();
 			this.songContainerPanel = new System.Windows.Forms.Panel();
-			this.songPanel1 = new BrawlManagerLib.SongPanel();
 			this.listBoxSongs = new System.Windows.Forms.ListBox();
-			this.collapsibleSplitter2 = new BrawlManagerLib.CollapsibleSplitter();
+			this.songContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.msBinPanel = new System.Windows.Forms.Panel();
 			this.exportpacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,11 +103,16 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.songContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.collapsibleSplitter3 = new BrawlManagerLib.CollapsibleSplitter();
+			this.collapsibleSplitter2 = new BrawlManagerLib.CollapsibleSplitter();
 			this.collapsibleSplitter1 = new BrawlManagerLib.CollapsibleSplitter();
 			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
+			this.songPanel1 = new BrawlManagerLib.SongPanel();
 			this.collapsibleSplitter4 = new BrawlManagerLib.CollapsibleSplitter();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
+			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+			this.saveCommon5scselmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveInfopacToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -205,22 +208,6 @@
 			this.modelPanel1.TranslationScale = 0.05F;
 			this.modelPanel1.ZoomScale = 2.5F;
 			// 
-			// collapsibleSplitter3
-			// 
-			this.collapsibleSplitter3.AnimationDelay = 20;
-			this.collapsibleSplitter3.AnimationStep = 20;
-			this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.collapsibleSplitter3.ControlToHide = this.songContainerPanel;
-			this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.collapsibleSplitter3.ExpandParentForm = false;
-			this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 338);
-			this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-			this.collapsibleSplitter3.Size = new System.Drawing.Size(321, 8);
-			this.collapsibleSplitter3.TabIndex = 5;
-			this.collapsibleSplitter3.TabStop = false;
-			this.collapsibleSplitter3.UseAnimations = false;
-			this.collapsibleSplitter3.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
-			// 
 			// songContainerPanel
 			// 
 			this.songContainerPanel.Controls.Add(this.songPanel1);
@@ -231,16 +218,6 @@
 			this.songContainerPanel.Size = new System.Drawing.Size(321, 131);
 			this.songContainerPanel.TabIndex = 7;
 			this.songContainerPanel.Visible = false;
-			// 
-			// songPanel1
-			// 
-			this.songPanel1.AllowDrop = true;
-			this.songPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.songPanel1.Location = new System.Drawing.Point(46, 0);
-			this.songPanel1.MinimumSize = new System.Drawing.Size(0, 131);
-			this.songPanel1.Name = "songPanel1";
-			this.songPanel1.Size = new System.Drawing.Size(275, 131);
-			this.songPanel1.TabIndex = 6;
 			// 
 			// listBoxSongs
 			// 
@@ -254,21 +231,11 @@
 			this.listBoxSongs.TabIndex = 8;
 			this.listBoxSongs.SelectedIndexChanged += new System.EventHandler(this.listBoxSongs_SelectedIndexChanged);
 			// 
-			// collapsibleSplitter2
+			// songContextMenu
 			// 
-			this.collapsibleSplitter2.AnimationDelay = 20;
-			this.collapsibleSplitter2.AnimationStep = 20;
-			this.collapsibleSplitter2.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.collapsibleSplitter2.ControlToHide = this.msBinPanel;
-			this.collapsibleSplitter2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.collapsibleSplitter2.ExpandParentForm = false;
-			this.collapsibleSplitter2.Location = new System.Drawing.Point(0, 140);
-			this.collapsibleSplitter2.Name = "collapsibleSplitter2";
-			this.collapsibleSplitter2.Size = new System.Drawing.Size(321, 8);
-			this.collapsibleSplitter2.TabIndex = 0;
-			this.collapsibleSplitter2.TabStop = false;
-			this.collapsibleSplitter2.UseAnimations = false;
-			this.collapsibleSplitter2.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
+			this.songContextMenu.Name = "songContextMenu";
+			this.songContextMenu.Size = new System.Drawing.Size(61, 4);
+			this.songContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.songContextMenu_Opening);
 			// 
 			// msBinPanel
 			// 
@@ -325,8 +292,11 @@
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeDirectoryToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.currentStageToolStripMenuItem,
             this.currentSongToolStripMenuItem,
+            this.saveCommon5scselmapToolStripMenuItem,
+            this.saveInfopacToolStripMenuItem,
             this.toolStripMenuItem4,
             this.registryToolStripMenuItem,
             this.exportAllToolStripMenuItem,
@@ -653,7 +623,7 @@
 			// 
 			this.updateScselcharacter2ToolStripMenuItem.Name = "updateScselcharacter2ToolStripMenuItem";
 			this.updateScselcharacter2ToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
-			this.updateScselcharacter2ToolStripMenuItem.Text = "Update sc_selcharacter2";
+			this.updateScselcharacter2ToolStripMenuItem.Text = "Update stage pics in sc_selcharacter2";
 			this.updateScselcharacter2ToolStripMenuItem.Click += new System.EventHandler(this.updateScselcharacter2ToolStripMenuItem_Click);
 			// 
 			// separator4
@@ -817,11 +787,37 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
-			// songContextMenu
+			// collapsibleSplitter3
 			// 
-			this.songContextMenu.Name = "songContextMenu";
-			this.songContextMenu.Size = new System.Drawing.Size(153, 26);
-			this.songContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.songContextMenu_Opening);
+			this.collapsibleSplitter3.AnimationDelay = 20;
+			this.collapsibleSplitter3.AnimationStep = 20;
+			this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+			this.collapsibleSplitter3.ControlToHide = this.songContainerPanel;
+			this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.collapsibleSplitter3.ExpandParentForm = false;
+			this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 338);
+			this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+			this.collapsibleSplitter3.Size = new System.Drawing.Size(321, 8);
+			this.collapsibleSplitter3.TabIndex = 5;
+			this.collapsibleSplitter3.TabStop = false;
+			this.collapsibleSplitter3.UseAnimations = false;
+			this.collapsibleSplitter3.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
+			// 
+			// collapsibleSplitter2
+			// 
+			this.collapsibleSplitter2.AnimationDelay = 20;
+			this.collapsibleSplitter2.AnimationStep = 20;
+			this.collapsibleSplitter2.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+			this.collapsibleSplitter2.ControlToHide = this.msBinPanel;
+			this.collapsibleSplitter2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.collapsibleSplitter2.ExpandParentForm = false;
+			this.collapsibleSplitter2.Location = new System.Drawing.Point(0, 140);
+			this.collapsibleSplitter2.Name = "collapsibleSplitter2";
+			this.collapsibleSplitter2.Size = new System.Drawing.Size(321, 8);
+			this.collapsibleSplitter2.TabIndex = 0;
+			this.collapsibleSplitter2.TabStop = false;
+			this.collapsibleSplitter2.UseAnimations = false;
+			this.collapsibleSplitter2.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
 			// 
 			// collapsibleSplitter1
 			// 
@@ -849,6 +845,16 @@
 			this.stageInfoControl1.TabIndex = 0;
 			this.stageInfoControl1.UseRelDescription = false;
 			// 
+			// songPanel1
+			// 
+			this.songPanel1.AllowDrop = true;
+			this.songPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.songPanel1.Location = new System.Drawing.Point(46, 0);
+			this.songPanel1.MinimumSize = new System.Drawing.Size(0, 131);
+			this.songPanel1.Name = "songPanel1";
+			this.songPanel1.Size = new System.Drawing.Size(275, 131);
+			this.songPanel1.TabIndex = 6;
+			// 
 			// collapsibleSplitter4
 			// 
 			this.collapsibleSplitter4.AnimationDelay = 20;
@@ -873,6 +879,25 @@
 			this.portraitViewer1.Name = "portraitViewer1";
 			this.portraitViewer1.Size = new System.Drawing.Size(213, 477);
 			this.portraitViewer1.TabIndex = 2;
+			// 
+			// toolStripMenuItem3
+			// 
+			this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+			this.toolStripMenuItem3.Size = new System.Drawing.Size(212, 6);
+			// 
+			// saveCommon5scselmapToolStripMenuItem
+			// 
+			this.saveCommon5scselmapToolStripMenuItem.Name = "saveCommon5scselmapToolStripMenuItem";
+			this.saveCommon5scselmapToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+			this.saveCommon5scselmapToolStripMenuItem.Text = "Save common5/sc_selmap";
+			this.saveCommon5scselmapToolStripMenuItem.Click += new System.EventHandler(this.saveCommon5scselmapToolStripMenuItem_Click);
+			// 
+			// saveInfopacToolStripMenuItem
+			// 
+			this.saveInfopacToolStripMenuItem.Name = "saveInfopacToolStripMenuItem";
+			this.saveInfopacToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+			this.saveInfopacToolStripMenuItem.Text = "Save info.pac";
+			this.saveInfopacToolStripMenuItem.Click += new System.EventHandler(this.saveInfopacToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -992,6 +1017,9 @@
 		private System.Windows.Forms.ToolStripMenuItem currentSongToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
 		private System.Windows.Forms.ContextMenuStrip songContextMenu;
+		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+		private System.Windows.Forms.ToolStripMenuItem saveCommon5scselmapToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveInfopacToolStripMenuItem;
 
 
 

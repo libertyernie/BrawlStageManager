@@ -164,6 +164,8 @@ namespace BrawlStageManager {
 			}
 
 			fileToolStripMenuItem.DropDownOpening += (o, e) => {
+				saveCommon5scselmapToolStripMenuItem.Enabled = portraitViewer1.IsDirty;
+				saveInfopacToolStripMenuItem.Enabled = songPanel1.IsInfoBarDirty();
 				MoveToolStripItems(stageContextMenu.Items, currentStageToolStripMenuItem.DropDownItems);
 				MoveToolStripItems(songContextMenu.Items, currentSongToolStripMenuItem.DropDownItems);
 			};
@@ -189,15 +191,18 @@ namespace BrawlStageManager {
 		}
 
 		/// <summary>
-		/// If the common5/sc_selmap is dirty, asks the user whether they want to save it.
+		/// If the common5/sc_selmap or info.pac is dirty, asks the user whether they want to save them.
 		/// </summary>
-		/// <returns>true if the file did not need to be saved OR the user saved it; false otherwise.</returns>
-		private bool saveCommon5IfNecessary() {
-			if (portraitViewer1.IsDirty) {
-				var result = MessageBox.Show("Would you like to save common5/sc_selmap before closing?", Text, MessageBoxButtons.YesNoCancel);
+		/// <returns>true if the files did not need to be saved OR the user saved them; false otherwise.</returns>
+		private bool savePacsIfNecessary() {
+			bool s = portraitViewer1.IsDirty;
+			bool i = songPanel1.IsInfoBarDirty();
+			if (s || i) {
+				var result = MessageBox.Show("Would you like to save common5/sc_selmap and info.pac before closing?", Text, MessageBoxButtons.YesNoCancel);
 				if (result == DialogResult.Cancel) {
 					return false;
 				} else if (result == DialogResult.Yes) {
+					songPanel1.save();
 					portraitViewer1.save();
 					return true;
 				} else if (result == DialogResult.No) {
@@ -673,7 +678,7 @@ namespace BrawlStageManager {
 			portraitViewer1.useTextureConverter = useTextureConverterToolStripMenuItem.Checked;
 		}
 		private void useAFixedStageListToolStripMenuItem_Click(object sender, EventArgs e) {
-			bool cont = saveCommon5IfNecessary();
+			bool cont = savePacsIfNecessary();
 			if (cont) {
 				changeDirectory(CurrentDirectory); // Refresh .pac list
 			}
@@ -890,7 +895,7 @@ namespace BrawlStageManager {
 		}
 
 		private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-			e.Cancel = !saveCommon5IfNecessary();
+			e.Cancel = !savePacsIfNecessary();
 		}
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e) {
 			TempFiles.TryToDeleteAll();
@@ -961,5 +966,13 @@ namespace BrawlStageManager {
 			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
+
+		private void saveCommon5scselmapToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.save();
+		}
+
+		private void saveInfopacToolStripMenuItem_Click(object sender, EventArgs e) {
+			songPanel1.save();
+		}
 	}
 }

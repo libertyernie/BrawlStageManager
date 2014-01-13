@@ -29,17 +29,14 @@
 			this.splitContainerLeft = new System.Windows.Forms.SplitContainer();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.clbTextures = new System.Windows.Forms.CheckedListBox();
+			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
+			this.msBinPanel = new System.Windows.Forms.Panel();
 			this.exportpacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deletepacrelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
 			this.exportbrstmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deletebrstmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clbTextures = new System.Windows.Forms.CheckedListBox();
-			this.modelPanel1 = new System.Windows.Forms.ModelPanel();
-			this.collapsibleSplitter3 = new BrawlManagerLib.CollapsibleSplitter();
-			this.songPanel1 = new BrawlManagerLib.SongPanel();
-			this.collapsibleSplitter2 = new BrawlManagerLib.CollapsibleSplitter();
-			this.msBinPanel = new System.Windows.Forms.Panel();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +99,11 @@
 			this.texturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pnlSong = new System.Windows.Forms.Panel();
+			this.lblSong = new System.Windows.Forms.Label();
+			this.collapsibleSplitter3 = new BrawlManagerLib.CollapsibleSplitter();
+			this.songPanel1 = new BrawlManagerLib.SongPanel();
+			this.collapsibleSplitter2 = new BrawlManagerLib.CollapsibleSplitter();
 			this.collapsibleSplitter1 = new BrawlManagerLib.CollapsibleSplitter();
 			this.stageInfoControl1 = new BrawlStageManager.StageInfoControl();
 			this.collapsibleSplitter4 = new BrawlManagerLib.CollapsibleSplitter();
@@ -114,8 +116,8 @@
 			this.splitContainerLeft.Panel1.SuspendLayout();
 			this.splitContainerLeft.Panel2.SuspendLayout();
 			this.splitContainerLeft.SuspendLayout();
-			this.contextMenuStrip1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			this.pnlSong.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainer1
@@ -136,7 +138,7 @@
 			this.splitContainer1.Panel2.Controls.Add(this.msBinPanel);
 			this.splitContainer1.Panel2.Controls.Add(this.collapsibleSplitter1);
 			this.splitContainer1.Panel2.Controls.Add(this.stageInfoControl1);
-			this.splitContainer1.Panel2.Controls.Add(this.songPanel1);
+			this.splitContainer1.Panel2.Controls.Add(this.pnlSong);
 			this.splitContainer1.Size = new System.Drawing.Size(463, 477);
 			this.splitContainer1.SplitterDistance = 138;
 			this.splitContainer1.TabIndex = 0;
@@ -175,8 +177,39 @@
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(197, 98);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
 			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+			// 
+			// clbTextures
+			// 
+			this.clbTextures.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.clbTextures.FormattingEnabled = true;
+			this.clbTextures.Location = new System.Drawing.Point(0, 0);
+			this.clbTextures.Name = "clbTextures";
+			this.clbTextures.Size = new System.Drawing.Size(150, 46);
+			this.clbTextures.TabIndex = 0;
+			// 
+			// modelPanel1
+			// 
+			this.modelPanel1.DefaultTranslate = ((System.Vector3)(resources.GetObject("modelPanel1.DefaultTranslate")));
+			this.modelPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.modelPanel1.InitialYFactor = 100;
+			this.modelPanel1.InitialZoomFactor = 5;
+			this.modelPanel1.Location = new System.Drawing.Point(0, 148);
+			this.modelPanel1.Name = "modelPanel1";
+			this.modelPanel1.RotationScale = 0.1F;
+			this.modelPanel1.Size = new System.Drawing.Size(321, 170);
+			this.modelPanel1.TabIndex = 2;
+			this.modelPanel1.TranslationScale = 0.05F;
+			this.modelPanel1.ZoomScale = 2.5F;
+			// 
+			// msBinPanel
+			// 
+			this.msBinPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.msBinPanel.Location = new System.Drawing.Point(0, 64);
+			this.msBinPanel.Name = "msBinPanel";
+			this.msBinPanel.Size = new System.Drawing.Size(321, 76);
+			this.msBinPanel.TabIndex = 3;
 			// 
 			// exportpacrelToolStripMenuItem
 			// 
@@ -210,79 +243,6 @@
 			this.deletebrstmToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
 			this.deletebrstmToolStripMenuItem.Text = "Delete .brstm";
 			this.deletebrstmToolStripMenuItem.Click += new System.EventHandler(this.deletebrstmToolStripMenuItem_Click);
-			// 
-			// clbTextures
-			// 
-			this.clbTextures.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.clbTextures.FormattingEnabled = true;
-			this.clbTextures.Location = new System.Drawing.Point(0, 0);
-			this.clbTextures.Name = "clbTextures";
-			this.clbTextures.Size = new System.Drawing.Size(150, 46);
-			this.clbTextures.TabIndex = 0;
-			// 
-			// modelPanel1
-			// 
-			this.modelPanel1.DefaultTranslate = ((System.Vector3)(resources.GetObject("modelPanel1.DefaultTranslate")));
-			this.modelPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.modelPanel1.InitialYFactor = 100;
-			this.modelPanel1.InitialZoomFactor = 5;
-			this.modelPanel1.Location = new System.Drawing.Point(0, 148);
-			this.modelPanel1.Name = "modelPanel1";
-			this.modelPanel1.RotationScale = 0.1F;
-			this.modelPanel1.Size = new System.Drawing.Size(321, 181);
-			this.modelPanel1.TabIndex = 2;
-			this.modelPanel1.TranslationScale = 0.05F;
-			this.modelPanel1.ZoomScale = 2.5F;
-			// 
-			// collapsibleSplitter3
-			// 
-			this.collapsibleSplitter3.AnimationDelay = 20;
-			this.collapsibleSplitter3.AnimationStep = 20;
-			this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.collapsibleSplitter3.ControlToHide = this.songPanel1;
-			this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.collapsibleSplitter3.ExpandParentForm = false;
-			this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 329);
-			this.collapsibleSplitter3.Name = "collapsibleSplitter3";
-			this.collapsibleSplitter3.Size = new System.Drawing.Size(321, 8);
-			this.collapsibleSplitter3.TabIndex = 5;
-			this.collapsibleSplitter3.TabStop = false;
-			this.collapsibleSplitter3.UseAnimations = false;
-			this.collapsibleSplitter3.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
-			// 
-			// songPanel1
-			// 
-			this.songPanel1.AllowDrop = true;
-			this.songPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.songPanel1.Location = new System.Drawing.Point(0, 337);
-			this.songPanel1.Name = "songPanel1";
-			this.songPanel1.ShowPropertyGrid = false;
-			this.songPanel1.Size = new System.Drawing.Size(321, 140);
-			this.songPanel1.TabIndex = 6;
-			// 
-			// collapsibleSplitter2
-			// 
-			this.collapsibleSplitter2.AnimationDelay = 20;
-			this.collapsibleSplitter2.AnimationStep = 20;
-			this.collapsibleSplitter2.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
-			this.collapsibleSplitter2.ControlToHide = this.msBinPanel;
-			this.collapsibleSplitter2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.collapsibleSplitter2.ExpandParentForm = false;
-			this.collapsibleSplitter2.Location = new System.Drawing.Point(0, 140);
-			this.collapsibleSplitter2.Name = "collapsibleSplitter2";
-			this.collapsibleSplitter2.Size = new System.Drawing.Size(321, 8);
-			this.collapsibleSplitter2.TabIndex = 0;
-			this.collapsibleSplitter2.TabStop = false;
-			this.collapsibleSplitter2.UseAnimations = false;
-			this.collapsibleSplitter2.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
-			// 
-			// msBinPanel
-			// 
-			this.msBinPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.msBinPanel.Location = new System.Drawing.Point(0, 64);
-			this.msBinPanel.Name = "msBinPanel";
-			this.msBinPanel.Size = new System.Drawing.Size(321, 76);
-			this.msBinPanel.TabIndex = 3;
 			// 
 			// menuStrip1
 			// 
@@ -782,6 +742,69 @@
 			this.aboutToolStripMenuItem.Text = "About";
 			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
+			// pnlSong
+			// 
+			this.pnlSong.Controls.Add(this.lblSong);
+			this.pnlSong.Controls.Add(this.songPanel1);
+			this.pnlSong.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnlSong.Location = new System.Drawing.Point(0, 326);
+			this.pnlSong.Name = "pnlSong";
+			this.pnlSong.Size = new System.Drawing.Size(321, 151);
+			this.pnlSong.TabIndex = 1;
+			this.pnlSong.Visible = false;
+			// 
+			// lblSong
+			// 
+			this.lblSong.Dock = System.Windows.Forms.DockStyle.Top;
+			this.lblSong.Location = new System.Drawing.Point(0, 0);
+			this.lblSong.Name = "lblSong";
+			this.lblSong.Size = new System.Drawing.Size(321, 20);
+			this.lblSong.TabIndex = 6;
+			this.lblSong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// collapsibleSplitter3
+			// 
+			this.collapsibleSplitter3.AnimationDelay = 20;
+			this.collapsibleSplitter3.AnimationStep = 20;
+			this.collapsibleSplitter3.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+			this.collapsibleSplitter3.ControlToHide = this.pnlSong;
+			this.collapsibleSplitter3.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.collapsibleSplitter3.ExpandParentForm = false;
+			this.collapsibleSplitter3.Location = new System.Drawing.Point(0, 318);
+			this.collapsibleSplitter3.Name = "collapsibleSplitter3";
+			this.collapsibleSplitter3.Size = new System.Drawing.Size(321, 8);
+			this.collapsibleSplitter3.TabIndex = 5;
+			this.collapsibleSplitter3.TabStop = false;
+			this.collapsibleSplitter3.UseAnimations = false;
+			this.collapsibleSplitter3.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
+			// 
+			// songPanel1
+			// 
+			this.songPanel1.AllowDrop = true;
+			this.songPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.songPanel1.Location = new System.Drawing.Point(0, 20);
+			this.songPanel1.MinimumSize = new System.Drawing.Size(0, 131);
+			this.songPanel1.Name = "songPanel1";
+			this.songPanel1.ShowPropertyGrid = false;
+			this.songPanel1.Size = new System.Drawing.Size(321, 131);
+			this.songPanel1.TabIndex = 6;
+			// 
+			// collapsibleSplitter2
+			// 
+			this.collapsibleSplitter2.AnimationDelay = 20;
+			this.collapsibleSplitter2.AnimationStep = 20;
+			this.collapsibleSplitter2.BorderStyle3D = System.Windows.Forms.Border3DStyle.Flat;
+			this.collapsibleSplitter2.ControlToHide = this.msBinPanel;
+			this.collapsibleSplitter2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.collapsibleSplitter2.ExpandParentForm = false;
+			this.collapsibleSplitter2.Location = new System.Drawing.Point(0, 140);
+			this.collapsibleSplitter2.Name = "collapsibleSplitter2";
+			this.collapsibleSplitter2.Size = new System.Drawing.Size(321, 8);
+			this.collapsibleSplitter2.TabIndex = 0;
+			this.collapsibleSplitter2.TabStop = false;
+			this.collapsibleSplitter2.UseAnimations = false;
+			this.collapsibleSplitter2.VisualStyle = BrawlManagerLib.VisualStyles.Mozilla;
+			// 
 			// collapsibleSplitter1
 			// 
 			this.collapsibleSplitter1.AnimationDelay = 20;
@@ -856,9 +879,9 @@
 			this.splitContainerLeft.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerLeft)).EndInit();
 			this.splitContainerLeft.ResumeLayout(false);
-			this.contextMenuStrip1.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.pnlSong.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -947,6 +970,8 @@
 		private System.Windows.Forms.ToolStripMenuItem exportbrstmToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deletebrstmToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem currentStageToolStripMenuItem;
+		private System.Windows.Forms.Panel pnlSong;
+		private System.Windows.Forms.Label lblSong;
 
 
 

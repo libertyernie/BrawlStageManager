@@ -310,12 +310,12 @@ namespace BrawlStageManager {
 			} else {
 				Song song;
 				if (loadbrstmsToolStripMenuItem.Checked && portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)stage_id, out song)) {
-					songPanel1.Visible = true;
+					pnlSong.Visible = true;
 					var songfi = new FileInfo("../../sound/strm/" + song.Filename + ".brstm");
 					songPanel1.Open(songfi);
 				} else {
 					songPanel1.Close();
-					songPanel1.Visible = false;
+					pnlSong.Visible = false;
 				}
 			}
 			exportbrstmToolStripMenuItem.Enabled = deletebrstmToolStripMenuItem.Enabled = songPanel1.FileOpen;

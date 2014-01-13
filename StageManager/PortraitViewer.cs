@@ -175,10 +175,11 @@ namespace BrawlStageManager {
 				btnGenerateName.Visible = (textures.prevbase_tex0 != null);
 				lblIconTex.Text = "Icon no.: " + iconNum;
 
+				var pal = textures.icon_tex0.GetPaletteNode();
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P: " + textures.prevbase_tex0.ToSizeString()
 						+ ", F: " + textures.frontstname_tex0.ToSizeString()
-						+ ", icon: " + textures.icon_tex0.GetPaletteNode().Colors + "c"
+						+ ", icon: " + (pal == null ? "null" : pal.Colors + "c")
 						+ "\nmark: " + textures.selmap_mark_tex0.ToSizeString();
 					if (textures.selmap_mark_tex0 != null) {
 						label1.Text += " " + textures.selmap_mark_tex0.Format;
@@ -687,14 +688,16 @@ namespace BrawlStageManager {
 
 				byte absent_stage_id = BestSSS[0x1E].Item1;
 				int sss2_count = BestSSS.sss2.Where(b => b != 0x1E).Count() + 1;
-				string warn = sss2_count <= 39 ? "" : "\nWARNING: screen 2 of the SSS has more than 39 stages - My Music will crash on page 2.";
+				string warn = sss2_count <= 39 ? "" : "\nWARNING: screen 2 of the SSS " +
+					(AutoSSS == null ? "may have " : "has ") +
+					"more than 39 stages, causing My Music to crash on page 2.";
 				var q = StageIDMap.Stages.Where(s => s.ID == absent_stage_id);
 				string absent = q.Any()
 					? q.First().Name
 					: "STGCUSTOM" + (absent_stage_id - 0x3f).ToString("X2");
-				MessageBox.Show("Done" +
-					(msBinPath != null ? " (song titles copied too)" : "") +
-					". Based on your current SSS code, " +
+				MessageBox.Show("Done. " +
+					(msBinPath != null ? "(Song titles copied too.) " : "") +
+					(AutoSSS == null ? "Without a Custom SSS code, " : "Based on your current SSS code, ") +
 					absent + " will be missing; and Menu will be added to the end of screen 2." + warn);
 			}
 		}

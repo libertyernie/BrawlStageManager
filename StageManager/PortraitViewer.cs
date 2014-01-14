@@ -175,7 +175,8 @@ namespace BrawlStageManager {
 				btnGenerateName.Visible = (textures.prevbase_tex0 != null);
 				lblIconTex.Text = "Icon no.: " + iconNum;
 
-				var pal = textures.icon_tex0.GetPaletteNode();
+				var tex = textures.icon_tex0;
+				var pal = tex == null ? null : textures.icon_tex0.GetPaletteNode();
 				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
 					label1.Text = "P: " + textures.prevbase_tex0.ToSizeString()
 						+ ", F: " + textures.frontstname_tex0.ToSizeString()

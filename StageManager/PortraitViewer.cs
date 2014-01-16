@@ -36,13 +36,13 @@ namespace BrawlStageManager {
 			}
 		}
 
-		public TEX0Node GetTEX0For(object sender) {
+		public TextureContainer.Texture GetTexInfoFor(object sender) {
 			return
-				(sender == prevbase) ? textures.prevbase_tex0 :
-				(sender == icon) ? textures.icon_tex0 :
-				(sender == frontstname) ? textures.frontstname_tex0 :
-				(sender == seriesicon) ? textures.seriesicon_tex0 :
-				(sender == selmap_mark) ? textures.selmap_mark_tex0 :
+				(sender == prevbase) ? textures.prevbase :
+				(sender == icon) ? textures.icon :
+				(sender == frontstname) ? textures.frontstname :
+				(sender == seriesicon) ? textures.seriesicon :
+				(sender == selmap_mark) ? textures.selmap_mark :
 				null;
 		}
 		#endregion
@@ -171,18 +171,18 @@ namespace BrawlStageManager {
 					}
 				}
 
-				btnGenerateName.Visible = (textures.prevbase_tex0 != null);
+				btnGenerateName.Visible = (textures.prevbase.tex0 != null);
 				lblIconTex.Text = "Icon no.: " + iconNum;
 
-				var tex = textures.icon_tex0;
-				var pal = tex == null ? null : textures.icon_tex0.GetPaletteNode();
-				if (textures.prevbase_tex0 != null && textures.frontstname_tex0 != null) {
-					label1.Text = "P: " + textures.prevbase_tex0.ToSizeString()
-						+ ", F: " + textures.frontstname_tex0.ToSizeString()
+				var tex = textures.icon.tex0;
+				var pal = tex == null ? null : textures.icon.tex0.GetPaletteNode();
+				if (textures.prevbase.tex0 != null && textures.frontstname.tex0 != null) {
+					label1.Text = "P: " + textures.prevbase.tex0.ToSizeString()
+						+ ", F: " + textures.frontstname.tex0.ToSizeString()
 						+ ", icon: " + (pal == null ? "null" : pal.Colors + "c")
-						+ "\nmark: " + textures.selmap_mark_tex0.ToSizeString();
-					if (textures.selmap_mark_tex0 != null) {
-						label1.Text += " " + textures.selmap_mark_tex0.Format;
+						+ "\nmark: " + textures.selmap_mark.tex0.ToSizeString();
+					if (textures.selmap_mark.tex0 != null) {
+						label1.Text += " " + textures.selmap_mark.tex0.Format;
 					}
 				}
 
@@ -259,7 +259,7 @@ namespace BrawlStageManager {
 					Replace(sender, tempFile); // call self with new file
 				}
 			} else {
-				TEX0Node tex0 = GetTEX0For(sender);
+				TEX0Node tex0 = GetTexInfoFor(sender).tex0;
 				if (useTextureConverter) {
 					using (TextureConverterDialog dlg = new TextureConverterDialog()) {
 						dlg.ImageSource = filename;
@@ -314,15 +314,15 @@ namespace BrawlStageManager {
 
 		#region Private methods
 		private void setBG(Panel panel) {
-			TEX0Node tex0 = GetTEX0For(panel);
+			var texInfo = GetTexInfoFor(panel);
 			Bitmap bgi = null;
-			if (tex0 == null) {
+			if (texInfo.tex0 == null) {
 				Bitmap b = new Bitmap(1, 1);
 				b.SetPixel(0, 0, Color.Brown);
 				bgi = b;
 			} else {
-				Bitmap image = new Bitmap(tex0.GetImage(0));
-				if (panel == selmap_mark && selmapMarkPreview && tex0.Format != WiiPixelFormat.CMPR) {
+				Bitmap image = new Bitmap(texInfo.tex0.GetImage(0));
+				if (panel == selmap_mark && selmapMarkPreview && texInfo.tex0.Format != WiiPixelFormat.CMPR) {
 					bgi = BitmapUtilities.AlphaSwap(image);
 				} else if (panel == seriesicon && selmapMarkPreview) {
 					bgi = BitmapUtilities.Invert(BitmapUtilities.AlphaSwap(image));
@@ -334,6 +334,10 @@ namespace BrawlStageManager {
 				if (bgi.Size != panel.Size) {
 					bgi = BitmapUtilities.Resize(bgi, panel.Size);
 				}
+			}
+
+			if (!texInfo.ForThisFrameIndex) {
+				bgi = BitmapUtilities.Border(bgi, Color.Magenta, 2);
 			}
 
 			panel.BackgroundImage = bgi;
@@ -587,11 +591,11 @@ namespace BrawlStageManager {
 			TextureContainer texs = get_icons(p);
 			if (texs == null) return;
 
-			if (texs.prevbase_tex0 != null) texs.prevbase_tex0.Export(thisdir + "/MenSelmapPrevbase.png");
-			if (texs.icon_tex0 != null) texs.icon_tex0.Export(thisdir + "/MenSelmapIcon.png");
-			if (texs.frontstname_tex0 != null) texs.frontstname_tex0.Export(thisdir + "/MenSelmapFrontStname.png");
-			if (texs.seriesicon_tex0 != null) texs.seriesicon_tex0.Export(thisdir + "/MenSelchrMark.png");
-			if (texs.selmap_mark_tex0 != null) texs.selmap_mark_tex0.Export(thisdir + "/MenSelmapMark.png");
+			if (texs.prevbase.tex0 != null) texs.prevbase.tex0.Export(thisdir + "/MenSelmapPrevbase.png");
+			if (texs.icon.tex0 != null) texs.icon.tex0.Export(thisdir + "/MenSelmapIcon.png");
+			if (texs.frontstname.tex0 != null) texs.frontstname.tex0.Export(thisdir + "/MenSelmapFrontStname.png");
+			if (texs.seriesicon.tex0 != null) texs.seriesicon.tex0.Export(thisdir + "/MenSelchrMark.png");
+			if (texs.selmap_mark.tex0 != null) texs.selmap_mark.tex0.Export(thisdir + "/MenSelmapMark.png");
 		}
 
 		public void openModifyPAT0Dialog() {
@@ -630,8 +634,8 @@ namespace BrawlStageManager {
 
 		public void DowngradeMenSelmapMark(int i) {
 			TextureContainer texs = get_icons(i);
-			if (texs == null || texs.selmap_mark_tex0 == null) return;
-			TEX0Node tex0 = texs.selmap_mark_tex0;
+			if (texs == null || texs.selmap_mark.tex0 == null) return;
+			TEX0Node tex0 = texs.selmap_mark.tex0;
 			if (tex0.Format != WiiPixelFormat.IA4) return;
 
 			tex0.ReplaceWithCMPR(BitmapUtilities.AlphaSwap(tex0.GetImage(0)));

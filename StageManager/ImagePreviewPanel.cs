@@ -70,7 +70,7 @@ namespace BrawlStageManager {
 		private void copy_Click(object sender, EventArgs e) {
 			PortraitViewer pv = getPVParent();
 			if (pv != null) {
-				Bitmap bmp = pv.GetTEX0For(this).GetImage(0);
+				Bitmap bmp = pv.GetTexInfoFor(this).tex0.GetImage(0);
 				Clipboard.SetImage(bmp);
 			}
 		}
@@ -86,13 +86,13 @@ namespace BrawlStageManager {
 
 					//Fix extension
 					string fileName = ApplyExtension(SaveDialog.FileName, SaveDialog.Filter, fIndex - 1);
-					pv.GetTEX0For(this).Export(fileName);
+					pv.GetTexInfoFor(this).tex0.Export(fileName);
 				}
 			}
 		}
 
 		public void changeBorder() {
-			TEX0Node tex0 = getPVParent().GetTEX0For(this);
+			TEX0Node tex0 = getPVParent().GetTexInfoFor(this).tex0;
 			Bitmap icon = tex0.GetImage(0);
 			Bitmap newIcon = replaceBorder(icon);
 			if (newIcon == null) return;

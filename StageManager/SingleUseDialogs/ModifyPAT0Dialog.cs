@@ -3,11 +3,7 @@ using BrawlLib.Wii.Textures;
 using BrawlManagerLib;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BrawlStageManager {
@@ -23,7 +19,7 @@ namespace BrawlStageManager {
 			textures = tx;
 			AcceptButton = btnOkay;
 
-			if (textures.seriesicon_pat0 == null) {
+			if (textures.seriesicon.pat0 == null) {
 				selchrBox.Enabled = false;
 			} else {
 				var i4 = from tex in textures.TEX0Folder.Children
@@ -32,11 +28,11 @@ namespace BrawlStageManager {
 						 select tex.Name;
 				selchrList = i4.ToList();
 				selchrBox.DataSource = selchrList;
-				if (textures.seriesicon_tex0 != null) selchrBox.SelectedItem = textures.seriesicon_tex0.Name;
+				if (textures.seriesicon.tex0 != null) selchrBox.SelectedItem = textures.seriesicon.tex0.Name;
 				selchrBox.Enabled = true;
 			}
 
-			if (textures.selmap_mark_pat0 == null) {
+			if (textures.selmap_mark.pat0 == null) {
 				selmapBox.Enabled = false;
 			} else {
 				var ia4 = from tex in textures.TEX0Folder.Children
@@ -45,13 +41,9 @@ namespace BrawlStageManager {
 						  select tex.Name;
 				selmapList = ia4.ToList();
 				selmapBox.DataSource = selmapList;
-				if (textures.selmap_mark_tex0 != null) selmapBox.SelectedItem = textures.selmap_mark_tex0.Name;
+				if (textures.selmap_mark.tex0 != null) selmapBox.SelectedItem = textures.selmap_mark.tex0.Name;
 				selmapBox.Enabled = true;
 			}
-		}
-
-		private void btnCancel_Click(object sender, EventArgs e) {
-			//Close();
 		}
 
 		private void btnOkay_Click(object sender, EventArgs e) {
@@ -61,13 +53,13 @@ namespace BrawlStageManager {
 			if (selmapBox.SelectedItem == null) {
 				selmapBox.SelectedIndex = selmapList.IndexOf(selmapBox.Text);
 			}
-			if (selchrBox.Enabled && selchrBox.SelectedItem != null && selchrBox.SelectedItem.ToString() != textures.seriesicon_pat0.Texture) {
-				textures.seriesicon_pat0.Texture = selchrBox.SelectedItem.ToString();
-				textures.seriesicon_pat0.IsDirty = true;
+			if (selchrBox.Enabled && selchrBox.SelectedItem != null && selchrBox.SelectedItem.ToString() != textures.seriesicon.pat0.Texture) {
+				textures.seriesicon.pat0.Texture = selchrBox.SelectedItem.ToString();
+				textures.seriesicon.pat0.IsDirty = true;
 			}
-			if (selmapBox.Enabled && selmapBox.SelectedItem != null && selmapBox.SelectedItem.ToString() != textures.selmap_mark_pat0.Texture) {
-				textures.selmap_mark_pat0.Texture = selmapBox.SelectedItem.ToString();
-				textures.selmap_mark_pat0.IsDirty = true;
+			if (selmapBox.Enabled && selmapBox.SelectedItem != null && selmapBox.SelectedItem.ToString() != textures.selmap_mark.pat0.Texture) {
+				textures.selmap_mark.pat0.Texture = selmapBox.SelectedItem.ToString();
+				textures.selmap_mark.pat0.IsDirty = true;
 			}
 
 			//Close();

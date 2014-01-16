@@ -52,6 +52,7 @@
 			this.currentSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.common5scselmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveCommon5scselmapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportAllMiscData80ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveInfopacToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
 			this.registryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -114,7 +115,7 @@
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.collapsibleSplitter4 = new BrawlManagerLib.CollapsibleSplitter();
 			this.portraitViewer1 = new BrawlStageManager.PortraitViewer();
-			this.exportAllMiscData80ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.drawBlocksOverPrevbasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -421,6 +422,13 @@
 			this.saveCommon5scselmapToolStripMenuItem.Text = "Save";
 			this.saveCommon5scselmapToolStripMenuItem.Click += new System.EventHandler(this.saveCommon5scselmapToolStripMenuItem_Click);
 			// 
+			// exportAllMiscData80ToolStripMenuItem
+			// 
+			this.exportAllMiscData80ToolStripMenuItem.Name = "exportAllMiscData80ToolStripMenuItem";
+			this.exportAllMiscData80ToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+			this.exportAllMiscData80ToolStripMenuItem.Text = "Export all (MiscData[80])";
+			this.exportAllMiscData80ToolStripMenuItem.Click += new System.EventHandler(this.exportAllMiscData80ToolStripMenuItem_Click);
+			// 
 			// saveInfopacToolStripMenuItem
 			// 
 			this.saveInfopacToolStripMenuItem.Name = "saveInfopacToolStripMenuItem";
@@ -686,7 +694,8 @@
             this.toolStripMenuItem1,
             this.addmissingPAT0EntriesToolStripMenuItem,
             this.downgradeMenSelmapMarksToolStripMenuItem,
-            this.resizeAllPrevbasesToolStripMenuItem});
+            this.resizeAllPrevbasesToolStripMenuItem,
+            this.drawBlocksOverPrevbasesToolStripMenuItem});
 			this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
 			this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.toolsToolStripMenuItem.Text = "Tools";
@@ -910,12 +919,12 @@
 			this.portraitViewer1.Size = new System.Drawing.Size(213, 477);
 			this.portraitViewer1.TabIndex = 2;
 			// 
-			// exportAllMiscData80ToolStripMenuItem
+			// drawBlocksOverPrevbasesToolStripMenuItem
 			// 
-			this.exportAllMiscData80ToolStripMenuItem.Name = "exportAllMiscData80ToolStripMenuItem";
-			this.exportAllMiscData80ToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-			this.exportAllMiscData80ToolStripMenuItem.Text = "Export all (MiscData[80])";
-			this.exportAllMiscData80ToolStripMenuItem.Click += new System.EventHandler(this.exportAllMiscData80ToolStripMenuItem_Click);
+			this.drawBlocksOverPrevbasesToolStripMenuItem.Name = "drawBlocksOverPrevbasesToolStripMenuItem";
+			this.drawBlocksOverPrevbasesToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+			this.drawBlocksOverPrevbasesToolStripMenuItem.Text = "Draw blocks over Prevbases";
+			this.drawBlocksOverPrevbasesToolStripMenuItem.Click += new System.EventHandler(this.drawBlocksOverPrevbasesToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -1040,6 +1049,7 @@
 		private System.Windows.Forms.ToolStripMenuItem saveInfopacToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem common5scselmapToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exportAllMiscData80ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem drawBlocksOverPrevbasesToolStripMenuItem;
 
 
 

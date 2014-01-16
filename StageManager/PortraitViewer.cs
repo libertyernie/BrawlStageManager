@@ -8,6 +8,7 @@ using BrawlLib.SSBB.ResourceNodes;
 using System.IO;
 using BrawlLib.Wii.Textures;
 using BrawlManagerLib;
+using System.Reflection;
 
 namespace BrawlStageManager {
 	public partial class PortraitViewer : UserControl {
@@ -715,6 +716,46 @@ namespace BrawlStageManager {
 			}
 		}
 
+		internal void DrawBlocksOverPrevbases() {
+			if (sc_selmap == null) return;
+
+			Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BrawlStageManager.blockout.png");
+			if (stream == null) return;
+			Image blockout = Image.FromStream(stream);
+
+			var prevbases = from c in sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false).Children
+							where c is TEX0Node && c.Name.Contains("MenSelmapPrevbase")
+							select (TEX0Node)c;
+			int i = 0;
+			foreach (TEX0Node node in prevbases) {
+				Bitmap image = node.GetImage(0);
+				if (image.Width <= 4 && image.Height <= 4) {
+					continue;
+				}
+
+				string file = TempFiles.Create(".png");
+				image = BitmapUtilities.Combine(image, new Bitmap(blockout, image.Size));
+				if (useTextureConverter) {
+					image.Save(file);
+
+					TextureConverterDialog d = new TextureConverterDialog();
+					d.ImageSource = file;
+					if (d.ShowDialog(null, node) == DialogResult.OK) {
+						node.IsDirty = true;
+						Console.WriteLine("Resized " + node);
+						i++;
+					} else if (MessageBox.Show(this, "Stop resizing textures here?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+						break;
+					}
+				} else {
+					image.Save(file);
+					node.Replace(file);
+					Console.WriteLine("Resized " + node);
+					i++;
+				}
+			}
+		}
+
 		public void ResizeAllPrevbases(Size newSize) {
 			if (sc_selmap == null) return;
 			var prevbases = from c in sc_selmap.FindChild("MiscData[80]/Textures(NW4R)", false).Children
@@ -736,6 +777,8 @@ namespace BrawlStageManager {
 					d.InitialSize = newSize;
 					if (d.ShowDialog(null, node) == DialogResult.OK) {
 						node.IsDirty = true;
+						Console.WriteLine("Resized " + node);
+						i++;
 					} else if (MessageBox.Show(this, "Stop resizing textures here?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
 						break;
 					}
@@ -744,11 +787,11 @@ namespace BrawlStageManager {
 					b.Save(file);
 
 					node.Replace(file);
+					Console.WriteLine("Resized " + node);
+					i++;
 				}
 
 				File.Delete(file);
-				Console.WriteLine("Resized " + node);
-				i++;
 			}
 			MessageBox.Show("Resized " + i + " images.");
 			UpdateImage();

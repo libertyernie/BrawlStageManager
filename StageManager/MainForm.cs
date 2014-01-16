@@ -989,5 +989,9 @@ namespace BrawlStageManager {
 			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
+
+		private void drawBlocksOverPrevbasesToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.DrawBlocksOverPrevbases();
+		}
 	}
 }

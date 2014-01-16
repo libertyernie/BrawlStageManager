@@ -1,11 +1,10 @@
-﻿using BrawlStageManager.NameCreatorNS;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Drawing;
 
 namespace BrawlStageManager.RegistryUtilities {
-	public class FontSettings {
+	public static class FontSettings {
 		private static TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
 
 		public static string WriteToRegistry(NameCreatorSettings settings) {

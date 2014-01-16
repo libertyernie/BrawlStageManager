@@ -68,6 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NameCreatorSettings.cs" />
     <Compile Include="SongListItem.cs" />
     <Compile Include="SingleUseDialogs\AskNameDialog.cs">
       <SubType>Form</SubType>
@@ -191,14 +192,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="NameCreatorNS\NameCreator.cs" />
-    <Compile Include="NameCreatorNS\NameCreatorDialog.cs">
+    <Compile Include="NameCreator.cs" />
+    <Compile Include="NameCreatorDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NameCreatorNS\NameCreatorDialog.Designer.cs">
+    <Compile Include="NameCreatorDialog.Designer.cs">
       <DependentUpon>NameCreatorDialog.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="NameCreatorNS\NameCreatorDialog.resx">
+    <EmbeddedResource Include="NameCreatorDialog.resx">
       <DependentUpon>NameCreatorDialog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

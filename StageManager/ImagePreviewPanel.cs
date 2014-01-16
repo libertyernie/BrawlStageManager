@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -119,9 +120,12 @@ namespace BrawlStageManager {
 			} else if (File.Exists("border.png")) {
 				border = new Bitmap("border.png");
 			} else {
-				MessageBox.Show("No border.png found.\nPlease place a 64x56 PNG image named \"border.png\" in the current folder or the program folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				border = null;
-				return null;
+				Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BrawlStageManager.border.png");
+				if (stream == null) {
+					MessageBox.Show("No border.png found.\nPlease place a 64x56 PNG image named \"border.png\" in the current folder or the program folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return null;
+				}
+				border = Image.FromStream(stream) as Bitmap;
 			}
 
 			if (border.Width < 64 || border.Height < 56) {

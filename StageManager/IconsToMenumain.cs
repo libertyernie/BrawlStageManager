@@ -2,8 +2,10 @@
 using BrawlManagerLib;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace BrawlStageManager {
@@ -28,11 +30,22 @@ namespace BrawlStageManager {
 				string file = tempFiles[n.Name];
 				n.Replace(file);
 			}
-
+			
+			string tempfile = TempFiles.Create(".png");
 			ResourceNode xx = miscData0.FindChild("Textures(NW4R)/MenSelmapIcon.XX", false);
+			bool found = false;
 			if (xx != null) {
-				string tempfile = TempFiles.Create(".png");
 				xx.Export(tempfile);
+				found = true;
+			} else {
+				Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BrawlStageManager.XX.png");
+				if (stream != null) {
+					Image.FromStream(stream).Save(tempfile);
+					found = true;
+				}
+			}
+
+			if (found) {
 				foreach (ResourceNode tex in miscData0.FindChild("Textures(NW4R)", false).Children) {
 					byte icon_id;
 					if (tex.Name.StartsWith("MenSelmapIcon.") && Byte.TryParse(tex.Name.Substring(14, 2), out icon_id)) {

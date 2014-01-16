@@ -602,6 +602,21 @@ namespace BrawlStageManager {
 		private void deletebrstmToolStripMenuItem_Click(object sender, EventArgs e) {
 			songPanel1.Delete();
 		}
+
+		private void saveCommon5scselmapToolStripMenuItem_Click(object sender, EventArgs e) {
+			portraitViewer1.save();
+		}
+
+		private void saveInfopacToolStripMenuItem_Click(object sender, EventArgs e) {
+			songPanel1.save();
+		}
+
+		private void exportAllMiscData80ToolStripMenuItem_Click(object sender, EventArgs e) {
+			if (FolderDialog.ShowDialog() == DialogResult.OK) {
+				portraitViewer1.exportAll(FolderDialog.SelectedPath);
+			}
+		}
+
 		private void listBox1_SelectedIndexChanged(object sender, EventArgs e) {
 			open((FileInfo)listBox1.SelectedItem);
 		}
@@ -974,13 +989,5 @@ namespace BrawlStageManager {
 			MessageBox.Show("Registry settings for BrawlStageManager have been cleared.");
 		}
 		#endregion
-
-		private void saveCommon5scselmapToolStripMenuItem_Click(object sender, EventArgs e) {
-			portraitViewer1.save();
-		}
-
-		private void saveInfopacToolStripMenuItem_Click(object sender, EventArgs e) {
-			songPanel1.save();
-		}
 	}
 }

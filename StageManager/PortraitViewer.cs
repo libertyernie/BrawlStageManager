@@ -310,6 +310,15 @@ namespace BrawlStageManager {
 
 			updateFileSize();
 		}
+
+		public void exportAll(string folder) {
+			if (sc_selmap != null) {
+				BRESNode bres = sc_selmap.FindChild("MiscData[80]", false) as BRESNode;
+				if (bres != null) {
+					bres.ExportToFolder(folder, ".png");
+				}
+			}
+		}
 		#endregion
 
 		#region Private methods

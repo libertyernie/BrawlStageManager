@@ -337,7 +337,7 @@ namespace BrawlStageManager {
 			}
 
 			if (!texInfo.ForThisFrameIndex) {
-				bgi = BitmapUtilities.Border(bgi, Color.Magenta, 2);
+				bgi = BitmapUtilities.Border(bgi, Color.Brown, 2);
 			}
 
 			panel.BackgroundImage = bgi;

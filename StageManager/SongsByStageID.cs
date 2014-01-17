@@ -352,7 +352,7 @@ namespace BrawlStageManager {
 				string[] ret = null;
 				string key = filename.Substring(0, filename.IndexOfAny("_.".ToCharArray()));
 				dict.TryGetValue(key, out ret);
-				return ret;
+				return ret ?? new string[0];
 			}
 		}
 	}

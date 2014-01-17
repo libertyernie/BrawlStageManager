@@ -325,7 +325,7 @@ namespace BrawlStageManager {
 					if (arr != null) {
 						songContainerPanel.Visible = true;
 						listBoxSongs.Items.AddRange(arr);
-						listBoxSongs.SelectedIndex = 0;
+						if (listBoxSongs.Items.Count > 0) listBoxSongs.SelectedIndex = 0;
 					} else {
 						songContainerPanel.Visible = false;
 						songPanel1.Close();
@@ -471,6 +471,7 @@ namespace BrawlStageManager {
 			var frontstnames = dirinfo.EnumerateFiles("*FrontStname.*");
 			var seriesicons = dirinfo.EnumerateFiles("*SelchrMark.*").Concat(dirinfo.EnumerateFiles("*SeriesIcon.*"));
 			var selmap_marks = dirinfo.EnumerateFiles("*SelmapMark.*");
+			var brstms = dirinfo.EnumerateFiles("*.brstm");
 			bool any = pacfiles.Any() || prevbases.Any() || icons.Any() || frontstnames.Any() || seriesicons.Any() || selmap_marks.Any();
 			if (!any) {
 				MessageBox.Show("No .pac files or images found in this folder.");
@@ -511,6 +512,10 @@ namespace BrawlStageManager {
 				if (selmap_marks.Any()) {
 					portraitViewer1.Replace(portraitViewer1.selmap_mark, selmap_marks.First().FullName);
 				}
+
+				if (brstms.Any()) {
+					songPanel1.Replace(brstms.First().FullName);
+				}
 			}
 		}
 
@@ -544,6 +549,14 @@ namespace BrawlStageManager {
 			if (rel.Exists) FileOperations.Copy(rel.FullName, thisdir + "/st.rel");
 
 			portraitViewer1.ExportImages(portraitViewer1.BestSSS.IconForStage(StageIDMap.StageIDForPac(f.Name)), thisdir);
+
+			Song song;
+			portraitViewer1.BestSSS.SongsByStage.TryGetValue((byte)StageIDMap.StageIDForPac(f.Name), out song);
+			if (song == null) SongsByStageID.ForPac(f.Name);
+
+			if (song != null && File.Exists("../../sound/strm/" + song.Filename + ".brstm")) {
+				File.Copy("../../sound/strm/" + song.Filename + ".brstm", thisdir + "/song.brstm", true);
+			}
 		}
 		#endregion
 

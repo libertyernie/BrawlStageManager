@@ -142,9 +142,9 @@ namespace BrawlStageManager {
 			stageInfoControl1.UseRelDescription = useFullrelNamesToolStripMenuItem.Checked = useRelDescription;
 
 			// Drag and drop for the left and right sides of the window. The dragEnter and dragDrop methods will check which panel the file is dropped onto.
-			splitContainer1.Panel2.AllowDrop = true;
-			splitContainer1.Panel2.DragEnter += new DragEventHandler(dragEnter);
-			splitContainer1.Panel2.DragDrop += new DragEventHandler(dragDrop);
+			panel2.AllowDrop = true;
+			panel2.DragEnter += new DragEventHandler(dragEnter);
+			panel2.DragDrop += new DragEventHandler(dragDrop);
 			listBox1.AllowDrop = true;
 			listBox1.DragEnter += new DragEventHandler(dragEnter);
 			listBox1.DragDrop += new DragEventHandler(dragDrop);

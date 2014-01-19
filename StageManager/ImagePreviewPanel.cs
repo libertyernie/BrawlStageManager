@@ -137,7 +137,7 @@ namespace BrawlStageManager {
 			bool[,] mask = new bool[64, 56];
 			for (int y = 4; y < 52; y++) {
 				for (int x = 4; x < 60; x++) {
-					mask[x, y] = true;
+					mask[x, y] = (border.GetPixel(x, y).A != 255);
 				}
 			}
 

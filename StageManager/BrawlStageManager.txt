@@ -1,4 +1,4 @@
-﻿Brawl Stage Manager 3.1.1 - January 7, 2013
+﻿Brawl Stage Manager 3.2 - January 21, 2013
 Copyright © 2014 libertyernie
 http://lakora.us/brawl/stagemanager
 
@@ -42,28 +42,26 @@ stage file will display:
 	  * By default, the program searches for .rel files in ../../module, but
 		through the Options menu you can tell the program to search the current
 		directory instead.
-	* On the upper-right button: the stage ID of the .rel file
-	  * This ID should match the ID of the stage you're replacing; if it doesn't,
-		the button will turn red. (If the program doesn't know what ID your .rel file
-		should have due to an unrecognized .pac name, the button will turn beige.)
-	  * Right-click this button for some more options!
+	  * If the .rel file has the wrong ID for the stage it's replacing, a button
+	    will appear allowing you to fix it automatically.
 	* Any MSBin nodes in the .pac file, starting with the last (shown by default)
 	  * Some stage authors often put info about the stage in these nodes. This
 		program will display them read-only; you can edit them with BrawlBox.
 	* If Options>Render Models is checked: the 3D models that make up the stage itself
 	  * You can hide a particular texture by unchecking it in the Model Textures list
 	  * Note: using "Preview All Models" in BrawlBox is another way to examine a stage
-You can use Page Up and Page Down to go up and down the list,
-even when it doesn't have focus.
+	* If Options>Load .brstms is checked: any .brstms associated with the stage
+	  * Select the .brstm from the small menu to the left of the audio player.
+	  * You can export or delete the .brstm by right-clicking the menu.
+	  * You can replace the .brstm by dragging a new .brstm onto the audio player.
+You can use Page Up and Page Down to go up and down the stage list, even when
+it doesn't have focus.
 
 Stage Manager can also perform certain operations on stage and .rel files:
-	* Click on the button to automatically fix the .rel file's stage ID. This ID
-	  has to match the stage you're replacing, or Brawl will freeze.
-	  * You can also choose a stage ID manually (in case the automatic function
-		doesn't work) by right-clicking the button and choosing "Change stage ID."
-		The dialog for changing the ID is the same as in BrawlBox.
-	* Right-click on the button to pull up a menu, which lets you delete the .pac
-	  file or the .rel file. Windows will ask before deleting the file.
+	* Right-click on the button to pull up a menu, which lets you delete the
+	  .pac file or the .rel file. You can also export both files, a .brstm
+	  file (in some cases), and all stage portraits to a folder, which you
+	  can then import later by dragging the folder onto the center panel.
 	* Drag and drop a .pac file onto the left-hand stage list to copy it to the
 	  working directory. The program will ask what filename to save it as.
 	* Drag and drop a .pac or .rel file onto the center information display to
@@ -72,11 +70,11 @@ Stage Manager can also perform certain operations on stage and .rel files:
 The right sidebar will display (top to bottom):
 	* Stage preview (MelSelmapPrevbase)
 	* Stage icon (MenSelmapIcon)
-	* "Repaint border" and "Generate name" buttons
-	  (same as "[" and "]" buttons on keyboard)
+	* Icon number (PAT0 key; XX in MenSelmapIconXX)
+	* "Generate name" button  (same as "]" button on keyboard)
 	* Stage name (MenSelmapFrontStname)
-	* Series icon (MenSelchrMark normally; SeriesIcon if using my
-	  Classic Expansion Pack sc_selmap)
+	* Series icon (normally MenSelchrMark, but in my pack I sometimes rename
+	  it to SeriesIcon to avoid confusion)
 	* Game logo (MenSelmapMark)
 	* A filesize bar that compares your sc_selmap size to the one in the game -
 	  going over this limit could cause freezing at the stage select screen!
@@ -90,9 +88,16 @@ the tilde (~) button on your keyboard.)
 
 ----------------------------------------
 
-New in 3.1:
-	* The program will now look in /projectm/pf as well as /private/wii/app/RSBE/pf
-	* You can still copy a stage folder if a .pac or .rel is missing (but make sure you have the right .rel in that case!)
-	* Stage Manager will give you a warning if there is more than one Custom SSS code in your GCT (it'll use the last one)
-	* You can downsize all MenSelmapPrevbase images at once to a custom size
-	* Option added to turn BrawlBox's Texture Converter on/off
+New in 3.2:
+	* New panel (taken from Song Manager) allows you to play, replace, and delete
+	  .brstm files associated with a stage - includes normal stage/song mappings
+	  and any instances of Stage-Dependent Song Loader found in the codeset
+	* Song titles included when updating mu_menumain, if info.pac exists
+	* Folder import (drag and drop) now includes the first BRSTM found in the dir
+	* Folder export includes the BRSTM, but only if a SDSL code is being used
+
+	* Use collapsible splitters for all top/bottom/left/right docked panels
+	* PAT0 modification dialog lets you paste a name into the box if it's valid
+	* If no PAT0 exists for a stage, the one for the stage before it will be
+	  shown, with a brown border
+	* border.png more than 4 pixels wide can now be used for border replace ([)

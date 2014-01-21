@@ -1,16 +1,6 @@
 StageManager/bin/Debug
 StageManager/bin/Release/*
 !StageManager/bin/Release/BrawlStageManager.exe
+!StageManager/bin/Release/BrawlManagerLib.dll
 StageManager/obj
-SSSPreview/bin/Debug
-SSSPreview/bin/Release/*
-!SSSPreview/bin/Release/BrawlStageManager.exe
-!SSSPreview/bin/Release/SSSPreview.exe
-SSSPreview/obj
-SSSEditor/bin/Debug
-SSSEditor/bin/Release/*
-!SSSEditor/bin/Release/BrawlStageManager.exe
-!SSSEditor/bin/Release/SSSEditor.exe
-SSSEditor/obj
 *.suo
-SSSEditor/From Stage Manager/*
